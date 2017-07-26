@@ -4,3 +4,4 @@
 1. static/portal
 2. static/console
 3. static/wechat
+
