@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="x5-page-mode" content="app">
+    <meta name="browsermode" content="application">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>亚海飞行俱乐部</title>
+</head>
+<body>
+    <div class="background2">
+        <div class="tb-title">飞行日志</div>
+        <div class="shadow">
+            <div class="box">
+                <p class="fd-time">我已飞行了<span>15</span>分钟</p>
+                <ul class="fd-list">
+                    <li class="fd-item current">当前礼品</li>
+                    <li class="fd-item">已购礼品</li>
+                </ul>
+                <div class="fd-con">
+                    <div class="fd-list-con">
+                       <div class="fd-dq">
+                            <img src="images/img6.jpg">
+                            <p>*恭喜您已完成本次飞行体验，购买飞行礼包，您可获得我们为您记录的飞行图片、视频、定制T恤等好礼。<br>*完成支付，即可解锁视频图片，实时分享好友哦</p>
+                            <div class="fd-payment">
+                                <span class="fl">¥</span>
+                                <div class="fl">
+                                    <p>180</p>
+                                    <p>支付金额</p>
+                                </div>
+                                <button class="fr">支付</button>
+                            </div>
+                       </div>
+                    </div>
+                    <div class="fd-list-con" style="display: none;">
+                        <div class="fd-yg">
+                            <img src="images/img4.jpg">
+                            <img src="images/img5.jpg">
+                            <img src="images/img5.jpg">
+                            <img src="images/img5.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 以下js仅供原型展示使用 -->
+    <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            fnBindEvent();
+            function fnBindEvent(){            
+                /*table-nav even*/
+                $(".fd-con>.fd-list-con").hide();
+                $(".fd-con>.fd-list-con").eq(0).show();
+                $(".fd-list>li").each(function(){
+                    $(this).bind("click",function(){
+                        var $this=$(this),
+                                thisIndex=$this.index(),
+                                $tabContentAll=$(".fd-con>.fd-list-con");
+                        $this.addClass("current");
+                        $this.siblings().removeClass("current");
+                        $tabContentAll.hide().eq(thisIndex).show();
+                    })
+                })
+            }
+        });
+    </script>
+</body>
+</html>

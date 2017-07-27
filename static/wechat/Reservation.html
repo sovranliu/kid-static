@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="x5-page-mode" content="app">
+    <meta name="browsermode" content="application">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>亚海飞行俱乐部</title>
+</head>
+<body>
+    <div class="background2">
+        <div class="tb-title">预约飞行</div>
+        <div class="shadow">
+            <div class="box">
+                <div class="rs-con">
+                    <a class="rs-ticket" href="Reservation1.html">我要购票</a>
+                    <div class="rs-ticketnotes">购票前请务必详细阅读购票须知 <a href="TicketNotes.html">购票须知</a></div>
+                    <dl class="rs-dl-list">
+                        <dd class="rs-dd-item">
+                            <a href="javascript:;">单人购票</a>
+                            <span><i>¥</i>520/张</span>
+                        </dd>
+                        <dd class="rs-dd-item">
+                            <a href="javascript:;">团队购票</a>
+                            <span><i>¥</i>380/张</span>
+                        </dd>
+                    </dl>
+                    <div class="rs-hr"></div>
+                    <span class="rs-ticket">我的票券</span>
+                    <ul class="rs-ul-list">
+                        <li class="rs-li-item">
+                            <div class="rs-left">
+                                <span>单人票</span>
+                            </div>
+                            <div class="rs-right">
+                                <button class="use-btn">使用</button>
+                                <button class="give-btn gray">赠送</button>
+                            </div>
+                        </li>
+                         <li class="rs-li-item">
+                            <div class="rs-left">
+                                <span>团队票</span>
+                            </div>
+                            <div class="rs-right">
+                                <button class="use-btn">使用</button>
+                                <button class="give-btn">赠送</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup">
+        <div class="pop-mask"></div>
+        <div class="pop-main">
+            <p class="cen">请输入被赠送者手机号码</p>
+            <input type="number" name="">
+            <!-- 当输入手机号码后点击确认，提示语为： -->
+            <!-- <p>您的票券已成功送出，请对方至会员中心的预约飞行中，查看并使用他的票券。</p> -->
+            <!-- 当被赠送者非会员时，提示语为： -->
+            <!-- <p>被赠送者还不是会员，请通知对方先注册成为会员，才能成功接收该票券。如24小时内对方未完成注册，票券将返还到您的账号。</p> -->
+            <button class="confirm-btn">确认</button>
+        </div>
+    </div>
+    <!-- 以下js仅供原型展示使用 -->
+    <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".give-btn").bind("click", function(){
+              $(".popup").show();
+            });
+            $(".confirm-btn").bind("click", function(){
+              $(".popup").hide();
+            });
+        })
+    </script>
+</body>
+</html>
