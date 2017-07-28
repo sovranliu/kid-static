@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="x5-page-mode" content="app">
+    <meta name="browsermode" content="application">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>亚海飞行俱乐部</title>
+    <!-- 会员特价 -->
+</head>
+<body>
+    <div class="background">
+        <div class="menber-header">我的订单</div>
+        <div class="table-nav">
+           <nav class="tab-plugin">
+              <a href="javascript:;" class="tab-active">飞行票</a>
+              <a href="javascript:;" class="">预约</a>
+            </nav>
+        </div>
+        <dl class="table-main">
+            <dd style="display:block">
+                <ul class="voucher-list">
+                    <li class="voucher-item">
+                        <div class="cont">
+                            <div class="lcon">
+                                <p class="p-class">订单性质：单人购票</p>
+                                <p class="p-day">有效期：2017年8月25日</p>
+                            </div>
+                            <div class="rcon">
+                                <span class="pir">¥150</span>
+                                <span class="status">可使用</span>
+                            </div>
+                        </div>
+                        <div class="oper">
+                            <button>退款</button>
+                            <a href="Reservation1.html">预约</a>
+                        </div>
+                    </li>
+                    <li class="voucher-item">
+                        <div class="cont">
+                            <div class="lcon">
+                                <p class="p-class">订单性质：团队购票（不接受退票）</p>
+                                <p class="p-day">有效期：2017年8月25日</p>
+                            </div>
+                            <div class="rcon">
+                                <span class="pir">¥380</span>
+                                <span class="status">可使用</span>
+                            </div>
+                        </div>
+                        <div class="oper">
+                            <button class="btn-give">赠送</button>
+                            <a href="Reservation1.html">预约</a>
+                        </div>
+                    </li>
+                    <li class="voucher-item gray">
+                        <div class="cont">
+                            <div class="lcon">
+                                <p class="p-class">订单性质：团队购票</p>
+                                <p class="p-day">有效期：2017年8月25日</p>
+                            </div>
+                            <div class="rcon">
+                                <span class="pir">¥380</span>
+                                <span class="status">已失效</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="voucher-item gray">
+                        <div class="cont">
+                            <div class="lcon">
+                                <p class="p-class">订单性质：团队购票</p>
+                                <p class="p-day">有效期：2017年8月25日</p>
+                            </div>
+                            <div class="rcon">
+                                <span class="pir">¥380</span>
+                                <span class="status">已使用</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="voucher-item gray">
+                        <div class="cont">
+                            <div class="lcon">
+                                <p class="p-class">订单性质：单人票</p>
+                                <p class="p-day">有效期：2017年8月25日</p>
+                            </div>
+                            <div class="rcon">
+                                <span class="pir">¥150</span>
+                                <span class="status">已退款</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </dd>
+            <dd>
+                <ul class="voucher-list">
+                    <li class="voucher-item">
+                        <div class="cont">
+                            <div class="lcon">
+                                <p class="p-class">订单性质：单人购票</p>
+                                <p class="p-day">日期：2017年8月25日</p>
+                                <p class="p-time">时段：10：30-11：00</p>
+                            </div>
+                            <div class="rcon">
+                                <span class="pir">¥150</span>
+                                <span class="status">未使用</span>
+                            </div>
+                        </div>
+                        <div class="oper">
+                            <button>使用</button>
+                        </div>
+                    </li>
+                    <li class="voucher-item">
+                        <div class="cont">
+                            <div class="lcon">
+                                <p class="p-class">订单性质：团队购票</p>
+                                <p class="p-day">日期：2017年8月25日</p>
+                                <p class="p-time">时段：10：30-11：00</p>
+                            </div>
+                            <div class="rcon">
+                                <span class="pir">¥150</span>
+                                <span class="status">已改期</span>
+                            </div>
+                        </div>
+                        <div class="oper">
+                            <button>使用</button>
+                        </div>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+    <div class="popup">
+        <div class="pop-mask"></div>
+        <div class="pop-main">
+            <button class="confirm-btn">分享</button>
+            <button class="confirm-btn">手机号赠送</button>
+        </div>
+    </div>
+    <!-- 以下js仅供原型展示使用 -->
+    <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".btn-give").bind("click", function(){
+              $(".popup").show();
+            });
+            $(".confirm-btn").bind("click", function(){
+              $(".popup").hide();
+            });
+            fnBindEvent();
+            function fnBindEvent(){            
+                /*table-nav even*/
+                $("dl.table-main>dd").hide();
+                $("dl.table-main>dd").eq(0).show();
+                $(".tab-plugin>a").each(function(){
+                    $(this).bind("click",function(){
+                        var $this=$(this),
+                                thisIndex=$this.index(),
+                                $tabContentAll=$("dl.table-main>dd");
+                        $this.addClass("tab-active");
+                        $this.siblings().removeClass("tab-active");
+                        $tabContentAll.hide().eq(thisIndex).show();
+                    })
+                })
+            }
+        });
+    </script>
+</body>
+</html>
