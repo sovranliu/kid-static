@@ -23,37 +23,44 @@
                 <div class="bt-usedetail">
                     <div>
                         <span class="left">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span>
-                        <span>张三</span>
+                        <span class="js-name"></span>
                     </div>
                     <div>
                         <span class="left">手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</span>
-                        <span>13556742389</span>
+                        <span class="js-phone"></span>
                     </div>
                     <div>
                         <span class="left">购买数量：</span>
-                        <!-- 一张 -->
-                        <!-- <span>一张</span> -->
-                        <span>
-                            <span class="minus">-</span>
-                            <input type="" name="" value="3"/>
-                            <span class="add">+</span>
+                        <span class="js-num-single">1张</span>
+                        <span class="js-num-group">
+                            <span class="js-minus-num">-</span>
+                            <input class="js-current-num" type="" name="" value="3"/>
+                            <span class="js-add-num">+</span>
                         </span>
                     </div>
                 </div>
                 <div class="bt-freight">
                     <span class="fl">退费险<i></i></span>
-                    <input type="checkbox" name="cardSelect" class="checkbox-switch" />
+                    <span class="fr">
+                        <span class="js-refundInsurance-wrapper">
+                            <span class="js-refundInsurance"></span>
+                            <span>元&nbsp;&nbsp;</span>
+                        </span>
+                        <input type="checkbox" name="cardSelect" class="js-switch-refundInsurance checkbox-switch" checked="checked" />
+                    </span>
                 </div>
                 <div class="bt-payment">
                     <span class="fl">¥</span>
                     <div class="fl">
-                        <p>520</p>
+                        <p class="js-price"></p>
                         <p>支付金额</p>
                     </div>
-                    <button class="fr">支付订单</button>
+                    <button class="js-pay-order fr">支付订单</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script data-main="js/boot.js" data-start="js/biz/buyTickets.js" src="js/libs/require.min.js"></script>
 </body>
 </html>
