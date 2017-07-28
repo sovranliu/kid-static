@@ -3,6 +3,8 @@ define([], function() {
 
     return {
         getTicketPrice: _basePath + 'getTicketPrice',
-        getUserTickets: _basePath + 'getUserTickets'
+        getTickets: _basePath + 'getTickets',
+        getUserInfo: _basePath + 'getUserInfo',
+        payOrder: _basePath + 'payOrder'
     };
 });

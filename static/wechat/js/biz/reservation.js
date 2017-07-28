@@ -1,6 +1,6 @@
-define(['url'], function (url) {
+define(['url', 'helper'], function (url, helper) {
 
-    function bindActions () {
+    /*function bindActions () {
         $('.js-gift-ticket').on("click", giftTicket);
         $('.js-send-message').on("click", sendMessage);
     }
@@ -11,43 +11,38 @@ define(['url'], function (url) {
 
     function sendMessage() {
         $('.popup').hide();
-    }
+    }*/
 
     function getTicketPrice() {
         var params = {};
 
-        $.post(url.getTicketPrice, params, function(res) {
+        helper.ajax(url.getTicketPrice, params, function(res) {
             if (!res.code) {
                 $('.js-single-price').text(res.data.single);
                 $('.js-group-price').text(res.data.group); 
             } else {
                 //todo
             }
-        }, 'json');
+        });
     }
 
-    function getUserTickets() {
+    /*function getTickets() {
         var params = {};
 
-        /*$.post(url.getUserTickets, params, function(res) {
+        helper.ajax(url.getTickets, params, function(res) {
             if (!res.code) {
-                $('.js-single-price').text(res.data.single);
-                $('.js-group-price').text(res.data.group); 
+                $('.js-ticket-list').html(mustache.render($('#ticketTmpl').html(), { 'ticketList': res.data }));
             } else {
                 //todo
             }
-        }, 'json');*/
-    }
-
-    function openAdd() {
-        //el.$typeDialog.html(mustache.render($('#tpl-addEdit-dialog').html(), { 'title': cst.TITLE_REPLY_TYPE_CREATE }));
-    }
+        });
+    }*/
 
     return {
         init: function () {
           bindActions();
           getTicketPrice();
-          getUserTickets();
+          //getTickets();
         }
     }
 });

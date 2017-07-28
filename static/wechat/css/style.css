@@ -784,14 +784,8 @@ a,div,img {
     text-align: justify;
 }
 
-.bt-usedetail .minus {
-    font-size: 15px;
+.bt-usedetail .disable {
     color: #c0c0c0;
-}
-
-.bt-usedetail .add {
-    font-size: 15px;
-    color: #2c3d58;
 }
 
 .bt-usedetail input {
@@ -938,6 +932,10 @@ a,div,img {
     background: #d3d7e1;
     padding: 0 44px;
     margin: 40px 0 100px -44px;
+}
+
+.bt-freight .fr {
+    float: right;
 }
 
 .bt-freight .fl {
