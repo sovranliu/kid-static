@@ -1506,6 +1506,6 @@ a,div,img {
     font-size: 12px;
 }
 
-.gray .rcon .status,.gray .rcon .pir,.voucher-item.gray p {
+.gray .rcon .status,.gray .rcon .pir,.voucher-item.gray p,.voucher-item.gray .num {
     color: #ccc;
 }
