@@ -1,0 +1,80 @@
+/**
+* @author lq.me
+* @version 1.0
+*/
+@charset "utf-8"; 
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    -webkit-tap-highlight-color: transparent
+}
+
+address,cite,dfn,em,var,i {
+    font-style: normal;
+    font-weight: 400
+}
+
+button,input,select,textarea {
+    font-size: 100%
+}
+
+fieldset,img,button,input {
+    border: 0
+}
+
+:focus {
+    outline: 0
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+body {
+    min-width: 16rem;
+    background: #f4f4f4;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-font-smoothing: antialiased;
+    -moz-user-select: none;
+    color: #000;
+    margin: auto;
+}
+
+body,button,input,select,textarea {
+    font: 400 14px/1.5 "Microsoft YaHei",hei,Arial,"Lucida Grande",Verdana
+}
+
+h1,h2,h3,h4 {
+    font-family: inherit
+}
+
+
+ol,ul {
+    list-style: none
+}
+
+a {
+    text-decoration: none
+}
+
+
+/*Common Style*/
+.box {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
