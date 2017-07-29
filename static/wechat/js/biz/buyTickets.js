@@ -16,13 +16,9 @@ define(['url', 'helper'], function (url, helper) {
     function getTicketPrice() {
         var params = {};
 
-        helper.ajax(url.getTicketPrice, params, function(res) {
-            if (!res.code) {
-                $('.js-single-price').text(res.data.single);
-                $('.js-group-price').text(res.data.group); 
-            } else {
-                //todo
-            }
+        helper.ajax(url.getTicketPrice, params, function(data) {
+            $('.js-single-price').text(data.single);
+            $('.js-group-price').text(data.group); 
         });
     }
 
