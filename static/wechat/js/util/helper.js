@@ -55,179 +55,6 @@ define(['jquery'], function($) {
         return tt;
     }
 
-    $.extend(Date.prototype, {
-        /**
-         * @method addYears
-         * 加上特定的年份
-         * @param {integer} 需要加上的特定年份
-         * @return {object} 返回加好年份的日期对象
-         */
-        addYears: function(y) {
-            var d = new Date(+this);
-            d.setYear(d.getFullYear() + y);
-            return d;
-        },
-
-        /**
-         * @method addMonths
-         * 加上特定的月份
-         * @param {integer} 需要加上的特定月份
-         * @return {object} 返回加好月份的日期对象
-         */
-        addMonths: function(M) {
-            var d = new Date(+this);
-            d.setMonth(d.getMonth() + M);
-            return d;
-        },
-
-        /**
-         * @method addDays
-         * 加上特定的天数
-         * @param {integer} 需要加上的特定天数
-         * @return {object} 返回加好天数的日期对象
-         */
-        addDays: function(D) {
-            var d = new Date(+this);
-            d.setDate(d.getDate() + D);
-            return d;
-        },
-
-        /**
-         * @method addHours
-         * 加上特定的小时数
-         * @param {integer} 需要加上的特定小时数
-         * @return {object} 返回加好小时数的日期对象
-         */
-        addHours: function(h) {
-            var d = new Date(+this);
-            d.setHours(d.getHours() + h);
-            return d;
-        },
-
-        /**
-         * @method addMinutes
-         * 加上特定的分钟数
-         * @param {integer} 需要加上的特定分钟数
-         * @return {object} 返回加好分钟数的日期对象
-         */
-        addMinutes: function(m) {
-            var d = new Date(+this);
-            d.setMinutes(d.getMinutes() + m);
-            return d;
-        },
-
-        /**
-         * @method addSeconds
-         * 加上特定的秒数
-         * @param {integer} 需要加上的特定秒数
-         * @return {object} 返回加好秒数的日期对象
-         */
-        addSeconds: function(s) {
-            var d = new Date(+this);
-            d.setSeconds(d.getSeconds() + s);
-            return d;
-        },
-        /**
-         * @method toDate
-         * 生成对应的日期对象
-         * @return {object} 返回日期对象
-         */
-        toDate: function() {
-            return new Date(this.getFullYear(), this.getMonth(), this.getDate());
-        },
-
-        /**
-         * @method toStdDateString
-         * 生成对应的日期字符串
-         * @return {string} 返回日期字符串
-         */
-        toStdDateString: function() {
-            return this.getFullYear() + '-' + (this.getMonth() + 1) + '-' + this.getDate();
-        },
-
-        toStdDateTimeString: function() {
-            function checkTime(i) {
-                if (i < 10) {
-                    i = "0" + i
-                }
-                return i
-            }
-            return this.getFullYear() + '-' + checkTime(this.getMonth() + 1) + '-' + checkTime(this.getDate()) + ' ' + checkTime(this.getHours()) + ':' + checkTime(this.getMinutes()) + ':' + checkTime(this.getSeconds());
-        },
-
-        /**
-         * @method toEngDateString
-         * 生成对应的英文版日期字符串
-         * @return {string} 返回英文版日期字符串
-         */
-        toEngDateString: function() {
-            var h = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            return h[this.getMonth()] + '-' + this.getDate() + '-' + this.getFullYear();
-        },
-
-        /**
-         * @method toFormatString
-         * 生成需要的格式的日期字符串
-         * @param {string} 格式　例如(yyyy-mm-dd)
-         * @return {string} 返回特定格式的日期字符串
-         */
-        toFormatString: function(fmt) {
-            var h = {
-                'y': this.getFullYear(),
-                'M': this.getMonth() + 1,
-                'd': this.getDate(),
-                'h': this.getHours(),
-                'm': this.getMinutes(),
-                's': this.getSeconds(),
-                'S': this.getMilliseconds()
-            };
-            var minL = {
-                'y': 2
-            };
-            for (var name in h) {
-                if (h.hasOwnProperty(name) && !(name in minL))
-                    minL[name] = h[name].toString().length;
-            }
-            return fmt.replace(usedRe.toFormatString, function(a, b) {
-                var t = h[b];
-                var l = Math.max(a.length, minL[b]);
-                return ('0'.repeat(l) + t).slice(-l);
-            });
-        },
-        DatePart: function(interval) {
-            var myDate = this;
-            var partStr = '';
-            var Week = ['日', '一', '二', '三', '四', '五', '六'];
-            switch (interval) {
-                case 'y':
-                    partStr = myDate.getFullYear();
-                    break;
-                case 'm':
-                    partStr = myDate.getMonth() + 1;
-                    break;
-                case 'd':
-                    partStr = myDate.getDate();
-                    break;
-                case 'w':
-                    partStr = Week[myDate.getDay()];
-                    break;
-                case 'ww':
-                    partStr = myDate.WeekNumOfYear();
-                    break;
-                case 'h':
-                    partStr = myDate.getHours();
-                    break;
-                case 'n':
-                    partStr = myDate.getMinutes();
-                    break;
-                case 's':
-                    partStr = myDate.getSeconds();
-                    break;
-            }
-            return parseInt(partStr, 10);
-        }
-    });
-
     _getQueryString = function(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
@@ -359,12 +186,12 @@ define(['jquery'], function($) {
             data: params,
             dataType: 'json',
             contentType: contentType,
-            beforeSend: function(request) {
-                //request.setRequestHeader("token", $.cookie('token'));
-            },
-            headers: {
-                //'token': $.cookie('token')
-            },
+            // beforeSend: function(request) {
+            //     request.setRequestHeader("token", $.cookie('token'));
+            // },
+            // headers: {
+            //     'token': $.cookie('token')
+            // },
             statusCode: {
                 401: function() {
                     $('#modal-dialog').html(_.template($('#errorTmpl').html(), {
@@ -380,7 +207,11 @@ define(['jquery'], function($) {
                 }
             },
             success: function(data) {
-                callback(data);
+                if (data.code == 0) {
+                    callback(data.data);
+                }else{
+                    alert(data.msg);
+                }
             }
         });
     };
