@@ -62,9 +62,9 @@
                 <button class="js-give btn-give">赠送</button>
                 {{/gift}}
                 {{#return}}
-                <button class="js-return">退款</button>
+                <a class="js-return" href="ApplyRefund.html?id={{id}}">退款</a>
                 {{/return}}
-                <a class="js-book" href="Reservation.html">预约</a>
+                <a class="js-book" href="Reservation.html?id={{id}}">预约</a>
             </div>
             {{/operate}}
         </li>
@@ -87,7 +87,7 @@
             </div>
             {{#operate}}
             <div class="oper">
-                <button class="js-changedate btn-give">改期</button>
+                <a class="js-changedate btn-give" href="Reservation.html?id={{id}}">改期</a>
                 <button class="js-revoke">撤销</button>
             </div>
             {{/operate}}
