@@ -5,6 +5,11 @@ define([], function() {
         getTicketPrice: _basePath + 'getTicketPrice',
         getTickets: _basePath + 'getTickets',
         getUserInfo: _basePath + 'getUserInfo',
-        payOrder: _basePath + 'payOrder'
+        buyFlightDiary: _basePath + 'buyFlightDiary',
+        submitBooking: _basePath + 'submitBooking',
+        getBookingTime: _basePath + 'getBookingTime',
+        getBookableNum: _basePath + 'getBookableNum',
+        buyTicket: _basePath + 'buyTicket',
+        getFlightDiary: _basePath + 'getFlightDiary'
     };
 });
