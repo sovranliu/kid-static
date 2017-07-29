@@ -27,17 +27,11 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     function getFlightDiary() {
         var params = {};
 
-        helper.ajax(url.getFlightDiary, params, function(res) {
-            if (!res.code) {
-                var data = res.data;
-
-                $('.js-video-can-purchase-list').html(mustache.render($('#imgTmpl').html(), { 'imgList': data.canPurchase.videos }));
-                $('.js-video-has-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.hasPurchased }));
-                $('.js-timeDuration').html(data.timeDuration);
-                $('.js-price').html(data.canPurchase.price);
-            } else {
-                //todo
-            }
+        helper.ajax(url.getFlightDiary, params, function(data) {
+            $('.js-video-can-purchase-list').html(mustache.render($('#imgTmpl').html(), { 'imgList': data.canPurchase.videos }));
+            $('.js-video-has-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.hasPurchased }));
+            $('.js-timeDuration').html(data.timeDuration);
+            $('.js-price').html(data.canPurchase.price);
         });
     }
 
@@ -55,13 +49,8 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
             'diaryId': diaryId
         };
 
-        helper.ajax(url.buyFlightDiary, params, function(res) {
-            if (!res.code) {
-                //调起微信支付
-
-            } else {
-                //todo
-            }
+        helper.ajax(url.buyFlightDiary, params, function(data) {
+            //调起微信支付
         });
     }
 
