@@ -2,7 +2,6 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
     function bindActions() {
         $('.js-give').on('click',_openGive);
-
     }
 
     function _changeTabs() {
@@ -103,6 +102,10 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         })
     }
 
+    function _openGive() {
+
+    }
+    
     return {
         init: function() {
             bindActions();

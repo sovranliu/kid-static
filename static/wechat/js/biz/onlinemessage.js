@@ -9,13 +9,21 @@ define(['url','helper'], function (url,helper) {
 
     //提交留言
     function _postMessageData() {
-        var params = {
-            "content":$.trim($('.js-message').val())
-        };
+        var content = $.trim($('.js-message').val());
+        debugger;
+        if(content != "") {
+            var params = {
+                "content":content
+            };
 
-        helper.ajax(url.postMessageData,params,function (res) {
+            helper.ajax(url.postMessageData,params,function (res) {
+                $(".popup").show();
+            })
+        }else{
             $(".popup").show();
-        })
+            $(".popup").find('p').html('请输入您咨询的问题。')
+        }
+        
     }
 
     return {
