@@ -13,47 +13,46 @@
     <meta name="browsermode" content="application">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>亚海飞行俱乐部</title>
-    <!-- 我要购票 -->
 </head>
 <body>
     <div class="background2">
-        <div class="mb-body">
-            <div class="th-title">我要购票</div>
-            <div class="box">
-                <div class="bt-usedetail">
-                    <div>
-                        <span class="left">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span>
-                        <span>张三</span>
-                    </div>
-                    <div>
-                        <span class="left">手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</span>
-                        <span>13556742389</span>
-                    </div>
-                    <div>
-                        <span class="left">购买数量：</span>
-                        <!-- 一张 -->
-                        <!-- <span>一张</span> -->
-                        <span>
-                            <span class="minus">-</span>
-                            <input type="" name="" value="3"/>
-                            <span class="add">+</span>
-                        </span>
-                    </div>
-                </div>
-                <div class="bt-freight">
-                    <span class="fl">退费险<i></i></span>
-                    <input type="checkbox" name="cardSelect" class="checkbox-switch" />
-                </div>
-                <div class="bt-payment">
-                    <span class="fl">¥</span>
-                    <div class="fl">
-                        <p>520</p>
-                        <p>支付金额</p>
-                    </div>
-                    <button class="fr">支付订单</button>
-                </div>
+        <div class="tb-title">我要购票</div>
+        <div class="shadow">
+            <div class="rs-con">
+                <a class="rs-ticket">我要购票</a>
+                <div class="rs-ticketnotes">购票前请务必详细阅读购票须知 <a href="./TicketNotes.html">购票须知</a></div>
+                <dl class="rs-dl-list">
+                    <dd class="rs-dd-item">
+                        <a href="./OrderDetail.html?type=1">单人购票</a>
+                        <span><i>¥</i><span class="js-single-price"></span>/张</span>
+                    </dd>
+                    <dd class="rs-dd-item">
+                        <a href="./OrderDetail.html?type=0">团队购票</a>
+                        <span><i>¥</i><span class="js-group-price"></span>/张</span>
+                    </dd>
+                </dl>
             </div>
         </div>
     </div>
+
+    <!-- 票务列表模板 -->
+    <script type="text/template" id="ticketTmpl">
+    <!--{{#ticketList}}{
+        <li class="rs-li-item">
+            <div class="rs-left">
+                <span>
+                    {{#type}}单人票{{/type}}
+                    {{^type}}团队票{{/type}}
+                </span>
+            </div>
+            <div class="rs-right">
+                <button class="use-btn">使用</button>
+                <button class="js-gift-ticket give-btn {{#type}}gray{{/type}}">赠送</button>
+            </div>
+        </li>
+    {/ticketList}}-->
+    </script>
+
+    <script data-main="js/boot.js" data-start="js/biz/buyTickets.js" src="js/libs/require.min.js"></script>
 </body>
 </html>

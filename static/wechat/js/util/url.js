@@ -3,6 +3,13 @@ define([], function() {
 
     return {
         getTicketPrice: _basePath + 'getTicketPrice',
-        getUserTickets: _basePath + 'getUserTickets'
+        getTickets: _basePath + 'getTickets',
+        getUserInfo: _basePath + 'getUserInfo',
+        buyFlightDiary: _basePath + 'buyFlightDiary',
+        submitBooking: _basePath + 'submitBooking',
+        getBookingTime: _basePath + 'getBookingTime',
+        getBookableNum: _basePath + 'getBookableNum',
+        buyTicket: _basePath + 'buyTicket',
+        getFlightDiary: _basePath + 'getFlightDiary'
     };
 });

@@ -360,10 +360,10 @@ define(['jquery'], function($) {
             dataType: 'json',
             contentType: contentType,
             beforeSend: function(request) {
-                request.setRequestHeader("token", $.cookie('token'));
+                //request.setRequestHeader("token", $.cookie('token'));
             },
             headers: {
-                'token': $.cookie('token')
+                //'token': $.cookie('token')
             },
             statusCode: {
                 401: function() {
