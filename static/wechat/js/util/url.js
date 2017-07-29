@@ -4,12 +4,24 @@ define([], function() {
     return {
         getTicketPrice: _basePath + 'getTicketPrice',
         getTickets: _basePath + 'getTickets',
-        getUserInfo: _basePath + 'getUserInfo',
         buyFlightDiary: _basePath + 'buyFlightDiary',
         submitBooking: _basePath + 'submitBooking',
         getBookingTime: _basePath + 'getBookingTime',
         getBookableNum: _basePath + 'getBookableNum',
         buyTicket: _basePath + 'buyTicket',
-        getFlightDiary: _basePath + 'getFlightDiary'
+        getFlightDiary: _basePath + 'getFlightDiary',
+        getUserTickets: _basePath + 'getTickets',
+        //编辑用户信息
+        getUserInfo: _basePath + 'getUserInfo',
+        postUserInfo: _basePath + 'postUserInfo',
+        //留言
+        getMessageData: _basePath + 'getMessageData',
+        postMessageData: _basePath + 'postUserInfo',
+        //会员权益
+        postBenefit: _basePath + 'postUserInfo',
+        //预约相关
+        getUserBooks: _basePath + 'getBooks'
+
+
     };
 });
