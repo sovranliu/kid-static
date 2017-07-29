@@ -28,32 +28,20 @@ define(['url', 'helper'], function (url, helper) {
     function getUserInfo() {
         var params = {};
 
-        helper.ajax(url.getUserInfo, params, function(res) {
-            if (!res.code) {
-                var data = res.data;
-
-                $('.js-name').text(data.userName);
-                $('.js-phone').text(data.telephone);
-            } else {
-                //todo
-            }
+        helper.ajax(url.getUserInfo, params, function(data) {
+            $('.js-name').text(data.userName);
+            $('.js-phone').text(data.telephone);
         });
     }
 
     function getTicketPrice() {
         var params = {};
 
-        helper.ajax(url.getTicketPrice, params, function(res) {
-            if (!res.code) {
-                var data = res.data;
+        helper.ajax(url.getTicketPrice, params, function(data) {
+            ticketPrice = ticketType == '1' ? data.single : data.group;
+            ticketRefundInsurance = data.refundInsurance;
 
-                ticketPrice = ticketType == '1' ? data.single : data.group;
-                ticketRefundInsurance = data.refundInsurance;
-
-                setRefundInsurance();
-            } else {
-                //todo
-            }
+            setRefundInsurance();
         });
     }
 
@@ -119,13 +107,8 @@ define(['url', 'helper'], function (url, helper) {
             'totalPrice': Number($('.js-price').text())
         };
 
-        helper.ajax(url.buyTicket, params, function(res) {
-            if (!res.code) {
-                //调起微信支付
-
-            } else {
-                //todo
-            }
+        helper.ajax(url.buyTicket, params, function(data) {
+            //调起微信支付
         });
     }
 

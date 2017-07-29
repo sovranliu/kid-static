@@ -16,13 +16,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     function getBookingTime() {
         var params = {};
 
-        helper.ajax(url.getBookingTime, params, function(res) {
-            if (!res.code) {
-                $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': res.data }));
-                $('.js-select-time').eq(0).click();
-            } else {
-                //todo
-            }
+        helper.ajax(url.getBookingTime, params, function(data) {
+            $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': data }));
+            $('.js-select-time').eq(0).click();
         });
     }
 
@@ -46,12 +42,8 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
             'endTime': activeTime[1]
         };
 
-        helper.ajax(url.getBookableNum, params, function(res) {
-            if (!res.code) {
-                $('.js-bookable-num').text(res.data.count);
-            } else {
-                //todo
-            }
+        helper.ajax(url.getBookableNum, params, function(data) {
+            $('.js-bookable-num').text(data.count);
         });
     }
 
@@ -78,12 +70,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
             'endTime': activeTime[1]
         };
 
-        helper.ajax(url.submitBooking, params, function(res) {
-            if (!res.code) {
-                showPopup(1);
-            } else {
-                showPopup(2); //todo
-            }
+        helper.ajax(url.submitBooking, params, function(data) {
+            showPopup(1);
+            //showPopup(2); //预约满
         });
     }
 

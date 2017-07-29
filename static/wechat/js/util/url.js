@@ -20,14 +20,8 @@ define([], function() {
         //会员权益
         postBenefit: _basePath + 'postUserInfo',
         //预约相关
-        getUserBooks: _basePath + 'getBooks',
-        getTickets: _basePath + 'getTickets',
-        buyFlightDiary: _basePath + 'buyFlightDiary',
-        submitBooking: _basePath + 'submitBooking',
-        getBookingTime: _basePath + 'getBookingTime',
-        getBookableNum: _basePath + 'getBookableNum',
-        buyTicket: _basePath + 'buyTicket',
-        getFlightDiary: _basePath + 'getFlightDiary'
->>>>>>> update
+        getUserBooks: _basePath + 'getBooks'
+
+
     };
 });
