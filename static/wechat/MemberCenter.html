@@ -21,8 +21,8 @@
             <div class="mc-header-top">
                 <img class="fl" src="images/head.jpg"></img>
                 <div class="fl">
-                    <p>昵称：kuku</p>
-                    <p>会员级别：初级飞行员</p>
+                    <p class="username">姓名：</p>
+                    <!--<p>会员级别：初级飞行员</p>-->
                 </div>
             </div>
             <div class="mc-header-bottom">
@@ -33,7 +33,7 @@
         <div class="mc-content">
             <ul class="mc-list">
                 <li class="mc-item">
-                    <a href="Reservation1.html"><img src="images/icon1.png">预约飞行</a>
+                    <a href="MyOrder.html"><img src="images/icon1.png">预约飞行</a>
                 </li>
                  <li class="mc-item">
                     <a href="FlightDiary.html"><img src="images/icon2.png">飞行日志</a>
@@ -45,8 +45,16 @@
                     <a href="CommonProblem.html"><img src="images/icon3.png">常见问题</a>
                 </li>
             </ul>
-            <button class="mc-btn">最新信息</button>
+            <button class="js-message mc-btn">最新信息</button>
         </div>
     </div>
+    <div class="popup">
+        <div class="pop-mask"></div>
+        <div class="pop-main">
+            <p></p>
+            <button class="js-confirm confirm-btn">确认</button>
+        </div>
+    </div>
+    <script data-main="js/boot.js" data-start="js/biz/membercenter.js" src="js/libs/require.min.js"></script>
 </body>
 </html>

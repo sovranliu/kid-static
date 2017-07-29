@@ -12,9 +12,6 @@ requirejs.config({
         url: 'util/url'
     },
     shim: {
-        underscore: {
-            exports: '_'
-        },
         jquery: {
             exports: '$'
         },
