@@ -1,29 +1,55 @@
-define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
+define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, mustache, datePicker) {
 
     var serialNumber;
 
     function bindActions() {
         $('.js-time-list').on('click', '.js-select-time', selectTime);
+        //$('.js-year').on('click', changeYear);
+        //$('.js-month').on('click', changeMonth)
         $('.js-submit').on('click', submitBooking);
         $('.js-confirm').on('click', hidePopup);
     }
 
+    //获取url参数
     function getUrlParams() {
         serialNumber = helper.getQueryStr('serialNumber');
     }
 
-    function getBookingTime() {
-        var params = {};
-
-        helper.ajax(url.getBookingTime, params, function(data) {
-            $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': data }));
-            $('.js-select-time').eq(0).click();
+    //初始化年月日选择框
+    function initDateSelectbox() {
+        $.DatePicker({ 
+            YearSelector: ".js-year", 
+            MonthSelector: ".js-month", 
+            DaySelector: ".js-day",
+            ShowDefaultText: false
         });
     }
 
+    //获取可预约时间段
+    function getBookingTime() {
+        var params = {
+            'year': $('.js-year').val(),
+            'month': $('.js-month').val(),
+            'day': $('.js-day').val()
+        };
+
+        helper.ajax(url.getBookingTime, params, function(data) {
+            if (data.length == 0) {
+                $('.js-time-list').html('<p class="dataNull">您选择的日期不可预约，请重新选择。</p>');
+            } else {
+                $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': data }));
+                $('.js-select-time').eq(0).click();
+            }
+        });
+    }
+
+    //根据所选时间段，查看可预约人数
     function selectTime(e) {
         var $activeTime = $(e.currentTarget);
         var activeTime = $activeTime.text() ? $activeTime.text().split('-') : [];
+        var year = $('.js-year').val();
+        var month = $('.js-month').val();
+        var day = $('.js-day').val();
         var params = {};
 
         if (activeTime.length < 2) {
@@ -36,9 +62,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
         params = {
             'serialNumber': serialNumber,
-            'year': '2017',
-            'month': '08',
-            'date': '01',
+            'year': year,
+            'month': month,
+            'day': day,
             'start': activeTime[0],
             'end': activeTime[1]
         };
@@ -48,10 +74,14 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         });
     }
 
+    //提交预约
     function submitBooking() {
         var agreeDisclaimer = $('.js-disclaimer').is(':checked');
         var $activeTime = $('.js-select-time.current');
         var activeTime = $activeTime.text() ? $activeTime.text().split('-') : [];
+        var year = $('.js-year').val();
+        var month = $('.js-month').val();
+        var day = $('.js-day').val();
 
         if (activeTime.length < 2) {
             showPopup(4);
@@ -65,9 +95,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
         var params = {
             'serialNumber': serialNumber,
-            'year': '2017',
-            'month': '08',
-            'date': '01',
+            'year': year,
+            'month': month,
+            'day': day,
             'start': activeTime[0],
             'end': activeTime[1]
         };
@@ -78,6 +108,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         });
     }
 
+    //信息提示弹框
     function showPopup(type) {
         var $resWrapper = $('.js-result-wrapper');
         var $resText = $('.js-result');
@@ -99,15 +130,16 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         }
     }
 
+    //关闭弹框
     function hidePopup() {
         $('.js-result-wrapper').hide();
     }
-
 
     return {
         init: function () {
           bindActions();
           getUrlParams();
+          initDateSelectbox();
           getBookingTime();
         }
     }
