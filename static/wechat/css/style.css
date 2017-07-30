@@ -385,18 +385,15 @@ a,div,img {
 
 .fd-dq {
     overflow: hidden;
-    color: #253c56
+    color: #253c56;
+    margin-top: 20px;
 }
 
 .fd-dq-desc {
     margin-top: 20px;
 }
 
-.fd-dq-list {
-    margin-top: 20px;
-}
-
-.fd-dq img {
+.fd-dq video {
     width: 100%;
     margin-top: 10px;
 }

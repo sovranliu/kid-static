@@ -1,16 +1,14 @@
 define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
-    var userId, diaryId;
+    var serialNumber;
 
     function bindActions() {
         $('.js-buy-flightDiary').on('click', buyFlightDiary);
         $('.js-tab-item').on('click', switchTab);
-        //$('.js-video-has-purchase-list').on('click', 'img', showVideo);
     }
 
     function getUrlParams() {
-        userId = helper.getQueryStr('userId');
-        ticketId = helper.getQueryStr('ticketId');
+        serialNumber = helper.getQueryStr('serialNumber');
     }
 
     function switchTab(e) {
@@ -25,28 +23,21 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     }
 
     function getFlightDiary() {
-        var params = {};
+        var params = {
+            'serialNumber': serialNumber
+        };
 
         helper.ajax(url.getFlightDiary, params, function(data) {
-            $('.js-video-can-purchase-list').html(mustache.render($('#imgTmpl').html(), { 'imgList': data.canPurchase.videos }));
+            $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.canPurchase.videos }));
             $('.js-video-has-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.hasPurchased }));
             $('.js-timeDuration').html(data.timeDuration);
             $('.js-price').html(data.canPurchase.price);
         });
     }
 
-    /*function showVideo(e) {
-        var $videoControl = $('.js-video-control');
-        var url = $(e.currentTarget).data('url');
-
-        $videoControl.show();
-        $videoControl.find('source').attr('src', url);
-    }*/
-
     function buyFlightDiary() {
         var params = {
-            'userId': userId,
-            'diaryId': diaryId
+            'serialNumber': serialNumber
         };
 
         helper.ajax(url.buyFlightDiary, params, function(data) {
