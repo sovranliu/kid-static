@@ -19,22 +19,31 @@
     <div class="background">
         <div class="menber-header">申请退款</div>
         <div class="ar-content">
-            <h2>订单详情</h2>
+        </div>
+        <button class="js-refund submit-btn">申请退款</button>
+    </div>
+    <div class="popup">
+        <div class="pop-mask"></div>
+        <div class="pop-main">
+            <p></p>
+            <button class="js-submit confirm-btn">确认</button>
+        </div>
+    </div>
+    <script id="template" type="x-tmpl-mustache">
+        <h2>订单详情</h2>
             <div>
-                <p>日期：2017年8月25日</p>
-                <p>时段：10:30-11:00</p>
+                <p>票号：{{serialNumber}}</p>
+                <p>日期：{{expire}}</p>
             </div>
              <h2>可退款金额</h2>
              <div>
-                 <p>¥364元</p>
+                 <p>¥{{price}}元</p>
              </div>
              <h2>退还方式</h2>
              <div>
                  <p class="tips">原路退回（15个工作日内退款至原支付方）</p>
              </div>
-        </div>
-        <button class="submit-btn">申请退款</button>
-    </div>
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    </script>
+    <script data-main="js/boot.js" data-start="js/biz/applyrefund.js" src="js/libs/require.min.js"></script>
 </body>
 </html>

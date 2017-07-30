@@ -1415,6 +1415,8 @@ a,div,img {
 }
 
 .voucher-list {
+    max-height: 65%;
+    overflow-y: scroll;
 }
 
 .voucher-item {
@@ -1516,4 +1518,37 @@ a,div,img {
 
 .gray .rcon .status,.gray .rcon .pir,.voucher-item.gray p,.voucher-item.gray .num {
     color: #ccc;
+}
+.no-title{
+    padding: 20px 0;
+    margin: 50px 0;
+}
+.result-img{
+    text-align: center;
+    margin: 50px auto;
+}
+.result-img img{
+    width: 22px;
+    vertical-align: sub;
+    margin-right: 10px;
+}
+.large-btn{
+    width: 80%;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 5px;
+    padding: 5px 0;
+    color: #fff;
+    background: #0068b7;
+}
+.back-btn{
+    display: block;
+    width: 80%;
+    margin: 50px auto 0;
+    line-height: 44px;
+    text-align: center;
+    font-size: 22px;
+    color: #fff;
+    background: #0068b7;
+    border-radius: 44px;
 }

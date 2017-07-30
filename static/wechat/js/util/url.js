@@ -10,7 +10,6 @@ define([], function() {
         getBookableNum: _basePath + 'getBookableNum',
         buyTicket: _basePath + 'buyTicket',
         getFlightDiary: _basePath + 'getFlightDiary',
-        getUserTickets: _basePath + 'getTickets',
         //编辑用户信息
         getUserInfo: _basePath + 'getUserInfo',
         postUserInfo: _basePath + 'postUserInfo',
@@ -20,8 +19,10 @@ define([], function() {
         //会员权益
         postBenefit: _basePath + 'postUserInfo',
         //预约相关
-        getUserBooks: _basePath + 'getBooks'
-
+        getUserBooks: _basePath + 'getBooks',
+        //退款相关
+        getRefund: _basePath + 'getRefund',
+        postRefund: _basePath + 'postUserInfo'
 
     };
 });
