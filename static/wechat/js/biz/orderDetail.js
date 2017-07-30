@@ -1,6 +1,6 @@
 define(['url', 'helper'], function (url, helper) {
 
-    var userId, ticketType, ticketPrice, ticketRefundInsurance;
+    var ticketType, ticketPrice, ticketRefundInsurance;
 
     function bindActions() {
         $('.js-minus-num').on('click', minusNum);
@@ -10,7 +10,6 @@ define(['url', 'helper'], function (url, helper) {
     }
 
     function getUrlParams() {
-        userId = helper.getQueryStr('userId');
         ticketType = helper.getQueryStr('ticketType');
     }
 
@@ -100,7 +99,6 @@ define(['url', 'helper'], function (url, helper) {
         var needRefundInsurance = $('.js-switch-refundInsurance').is(':checked');
 
         var params = {
-            'userId': userId,
             'type': ticketType,
             'ticketNum': ticketNum,
             'needRefundInsurance': needRefundInsurance,
