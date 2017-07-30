@@ -7,6 +7,7 @@ requirejs.config({
         mustache: 'libs/mustache.min',
         bootstrap: 'libs/bootstrap.min',
         jCookie: 'libs/jquery.cookie',
+        datePicker: 'libs/datePicker',
         /******************* utils *****************/
         helper: 'util/helper',
         url: 'util/url'
@@ -22,6 +23,10 @@ requirejs.config({
         bootstrap: {
             deps: ['jquery'],
             exports: 'bootstrap'
+        },
+        datePicker: {
+            deps: ['jquery'],
+            exports: 'datePicker'
         }
     }
 });

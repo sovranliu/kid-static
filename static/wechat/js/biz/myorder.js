@@ -1,8 +1,15 @@
 define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
+    var serialNumber;
+
     function bindActions() {
         $('.book-list').on('click','.js-revoke',_openRevoke);
+        $('.ticket-list').on('click', '.js-give', _openGiveShare);
         $('.js-submit').on('click',_postRevoke);
+        $('.js-ticket-give').on('click', _openGive);
+        $('.js-ticket-share').on('click', _shareTicket);
+        $('.js-send-message').on('click', _sendMessage);
+        $('.js-confirm-message-result').on('click', _confirmMessgeResult);
         $('.revoke-popup').on('click','.js-confirm',function() {
             $('.revoke-popup').hide();
             window.location.reload();
@@ -131,6 +138,40 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
             $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
             $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
         })
+    }
+
+    //打开赠送分享弹框
+    function _openGiveShare() {
+        serialNumber = $(this).closest('li').attr('data-id');
+        $('.give-popup').show();
+    }
+
+    function _openGive() {
+        $('.give-popup').hide();
+        $('.send-message').show();
+    }
+
+    function _sendMessage() {
+        var params = {
+            'phone': $('.js-phone').val(),
+            'serialNumber': serialNumber
+        };
+
+        helper.ajax(url.giveTicket, params, function(data) {
+            //todo 对方非会员的处理
+            $('.send-message').hide();
+            $('.send-message-result').show();
+            $('.js-send-message-result').html('您的票券已成功送出，请对方至会员中心的预约飞行中，查看并使用他的票券。');
+        });
+        
+    }
+
+    function _confirmMessgeResult() {
+        $('.send-message-result').hide();
+    }
+
+    function _shareTicket() {
+
     }
     
     return {
