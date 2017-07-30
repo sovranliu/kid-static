@@ -936,3 +936,7 @@
     border-right: 4px solid transparent;
     border-top: 8px solid white;
 }
+.friend-link{
+	background: transparent;
+	color: #fff
+}
