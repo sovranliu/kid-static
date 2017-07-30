@@ -1,7 +1,12 @@
 define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
     function bindActions() {
-        $('.js-give').on('click',_openGive);
+        $('.book-list').on('click','.js-revoke',_openRevoke);
+        $('.js-submit').on('click',_postRevoke);
+        $('.revoke-popup').on('click','.js-confirm',function() {
+            $('.revoke-popup').hide();
+            window.location.reload();
+        })
     }
 
     function _changeTabs() {
@@ -21,7 +26,13 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
     //获取票务信息
     function _getTicketData() {
-        helper.ajax(url.getUserTickets, {}, function(res) {
+        helper.ajax(url.getTickets, {}, function(res) {
+            //如果没有飞行票则引导用户去购票页面
+            if(res == null) {
+                var _html = '<p class="no-title">您没有飞行票，请购买后查看。</p>';
+                $('.ticket-list').html(_html);
+            }
+
             for (var i = 0; i < res.length; i++) {
                 switch (res[i].type) {
                     case 0:
@@ -102,8 +113,24 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         })
     }
 
-    function _openGive() {
+    //撤销弹框
+    function _openRevoke() {
+        var id = $(this).closest('li').attr('data-id');
+        $('.revoke-popup').show();
+        $('.revoke-popup').find('.js-submit').attr('data-id',id);
+    }
 
+    //撤销
+    function _postRevoke() {
+        var ticketId = $(this).attr('data-id');
+        var params = {
+            "ticketId":ticketId
+        };
+
+        helper.ajax(url.getTickets, params, function(res) {
+            $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
+            $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
+        })
     }
     
     return {

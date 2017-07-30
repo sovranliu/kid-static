@@ -20,12 +20,13 @@
         <div class="menber-header">我的订单</div>
         <div class="table-nav">
            <nav class="tab-plugin">
-              <a href="javascript:;" class="tab-active">飞行票</a>
-              <a href="javascript:;" class="">预约</a>
+              <a href="javascript:;" class="tab-active">我的飞行票</a>
+              <a href="javascript:;" class="">我的预约</a>
             </nav>
         </div>
         <dl class="table-main">
             <dd style="display:block">
+                <a href="BuyTickets.html" class="large-btn">购票</a>
                 <ul class="ticket-list voucher-list"></ul>
             </dd>
             <dd>
@@ -33,16 +34,23 @@
             </dd>
         </dl>
     </div>
-    <div class="popup">
+    <div class="give-popup popup">
         <div class="pop-mask"></div>
         <div class="pop-main">
             <button class="confirm-btn">分享</button>
             <button class="confirm-btn">手机号赠送</button>
         </div>
     </div>
+    <div class="revoke-popup popup">
+        <div class="pop-mask"></div>
+        <div class="pop-main">
+            <p>确认撤销此次预约嘛？</p>
+            <button class="js-submit confirm-btn">确认</button>
+        </div>
+    </div>
     <script id="ticketTemplate" type="x-tmpl-mustache">
     {{#res}}
-        <li class="voucher-item {{statusStyle}}" data-id="{{id}}">
+        <li class="voucher-item {{statusStyle}}" data-id="{{serialNumber}}">
             <div class="num">
                 <span>票流水号：{{serialNumber}}</span>
             </div>
@@ -62,9 +70,9 @@
                 <button class="js-give btn-give">赠送</button>
                 {{/gift}}
                 {{#return}}
-                <a class="js-return" href="ApplyRefund.html?id={{id}}">退款</a>
+                <a class="js-return" href="ApplyRefund.html?ticketId={{serialNumber}}">退款</a>
                 {{/return}}
-                <a class="js-book" href="Reservation.html?id={{id}}">预约</a>
+                <a class="js-book" href="Reservation.html?ticketId={{serialNumber}}">预约</a>
             </div>
             {{/operate}}
         </li>
@@ -72,7 +80,7 @@
     </script>
     <script id="bookTemplate" type="x-tmpl-mustache">
     {{#res}}
-        <li class="voucher-item {{statusStyle}}" data-id="{{id}}">
+        <li class="voucher-item {{statusStyle}}" data-id="{{serialNumber}}">
             <div class="num">
                 <span>票流水号：{{serialNumber}}</span>
             </div>
@@ -87,7 +95,7 @@
             </div>
             {{#operate}}
             <div class="oper">
-                <a class="js-changedate btn-give" href="Reservation.html?id={{id}}">改期</a>
+                <a class="js-changedate btn-give" href="Reservation.html?ticketId={{serialNumber}}">改期</a>
                 <button class="js-revoke">撤销</button>
             </div>
             {{/operate}}
