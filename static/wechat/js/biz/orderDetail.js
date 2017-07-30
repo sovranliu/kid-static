@@ -99,7 +99,7 @@ define(['url', 'helper'], function (url, helper) {
         var needRefundInsurance = $('.js-switch-refundInsurance').is(':checked');
 
         var params = {
-            'type': ticketType,
+            'ticketType': ticketType,
             'ticketNum': ticketNum,
             'needRefundInsurance': needRefundInsurance,
             'totalPrice': Number($('.js-price').text())

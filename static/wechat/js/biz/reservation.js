@@ -36,9 +36,11 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
         params = {
             'serialNumber': serialNumber,
-            'date': '2017-08-01',
-            'startTime': activeTime[0],
-            'endTime': activeTime[1]
+            'year': '2017',
+            'month': '08',
+            'date': '01',
+            'start': activeTime[0],
+            'end': activeTime[1]
         };
 
         helper.ajax(url.getBookableNum, params, function(data) {
@@ -63,9 +65,11 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
         var params = {
             'serialNumber': serialNumber,
-            'date': '2017-08-01',
-            'startTime': activeTime[0],
-            'endTime': activeTime[1]
+            'year': '2017',
+            'month': '08',
+            'date': '01',
+            'start': activeTime[0],
+            'end': activeTime[1]
         };
 
         helper.ajax(url.submitBooking, params, function(data) {
