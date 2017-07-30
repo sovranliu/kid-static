@@ -734,7 +734,7 @@
 	font-size:28px;
 	color: #fff;
 	text-indent: 25px;
-	background: url(images/q.jpg);
+	background: url(../images/q.jpg);
 }
 .yh-bt-c-list button{
 	position: relative;
@@ -935,4 +935,9 @@
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 8px solid white;
+}
+.friend-link{
+	background: transparent;
+	color: #fff
+
 }

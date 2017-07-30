@@ -63,6 +63,13 @@
             <button class="js-confirm-message-result confirm-btn">确认</button>
         </div>
     </div>
+    <div class="revoke-popup popup">
+        <div class="pop-mask"></div>
+        <div class="pop-main">
+            <p>确认撤销此次预约嘛？</p>
+            <button class="js-submit confirm-btn">确认</button>
+        </div>
+    </div>
     <script id="ticketTemplate" type="x-tmpl-mustache">
     {{#res}}
         <li class="voucher-item {{statusStyle}}" data-id="{{serialNumber}}">

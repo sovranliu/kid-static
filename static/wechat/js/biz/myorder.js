@@ -172,6 +172,10 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
     function _shareTicket() {
 
+        helper.ajax(url.getTickets, params, function(res) {
+            $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
+            $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
+        })
     }
     
     return {
