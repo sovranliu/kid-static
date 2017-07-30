@@ -1,6 +1,6 @@
 define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
-    var userId, ticketId;
+    var serialNumber;
 
     function bindActions() {
         $('.js-time-list').on('click', '.js-select-time', selectTime);
@@ -9,8 +9,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     }
 
     function getUrlParams() {
-        userId = helper.getQueryStr('userId');
-        ticketId = helper.getQueryStr('ticketId');
+        serialNumber = helper.getQueryStr('serialNumber');
     }
 
     function getBookingTime() {
@@ -36,7 +35,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         $activeTime.addClass('current');
 
         params = {
-            'ticketId': ticketId,
+            'serialNumber': serialNumber,
             'date': '2017-08-01',
             'startTime': activeTime[0],
             'endTime': activeTime[1]
@@ -63,8 +62,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         }
 
         var params = {
-            'userId': userId,
-            'ticketId': ticketId,
+            'serialNumber': serialNumber,
             'date': '2017-08-01',
             'startTime': activeTime[0],
             'endTime': activeTime[1]
