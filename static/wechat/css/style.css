@@ -393,9 +393,37 @@ a,div,img {
 
 .fd-dq img {
     width: 100%;
-    margin: 30px 0 20px 0;
 }
-
+.fd-dq-ov{
+    position: relative;
+    float: left;
+    margin: 30px 0 20px 0;
+    width: 100%;
+    font-size: 0;
+}
+.fd-dq-pop{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: 61.774%;
+    background: rgba(0,0,0,.5);
+    border-radius: 3px;
+    
+}  
+.fd-dq-pop i{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 52px;
+    height: 52px;
+    display: block;
+    background: url(../images/lock.png) no-repeat;
+    background-size: contain;
+}
 .fd-dq p {
     font-size: 12px;
     line-height: 1.5;
@@ -466,14 +494,42 @@ a,div,img {
 }
 
 .fd-yg img {
-    float: left;
-    width: 46%;
-    margin: 4% 0 0 0;
+    width: 100%;
+    border-radius: 3px;
 }
-
-.fd-yg img:nth-child(odd) {
+.over{
+    position: relative;
+    float: left;
+    margin: 4% 0 0 0;
+    width: 46%;
+    font-size: 0;
+}
+.fd-yg .over:nth-child(odd) {
     margin: 4% 8% 0 0;
 }
+.over .pop{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: 90.0759%;
+    background: rgba(0,0,0,.5);
+    border-radius: 3px;
+    
+}  
+.over .pop i{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 52px;
+    height: 52px;
+    display: block;
+    background: url(../images/start.png) no-repeat;
+    background-size: contain;
+}  
 
 .rs-con {
     margin: 0 44px;
