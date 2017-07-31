@@ -1,7 +1,4 @@
-/**
- * 常用工具
- * @Author xuyd@ctrip.com
- */
+
 define(['jquery'], function($) {
     var usedRe = {
         interval: /^(\d+)([smhdMy])$/,

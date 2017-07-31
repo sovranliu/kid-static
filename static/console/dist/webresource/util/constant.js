@@ -1,7 +1,4 @@
-/**
- * 常量定义
- * @Author xuyd@ctrip.com
- */
+
 define({
 
     COOKIE_SAVE_PATH: '/',
