@@ -1,7 +1,4 @@
-/**
- * 通用配置
- * @Author xuyd@ctrip.com
- */
+
 define(['jquery', 'jCookie', 'pace'], function($, jCookie, pace) {
     function _renderPageInit() {
         $('.js-username').html($.cookie('userName'));

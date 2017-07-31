@@ -1,7 +1,4 @@
-/**
- * AJAX URL
- * @Author xuyd@ctrip.com
- */
+
 define(['util/constant', 'util/env'], function(cst, env) {
     var _urls = {},
         _get, _gets, _getAuth, _getFetch;

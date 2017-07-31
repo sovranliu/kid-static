@@ -1,7 +1,4 @@
-/**
- * 配置信息
- * @Author wanghonga@ctrip.com
- */
+
 define(['util/constant'], function(cst) {
 
     /********** API基路径 ****************/

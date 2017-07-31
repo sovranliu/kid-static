@@ -1,7 +1,4 @@
-/**
- * Boot file for whole front-end pages
- * @Author wanghonga@ctrip.com
- */
+
 requirejs.config({
     baseUrl: 'webresource',
     paths: {
