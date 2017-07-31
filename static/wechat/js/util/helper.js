@@ -193,20 +193,23 @@ define(['jquery'], function($) {
             //     'token': $.cookie('token')
             // },
             statusCode: {
-                401: function() {
-                    $('#modal-dialog').html(_.template($('#errorTmpl').html(), {
-                        msg: '您没有权限进行操作，请联系管理员。'
-                    }));
-                    $('#modal-dialog').modal("show");
-                    setTimeout(function() {
-                        window.location.href = "./fetch-scene-list.html";
-                    }, 1000)
-                },
-                302: function() {
-                    window.location.href = './login.html';
-                }
+                // 401: function() {
+                //     $('#modal-dialog').html(_.template($('#errorTmpl').html(), {
+                //         msg: '您没有权限进行操作，请联系管理员。'
+                //     }));
+                //     $('#modal-dialog').modal("show");
+                //     setTimeout(function() {
+                //         window.location.href = "./fetch-scene-list.html";
+                //     }, 1000)
+                // },
+                // 302: function() {
+                //     window.location.href = './login.html';
+                // }
             },
             success: function(data) {
+                if(data.action) {
+                    window.location.href = ""//todo 跳去授权页
+                }
                 if (data.code == 0) {
                     callback(data.data);
                 }else{
