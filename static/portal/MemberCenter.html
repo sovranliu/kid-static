@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link rel="stylesheet" type="text/css" href="css/reset.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+         <!-- Link Swiper's CSS -->
+        <link rel="stylesheet" href="css/swiper.min.css">
+    </head>
+    <body style="background: #fff">
+        <!-- header -->
+        <div class="yh-header">
+            <p></p>
+            <div class="box">
+                <span class="logo"></span>
+                <ul class="yh-nav">
+                    <li class="yh-nav-li">
+                        <a href="javascript:;">俱乐部介绍</a>
+                    </li>
+                    <li class="yh-nav-li">
+                        <a href="javascript:;">会员与票务</a>
+                    </li>
+                    <li class="yh-nav-li">
+                        <a href="javascript:;">游客须知</a>
+                    </li>
+                    <li class="yh-nav-li">
+                        <a href="javascript:;">飞行体验</a>
+                    </li>
+                    <li class="yh-nav-li">
+                        <a href="javascript:;">分享好友</a>
+                    </li>
+                </ul>
+                <div class="sign-in">
+                    <button>登录</button>
+                    <button>注册</button>
+                </div>
+            </div>
+        </div>
+        <!-- banner -->
+        <div class="yh-banner">
+            <!-- Swiper -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="images/img1.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/img0.jpg">
+                    </div>
+                </div>
+                <!-- Add Pagination -->
+                <!-- Add Arrows -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+        <!-- conntent -->
+        <div class="yh-content">
+            <div class="yh-wid950">
+                <div class="yh-mc-top">
+                    <img class="fl" src="images/head.jpg">
+                    <div class="fl">
+                        <p>昵称：kuku    |   会员级别：初级飞行员</p>
+                        <div>
+                            <a href="javascript:;">编辑个人资料</a>
+                            <a href="javascript:;">会员权益说明</a>
+                            <a href="javascript:;">最新消息</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="yh-mc-bottom">
+                    <a class="yy" href="javascript:;"></a>
+                    <a class="dd" href="javascript:;"></a>
+                    <a class="hy" href="javascript:;"></a>
+                    <a class="wt" href="javascript:;"></a>
+                </div>
+            </div>
+        </div>
+        <!-- fixedtool -->
+        <div class="fixedtool">
+            <a class="icon1" href="javascript:;">
+            </a>
+            <a class="icon2" href="javascript:;">
+            </a>
+            <a class="icon3" href="javascript:;">
+            </a>
+            <a class="icon4" href="javascript:;">
+            </a>
+        </div>
+        <!-- footer -->
+        <div class="yh-footer">
+            <div class="footer-box">
+                <div class="yh-f-l">
+                    <div class="yh-f-wrap">
+                        <ul class="yh-f-www">
+                            <li><a href="javascript:;">联系我们</a></li>
+                            <li><a href="javascript:;">手机官网</a></li>
+                            <li><a href="javascript:;">社交媒体分享</a></li>
+                            <li><a href="javascript:;">法律声明</a></li>
+                        </ul>
+                        <div class="yh-f-sel">友情链接 <i></i></div>
+                    </div>
+                    <p class="copyright">
+                        <span>客服热线：400-1799-666</span>
+                        <span class="span2">上海亚海航空俱乐部有限公司</span>
+                        <span>渝ICP备16011041号-1</span>
+                    </p>
+                </div>
+                <div class="yh-f-r">
+                    +亚太飞行俱乐部 <i class="wechat"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Swiper JS -->
+        <script src="js/swiper.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+        var swiper = new Swiper('.swiper-container', {
+            // pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 2500,
+            autoplayDisableOnInteraction: false
+        });
+        </script>
+    </body>
+</html>

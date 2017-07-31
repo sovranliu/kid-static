@@ -39,7 +39,6 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
             } else {
                 $('.js-video-has-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.hasPurchased }));
             }
-
             $('.js-timeDuration').html(data.timeDuration);
             $('.js-price').html(data.canPurchasePrice);
         });
