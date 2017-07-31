@@ -57,37 +57,13 @@
         </div>
         <!-- conntent -->
         <div class="yh-content">
-            <div class="yh-wid950">
-                <div class="yh-mc-top">
-                    <img class="fl" src="images/head.jpg">
-                    <div class="fl">
-                        <p>昵称：kuku    |   会员级别：初级飞行员</p>
-                        <div>
-                            <a href="javascript:;">编辑个人资料</a>
-                            <a href="javascript:;">会员权益说明</a>
-                            <a href="javascript:;">最新消息</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="yh-mc-bottom">
-                    <a class="yy" href="BuyTickets.html"></a>
-                    <a class="dd" href="MyOrder.html"></a>
-                    <a class="hy" href="MembershipPrice.html"></a>
-                    <a class="wt" href="CommonProblem.html"></a>
-                </div>
+            <div class="yh-wid744">
+                <h2 class="yh-title">建议&反馈</h2>
+                <textarea class="js-message msg-text" name="" id=""></textarea>
+                <button class="js-submit msg-btn" type="button">提交</button>
             </div>
         </div>
-        <!-- fixedtool -->
-        <div class="fixedtool">
-            <a class="icon1" href="SendMessage.html">
-            </a>
-            <a class="icon2" href="BuyTickets.html">
-            </a>
-            <a class="icon3" href="Video.html">
-            </a>
-            <a class="icon4" href="#top">
-            </a>
-        </div>
+       
         <!-- footer -->
         <div class="yh-footer">
             <div class="footer-box">
@@ -117,21 +93,13 @@
                 </div>
             </div>
         </div>
-        <!-- Swiper JS -->
-        <script src="js/swiper.min.js"></script>
-
-        <!-- Initialize Swiper -->
-        <script>
-        var swiper = new Swiper('.swiper-container', {
-            // pagination: '.swiper-pagination',
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            paginationClickable: true,
-            spaceBetween: 30,
-            centeredSlides: true,
-            autoplay: 2500,
-            autoplayDisableOnInteraction: false
-        });
-        </script>
+        <div class="popup">
+            <div class="pop-mask"></div>
+            <div class="pop-main">
+                <p class="cen">您的留言已成功提交，请至会员中心“最新消息”功能查看我们的回复，谢谢关注</p>
+                <button class="js-confirm confirm-btn">确认</button>
+            </div>
+        </div>
+        <script data-main="js/boot.js" data-start="js/biz/sendmessage.js" src="js/libs/require.min.js"></script>
     </body>
 </html>
