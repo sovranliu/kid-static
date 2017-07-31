@@ -1,7 +1,3 @@
-/**
- * App下载子系统管理
- * @Author xuyd@ctrip.com
- */
 define(['jquery', 'underscore', 'model/app-download.model', 'util/constant', 'util/help', 'jqPaginator'], function($, _, model, cst, help, jqPaginator) {
 
     "use strict";
