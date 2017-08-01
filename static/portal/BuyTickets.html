@@ -57,89 +57,29 @@
 		</div>
 		<!-- conntent -->
 		<div class="yh-content">
-			<div class="yh-bt-table">
-				<div class="yh-bt-l fl">
-					<ul class="yh-bt-nav">
-						<li class="current"><i>。</i>我要购票</li>
-						<li><i>。</i>我的票券</li>
-					</ul>
-				</div>
+			<div class="yh-wid744">
+				<h2 class="yh-title">我要购票</h2>
 				<div class="yh-bt-r fr">
 					<dl class="yh-bt-con">
 						<dd>
-							<p class="yh-bt-tn">购票前请务必详细阅读购票须知</p>
+							<p class="js-notes-open yh-bt-tn">购票前请务必详细阅读购票须知</p>
 							<div class="yh-bt-box">
 								<h3>选择票价:</h3>
 								<ul class="yh-bt-q">
-									<li>
+									<li class="js-ticket-type current">
 										<span class="span1">单人购票</span>
-										<p><i>¥</i>520/张</p>
+										<p><i>¥</i><span class="js-single-price"></span>/张</p>
 									</li>
-									<li class="current">
+									<li class="js-ticket-type">
 										<span class="span1">团队购票</span>
-										<p><i>¥</i>320/张</p>
+										<p><i>¥</i><span class="js-group-price"></span>/张</p>
 									</li>
 								</ul>
 							</div>
 							<div class="yh-bt-b">
 								<p class="tip">*团队购票，三张起订，且不接受退票。</p>
-								<p class="input"><input type="checkbox" name="" />退票险 <img src="images/doubt.png"></p>
-								<p class="pir">支付金额：<i>¥</i><span>1140</span></p>
-								<button class="btn">支付订单</button>
-							</div>
-						</dd>
-						<dd>
-							<h2 class="yh-title">我的票券</h2>
-							<div class="yh-bt-t">
-								<div class="yh-bt-cou">
-									<ul class="yh-bt-c-list">
-										<li>
-											<div class="cou fl">单人票</div>
-											<button class="fl">使用</button>
-										</li>
-										<li>
-											<div class="cou fl">团队票</div>
-											<button class="fl">使用</button>
-											<button class="fl">赠送</button>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<h2 class="yh-title">飞行时段查询</h2>
-							<div class="yh-bt-t">
-								<div class="rsv-con">
-									<div class="bor">
-										<div class="rsv-date">
-					                        <span>日期</span>
-					                        <div class="year">年</div>
-					                        <div class="month">月</div>
-					                        <div class="day">日</div>
-					                    </div>
-					                    <div class="rsv-timeframe">
-					                        <ul class="rsv-ul-list">
-					                            <li class="rsv-li-item">
-					                                <span>9:00-10:00</span>
-					                                <span class="current">10:00-11:00</span>
-					                            </li>
-					                            <li class="rsv-li-item">
-					                                <span>12:00-13:00</span>
-					                                <span>13:00-14:00</span>
-					                            </li>
-					                            <li class="rsv-li-item">
-					                                <span>14:00-15:00</span>
-					                                <span>15:00-16:00</span>
-					                            </li>
-					                        </ul>
-					                    </div>
-					                    <p class="rsv-tip">当前时段还可预约<span>2</span>人</p>
-									</div>
-				                    
-				                    <a class="rsv-disclaimer" href="javascript:;">免责协议</a>
-				                    <div class="rsv-agree">
-				                        <input type="checkbox" name=""> 我已阅读并同意免责协议
-				                    </div>
-				                    <button class="rsv-btn">提交预约</button>
-				                </div>
+								<p class="input"><input class="js-switch-refundInsurance" type="checkbox" name="" />退票险 <img src="images/doubt.png"></p>
+								<button class="js-buy-ticket btn">支付订单</button>
 							</div>
 						</dd>
 					</dl>
@@ -175,8 +115,9 @@
 				</div>
 			</div>
 		</div>
+
 		<!-- 请通过微信扫描二维码付款,弹窗 -->
-		<div class="popup" style="display: none;">
+		<div class="popup">
 	        <div class="pop-mask"></div>
 	        <div class="pop-main">
 	            <p class="cen">请通过微信扫描二维码付款 </p>
@@ -184,6 +125,24 @@
 	            <div class="close"></div>
 	        </div>
 	    </div>
+
+	    <!-- 购票须知，弹窗 -->
+		<div class="js-notes popup">
+	        <div class="pop-mask"></div>
+	        <div class="pop-main notes">
+	            <p class="cen">
+	            	<p>1、团队购票，3张起订，不可退票，有效期7天</p>
+		            <p>2、单人购票，有效期30天，如未购买退票险，退票时需要收取30%的手续费</p>
+		            <p>3、单人购票仅限本人使用，团队购票可赠送他人使用</p>
+		            <p>4、单人票和团队票均可在有效期内申请改期</p>
+		            <p>5、如遇天气、俱乐部运营等意外状况发生的无法飞行，可延长有效期或申请退款（团购除外）</p>
+		            <p>6、如遇天气、俱乐部运营等意外状况发生的无法飞行，单人票购票者可全额退款（如购买退票险的该金额不退款）</p>
+		        </p>
+		        <button class="js-notes-close confirm-btn">确认</button>
+	            <div class="js-notes-close close"></div>
+	        </div>
+	    </div>
+
 		<!-- Swiper JS -->
 	    <script src="js/swiper.min.js"></script>
 
@@ -200,27 +159,7 @@
 	        autoplayDisableOnInteraction: false
 	    });
 	    </script>
-	    <!-- 以下js仅供原型展示使用 -->
-	    <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-	    <script type="text/javascript">
-	        $(document).ready(function(){
-	            fnBindEvent();
-	            function fnBindEvent(){            
-	                /*table-nav even*/
-	                $("dl.yh-bt-con>dd").hide();
-	                $("dl.yh-bt-con>dd").eq(0).show();
-	                $(".yh-bt-nav>li").each(function(){
-	                    $(this).bind("click",function(){
-	                        var $this=$(this),
-	                                thisIndex=$this.index(),
-	                                $tabContentAll=$("dl.yh-bt-con>dd");
-	                        $this.addClass("current");
-	                        $this.siblings().removeClass("current");
-	                        $tabContentAll.hide().eq(thisIndex).show();
-	                    })
-	                })
-	            }
-	        });
-	    </script>
+
+	    <script data-main="js/boot.js" data-start="js/biz/buyTickets.js" src="js/libs/require.min.js"></script>
 	</body>
 </html>

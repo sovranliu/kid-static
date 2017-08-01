@@ -32,8 +32,11 @@
 					</li>
 				</ul>
 				<div class="sign-in">
-					<button>登录</button>
-					<button>注册</button>
+					<img class="fl" src="images/head.jpg"></img>
+	                <div class="fl">
+	                    <span>昵称：kuku</span>
+	                    <span>会员级别：初级飞行员</spam>
+	                </div>
 				</div>
 			</div>
 		</div>
@@ -55,29 +58,11 @@
 		        <div class="swiper-button-prev"></div>
 		    </div>
 		</div>
-		<!-- conntent -->
 		<div class="yh-content">
 			<div class="yh-wid744">
-				<h2 class="yh-title">游客须知</h2>
-				<div class="yh-cp-con">
-					<div class="yh-tn-con">
-						<h3>-订票须知-</h3>
-						<div class="tn-text box">
-				            <p>1、团队购票，3张起订，不可退票，有效期7天</p>
-				            <p>2、单人购票，有效期30天，如未购买退票险，退票时需要收取30%的手续费</p>
-				            <p>3、单人购票仅限本人使用，团队购票可赠送他人使用</p>
-				            <p>4、单人票和团队票均可在有效期内申请改期</p>
-				            <p>5、如遇天气、俱乐部运营等意外状况发生的无法飞行，可延长有效期或申请退款（团购除外）</p>
-				            <p>6、如遇天气、俱乐部运营等意外状况发生的无法飞行，单人票购票者可全额退款（如购买退票险的该金额不退款）</p>
-				        </div>
-					</div>
-				</div>
-				<h2 class="yh-title">游客须知</h2>
-				<div class="yh-cp-con">
-					<div class="yh-tn-con">
-						<h3>-乘客须知-</h3>
-						<div>内容内容</div>
-					</div>
+				<h2 class="yh-title">飞行体验</h2>
+				<div class="yh-cp-rsv">
+					<div class="js-video-list rsv-con-fd"></div>
 				</div>
 			</div>
 		</div>
@@ -110,6 +95,16 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- 视频模板 -->
+	    <script type="text/template" id="videoTmpl">
+	    {{#videoList}}
+	        <video controls="controls" id="{{id}}">
+	            <source src="{{url}}" type="video/mp4" />
+	        </video>
+	    {{/videoList}}
+	    </script>
+
 		<!-- Swiper JS -->
 	    <script src="js/swiper.min.js"></script>
 
@@ -126,5 +121,7 @@
 	        autoplayDisableOnInteraction: false
 	    });
 	    </script>
+
+	    <script data-main="js/boot.js" data-start="js/biz/flightDiary.js" src="js/libs/require.min.js"></script>
 	</body>
 </html>

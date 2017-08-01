@@ -587,9 +587,21 @@
 .yh-bt-t{
 	margin:0 30px;
 }
+.yh-cp-rsv {
+    position: relative;
+    background: #fff;
+    text-align: center;
+}
 .rsv-con {			
     position: relative;
     text-align: right;
+    padding: 10px 40px;
+    background: #fff;
+}
+
+.rsv-con-fd {
+    padding: 20px;
+    background: #fff;
 }
 
 .rsv-date {
@@ -597,7 +609,6 @@
     margin: 20px 0;
     font-size: 18px;
     color: #a3a3a3;
-    text-align: center;
 }
 
 .rsv-date span {
@@ -607,7 +618,7 @@
     text-indent: 5px;
 }
 
-.rsv-date div {
+.rsv-date select {
     position: relative;
     display: block;
     float: left;
@@ -617,9 +628,11 @@
     border: 1px dotted #e5e5e5;
     background: #fff;
     margin: 0 7px;
+    font-size: 18px;
+    color: #a3a3a3;
 }
 
-.rsv-date div:after {
+.rsv-date select:after {
     content: "";
     position: absolute;
     right: 5px;
@@ -630,39 +643,22 @@
     border-right: 5px solid transparent;
     border-top: 10px solid #e5e5e5;
 }
+
 .rsv-li-item {
-    width: 100%;
+    float: left;
+    text-align: center;
+    width: 50%;
     height: 44px;
     line-height: 44px;
     background: #eee;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     overflow: hidden;
-}
-.rsv-li-item span {
-	width: 140px;
-    height: 44px;
-    margin: 0 40px;
-    padding: 0 5px;
-    line-height: 44px;
-    float: left;
-    position: relative;
     font-size: 18px;
-    color: #2c3d58;
-    text-align: center;
 }
 
-.rsv-li-item span:nth-child(odd) {
-    text-align: right;
-    margin-right: 4%
-}
-.rsv-li-item span.current{
+.rsv-li-item.current{
 	background: #1162a2;
 	color: #fff;
-}
-
-.rsv-li-item span:nth-child(odd).current:after {
-    left: initial;
-    right: -5%;
 }
 
 .rsv-tip {
@@ -819,7 +815,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    display: block;
+    display: none;
 }
 
 .pop-mask {
@@ -848,6 +844,17 @@
     -ms-transform: translate(-50%,-50%);
     -o-transform: translate(-50%,-50%);
     text-align: center;
+}
+
+.pop-main.notes {
+    width: 45%;
+    padding: 15px 0;
+}
+
+
+.pop-main.notes p {
+    padding: 5px 20px;
+    font-size: 14px;
 }
 
 .pop-main input {
