@@ -32,11 +32,8 @@
 					</li>
 				</ul>
 				<div class="sign-in">
-					<img class="fl" src="images/head.jpg"></img>
-	                <div class="fl">
-	                    <span>昵称：kuku</span>
-	                    <span>会员级别：初级飞行员</spam>
-	                </div>
+					<button>登录</button>
+					<button>注册</button>
 				</div>
 			</div>
 		</div>
@@ -59,76 +56,30 @@
 		    </div>
 		</div>
 		<!-- conntent -->
-		<style type="text/css">
-			.yh-wid1000{
-				width: 1000px;
-				margin: auto;
-			}
-			.yh-v-t{
-				overflow:hidden;
-				margin: 105px auto 135px;
-			}
-			.yh-v-t img{
-				float: left;
-				margin-right: 2px
-			}
-			.yh-v-t img:last-of-type{
-				margin-right: 0
-			}
-			.yh-v-b{
-				font-size: 0;
-			}
-			.yh-v-b-l,.yh-v-b-c{
-				margin-right: 1px;
-			}
-			.yh-v-b-l-t{
-				overflow:hidden;
-				margin-bottom: 2px;
-			}
-			.yh-v-b-l-b{
-				overflow:hidden;
-			}
-			.yh-v-b{
-				overflow:hidden;
-				margin-bottom: 315px;
-			}
-		</style>
 		<div class="yh-content">
-			<div class="yh-wid1000">
-				<div class="yh-v-t">
-					<img src="images/t1.jpg">
-					<img src="images/t2.jpg">
-					<img src="images/t3.jpg">
-					<img src="images/t4.jpg">
-				</div>
-				<div class="yh-v-b">
-					<div class="yh-v-b-l fl">
-						<div class="yh-v-b-l-t">
-							<img src="images/t5.jpg">
+			<div class="yh-wid744">
+				<h2 class="yh-title">预约飞行</h2>
+				<div class="yh-cp-rsv">
+					<div class="rsv-con">
+						<div class="bor">
+							<div class="rsv-date">
+		                        <span>日期</span>
+		                        <select class="js-year" rel=""></select>
+		                        <select class="js-month" rel=""></select> 
+		                        <select class="js-day" rel=""></select> 
+		                    </div>
+		                    <div class="rsv-timeframe">
+		                        <ul class="js-time-list rsv-ul-list"></ul>
+		                    </div>
+		                    <p class="rsv-tip">当前时段还可预约<span class="js-bookable-num"></span>人</p>
 						</div>
-						<div class="yh-v-b-l-b">
-							<img class="fl" src="images/t6.jpg">
-							<img class="fr" src="images/t7.jpg">
-						</div>
-					</div>
-					<div class="yh-v-b-c fl">
-						<div class="yh-v-b-l-b">
-							<img class="fl" src="images/t8.jpg">
-							<img class="fr" src="images/t9.jpg">
-						</div>
-						<div class="yh-v-b-l-t">
-							<img src="images/t10.jpg">
-						</div>
-					</div>
-					<div class="yh-v-b-l fl">
-						<div class="yh-v-b-l-t">
-							<img src="images/t11.jpg">
-						</div>
-						<div class="yh-v-b-l-b">
-							<img class="fl" src="images/t12.jpg">
-							<img class="fr" src="images/t13.jpg">
-						</div>
-					</div>
+		                
+		                <a class="rsv-disclaimer" href="/Disclaimer.html">免责协议</a>
+		                <div class="rsv-agree">
+		                    <input class="js-disclaimer" type="checkbox" checked="checked"> 我已阅读并同意免责协议
+		                </div>
+		                <button class="js-submit rsv-btn">提交预约</button>
+		            </div>
 				</div>
 			</div>
 		</div>
@@ -161,6 +112,23 @@
 				</div>
 			</div>
 		</div>
+		<!-- 请通过微信扫描二维码付款,弹窗 -->
+		<div class="js-result-wrapper popup">
+	        <div class="pop-mask"></div>
+	        <div class="pop-main">
+	            <p class="js-result cen">请通过微信扫描二维码付款 </p>
+	            <button class="js-confirm confirm-btn">确认</button>
+	            <div class="js-confirm close"></div>
+	        </div>
+	    </div>
+
+	    <!-- 时间段模板 -->
+	    <script type="text/template" id="timeTmpl">
+	    {{#timeList}}
+	        <li class="js-select-time rsv-li-item"><span>{{start}}-{{end}}</span></li>
+	    {{/timeList}}
+	    </script>
+
 		<!-- Swiper JS -->
 	    <script src="js/swiper.min.js"></script>
 
@@ -177,5 +145,7 @@
 	        autoplayDisableOnInteraction: false
 	    });
 	    </script>
+
+	     <script data-main="js/boot.js" data-start="js/biz/reservation.js" src="js/libs/require.min.js"></script>
 	</body>
 </html>

@@ -7,6 +7,7 @@ requirejs.config({
         mustache: 'libs/mustache.min',
         bootstrap: 'libs/bootstrap.min',
         jCookie: 'libs/jquery.cookie',
+        datePicker: 'libs/datePicker',
         swiper:'libs/swiper.min',
         /******************* utils *****************/
         helper: 'util/helper',
