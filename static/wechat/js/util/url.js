@@ -17,15 +17,16 @@ define([], function() {
         getUserInfo: _basePath + 'getUserInfo',
         postUserInfo: _basePath + 'postUserInfo',
         //留言
-        getMessageData: _basePath + 'getMessageData',
-        postMessageData: _basePath + 'postUserInfo',
+        getMessageData: _basePath + 'getMessage',
+        postMessageData: _basePath + 'postMessage',
         //会员权益
-        postBenefit: _basePath + 'postUserInfo',
+        postBenefit: _basePath + 'postBenefit',
         //预约相关
         getUserBooks: _basePath + 'getBooks',
+        postRevoke: _basePath + 'postRevoke',
         //退款相关
         getRefund: _basePath + 'getRefund',
-        postRefund: _basePath + 'postUserInfo',
+        postRefund: _basePath + 'postRefund',
         //赠送票券
         giveTicket: _basePath + 'giveTicket'
 

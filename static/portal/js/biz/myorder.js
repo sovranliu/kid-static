@@ -5,8 +5,9 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     function bindActions() {
         $('.book-list').on('click','.js-revoke',_openRevoke);
         $('.ticket-list').on('click', '.js-give', _openGiveShare);
+        $('.ticket-list').on('click','.js-return',_openRefund);
+        $('.js-submit-refund').on('click',_postRufund)
         $('.js-submit').on('click',_postRevoke);
-        $('.js-ticket-give').on('click', _openGive);
         $('.js-ticket-share').on('click', _shareTicket);
         $('.js-send-message').on('click', _sendMessage);
         $('.js-confirm-message-result').on('click', _confirmMessgeResult);
@@ -14,18 +15,21 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
             $('.revoke-popup').hide();
             window.location.reload();
         })
+        $('.refund-popup').on('click','.js-confirm',function() {
+            $('.refund-popup').hide();
+        })
     }
 
-    function _changeTabs() {
-        $("dl.table-main>dd").hide();
-        $("dl.table-main>dd").eq(0).show();
-        $(".tab-plugin>a").each(function(){
+    function _changeTabs(){            
+        $("dl.yh-bt-con>dd").hide();
+        $("dl.yh-bt-con>dd").eq(0).show();
+        $(".yh-bt-nav>li").each(function(){
             $(this).bind("click",function(){
                 var $this=$(this),
                         thisIndex=$this.index(),
-                        $tabContentAll=$("dl.table-main>dd");
-                $this.addClass("tab-active");
-                $this.siblings().removeClass("tab-active");
+                        $tabContentAll=$("dl.yh-bt-con>dd");
+                $this.addClass("current");
+                $this.siblings().removeClass("current");
                 $tabContentAll.hide().eq(thisIndex).show();
             })
         })
@@ -155,11 +159,6 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     //打开赠送分享弹框
     function _openGiveShare() {
         serialNumber = $(this).closest('li').attr('data-id');
-        $('.give-popup').show();
-    }
-
-    function _openGive() {
-        $('.give-popup').hide();
         $('.send-message').show();
     }
 
@@ -181,6 +180,24 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         
     }
 
+    //打开退票弹框
+    function _openRefund() {
+        serialNumber = $(this).closest('li').attr('data-id');
+        $('.refund-popup').show();
+    }
+
+    function _postRufund() {
+        var $popup = $('.refund-popup');
+        var params = {
+            'serialNumber': serialNumber
+        };
+
+        helper.ajax(url.postRefund, params, function(data) {
+            $popup.find('p').html('退款成功，零钱支付的退款20分钟内到账，银行卡支付的退款3个工作日后到账，请知晓。');
+            $popup.find('.confirm-btn').removeClass('js-submit-refund').addClass('js-confirm');
+        });
+    }
+
     function _confirmMessgeResult() {
         $('.send-message-result').hide();
     }
@@ -192,7 +209,6 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
             $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
         })
     }
-
     //验证手机号
     function _checkMobileNumber(num) {
         var reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证规则

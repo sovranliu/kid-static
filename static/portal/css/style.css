@@ -60,6 +60,12 @@
 .yh-content{
 
 }
+.yh-content .title{
+	text-align: center;
+	color: #1162a2;
+	font-size: 18px;
+	padding: 20px 0;
+}
 .yh-banner{
     position: relative;
     overflow: hidden;
@@ -819,7 +825,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    display: block;
+    display: none;
 }
 
 .pop-mask {
@@ -907,20 +913,13 @@
     width: 15px;
 }
 .pop-con button{
-    width: 50%;
+    width: 100%;
     height: 52px;
     line-height: 52px;
     font-size: 16px;
     color: #fff;
     background: #1162a2;
     text-align: center;
-}
-.pop-con button:first-of-type{
-    border-right: 1px solid #fff;
-    border-bottom-left-radius: 10px;
-}
-.pop-con button:last-of-type{
-    border-bottom-right-radius: 10px;
 }
 .popup .pop-con .close:before, .popup .pop-con .close:after{
 	right: 5px;
@@ -931,6 +930,7 @@
     margin: 0 0 20px 0;
     height: 38px;
     line-height: 38px;
+    padding: 0px 5px;
 }
 
 .pop-main p {
@@ -1064,7 +1064,6 @@
     height: 20px;
     background: #1f2222;
     line-height: 20px;
-    text-indent: 15px;
 }
 .yh-f-sel i{
 	position: absolute;
@@ -1074,4 +1073,28 @@
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 8px solid white;
+}
+.friend-link{
+	background: transparent;
+	color: #fff
+}
+.msg-text{
+	width: 100%;
+    border: #1162a2 solid 1px;
+    margin: 20px 0;
+    min-height: 200px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.msg-btn{
+	width: 240px;
+    height: 42px;
+    text-align: center;
+    line-height: 42px;
+    background: #1162a2;
+    color: #fff;
+    left: 0;
+    border-radius: 20px;
+    margin: 20px auto;
+    display: block;
 }
