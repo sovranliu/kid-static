@@ -37,12 +37,12 @@ define(['url', 'helper'], function(url, helper) {
         var params = {
             "mobileNumber":phone,
             "code":code,
-            "name":name
+            "name":name,
+            "openId":helper.getQueryStr('openId')
         }
 
         if(name != "" && code != "" && _checkMobileNumber()) {
             helper.ajax(url.postRegister, params, function(res) {
-                $.cookie('sid',res.sid,{expires:30});
                 window.location.href = "MemberCenter.html";
             })
         }else{

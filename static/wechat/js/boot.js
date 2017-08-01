@@ -10,7 +10,8 @@ requirejs.config({
         datePicker: 'libs/datePicker',
         /******************* utils *****************/
         helper: 'util/helper',
-        url: 'util/url'
+        url: 'util/url',
+        handshake: 'util/handshake'
     },
     shim: {
         jquery: {
@@ -31,11 +32,13 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'underscore', 'mustache', 'bootstrap', 'jCookie'], function($, _, mustache, bootstrap, jCookie) {
+require(['jquery', 'underscore', 'mustache', 'bootstrap', 'jCookie','handshake'], function($, _, mustache, bootstrap, jCookie,handshake) {
     (function() {
         var dataStart = $('script[data-main][data-start]').attr('data-start') || '';
         var startModules = dataStart.split(',');
 
+        handshake.init();
+        
         _.each(startModules, function(module) {
             require([module], function(moduleObj) {
                 if (moduleObj && moduleObj.init) {

@@ -207,8 +207,8 @@ define(['jquery'], function($) {
                 // }
             },
             success: function(data) {
-                if(data.action) {
-                    window.location.href = ""//todo 跳去授权页
+                if(data.redirect != null && data.redirect != "") {
+                    window.location.href = data.redirect;
                 }
                 if (data.code == 0) {
                     callback(data.data);
