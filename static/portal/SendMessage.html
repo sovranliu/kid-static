@@ -57,38 +57,13 @@
         </div>
         <!-- conntent -->
         <div class="yh-content">
-            <div class="yh-wid950">
-                <div class="yh-mc-top">
-                    <img class="fl" src="images/head.jpg">
-                    <div class="fl">
-                        <p>昵称：kuku    |   会员级别：初级飞行员</p>
-                        <div>
-                            <a class="js-userInfo">编辑个人资料</a>
-                            <a href="javascript:;">会员权益说明</a>
-                            <a class="js-message">最新消息</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="yh-mc-bottom">
-                    <a class="yy" href="BuyTickets.html"></a>
-                    <a class="dd" href="MyOrder.html"></a>
-                    <a class="hy" href="MembershipPrice.html"></a>
-                    <a class="wt" href="CommonProblem.html"></a>
-                </div>
+            <div class="yh-wid744">
+                <h2 class="yh-title">建议&反馈</h2>
+                <textarea class="js-message msg-text" name="" id=""></textarea>
+                <button class="js-submit msg-btn" type="button">提交</button>
             </div>
         </div>
-        <!-- fixedtool -->
-        <div class="fixedtool">
-            <a class="icon1" href="SendMessage.html">
-            </a>
-            <a class="icon2" href="BuyTickets.html">
-            </a>
-            <a class="icon3" href="Video.html">
-            </a>
-            <a class="icon4" href="#top">
-            </a>
-        </div>
-        
+       
         <!-- footer -->
         <div class="yh-footer">
             <div class="footer-box">
@@ -118,52 +93,13 @@
                 </div>
             </div>
         </div>
-        <!-- popup -->
-        <div class="js-edit-popup popup">
-            <div class="pop-mask"></div>
-            <div class="pop-con">
-                <h2 class="title">个人信息填写</h2>
-                <ul class="pop-list">
-                    
-                </ul>
-                <button class="js-submit fl">确认</button>
-                <div class="js-confirm close"></div>
-            </div>
-        </div>
-        <!-- popup -->
-        <div class="js-confirm-popup popup">
+        <div class="popup">
             <div class="pop-mask"></div>
             <div class="pop-main">
-                <p class="cen">编辑成功。</p>
+                <p class="cen">您的留言已成功提交，请至会员中心“最新消息”功能查看我们的回复，谢谢关注</p>
                 <button class="js-confirm confirm-btn">确认</button>
             </div>
         </div>
-        <!-- Swiper JS -->
-        <script type="x-tmpl-mustache" id="template">
-            <li class="pop-item">
-                <span class="fl">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span>
-                <input class="js-username fl" type="" name="" value="{{userName}}">
-            </li>
-            <li class="pop-item">
-                <span class="fl">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</span>
-                {{#ismale}}
-                <input class="js-sex fl" type="radio" name="sex" checked><label class="fl">男</label>
-                <input class="fl" type="radio" name="sex"><label class="fl">女</label>
-                {{/ismale}}
-                {{^ismale}}
-                <input class="js-sex fl" type="radio" name="sex"><label class="fl">男</label>
-                <input class="fl" type="radio" name="sex" checked><label class="fl">女</label>
-                {{/ismale}}
-            </li>
-            <li class="pop-item">
-                <span class="fl">手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</span>
-                <input class="js-telephone fl" type="" name="" value="{{telephone}}">
-            </li>
-            <li class="pop-item">
-                <span class="fl">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</span>
-                <input class="js-address fl" type="" name="" value="{{address}}">
-            </li>
-        </script>
-        <script data-main="js/boot.js" data-start="js/biz/membercenter.js" src="js/libs/require.min.js"></script>       
+        <script data-main="js/boot.js" data-start="js/biz/sendmessage.js" src="js/libs/require.min.js"></script>
     </body>
 </html>

@@ -42,6 +42,7 @@ define(['url', 'helper'], function(url, helper) {
 
         if(name != "" && code != "" && _checkMobileNumber()) {
             helper.ajax(url.postRegister, params, function(res) {
+                $.cookie('sid',res.sid,{expires:30});
                 window.location.href = "MemberCenter.html";
             })
         }else{

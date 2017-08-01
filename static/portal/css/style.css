@@ -60,6 +60,12 @@
 .yh-content{
 
 }
+.yh-content .title{
+	text-align: center;
+	color: #1162a2;
+	font-size: 18px;
+	padding: 20px 0;
+}
 .yh-banner{
     position: relative;
     overflow: hidden;
@@ -819,7 +825,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    display: block;
+    display: none;
 }
 
 .pop-mask {
@@ -849,13 +855,82 @@
     -o-transform: translate(-50%,-50%);
     text-align: center;
 }
+.pop-con {
+    position: fixed;
+    z-index: 203;
+    margin: auto;
+    width: 530px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px 0 0;
+    left: 50%;
+    top: 50%;
+    box-shadow: 0px 0px 10px #eee;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    text-align: center;
+}
 
+.pop-con .title{
+    width: 470px;
+    height: 52px;
+    margin: auto;
+    line-height: 52px;
+    text-indent: 10px;
+    text-align: left;
+    font-size: 18px;
+    color: #333;
+    background: #ededed;
+    border-radius: 10px;
+}
+.pop-con .pop-list{
+    margin: 20px;
+}
+.pop-con .pop-item{
+    overflow: hidden;
+    width: 470px;
+    height: 52px;
+    margin: auto;
+    line-height: 52px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.pop-con .pop-item span{
+    width: 80px;
+    text-align:justify;
+    display: block;
+}
+.pop-con .pop-item label{
+    margin: 0 10px;
+}
+.pop-con .pop-item input{
+    width: 390px;
+    height: 52px;
+    line-height: 52px;
+}
+.pop-con .pop-item input[type="radio"]{
+    width: 15px;
+}
+.pop-con button{
+    width: 100%;
+    height: 52px;
+    line-height: 52px;
+    font-size: 16px;
+    color: #fff;
+    background: #1162a2;
+    text-align: center;
+}
+.popup .pop-con .close:before, .popup .pop-con .close:after{
+	right: 5px;
+}
 .pop-main input {
     background: #eeeeee;
     width: 65%;
     margin: 0 0 20px 0;
     height: 38px;
     line-height: 38px;
+    padding: 0px 5px;
 }
 
 .pop-main p {
@@ -989,7 +1064,6 @@
     height: 20px;
     background: #1f2222;
     line-height: 20px;
-    text-indent: 15px;
 }
 .yh-f-sel i{
 	position: absolute;
@@ -999,4 +1073,28 @@
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 8px solid white;
+}
+.friend-link{
+	background: transparent;
+	color: #fff
+}
+.msg-text{
+	width: 100%;
+    border: #1162a2 solid 1px;
+    margin: 20px 0;
+    min-height: 200px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.msg-btn{
+	width: 240px;
+    height: 42px;
+    text-align: center;
+    line-height: 42px;
+    background: #1162a2;
+    color: #fff;
+    left: 0;
+    border-radius: 20px;
+    margin: 20px auto;
+    display: block;
 }
