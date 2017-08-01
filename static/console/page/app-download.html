@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include("include/head.html", {  
+      "title": "App下载子系统管理"
+  }) 
+  <link rel="stylesheet" href="webresource/css/style.css">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper js-app-download">
+
+  @@include('include/header.html')
+  <!-- Left side column. contains the logo and sidebar -->
+  @@include('include/sidebar.html')
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        渠道客户信息管理
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- part 1 search-box -->
+      <!--
+      <div class="box box-info">
+        <form class="form-horizontal">
+          <div class="box-body row">
+            
+            <div class="col-md-12 search-box first-line">
+              <div class="form-group">
+                <label for="" class="control-label">客户名称：</label>
+                <input type="text" class="js-ad-name form-control">
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">创建人：</label>
+                <input type="text" class="js-ad-owner form-control">
+              </div>
+              <button  type="button" class="js-search btn btn-info">查询</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      -->
+      <!-- part 2 alert-box -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-message hide">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- part 3 table -->
+      <div class="pull-right mrgb15">
+        <a href="#modal-dialog" data-toggle="modal" class="js-add btn btn-primary" data-toggle="modal" data-type="add">新增</a>
+      </div>
+      <div class="row">
+
+        <div class="col-xs-12">
+          
+          <div class="nav-tabs-custom">
+            
+            
+            <ul class="nav nav-tabs js-tabs">
+              
+            </ul>
+            <div class="tab-content">
+              
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- /.row -->
+      
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  @@include('include/footer.html')
+  <div class="modal fade" id="modal-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+  <div class="js-msg-modal modal-sm-msg"></div>
+  <div class="control-sidebar-bg"></div>
+</div>
+
+<script type="text/template" id="categroyTmpl">
+<%_.each(data,function(item,index){%>
+  <li><a href="#<%=item.subCategory%>" class="js-category-item" data-toggle="tab" data-type="<%=item.category%>" data-sub="<%=item.subCategory%>"><%=item.subCategoryNameCN%></a></li>
+<%})%>
+</script>
+<!-- 表格模板 -->
+<script type="text/template" id="tableTmpl">
+  <div class="tab-pane active" id="<%=ADtype%>" data-type="BaseInfo">
+    <table id="adTable" class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>编号</th>
+        <th>广告商名称</th>
+        <th>描述</th>
+        <th>结算方式</th>
+        <th>广告商渠道</th>
+        <th>更新时间</th>
+        <th>操作人</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody class="js-label-tbody">
+        <%if(advertiserList.length == 0) {%>
+          <tr>
+            <td colspan="9" align="center">
+              暂无数据
+            </td>
+          </tr>
+        <%}%>
+        <%_.each(advertiserList,function(item,index){%>
+          <tr data-id="<%=item.advertiserId%>" data-adtype="<%=item.adType%>">
+            <td class="js-td-id" width="50" align="center"><%=index+1%></td>
+            <td class="js-td-name"><%=item.sourceName%></td>
+            <td class="js-td-desc limit-width"><%=item.description%></td>
+            <td class="js-td-settletype"><%=item.settleType%></td>
+            <td class="js-td-source"><%=item.source%></td>
+            <td class="js-td-time"><%=item.datachangeLasttime%></td>
+            <td width="80"><%=item.operator%></td>
+            <td class="box-tools">
+              <a href="#modal-dialog" data-toggle="modal"><span class="js-edit label label-success" data-editType="base" data-toggle="tooltip" data-placement="top" title="编辑基本信息"><i class="fa fa-edit"></i></span></a>
+              <a><span class="js-look-url label label-info" data-toggle="tooltip" data-placement="top" title="查看URL配置"><i class="fa fa-plus"></i></span></a>
+              <a><span class="js-look-adver label label-primary" data-toggle="tooltip" data-placement="top" title="查看广告商配置"><i class="fa fa-plus"></i></span></a>
+              <a href="#modal-dialog" data-toggle="modal"><span class="js-del label label-danger" data-delType="base" data-type="del" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o"></i></span></a>
+            </td>
+          </tr>
+          <tr class="js-config-detail config-detail">
+          </tr>
+        <%})%>
+      </tbody>
+    </table>
+  </div>
+</script>
+
+<!--  新增&编辑 基础信息弹出框模板  -->
+<script type="text/template" id="aeModalTmpl">
+  <div class="modal-dialog appdownload-modal" data-id="<%=advertiserId%>">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title"><%=title%></h4>
+      </div>
+      <div class="modal-body">
+          <div class="box-body">
+            <form class="form-horizontal">
+              <%if(type == "add"){%>
+              <div class="form-group">
+                <label for="" class="col-sm-3 control-label">渠道客户类型<i class="text-red"> *</i></label>
+                <div class="col-sm-9">
+                  <select class="js-adType form-control" name="" id="">
+                  <%_.each(adDictionaryDtoList,function(item,index){%>
+                    <option value="<%=item.subCategory%>"><%=item.subCategoryNameCN%></option>
+                  <%})%>
+                  </select>
+                </div>
+              </div>
+              <%}%>
+              <div class="form-group">
+                <label for="" class="col-sm-3 control-label">广告商名称<i class="text-red"> *</i></label>
+                <div class="col-sm-9">
+                  <input type="text" class="js-name form-control js-filter-input" id="" value="<%=base.sourceName%>">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="col-sm-3 control-label">描述<i class="text-red"> *</i></label>
+                <div class="col-sm-9">
+                  <input type="text" class="js-desc form-control js-filter-input" id="" value="<%=base.description%>">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="col-sm-3 control-label">secretKey<i class="text-red"> *</i></label>
+                <div class="col-sm-9">
+                  <input type="text" class="js-secretKey form-control js-filter-input" id="" value="<%=base.secretKey%>">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="col-sm-3 control-label">结算方式<i class="text-red"> *</i></label>
+                <div class="col-sm-9">
+                  <select name="" class="js-settleType form-control js-filter-input" id="">
+                    <option value="CPC">CPC</option>
+                    <option value="CPA">CPA</option>
+                    <option value="Others">Others </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="col-sm-3 control-label">source<i class="text-red"> *</i></label>
+                <div class="col-sm-9">
+                  <input type="text" class="js-source form-control js-filter-input" id="" value="<%=base.source%>">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="col-sm-3 control-label">状态<i class="text-red"> *</i></label>
+                <div class="col-sm-9 control-label input-label">
+                  <input type="radio" name="status"  id="statusRun" value="" checked> 是
+                  <input type="radio" name="status"  id="statusStop" value=""> 否
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <p class="js-error text-red"></p>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+        <button type="button" class="js-save btn btn-success pull-right" data-adType="<%=base.adType%>" data-id="<%=advertiserId%>">保存</button>
+      </div>
+    </div>
+  </div>
+
+</script>
+
+<!-- 新增/编辑 ad配置 -->
+<script type="text/template" id="adConfigTmpl">
+  <div class="modal-dialog appdownload-modal" data-id="<%=advertiserId%>">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title"><%=title%></h4>
+      </div>
+      <div class="modal-body">
+        <div class="config-item" data-configType="ADCONFIG">
+          <form class="config-item-form form-horizontal clearfix">
+            <%if(type == "new"){%>
+            <div class="form-group">
+              <label for="" class="col-sm-3 control-label">广告商类型<i class="text-red"> *</i></label>
+              <div class="col-sm-9">
+                <select class="js-configType form-control" name="" id="">
+                <%_.each(adDictionaryDtoList,function(item,index){%>
+                  <option value="<%=item.subCategory%>"><%=item.subCategoryNameCN%></option>
+                <%})%>
+                </select>
+              </div>
+            </div>
+            <%}%>
+            <div class="form-group">
+              <label for="" class="col-sm-3 control-label">configKey<i class="text-red"> *</i></label>
+              <div class="col-sm-9">
+                <input type="text" class="js-configKey form-control js-filter-input" id="" value="<%=configKey%>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="" class="col-sm-3 control-label">configValue<i class="text-red"> *</i></label>
+              <div class="col-sm-9">
+                <textarea name="" id="" class="js-configValue form-control js-filter-input" cols="30" rows="10"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="" class="col-sm-3 control-label">描述<i class="text-red"> *</i></label>
+              <div class="col-sm-9">
+                <input type="text" class="js-desc form-control js-filter-input" id="" value="<%=remark%>">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p class="js-error text-red"></p>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+        <button type="button" class="js-save-adver btn btn-success pull-right" data-type="<%=configType%>" data-id="<%=configID%>">保存<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- 新增/编辑 url配置 -->
+<script type="text/template" id="urlConfigTmpl">
+  <div class="modal-dialog appdownload-modal" data-id="<%=advertiserId%>">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title"><%=title%></h4>
+      </div>
+      <div class="modal-body">
+        <div class="config-item" data-configType="URLCONFIG">
+          <form class="config-item-form form-horizontal clearfix">
+            <%if(type == "new"){%>
+            <div class="form-group">
+              <label for="" class="col-sm-3 control-label">广告商类型<i class="text-red"> *</i></label>
+              <div class="col-sm-9">
+                <select class="js-eventType form-control" name="" id="">
+                <%_.each(adDictionaryDtoList,function(item,index){%>
+                  <option value="<%=item.subCategory%>"><%=item.subCategoryNameCN%></option>
+                <%})%>
+                </select>
+              </div>
+            </div>
+            <%}%>
+            <div class="form-group">
+              <label for="" class="col-sm-3 control-label">feedbackUrl<i class="text-red"> *</i></label>
+              <div class="col-sm-9">
+                <input type="text" class="js-url form-control js-filter-input" id="" value="<%=feedbackUrl%>">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p class="js-error text-red"></p>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+        <button type="button" class="js-save-url btn btn-success pull-right"  data-type="<%=configType%>" data-id="<%=configID%>">保存<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+      </div>
+    </div>
+  </div>
+  
+</script>
+
+<!-- 删除弹框 -->
+<script type="text/template" id="delModalTmpl">
+  <div class="modal-dialog appdownload-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">删除</h4>
+      </div>
+      <div class="modal-body">
+          确认删除该条<%=name%>信息吗？
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+        <button type="button" class="js-save-del btn btn-success pull-right" data-id="<%=id%>" data-type="<%=type%>">确认</button>
+      </div>
+    </div>
+  </div>
+
+</script>
+
+<!-- 广告商自定义配置 -->
+<script type="text/template" id="adConfigTableTmpl">
+  <td colspan="8">
+    <form>
+      <div class="col-sm-12 js-config-detail-item config-detail-item">
+        <a href="#modal-dialog" data-toggle="modal" class="js-add-new btn btn-info pull-right" data-id="<%=advertiserId%>"  data-type="adver">新增</a>
+        <%if(adConfigDetail.length != 0){%>
+          <%_.each(adConfigDetail,function(sub,index){%>
+          <h5><%=sub.title%></h5>
+          <%_.each(sub.items,function(subitem,index){%>
+          <div class="table-wrap">
+            <a href="#modal-dialog" data-toggle="modal" class="js-edit btn-edit-config" data-editType="adver" data-type="<%=subitem.configType%>" data-id="<%=subitem.configId%>"><i class="fa fa-edit text-success"></i></a>
+            <a href="#modal-dialog" data-toggle="modal" class="js-del btn-del-config" data-delType="adver" data-type="<%=subitem.configType%>" data-id="<%=subitem.configId%>"><i class="fa fa-times text-danger"></i></a>
+            <table class="js-td-adConfig-table table" data-id="<%=subitem.advertiserId%>">
+              <tbody>
+                <tr>
+                  <th style="width:40%">configKey:</th>
+                  <td  style="width:60%" class="js-td-configKey"><%=subitem.configKey%></td>
+                </tr>
+                <tr>
+                  <th>configValue</th>
+                  <td class="js-td-configValue"><%=subitem.configValue%></td>
+                </tr>
+                <tr>
+                  <th>描述:</th>
+                  <td class="js-td-remark"><%=subitem.remark%></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <%})%>
+          <%})%>
+        <%} else {%>
+          无广告商自定义配置信息
+        <%}%>
+      </div>
+    </form>
+  </td>
+</script>
+
+<!-- URL自定义配置 -->
+<script type="text/template" id="urlConfigTableTmpl">
+  <td colspan="8">
+    <form>
+      <div class="col-sm-12 js-config-detail-item config-detail-item">
+        <a href="#modal-dialog" data-toggle="modal" class="js-add-new btn btn-info pull-right" data-id="<%=advertiserId%>" data-type="url">新增</a>
+        <%if(adConfigDetail.length != 0){%>
+          <%_.each(adConfigDetail,function(sub,index){%>
+          <%_.each(sub.items,function(subitem,index){%>
+          <div class="table-wrap">
+            <h5><%=sub.title%></h5>
+            <a href="#modal-dialog" data-toggle="modal" class="js-edit btn-edit-config" data-editType="url" data-type="<%=subitem.eventType%>" data-id="<%=subitem.feedbackConfigId%>"><i class="fa fa-edit text-success"></i></a>
+            <a href="#modal-dialog" data-toggle="modal" class="js-del btn-del-config" data-delType="url" data-type="<%=subitem.eventType%>" data-id="<%=subitem.feedbackConfigId%>"><i class="fa fa-times text-danger"></i></a>
+            <table class="js-td-config-table table" data-id="<%=subitem.advertiserId%>">
+              <tbody>
+                <tr>
+                  <th style="width:40%">feedbackUrl:</th>
+                  <td  style="width:60%" class="js-td-feedbackUrl"><%=subitem.feedbackUrl%></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <%})%>
+          <%})%>
+        <%} else {%>
+          无URL自定义配置信息
+        <%}%>
+      </div>
+    </form>
+  </td>
+</script>
+
+<!-- 错误提示 -->
+<script type="text/template" id="errorTmpl">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+          <h4 class="modal-title">错误提示</h4>
+        </div>
+        <div class="modal-body">
+          <%=msg%>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+</script>
+
+<script data-main="webresource/boot.js" data-start="webresource/controller/app-download.controller.js" src="webresource/libs/require.min.js"></script>
+</body>
+</html>
