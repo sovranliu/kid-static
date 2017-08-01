@@ -8,6 +8,7 @@ requirejs.config({
         bootstrap: 'libs/bootstrap.min',
         jCookie: 'libs/jquery.cookie',
         datePicker: 'libs/datePicker',
+        swiper:'libs/swiper.min',
         /******************* utils *****************/
         helper: 'util/helper',
         url: 'util/url'
@@ -27,7 +28,7 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'underscore', 'mustache', 'bootstrap', 'jCookie'], function($, _, mustache, bootstrap, jCookie) {
+require(['jquery', 'underscore', 'mustache', 'bootstrap', 'jCookie','swiper'], function($, _, mustache, bootstrap, jCookie,Swiper) {
     (function() {
         var dataStart = $('script[data-main][data-start]').attr('data-start') || '';
         var startModules = dataStart.split(',');
@@ -38,6 +39,16 @@ require(['jquery', 'underscore', 'mustache', 'bootstrap', 'jCookie'], function($
                     moduleObj.init();
                 }
             });
+        });
+        var swiper = new Swiper('.swiper-container', {
+            // pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 2500,
+            autoplayDisableOnInteraction: false
         });
     })();
 });
