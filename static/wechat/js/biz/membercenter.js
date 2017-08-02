@@ -11,7 +11,9 @@ define(['url','helper'], function (url,helper) {
     function _getUserInfoData() {
         var params = {};
         helper.ajax(url.getUserInfo,params,function (res) {
-            $('.username').html(res.userName);
+            if(res.code == 0) {
+                $('.username').html(res.userName);
+            }
         })
     }
 
@@ -20,7 +22,9 @@ define(['url','helper'], function (url,helper) {
         var params = {};
         $('.popup').show();
         helper.ajax(url.getMessageData,params,function (res) {
-            $('.popup').find('p').html(res.content);
+            if(res.code == 0) {
+                $('.popup').find('p').html(res.content);
+            }
         })
     }
 

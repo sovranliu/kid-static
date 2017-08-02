@@ -11,7 +11,8 @@ requirejs.config({
         swiper:'libs/swiper.min',
         /******************* utils *****************/
         helper: 'util/helper',
-        url: 'util/url'
+        url: 'util/url',
+        qrcode: 'util/showqQRcode'
     },
     shim: {
         jquery: {
@@ -28,7 +29,7 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'underscore', 'mustache', 'bootstrap', 'jCookie','swiper'], function($, _, mustache, bootstrap, jCookie,Swiper) {
+require(['jquery', 'underscore', 'mustache', 'bootstrap', 'jCookie','swiper','qrcode'], function($, _, mustache, bootstrap, jCookie,Swiper,qrcode) {
     (function() {
         var dataStart = $('script[data-main][data-start]').attr('data-start') || '';
         var startModules = dataStart.split(',');
@@ -40,6 +41,9 @@ require(['jquery', 'underscore', 'mustache', 'bootstrap', 'jCookie','swiper'], f
                 }
             });
         });
+
+        qrcode.init();
+        
         var swiper = new Swiper('.swiper-container', {
             // pagination: '.swiper-pagination',
             nextButton: '.swiper-button-next',
