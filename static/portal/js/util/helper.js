@@ -207,11 +207,7 @@ define(['jquery'], function($) {
                 }
             },
             success: function(data) {
-                if (data.code == 0) {
-                    callback(data.data);
-                }else{
-                    alert(data.msg);
-                }
+                callback(data);
             }
         });
     };

@@ -1,4 +1,4 @@
-define(['url','helper'], function (url,helper) {
+define(['url','helper','handshake'], function (url,helper,handshake) {
 
     function bindActions () {
         $('.js-message').on('click',_getMessageData);
@@ -11,7 +11,9 @@ define(['url','helper'], function (url,helper) {
     function _getUserInfoData() {
         var params = {};
         helper.ajax(url.getUserInfo,params,function (res) {
-            $('.username').html(res.userName);
+            if(res.code == 0) {
+                $('.username').html(res.userName);
+            }
         })
     }
 
@@ -20,14 +22,17 @@ define(['url','helper'], function (url,helper) {
         var params = {};
         $('.popup').show();
         helper.ajax(url.getMessageData,params,function (res) {
-            $('.popup').find('p').html(res.content);
+            if(res.code == 0) {
+                $('.popup').find('p').html(res.content);
+            }
         })
     }
 
     return {
         init: function () {
-          bindActions();
-          _getUserInfoData();
+            handshake.init();
+            bindActions();
+            _getUserInfoData();
         }
     }
 });

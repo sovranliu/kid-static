@@ -1,4 +1,4 @@
-define(['url','helper'], function (url,helper) {
+define(['url','helper','handshake'], function (url,helper,handshake) {
 
     function bindActions () {
         $('.js-submit').on('click',_postBenefitData);
@@ -13,7 +13,9 @@ define(['url','helper'], function (url,helper) {
         if(isCheck) {
             var params = {};
             helper.ajax(url.postBenefit,params,function (res) {
-                window.history.go(-1);
+                if(res.code == 0) {
+                    window.history.go(-1);
+                }
             })
         }else{
             $('.popup').show();
@@ -22,6 +24,7 @@ define(['url','helper'], function (url,helper) {
 
     return {
         init: function () {
+          handshake.init();
           bindActions();
         }
     }

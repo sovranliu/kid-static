@@ -33,12 +33,15 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
             'day': $('.js-day').val()
         };
 
-        helper.ajax(url.getBookingTime, params, function(data) {
-            if (data.length == 0) {
-                $('.js-time-list').html('<p class="dataNull">您选择的日期不可预约，请重新选择。</p>');
-            } else {
-                $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': data }));
-                $('.js-select-time').eq(0).click();
+        helper.ajax(url.getBookingTime, params, function(res) {
+            var data = res.data;
+            if(res.code == 0) {
+                if (data.length == 0) {
+                    $('.js-time-list').html('<p class="dataNull">您选择的日期不可预约，请重新选择。</p>');
+                } else {
+                    $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': data }));
+                    $('.js-select-time').eq(0).click();
+                }
             }
         });
     }
@@ -69,8 +72,10 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
             'end': activeTime[1]
         };
 
-        helper.ajax(url.getBookableNum, params, function(data) {
-            $('.js-bookable-num').text(data.count);
+        helper.ajax(url.getBookableNum, params, function(res) {
+            if (res.code == 0) {
+                $('.js-bookable-num').text(res.data.count);
+            }
         });
     }
 
@@ -102,9 +107,11 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
             'end': activeTime[1]
         };
 
-        helper.ajax(url.submitBooking, params, function(data) {
-            showPopup(1);
-            //showPopup(2); //预约满
+        helper.ajax(url.submitBooking, params, function(res) {
+            if(res.code == 0) {
+                showPopup(1);
+                //showPopup(2); //预约满
+            }
         });
     }
 

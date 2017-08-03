@@ -28,7 +28,10 @@ define([], function() {
         getRefund: _basePath + 'getRefund',
         postRefund: _basePath + 'postRefund',
         //赠送票券
-        giveTicket: _basePath + 'giveTicket'
+        giveTicket: _basePath + 'giveTicket',
+        //登陆授权
+        getVerificationCode: _basePath + 'getVerificationCode',
+        handshake:_basePath + 'handshake'
 
     };
 });

@@ -1,5 +1,5 @@
 define([], function() {
-    var _basePath = 'http://121.40.90.141:8003/kid/wechat/'; //todo 发布时改成生产地址
+    var _basePath = 'http://121.40.90.141:8003/kid/portal/'; //todo 发布时改成生产地址
 
     return {
         //购票
@@ -28,7 +28,10 @@ define([], function() {
         getRefund: _basePath + 'getRefund',
         postRefund: _basePath + 'postRefund',
         //赠送票券
-        giveTicket: _basePath + 'giveTicket'
+        giveTicket: _basePath + 'giveTicket',
+        //登陆注册
+        getLogin: _basePath + 'login/qrcode',
+        checkLogin: _basePath + 'login/check'
 
     };
 });

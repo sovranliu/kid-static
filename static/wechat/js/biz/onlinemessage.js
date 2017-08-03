@@ -1,4 +1,4 @@
-define(['url','helper'], function (url,helper) {
+define(['url','helper','handshake'], function (url,helper,handshake) {
 
     function bindActions () {
         $('.js-submit').on('click',_postMessageData);
@@ -16,7 +16,9 @@ define(['url','helper'], function (url,helper) {
             };
 
             helper.ajax(url.postMessageData,params,function (res) {
-                $(".popup").show();
+                if(res.code == 0) {
+                    $(".popup").show();
+                }
             })
         }else{
             $(".popup").show();
@@ -27,7 +29,8 @@ define(['url','helper'], function (url,helper) {
 
     return {
         init: function () {
-          bindActions();
+            handshake.init();
+            bindActions();
         }
     }
 });
