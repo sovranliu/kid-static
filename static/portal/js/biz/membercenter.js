@@ -18,16 +18,19 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     function _getUserInfo() {
         var params = {};
         helper.ajax(url.getUserInfo,params,function (res) {
-            res.ismale = function(){  
-                if(this.sex == 0 ){  
-                    return true;  
-                }else{
-                    return false;  
-                }  
-            };
-            var template = $('#template').html();
-            Mustache.parse(template);
-            $('.pop-list').html(Mustache.render(template, res));
+            var data = res.data;
+            if(res.code == 0) {
+                data.ismale = function(){  
+                    if(this.sex == 0 ){  
+                        return true;  
+                    }else{
+                        return false;  
+                    }  
+                };
+                var template = $('#template').html();
+                Mustache.parse(template);
+                $('.pop-list').html(Mustache.render(template, data));
+            }
         })
     }
 
@@ -44,8 +47,10 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
 
         helper.ajax(url.postUserInfo,params,function (res) {
             //todo 弹层提示成功
-            $('.js-edit-popup').hide();
-            $('.js-confirm-popup').show().find('p').html('编辑成功。');
+            if(res.code == 0) {
+                $('.js-edit-popup').hide();
+                $('.js-confirm-popup').show().find('p').html('编辑成功。');
+            }
         })
     }
 
@@ -54,7 +59,10 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         var params = {};
         $('.js-confirm-popup').show();
         helper.ajax(url.getMessageData,params,function (res) {
-            $('.js-confirm-popup').find('p').html(res.content);
+            var data = res.data;
+            if(res.code == 0) {
+                $('.js-confirm-popup').find('p').html(data.content);
+            }
         })
     }
 

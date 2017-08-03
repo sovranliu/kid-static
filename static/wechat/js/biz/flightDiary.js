@@ -1,4 +1,4 @@
-define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
+define(['url', 'helper', 'mustache','handshake'], function (url, helper, mustache,handshake) {
 
     var serialNumber;
 
@@ -74,6 +74,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
     return {
         init: function () {
+          handshake.init();
           bindActions();
           getUrlParams();
           getFlightDiary();

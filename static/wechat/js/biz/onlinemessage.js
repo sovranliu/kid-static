@@ -1,4 +1,4 @@
-define(['url','helper'], function (url,helper) {
+define(['url','helper','handshake'], function (url,helper,handshake) {
 
     function bindActions () {
         $('.js-submit').on('click',_postMessageData);
@@ -29,7 +29,8 @@ define(['url','helper'], function (url,helper) {
 
     return {
         init: function () {
-          bindActions();
+            handshake.init();
+            bindActions();
         }
     }
 });

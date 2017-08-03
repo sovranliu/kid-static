@@ -1,4 +1,4 @@
-define(['mustache','url', 'helper'], function(Mustache,url, helper) {
+define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,handshake) {
 
     var serialNumber;
 
@@ -215,6 +215,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     
     return {
         init: function() {
+            handshake.init();
             bindActions();
             _changeTabs();
             _getTicketData();

@@ -83,7 +83,6 @@ define(['url', 'helper'], function(url, helper) {
 
     //验证手机号
     function _checkMobileNumber(num) {
-        debugger
         var reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证规则
         return reg.test(num); //true
     }

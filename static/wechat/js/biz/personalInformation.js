@@ -1,4 +1,4 @@
-define(['mustache','url','helper'], function (Mustache,url,helper) {
+define(['mustache','url','helper','handshake'], function (Mustache,url,helper,handshake) {
 
     function bindActions () {
         $('.js-submit').on("click", _postUserInfoData);
@@ -46,8 +46,9 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
 
     return {
         init: function () {
-          bindActions();
-          _getUserInfoData();
+            handshake.init();
+            bindActions();
+            _getUserInfoData();
         }
     }
 });

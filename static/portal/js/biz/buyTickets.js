@@ -21,9 +21,12 @@ define(['url', 'helper'], function (url, helper) {
     function getTicketPrice() {
         var params = {};
 
-        helper.ajax(url.getTicketPrice, params, function(data) {
-            $('.js-single-price').text(data.single);
-            $('.js-group-price').text(data.group); 
+        helper.ajax(url.getTicketPrice, params, function(res) {
+            var data = res.data;
+            if(res.code == 0) {
+                $('.js-single-price').text(data.single);
+                $('.js-group-price').text(data.group); 
+            }
         });
     }
 
@@ -35,7 +38,7 @@ define(['url', 'helper'], function (url, helper) {
             'needRefundInsurance': needRefundInsurance
         };
 
-        helper.ajax(url.buyTicket, params, function(data) {
+        helper.ajax(url.buyTicket, params, function(res) {
             //服务端返回二维码，用于微信端操作
         });
     }

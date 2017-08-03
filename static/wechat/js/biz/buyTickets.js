@@ -1,4 +1,4 @@
-define(['url', 'helper'], function (url, helper) {
+define(['url', 'helper','handshake'], function (url, helper,handshake) {
 
     /*function bindActions() {
         $('.js-gift-ticket').on('click', giftTicket);
@@ -38,8 +38,9 @@ define(['url', 'helper'], function (url, helper) {
 
     return {
         init: function () {
+            handshake.init();
           //bindActions();
-          getTicketPrice();
+            getTicketPrice();
           //getTickets();
         }
     }

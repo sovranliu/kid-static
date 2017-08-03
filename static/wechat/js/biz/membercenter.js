@@ -1,4 +1,4 @@
-define(['url','helper'], function (url,helper) {
+define(['url','helper','handshake'], function (url,helper,handshake) {
 
     function bindActions () {
         $('.js-message').on('click',_getMessageData);
@@ -30,8 +30,9 @@ define(['url','helper'], function (url,helper) {
 
     return {
         init: function () {
-          bindActions();
-          _getUserInfoData();
+            handshake.init();
+            bindActions();
+            _getUserInfoData();
         }
     }
 });

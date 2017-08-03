@@ -30,7 +30,8 @@ define([], function() {
         //赠送票券
         giveTicket: _basePath + 'giveTicket',
         //登陆注册
-        getLogin: _basePath + 'getLogin'
+        getLogin: _basePath + 'login/qrcode',
+        checkLogin: _basePath + 'login/check'
 
     };
 });

@@ -1,4 +1,4 @@
-define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, mustache, datePicker) {
+define(['url', 'helper', 'mustache', 'datePicker','handshake'], function (url, helper, mustache, datePicker,handshake) {
 
     var serialNumber, optType;
 
@@ -147,10 +147,11 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
 
     return {
         init: function () {
-          bindActions();
-          getUrlParams();
-          initDateSelectbox();
-          getBookingTime();
+            handshake.init();
+            bindActions();
+            getUrlParams();
+            initDateSelectbox();
+            getBookingTime();
         }
     }
 });

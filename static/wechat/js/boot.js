@@ -32,12 +32,10 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'underscore', 'mustache', 'bootstrap', 'jCookie','handshake'], function($, _, mustache, bootstrap, jCookie,handshake) {
+require(['jquery', 'underscore', 'mustache', 'bootstrap', 'jCookie'], function($, _, mustache, bootstrap, jCookie) {
     (function() {
         var dataStart = $('script[data-main][data-start]').attr('data-start') || '';
         var startModules = dataStart.split(',');
-
-        handshake.init();
         
         _.each(startModules, function(module) {
             require([module], function(moduleObj) {
