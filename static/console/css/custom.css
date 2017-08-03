@@ -1,1 +1,5 @@
 /* Write your custom CSS here */
+.input-span{
+	display: inline-block;
+    padding-top: 7px;
+}
