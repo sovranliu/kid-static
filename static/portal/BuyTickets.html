@@ -66,11 +66,11 @@
 							<div class="yh-bt-box">
 								<h3>选择票价:</h3>
 								<ul class="yh-bt-q">
-									<li class="js-ticket-type current">
+									<li class="js-ticket-type current" data-type="1">
 										<span class="span1">单人购票</span>
 										<p><i>¥</i><span class="js-single-price"></span>/张</p>
 									</li>
-									<li class="js-ticket-type">
+									<li class="js-ticket-type" data-type="0">
 										<span class="span1">团队购票</span>
 										<p><i>¥</i><span class="js-group-price"></span>/张</p>
 									</li>
@@ -117,12 +117,13 @@
 		</div>
 
 		<!-- 请通过微信扫描二维码付款,弹窗 -->
-		<div class="popup">
+		<div class="js-pay popup">
 	        <div class="pop-mask"></div>
 	        <div class="pop-main">
 	            <p class="cen">请通过微信扫描二维码付款 </p>
-	            <button class="confirm-btn">确认</button>
-	            <div class="close"></div>
+	            <img src="" alt="">
+	            <button class="js-confirm confirm-btn">确认</button>
+	            <div class="js-confirm close"></div>
 	        </div>
 	    </div>
 
