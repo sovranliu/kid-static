@@ -210,11 +210,7 @@ define(['jquery'], function($) {
                 if(data.redirect != null && data.redirect != "") {
                     window.location.href = data.redirect;
                 }
-                if (data.code == 0) {
-                    callback(data.data);
-                }else{
-                    alert(data.msg);
-                }
+                callback(data)
             }
         });
     };

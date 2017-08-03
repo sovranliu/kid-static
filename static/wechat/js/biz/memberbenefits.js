@@ -13,7 +13,9 @@ define(['url','helper'], function (url,helper) {
         if(isCheck) {
             var params = {};
             helper.ajax(url.postBenefit,params,function (res) {
-                window.history.go(-1);
+                if(res.code == 0) {
+                    window.history.go(-1);
+                }
             })
         }else{
             $('.popup').show();

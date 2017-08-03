@@ -34,101 +34,109 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     //获取票务信息
     function _getTicketData() {
         helper.ajax(url.getTickets, {}, function(res) {
-            //如果没有飞行票则引导用户去购票页面
-            if(res == null) {
-                var _html = '<p class="no-title">您没有飞行票，请购买后查看。</p>';
-                $('.ticket-list').html(_html);
-            }
-
-            for (var i = 0; i < res.length; i++) {
-                switch (res[i].type) {
-                    case 0:
-                        res[i].ticketType = "团体购票（不接受退票）";
-                        break;
-                    case 1:
-                        res[i].ticketType = "单人购票";
-                        break;
+            if(res.code == 0) {
+                var data = res.data;
+                //如果没有飞行票则引导用户去购票页面
+                if(data == null) {
+                    var _html = '<p class="no-title">您没有飞行票，请购买后查看。</p>';
+                    $('.ticket-list').html(_html);
                 }
-                switch (res[i].status) {
-                    case 0:
-                        res[i].statusName = "可用";
-                        res[i].statusStyle = "";
-                        res[i].operate = true;
-                        //团体票可赠送
-                        if (res[i].type == 0) {
-                            res[i].gift  = true;
-                        } else {
-                        //单人票可退款
-                            res[i].return = true;
-                        }
-                        break;
-                    case 1:
-                        res[i].statusName = "已使用";
-                        res[i].statusStyle = "gray";
-                        break;
-                    case 2:
-                        res[i].statusName = "已过期";
-                        res[i].statusStyle = "gray";
-                        break;
-                    case 3:
-                        res[i].statusName = "退款申请中";
-                        res[i].statusStyle = "gray";
-                        break;
-                    case 4:
-                        res[i].statusName = "已退票";
-                        res[i].statusStyle = "gray";
-                        break;
-                }
-            }
 
-            var ticketList = {
-                res
-            };
-            var template = $('#ticketTemplate').html();
-            Mustache.parse(template);
-            $('.ticket-list').html(Mustache.render(template, ticketList));
+                for (var i = 0; i < data.length; i++) {
+                    switch (data[i].type) {
+                        case 0:
+                            data[i].ticketType = "团体购票（不接受退票）";
+                            break;
+                        case 1:
+                            data[i].ticketType = "单人购票";
+                            break;
+                    }
+                    switch (data[i].status) {
+                        case 0:
+                            data[i].statusName = "可用";
+                            data[i].statusStyle = "";
+                            data[i].operate = true;
+                            //团体票可赠送
+                            if (data[i].type == 0) {
+                                data[i].gift  = true;
+                            } else {
+                            //单人票可退款
+                                data[i].return = true;
+                            }
+                            break;
+                        case 1:
+                            data[i].statusName = "已使用";
+                            data[i].statusStyle = "gray";
+                            break;
+                        case 2:
+                            data[i].statusName = "已过期";
+                            data[i].statusStyle = "gray";
+                            break;
+                        case 3:
+                            data[i].statusName = "退款申请中";
+                            data[i].statusStyle = "gray";
+                            break;
+                        case 4:
+                            data[i].statusName = "已退票";
+                            data[i].statusStyle = "gray";
+                            break;
+                    }
+                }
+
+                var ticketList = {
+                    data
+                };
+                var template = $('#ticketTemplate').html();
+                Mustache.parse(template);
+                $('.ticket-list').html(Mustache.render(template, ticketList));
+            }
+            
         })
     }
 
     //获取预约信息
     function _getBookData() {
         helper.ajax(url.getUserBooks, {}, function(res) {
-            for (var i = 0; i < res.length; i++) {
-                switch (res[i].status) {
-                    case 0:
-                        res[i].statusName = "已预约";
-                        res[i].statusStyle = "";
-                        res[i].operate = true;
-                        break;
-                    case 1:
-                        res[i].statusName = "已过期";
-                        res[i].statusStyle = "gray";
-                        break;
-                    case 2:
-                        res[i].statusName = "已核销";
-                        res[i].statusStyle = "gray";
-                        break;
-                    case 3:
-                        res[i].statusName = "改期申请中";
-                        res[i].statusStyle = "";
-                        break;
-                    case 4:
-                        res[i].statusName = "已撤销";
-                        res[i].statusStyle = "gray";
-                        break;
-                    case 5:
-                        res[i].statusName = "撤销审核中";
-                        res[i].statusStyle = "gray";
-                        break;
+            if(res.code == 0) {
+                var data = res.data;
+                for (var i = 0; i < data.length; i++) {
+                    switch (data[i].status) {
+                        case 0:
+                            data[i].statusName = "已预约";
+                            data[i].statusStyle = "";
+                            data[i].operate = true;
+                            break;
+                        case 1:
+                            data[i].statusName = "已过期";
+                            data[i].statusStyle = "gray";
+                            break;
+                        case 2:
+                            data[i].statusName = "已核销";
+                            data[i].statusStyle = "gray";
+                            break;
+                        case 3:
+                            data[i].statusName = "改期申请中";
+                            data[i].statusStyle = "";
+                            break;
+                        case 4:
+                            data[i].statusName = "已撤销";
+                            data[i].statusStyle = "gray";
+                            break;
+                        case 5:
+                            data[i].statusName = "撤销审核中";
+                            data[i].statusStyle = "gray";
+                            break;
+                    }
                 }
-            }
 
-            var bookList = {
-                res
-            };
-            var template = $('#bookTemplate').html();
-            Mustache.parse(template);
-            $('.book-list').html(Mustache.render(template, bookList));
+                var bookList = {
+                    data
+                };
+                var template = $('#bookTemplate').html();
+                Mustache.parse(template);
+                $('.book-list').html(Mustache.render(template, bookList));
+            }
+            
         })
     }
 
@@ -147,8 +155,10 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         };
 
         helper.ajax(url.postRevoke, params, function(res) {
-            $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
-            $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
+            if(res.code == 0) {
+                $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
+                $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
+            }
         })
     }
 
@@ -171,11 +181,13 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         };
 
         if(_checkMobileNumber(tel)) {
-            helper.ajax(url.giveTicket, params, function(data) {
-            //todo 对方非会员的处理
-                $('.send-message').hide();
-                $('.send-message-result').show();
-                $('.js-send-message-result').html('您的票券已成功送出，请对方至会员中心的预约飞行中，查看并使用他的票券。');
+            helper.ajax(url.giveTicket, params, function(res) {
+                if(res.code == 0) {
+                    //todo 对方非会员的处理
+                    $('.send-message').hide();
+                    $('.send-message-result').show();
+                    $('.js-send-message-result').html('您的票券已成功送出，请对方至会员中心的预约飞行中，查看并使用他的票券。');
+                }
             });
         }
         
@@ -188,8 +200,10 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     function _shareTicket() {
 
         helper.ajax(url.getTickets, params, function(res) {
-            $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
-            $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
+            if(res.code == 0) {
+                $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
+                $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
+            }
         })
     }
 
