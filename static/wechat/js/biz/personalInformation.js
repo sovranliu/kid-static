@@ -1,4 +1,4 @@
-define(['mustache','url','helper'], function (Mustache,url,helper) {
+define(['mustache','url','helper','handshake'], function (Mustache,url,helper,handshake) {
 
     function bindActions () {
         $('.js-submit').on("click", _postUserInfoData);
@@ -8,16 +8,19 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     function _getUserInfoData() {
         var params = {};
         helper.ajax(url.getUserInfo,params,function (res) {
-            res.ismale = function(){  
-                if(this.sex == 0 ){  
-                    return true;  
-                }else{
-                    return false;  
-                }  
-            };
-            var template = $('#template').html();
-            Mustache.parse(template);
-            $('.pi-list').html(Mustache.render(template, res));
+            var data = res.data;
+            if(res.code == 0) {
+                data.ismale = function(){  
+                    if(this.sex == 0 ){  
+                        return true;  
+                    }else{
+                        return false;  
+                    }  
+                };
+                var template = $('#template').html();
+                Mustache.parse(template);
+                $('.pi-list').html(Mustache.render(template, data));
+            }
         })
     }
 
@@ -33,15 +36,19 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         params.sex = sex;
 
         helper.ajax(url.postUserInfo,params,function (res) {
-            //todo 弹层提示成功
-            alert('修改成功');
+            var data = res.data;
+            if(res.code == 0) {
+                //todo 弹层提示成功
+                alert('修改成功');
+            }
         })
     }
 
     return {
         init: function () {
-          bindActions();
-          _getUserInfoData();
+            handshake.init();
+            bindActions();
+            _getUserInfoData();
         }
     }
 });

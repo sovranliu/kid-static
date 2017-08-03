@@ -1,4 +1,4 @@
-define(['url', 'helper'], function (url, helper) {
+define(['url', 'helper','handshake'], function (url, helper,handshake) {
 
     /*function bindActions() {
         $('.js-gift-ticket').on('click', giftTicket);
@@ -16,9 +16,11 @@ define(['url', 'helper'], function (url, helper) {
     function getTicketPrice() {
         var params = {};
 
-        helper.ajax(url.getTicketPrice, params, function(data) {
-            $('.js-single-price').text(data.single);
-            $('.js-group-price').text(data.group); 
+        helper.ajax(url.getTicketPrice, params, function(res) {
+            if(res.code == 0) {
+                $('.js-single-price').text(data.single);
+                $('.js-group-price').text(data.group); 
+            }
         });
     }
 
@@ -36,8 +38,9 @@ define(['url', 'helper'], function (url, helper) {
 
     return {
         init: function () {
+            handshake.init();
           //bindActions();
-          getTicketPrice();
+            getTicketPrice();
           //getTickets();
         }
     }

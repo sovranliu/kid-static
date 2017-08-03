@@ -1,4 +1,4 @@
-define(['mustache','url', 'helper'], function(Mustache,url, helper) {
+define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,handshake) {
 
     var ticketId = helper.getQueryStr('ticketId');
     var $popup = $('.popup');
@@ -17,7 +17,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     //获取要退的票券信息
     function _getTicketData() {
         var params = {
-            "ticketId": ticketId
+            "serialNumber": ticketId
         }
 
         helper.ajax(url.getRefund, params, function(res) {
@@ -30,7 +30,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     //提交退款
     function _postRefundData() {
         var params = {
-            "ticketId": ticketId
+            "serialNumber": ticketId
         }
 
         helper.ajax(url.postRefund, params, function(res) {
@@ -41,6 +41,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
     return {
         init: function() {
+            handshake.init();
             bindActions();
             _getTicketData();
         }

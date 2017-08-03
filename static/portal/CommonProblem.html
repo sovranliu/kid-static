@@ -25,15 +25,15 @@
 						<a href="TicketNotes.html">游客须知</a>
 					</li>
 					<li class="yh-nav-li">
-						<a href="Video.html">飞行体验</a>
+						<a href="FlightDiary.html">飞行体验</a>
 					</li>
 					<li class="yh-nav-li">
 						<a href="QRCode.html">分享好友</a>
 					</li>
 				</ul>
 				<div class="sign-in">
-					<button>登录</button>
-					<button>注册</button>
+					<button class="js-login">登录</button>
+					<button class="js-register">注册</button>
 				</div>
 			</div>
 		</div>
@@ -74,7 +74,7 @@
 							<p><span>A</span>请至我的订单中提交申请，您可在可飞行时段中选择更改</p>
 						</div>
 					</div>
-					<button class="yh-cp-btn">在线留言</button>
+					<a class="yh-cp-btn" href="SendMessage.html">在线留言</a>
 				</div>
 			</div>
 		</div>
@@ -107,21 +107,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- Swiper JS -->
-	    <script src="js/swiper.min.js"></script>
-
-	    <!-- Initialize Swiper -->
-	    <script>
-	    var swiper = new Swiper('.swiper-container', {
-	        // pagination: '.swiper-pagination',
-	        nextButton: '.swiper-button-next',
-	        prevButton: '.swiper-button-prev',
-	        paginationClickable: true,
-	        spaceBetween: 30,
-	        centeredSlides: true,
-	        autoplay: 2500,
-	        autoplayDisableOnInteraction: false
-	    });
-	    </script>
+	    <script data-main="js/boot.js" src="js/libs/require.min.js"></script>
 	</body>
 </html>
