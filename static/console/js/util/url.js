@@ -11,6 +11,7 @@ define([], function() {
         submitBooking: _basePath + 'submitBooking',
         //飞行日志
         getFlightDiary: _basePath + 'getFlightDiary',
-
+        //参数配置
+        getConfig:_basePath + 'getConfig'
     };
 });
