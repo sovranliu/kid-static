@@ -1,5 +1,6 @@
 define(['mustache','url','helper'], function (Mustache,url,helper) {
 
+    var userInfo;
     function bindActions () {
         $('.js-userInfo').on('click',_openUserInfo);
         $('.js-submit').on('click',_postUserInfoData);
@@ -12,24 +13,26 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     //打开编辑弹框
     function _openUserInfo() {
         $('.js-edit-popup').show();
-        _getUserInfo();
+        userInfo.ismale = function(){  
+            if(this.sex == 0 ){  
+                return true;  
+            }else{
+                return false;  
+            }  
+        };
+        var template = $('#template').html();
+        Mustache.parse(template);
+        $('.pop-list').html(Mustache.render(template, userInfo));
     }
 
     function _getUserInfo() {
         var params = {};
         helper.ajax(url.getUserInfo,params,function (res) {
-            var data = res.data;
             if(res.code == 0) {
-                data.ismale = function(){  
-                    if(this.sex == 0 ){  
-                        return true;  
-                    }else{
-                        return false;  
-                    }  
-                };
-                var template = $('#template').html();
-                Mustache.parse(template);
-                $('.pop-list').html(Mustache.render(template, data));
+                userInfo = res.data;
+                $('.userInfo').html('姓名：' + userInfo.userName + '   |   会员级别：初级飞行员');
+            }else{
+                $('.userInfo').html('获取用户信息失败');
             }
         })
     }
@@ -69,6 +72,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     return {
         init: function () {
           bindActions();
+          _getUserInfo();
         }
     }
 });
