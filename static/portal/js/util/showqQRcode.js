@@ -20,7 +20,7 @@ define(['url','helper'], function(url,helper) {
     function _init() {
         helper.ajax(url.getUserInfo,{},function(res) {
             if(res.data != null) {
-                $('.sign-in').html('<div class="fl"><span>姓名：' + res.data.userName + '</span><span>会员级别：初级飞行员</spam></div>')
+                $('.sign-in').html('<div class="fl"><span>姓名：' + res.data.userName + '</span><a href="MemberCenter.html"><span>会员级别：初级飞行员</span></a></div>')
             }else{
                 $('.sign-in').html('<button class="js-login">登录</button> <button class="js-register">注册</button>');
             }
@@ -29,7 +29,7 @@ define(['url','helper'], function(url,helper) {
 
     function _getRegister() {
     		$('body').append(_qrcodepopup);
-    		$('.js-qrcode-popup').show().find('img').attr('scr','/kid/portal/qrcode/register.jpg');
+    		$('.js-qrcode-popup').show().find('img').attr('scr','/kid/portal/register/qrcode.jpg');
     }
 
     function _getLogin() {

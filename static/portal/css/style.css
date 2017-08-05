@@ -57,6 +57,10 @@
 	border-radius: 30px;
 	background: transparent;
 }
+.sign-in a{
+    text-decoration: underline;
+    color: blue
+}
 .yh-content{
 
 }
