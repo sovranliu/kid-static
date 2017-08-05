@@ -3,11 +3,11 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     var serialNumber,openId,mobileNo;
 
     function bindActions() {
-        $('.js-buy-flightDiary').on('click', buyFlightDiary);
         $('.js-tab-item').on('click', switchTab);
         $('.popup').on('click', '.js-confirm',function() {
-            $popup.hide();
+            $('.popup').hide();
         });
+        $('.js-buy-flightDiary').on('click', buyFlightDiary);
     }
 
     function getUrlParams() {
@@ -49,19 +49,52 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         helper.ajax(url.getFlightDiary, params, function(res) {
             if(res.code == 0) {
                 var data = res.data;
+                var $dqVideoItem;
+                var $ygVideoItem;
+                var dqWidth = 0;
+                var dqHeight = 0;
+                var ygWidth = 0;
+                var ygHeight = 0;
+
                 if (data.canPurchase.length == 0) {
                     $('.js-video-can-purchase-list').html('<p class="dataNull">您还没有飞行礼品</p>');
                 } else {
-                    $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.canPurchase }));
+                    $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.canPurchase, 'isPurchased': false }));
                 }
                 
                 if (data.hasPurchased.length == 0) {
                     $('.js-video-has-purchase-list').html('<p class="dataNull">您还没有购买飞行礼品。</p>');
                 } else {
-                    $('.js-video-has-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.hasPurchased }));
+                    $('.js-video-has-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.hasPurchased, 'isPurchased': true }));
                 }
+
                 $('.js-timeDuration').html(data.timeDuration);
                 $('.js-price').html(data.canPurchasePrice);
+                
+                var timer = setInterval(function() {
+                    if (document.getElementsByTagName("video")[0].readyState != 0) {
+                        $dqVideoItem = $('.js-video-can-purchase-list .fd-video-item');
+                        if ($dqVideoItem.length > 0) {
+                            dqWidth = $dqVideoItem.eq(0).width();
+                            dqHeight = $dqVideoItem.eq(0).height();
+                            $('.fd-dq-pop').css('width', dqWidth+'px');
+                            $('.fd-dq-pop').css('height', dqHeight+'px');
+                            $('.fd-dq-pop').css('margin-top', '-'+dqHeight+'px');
+                        }
+
+                        $ygVideoItem = $('.js-video-has-purchase-list .fd-video-item');
+                        if ($ygVideoItem.length > 0) {
+                            ygWidth = $ygVideoItem.eq(0).width();
+                            ygHeight = $ygVideoItem.eq(0).height();
+                            $('.fd-yg-pop').css('width', ygWidth+'px');
+                            $('.fd-yg-pop').css('height', ygHeight+'px');
+                            $('.fd-yg-pop').css('margin-top', '-'+ygHeight+'px');
+                        }
+                
+                        clearInterval(timer);
+                    }
+                }, 10);
+                
             }
         });
     }
@@ -73,16 +106,15 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         };
 
         helper.ajax(url.buyTicket, params, function(res) {
-            var data = res.data;
-            if(res.code == 0) {
-                if (typeof WeixinJSBridge == "undefined"){
-                   if( document.addEventListener ){
+            if (res.code == 0) {
+                if (typeof WeixinJSBridge == "undefined") {
+                   if ( document.addEventListener ) {
                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-                   }else if (document.attachEvent){
+                   } else if (document.attachEvent) {
                        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
                        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
                    }
-                }else{
+                } else {
                     onBridgeReady(res);
                 }
             }
@@ -109,7 +141,6 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
            }
        ); 
     }
-    
     return {
         init: function () {
           bindActions();

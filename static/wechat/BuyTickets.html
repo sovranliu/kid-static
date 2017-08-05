@@ -23,35 +23,17 @@
                 <div class="rs-ticketnotes">购票前请务必详细阅读购票须知 <a href="./TicketNotes.html">购票须知</a></div>
                 <dl class="rs-dl-list">
                     <dd class="rs-dd-item">
-                        <a href="./OrderDetail.html?type=1">单人购票</a>
+                        <a href="./OrderDetail.html?ticketType=1">单人购票</a>
                         <span><i>¥</i><span class="js-single-price"></span>/张</span>
                     </dd>
                     <dd class="rs-dd-item">
-                        <a href="./OrderDetail.html?type=0">团队购票</a>
+                        <a href="./OrderDetail.html?ticketType=0">团队购票</a>
                         <span><i>¥</i><span class="js-group-price"></span>/张</span>
                     </dd>
                 </dl>
             </div>
         </div>
     </div>
-
-    <!-- 票务列表模板 -->
-    <script type="text/template" id="ticketTmpl">
-    <!--{{#ticketList}}{
-        <li class="rs-li-item">
-            <div class="rs-left">
-                <span>
-                    {{#type}}单人票{{/type}}
-                    {{^type}}团队票{{/type}}
-                </span>
-            </div>
-            <div class="rs-right">
-                <button class="use-btn">使用</button>
-                <button class="js-gift-ticket give-btn {{#type}}gray{{/type}}">赠送</button>
-            </div>
-        </li>
-    {/ticketList}}-->
-    </script>
 
     <script data-main="js/boot.js" data-start="js/biz/buyTickets.js" src="js/libs/require.min.js"></script>
 </body>

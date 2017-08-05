@@ -354,6 +354,7 @@ a,div,img {
 .fd-list {
     overflow: hidden;
     text-align: center;
+    margin-bottom: 40px;
 }
 
 .fd-item {
@@ -378,6 +379,7 @@ a,div,img {
 }
 
 .fd-con {
+    margin-bottom: 100px;
 }
 
 .fd-list-con {
@@ -395,7 +397,7 @@ a,div,img {
 
 .fd-dq video {
     width: 100%;
-    margin-top: 10px;
+    height: 100%;
 }
 
 .fd-dq p {
@@ -469,7 +471,6 @@ a,div,img {
 
 .fd-yg video {
     width: 100%;
-    margin-top: 10px;
     /*width: 48%;
     float: left;*/
 }
@@ -487,7 +488,47 @@ a,div,img {
 .fd-yg img:nth-child(odd) {
     margin: 4% 8% 0 0;
 }*/
-
+.fd-yg .over:nth-child(odd) {
+    margin: 4% 8% 0 0;
+}
+.fd-video-item {
+    display: block;;
+    width: 100%;
+    height: 100%;
+    margin-top: 5%;
+}
+.fd-dq-pop, .fd-yg-pop{
+    position: absolute;
+    background: rgba(0,0,0,.5);
+    border-radius: 3px;
+    margin-top: -215px;
+}  
+.fd-dq-pop i{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 52px;
+    height: 52px;
+    display: block;
+    background: url(../images/lock.png) no-repeat;
+    background-size: contain;
+}
+.fd-yg-pop i{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 52px;
+    height: 52px;
+    display: block;
+    background: url(../images/start.png) no-repeat;
+    background-size: contain;
+}  
 .rs-con {
     margin: 0 44px;
 }
@@ -812,9 +853,8 @@ a,div,img {
 
 .bt-payment {
     overflow: hidden;
-    margin-top: 15px;
-    padding-top: 15px;
-    position: relative;
+    position: absolute;
+    bottom: 75px;
 }
 
 .bt-payment .fl {

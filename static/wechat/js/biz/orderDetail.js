@@ -18,6 +18,16 @@ define(['url', 'helper'], function (url, helper) {
         mobileNo = helper.getQueryStr('mobileNo');
     }
 
+    function initPage() {
+        var $refundInsurance = $('.js-refund-insurance');
+
+        if (ticketType == '1') {
+            $refundInsurance.show();
+        } else {
+            $refundInsurance.hide();
+        }
+    }
+
     /*
     1，检查url是否有type参数，不存在就弹错，流程结束
     2，检查url是否有mobileno和openid，有一个没有就调prepayaction
@@ -46,7 +56,6 @@ define(['url', 'helper'], function (url, helper) {
         }
     }
 
-
     function checkTicketType() {
         if (ticketType == '1') {
             $('.js-num-single').show();
@@ -58,18 +67,19 @@ define(['url', 'helper'], function (url, helper) {
         }
     }
 
-
-
     function getTicketPrice() {
         var params = {};
 
         helper.ajax(url.getTicketPrice, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
+
+            if (res.code == 0) {
                 ticketPrice = ticketType == '1' ? data.single : data.group;
                 ticketRefundInsurance = data.refundInsurance;
 
                 setRefundInsurance();
+            } else {
+                //toto
             }
         });
     }
@@ -118,7 +128,7 @@ define(['url', 'helper'], function (url, helper) {
 
     function calculateTotal() {
         var ticketNum = ticketType == '1' ? 1 : Number($('.js-current-num').val());
-        var refundInsurance = Number($('.js-refundInsurance').text()) || 0;
+        var refundInsurance = ticketType == '1' ? Number($('.js-refundInsurance').text()) : 0;
         var total = ticketPrice * ticketNum + refundInsurance;
 
         $('.js-price').text(total);
@@ -149,15 +159,16 @@ define(['url', 'helper'], function (url, helper) {
 
         helper.ajax(url.buyTicket, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
-                if (typeof WeixinJSBridge == "undefined"){
-                   if( document.addEventListener ){
+
+            if (res.code == 0) {
+                if (typeof WeixinJSBridge == "undefined") {
+                   if ( document.addEventListener ) {
                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-                   }else if (document.attachEvent){
+                   } else if (document.attachEvent) {
                        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
                        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
                    }
-                }else{
+                } else {
                     onBridgeReady(res);
                 }
             }
@@ -166,6 +177,7 @@ define(['url', 'helper'], function (url, helper) {
 
     function onBridgeReady(res){
         var data = res.data;
+
         WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
                "appId":data.appId,     //公众号名称，由商户传入     
@@ -176,9 +188,9 @@ define(['url', 'helper'], function (url, helper) {
                "paySign":data.signature//微信签名 
            },
            function(res){     
-               if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+               if (res.err_msg == "get_brand_wcpay_request:ok") {
                     window.location.href = "PayResult.html";
-               }else{
+               } else {
                     $('popup').show().find('p').html(res.msg)
                }
            }
@@ -190,6 +202,7 @@ define(['url', 'helper'], function (url, helper) {
           bindActions();
           getUrlParams();
           checkType();
+          initPage();
           checkTicketType();
           getTicketPrice();
         }

@@ -131,7 +131,7 @@
                     <div class="form-inline">
                         <div class="form-group m-r-10">
                             <label class="control-label">手机号：</label>
-                            <input type="text" class="js-filter-input js-filter-phone form-control" placeholder="请输入手机号">
+                            <input type="text" class="js-filter-input js-filter-telephone form-control" placeholder="请输入手机号">
                         </div>
                         <div class="form-group m-r-10">
                             <label class="control-label">会员姓名：</label>
@@ -144,15 +144,12 @@
                 <!-- end serach -->
 
                 <!-- begin table -->
-                <div class="pull-right mrgb15">
-                    <a href="#modal-dialog" class="js-add btn btn-sm btn-success" data-toggle="modal">新增</a>
-                </div>
                 <table class="js-table table table-striped table-bordered">
                     <thead>
                         <tr role="row">
                             <th>姓名</th>
-                            <th>性别</th>
                             <th>手机号码</th>
+                            <th>性别</th>
                             <th>地址</th>
                             <th>注册时间</th>
                             <th>操作</th>
@@ -184,12 +181,12 @@
         <td>{{address}}</td>
         <td>{{createTime}}</td>
         <td>
-            <a href="ticket.html?phone={{telephone}}">
+            <a href="ticket.html?telephone={{telephone}}">
                 <span class="btn btn-sm btn-success">
                     <i class="fa fa-edit text-edit"></i>票务
                 </span>
             </a>
-            <a href="reservation.html?phone={{telephone}}">
+            <a href="reservation.html?telephone={{telephone}}">
                 <span class="btn btn-sm btn-success">
                     <i class="fa fa-edit text-edit"></i>预约
                 </span>
@@ -204,20 +201,12 @@
     {{/data}}
 </script>
 
-
                 </div><!-- Row -->
             </div><!-- Main Wrapper -->
         </div><!-- Page Inner -->
     </main><!-- Page Content -->
     <div class="cd-overlay"></div>
 
-
-    <!-- 时间段模板 -->
-    <script type="text/template" id="timeTmpl">
-    <!--{{#timeList}}
-        <li class="js-select-time rsv-li-item"><span>{{start}}-{{end}}</span></li>
-    {{/timeList}}-->
-    </script>
 
     <script data-main="js/boot.js" data-start="js/biz/user.js" src="js/libs/require.min.js"></script>
     

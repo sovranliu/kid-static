@@ -57,9 +57,13 @@
     <!-- 视频模板 -->
     <script type="text/template" id="videoTmpl">
     {{#videoList}}
-        <video controls="controls" id="{{id}}">
-            <source src="{{url}}" type="video/mp4" />
-        </video>
+        <div class="fd-video-item">
+            <video controls="controls" id="{{id}}" poster="">
+                <source src="{{url}}" type="video/mp4" />
+            </video>
+            <!--<div class="{{#isPurchased}}fd-yg-pop{{/isPurchased}}{{^isPurchased}}fd-dq-pop{{/isPurchased}}"><i></i></div>-->
+            <div class="{{^isPurchased}}fd-dq-pop{{/isPurchased}}"><i></i></div>
+        </div>
     {{/videoList}}
     </script>
 
