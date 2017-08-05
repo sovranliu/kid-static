@@ -64,7 +64,7 @@
         </div>
     </div>
     <script id="ticketTemplate" type="x-tmpl-mustache">
-    {{#res}}
+    {{#data}}
         <li class="voucher-item {{statusStyle}}" data-id="{{serialNumber}}">
             <div class="num">
                 <span>票流水号：{{serialNumber}}</span>
@@ -91,10 +91,10 @@
             </div>
             {{/operate}}
         </li>
-    {{/res}}
+    {{/data}}
     </script>
     <script id="bookTemplate" type="x-tmpl-mustache">
-    {{#res}}
+    {{#data}}
         <li class="voucher-item {{statusStyle}}" data-id="{{serialNumber}}">
             <div class="num">
                 <span>票流水号：{{serialNumber}}</span>
@@ -115,7 +115,7 @@
             </div>
             {{/operate}}
         </li>
-    {{/res}}
+    {{/data}}
     </script>
     <script data-main="js/boot.js" data-start="js/biz/myorder.js" src="js/libs/require.min.js"></script>
 </body>

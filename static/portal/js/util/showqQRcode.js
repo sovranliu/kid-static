@@ -4,6 +4,7 @@ define(['url','helper'], function(url,helper) {
             		 + '<div class="pop-mask"></div>'
            			 + '<div class="pop-con">'
                 	 + '<img>'
+                     + '<p class="cen">请打开微信客户端“扫一扫” </p>'
                 	 + '<button class="js-confirm fl">确认</button>'
                 	 + '<div class="js-confirm close"></div></div></div>';
 
