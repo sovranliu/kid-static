@@ -38,7 +38,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         helper.ajax(url.getBookingTime, params, function(res) {
             var data = res.data;
 
-            if (res.code == 0) {
+            if (res.code >= 0) {
                 if (data.length == 0) {
                     $('.js-time-list').html('<p class="dataNull">您选择的日期不可预约，请重新选择。</p>');
                 } else {
@@ -80,7 +80,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         helper.ajax(url.getBookableNum, params, function(res) {
             var data = res.data;
 
-            if (res.code == 0) {
+            if (res.code >= 0) {
                 $('.js-bookable-num').text(data.count);
             }
         });
@@ -116,7 +116,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         };
 
         helper.ajax(url.submitBooking, params, function(res) {
-            if (res.code == 0) {
+            if (res.code >= 0) {
                 showPopup(1);
             } else {
                 showPopup(2); //预约满  todo 依赖后端信息

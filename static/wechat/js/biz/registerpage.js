@@ -21,7 +21,7 @@ define(['url', 'helper','handshake'], function(url, helper,handshake) {
             //$btn.html("短信发送中");
             _loadingCodeTime($btn);
             helper.ajax(url.getVerificationCode, params, function(res) {
-                if(res.code == 0) {
+                if(res.code >= 0) {
                     $btn.html("已发送");
                 }else{
                     $btn.html("重新发送");
@@ -71,7 +71,7 @@ define(['url', 'helper','handshake'], function(url, helper,handshake) {
 
         if(name != "" && code != "" && _checkMobileNumber()) {
             helper.ajax(url.postRegister, params, function(res) {
-                if(res.code == 0) {
+                if(res.code >= 0) {
                     window.location.href = "MemberCenter.html";
                 }
             })

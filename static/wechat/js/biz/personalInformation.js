@@ -9,7 +9,7 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
         var params = {};
         helper.ajax(url.getUserInfo,params,function (res) {
             var data = res.data;
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 data.ismale = function(){  
                     if(this.sex == 0 ){  
                         return true;  
@@ -37,7 +37,7 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
 
         helper.ajax(url.postUserInfo,params,function (res) {
             var data = res.data;
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 //todo 弹层提示成功
                 alert('修改成功');
             }

@@ -11,7 +11,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
     function _getUserInfoData() {
         var params = {};
         helper.ajax(url.getUserInfo,params,function (res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('.username').html(res.data.userName);
             }
         })
@@ -22,7 +22,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
         var params = {};
         $('.popup').show();
         helper.ajax(url.getMessageData,params,function (res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('.popup').find('p').html(res.data.content);
             }
         })

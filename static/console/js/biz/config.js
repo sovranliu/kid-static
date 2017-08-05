@@ -10,7 +10,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
     function getConfigData() {
         helper.ajax(url.getConfig, {}, function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data }));
             }
         });
@@ -32,7 +32,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
             "content":$.trim($('.js-new-content').val())
         }
         helper.ajax(url.postConfig, data, function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('.js-dialog').modal('hide');
                 getConfigData();
             }

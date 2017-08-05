@@ -24,7 +24,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         var params = buildParams();
 
         helper.ajax(url.getMessages, params, function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data }));
             }
         });
@@ -45,7 +45,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
             "answer":$.trim($('.js-reply').val())
         }
         helper.ajax(url.postMessageReply, data, function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('.js-dialog').modal('hide');
                 getMessageData();
             }

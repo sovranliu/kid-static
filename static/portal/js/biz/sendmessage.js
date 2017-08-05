@@ -16,7 +16,7 @@ define(['url','helper'], function (url,helper) {
             };
 
             helper.ajax(url.postMessageData,params,function (res) {
-                if(res.code == 0) {
+                if(res.code >= 0) {
                     $(".popup").show();
                 }
             })

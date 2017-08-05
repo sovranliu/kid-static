@@ -34,9 +34,9 @@ define(['url','helper'], function(url,helper) {
 
     function _getLogin() {
     	helper.ajax(url.getLogin,{},function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('body').append(_qrcodepopup);
-                $('.js-qrcode-popup').show().find('img').attr('scr',res.qrcode);
+                $('.js-qrcode-popup').show().find('img').attr('scr',res.data.qrcode);
             }
     	})
         setInterval(_checkLogin(res.code),2000);
@@ -44,7 +44,7 @@ define(['url','helper'], function(url,helper) {
 
     function _checkLogin(code) {
         helper.ajax(url.checkLogin,{"code":code},function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 if(res.data != null && res.data != "") {
                     window.location.reload();
                 }

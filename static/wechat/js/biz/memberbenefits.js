@@ -13,7 +13,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
         if(isCheck) {
             var params = {};
             helper.ajax(url.postBenefit,params,function (res) {
-                if(res.code == 0) {
+                if(res.code >= 0) {
                     window.history.go(-1);
                 }
             })

@@ -12,7 +12,7 @@ define(['url', 'helper'], function (url, helper) {
             "password":$.trim($('.js-pwd').val())
         }
         helper.ajax(url.getLogin, params, function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 window.location.href = "config.html"
             }
         });

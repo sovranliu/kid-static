@@ -47,7 +47,7 @@ define(['url', 'helper'], function (url, helper) {
             helper.ajax(url.prepayAction,{},function() {})
         }else{
             helper.ajax(url.payInfo,{"mobileNo":mobileNo,"openId":openId},function() {
-                if(res.code == 0) {
+                if(res.code >= 0) {
                     var data = res.data;
                     $('.js-name').text(data.user.userName);
                     $('.js-phone').text(data.user.mobileNo);
@@ -73,7 +73,7 @@ define(['url', 'helper'], function (url, helper) {
         helper.ajax(url.getTicketPrice, params, function(res) {
             var data = res.data;
 
-            if (res.code == 0) {
+            if (res.code >= 0) {
                 ticketPrice = ticketType == '1' ? data.single : data.group;
                 ticketRefundInsurance = data.refundInsurance;
 
@@ -160,7 +160,7 @@ define(['url', 'helper'], function (url, helper) {
         helper.ajax(url.buyTicket, params, function(res) {
             var data = res.data;
 
-            if (res.code == 0) {
+            if (res.code >= 0) {
                 if (typeof WeixinJSBridge == "undefined") {
                    if ( document.addEventListener ) {
                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
