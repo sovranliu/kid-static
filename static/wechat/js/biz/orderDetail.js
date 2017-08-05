@@ -10,7 +10,7 @@ define(['url', 'helper'], function (url, helper) {
     }
 
     function getUrlParams() {
-        ticketType = helper.getQueryStr('type');
+        ticketType = helper.getQueryStr('ticketType');
     }
 
     function initPage() {
