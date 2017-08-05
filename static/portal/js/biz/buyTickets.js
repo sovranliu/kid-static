@@ -5,15 +5,25 @@ define(['url', 'helper'], function (url, helper) {
     function bindActions() {
         $('.js-ticket-type').on('click', checkTicketType);
         $('.js-buy-ticket').on('click', buyTicket);
-        $('.js-notes-open').on('click', openNote);
-        $('.js-notes-close').on('click', closeNote);
+        //$('.js-notes-open').on('click', openNote);
+        //$('.js-notes-close').on('click', closeNote);
         $('.js-confirm').on('click',closePay)
     }
 
 
     function checkTicketType(e) {
+        var $refundInsurance = $('.js-refundInsurance');
+
         $('.js-ticket-type').removeClass('current');
         $(e.currentTarget).addClass('current');
+
+        ticketType = Number($('.js-ticket-type.current').data('type'));
+
+        if (ticketType == 0) {
+            $refundInsurance.hide();
+        } else {
+            $refundInsurance.show();
+        }
     }
 
     function getTicketPrice() {
@@ -31,22 +41,25 @@ define(['url', 'helper'], function (url, helper) {
 
     function buyTicket() {
         var needRefundInsurance = $('.js-switch-refundInsurance').is(':checked');
-        ticketType = $('current').data('type')
+
         var params = {
-            'ticketType': parseInt(ticketType),
+            'ticketType': ticketType,
             'needRefundInsurance': needRefundInsurance
         };
 
         helper.ajax(url.buyTicket, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
-                $('.js-pay').show().find('img').attr('scr',data.qrcode);
+
+            if (res.code == 0) {
+                $('.js-pay').show().find('img').attr('scr', data.qrcode);
+            } else {
+                //todo
             }
         });
     }
 
     function openNote() {
-        $('.js-notes').show();
+        //$('.js-notes').show();
     }
 
     function closeNote() {

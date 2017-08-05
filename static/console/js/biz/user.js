@@ -35,7 +35,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     function getUserList() {
         var params = buildSearchParams();
 
-        helper.ajax(url.getUserList, params, function(data) {
+        helper.ajax(url.getUserList, params, function(res) {
+            var data = res.data;
+            
             if (data.length == 0) {
                 $('.js-tbody').html('<p class="dataNull">还没有注册会员信息</p>');
             } else {
