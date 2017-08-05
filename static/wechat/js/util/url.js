@@ -32,6 +32,8 @@ define([], function() {
         //登陆授权
         getVerificationCode: _basePath + 'getVerificationCode',
         handshake:_basePath + 'handshake'
-
+        //支付页面相关
+        prepayAction: _basePath + 'prepayAction',
+        parInfo: _basePath + 'parInfo'
     };
 });

@@ -10,8 +10,38 @@ define(['url', 'helper'], function (url, helper) {
     }
 
     function getUrlParams() {
-        ticketType = helper.getQueryStr('ticketType');
+        ticketType = helper.getQueryStr('type');
     }
+
+    /*
+    1，检查url是否有type参数，不存在就弹错，流程结束
+    2，检查url是否有mobileno和openid，有一个没有就调prepayaction
+    3，两个都有，则调payinfo，入参url上拿手机号，返回渲染数据
+    4，点支付，调支付接口
+    */
+    function checkType() {
+        if(!ticketType) {
+            alert('您好，页面入口不合法，请注册后登陆购买。谢谢。');
+            window.location.href = "Registerpage.html";
+        }
+    }
+
+    function checkPhone() {
+        var phone =  helper.getQueryStr('mobileNo');
+        var openId =  helper.getQueryStr('openId');
+        if(!phone || !openId) {
+            helper.ajax(url.prepayAction,{},function() {})
+        }else{
+            helper.ajax(url.payInfo,{"mobileNo":phone},function() {
+                var data = res.data;
+                if(res.code == 0) {
+                    $('.js-name').text(data.userName);
+                    $('.js-phone').text(data.mobileNo);
+                }
+            })
+        }
+    }
+
 
     function checkTicketType() {
         if (ticketType == '1') {
@@ -24,18 +54,7 @@ define(['url', 'helper'], function (url, helper) {
         }
     }
 
-    function getUserInfo() {
-        var params = {};
 
-        helper.ajax(url.getUserInfo, params, function(res) {
-            var data = res.data;
-            if(res.code == 0) {
-                $('.js-name').text(data.userName);
-                $('.js-phone').text(data.telephone);
-            }
-            
-        });
-    }
 
     function getTicketPrice() {
         var params = {};
@@ -154,7 +173,6 @@ define(['url', 'helper'], function (url, helper) {
           bindActions();
           getUrlParams();
           checkTicketType();
-          getUserInfo();
           getTicketPrice();
         }
     }
