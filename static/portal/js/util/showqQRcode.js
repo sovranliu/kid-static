@@ -51,7 +51,9 @@ define(['url','helper'], function(url,helper) {
             if(res.code >= 0) {
                 $('body').append(_qrcodepopup);
                 $('.js-qrcode-popup').show().find('img').attr('src',res.data.qrcode);
-                setInterval(_checkLogin(res.data.code),2000);
+                setInterval(function() {
+                    _checkLogin(res.data.code)
+                },2000);
             }
     	})
     }

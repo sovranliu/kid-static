@@ -1572,6 +1572,15 @@ a,div,img {
     vertical-align: sub;
     margin-right: 10px;
 }
+.scan-result-img{
+    text-align: center;
+    margin: 50% auto 0;
+}
+.scan-result-img img{
+    width: 30px;
+    margin-bottom:10px;
+    margin-right: 10px;
+}
 .large-btn{
     width: 80%;
     display: block;
