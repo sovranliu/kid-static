@@ -45,8 +45,6 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                     $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': data }));
                     $('.js-select-time').eq(0).click();
                 }
-
-                selectTime();
             } else {
                 //todo
             }
