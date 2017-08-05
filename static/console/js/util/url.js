@@ -5,12 +5,13 @@ define([], function() {
         //会员信息列表
         getUserList: _basePath + 'getUserList',
         //票务信息列表
-        getTickets: _basePath + 'getTickets',
-        //预约飞行
-        getBookingTime: _basePath + 'getBookingTime',
-        submitBooking: _basePath + 'submitBooking',
-        //飞行日志
+        getTicketList: _basePath + 'getTicketList',
+        //退票
+        refundTicket: _basePath + 'refundTicket',
+        //飞行日志列表
         getFlightDiary: _basePath + 'getFlightDiary',
+        //预约列表
+        getBookingList: _basePath + 'getBookingList',
 
     };
 });

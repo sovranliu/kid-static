@@ -1,77 +1,117 @@
-define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
+define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], function (url, helper, mustache, dateTimePicker, message, paginator) {
 
-    var serialNumber;
+    var pageNum = 1, limit = 20, gId;
 
     function bindActions() {
-        $('.js-buy-flightDiary').on('click', buyFlightDiary);
-        $('.js-tab-item').on('click', switchTab);
+        $('.js-search').on('click', getTicketList);
+        $('.js-reset').on('click', handleReset);
+        $('.js-tbody').on('click', '.js-refund', openDelete);
+        $('.js-tbody').on('click', '.js-flightDiary', getFlightDiary);
+        $('.js-dialog').on('click', '.js-confirm', refundTicket);
     }
 
-    function getUrlParams() {
-        serialNumber = helper.getQueryStr('serialNumber');
+    function initPage() {
+        $('.js-filter-startTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
+        $('.js-filter-endTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
+        $('.js-filter-serialNumber').val(helper.getQueryStr('serialNumber') || '');
+        $('.js-filter-telephone').val(helper.getQueryStr('telephone') || '');
     }
 
-    function switchTab(e) {
-        var $activeTab = $(e.currentTarget);
-        var tabIndex = Number($activeTab.data('index'));
+    function handleReset() {
+        $('.js-filter-input').val('');
+        $('.js-filter-select').find('option:first').prop('selected', 'selected');
 
-        $('.js-tab-item').removeClass('current');
-        $('.js-tab-content').hide();
+        pageNum = 1;
+        getTicketList();
+    }
 
-        $activeTab.addClass('current');
-        $('.js-tab-content').eq(tabIndex).show();
+    function openDelete() {
+        var $row = $(this).closest('tr');
+
+        gId = $row.data('id');
+
+        $('.js-dialog').html(mustache.render($('#tpl-delete-dialog').html(), { 'id': gId })).modal();
+    }
+
+    function refundTicket() {
+        var params = {
+            'serialNumber': gId
+        };
+
+        helper.ajax(url.postConfig, params, function(res) {
+            if (res.code == '0') {
+                $('.js-dialog').modal('hide');
+                msg.success('退票成功');
+            } else {
+                msg.error(res.msg);
+            }
+        });
     }
 
     function getFlightDiary() {
         var params = {
-            'serialNumber': serialNumber
+            'serialNumber': gId
         };
 
-        helper.ajax(url.getFlightDiary, params, function(data) {
-            if (data.canPurchase.length == 0) {
-                $('.js-video-can-purchase-list').html('<p class="dataNull">您还没有飞行礼品</p>');
+        helper.ajax(url.getFlightDiary, params, function(res) {
+            if (res.code == '0') {
+                //todo
             } else {
-                $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.canPurchase }));
+                //todo
             }
-            
-            if (data.hasPurchased.length == 0) {
-                $('.js-video-has-purchase-list').html('<p class="dataNull">您还没有购买飞行礼品。</p>');
-            } else {
-                $('.js-video-has-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.hasPurchased }));
-            }
-            $('.js-timeDuration').html(data.timeDuration);
-            $('.js-price').html(data.canPurchasePrice);
         });
     }
 
-    function buyFlightDiary() {
+    function buildSearchParams() {
+        var serialNumber = $('.js-filter-serialNumber').val();
+        var telephone = $('.js-filter-telephone').val();
+        var startTime = $('.js-filter-startTime').val();
+        var endTime = $('.js-filter-endTime').val();
+        var status = $('.js-filter-status').find('option:selected').data('val');
+
         var params = {
-            'serialNumber': serialNumber
+            'serialNumber': $.trim(serialNumber),
+            'telephone': $.trim(telephone),
+            'startTime': startTime,
+            'endTime': endTime,
+            'status': status,
+            'begin': pageNum,
+            'limit': limit
         };
 
-        helper.ajax(url.buyFlightDiary, params, function(data) {
-            //调起微信支付
-            wx.chooseWXPay({
-                timestamp: data.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                nonceStr: data.nonceStr, // 支付签名随机串，不长于 32 位
-                package: data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-                signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                paySign: data.paySign, // 支付签名
-                success: function (res) {
-                    // 支付成功后的回调函数
-                    window.location.href = 'PayResult.html';
-                },
-                error: function() {
+        return params;
+    }
+
+    function getTicketList() {
+        var params = buildSearchParams();
+
+        helper.ajax(url.getTicketList, params, function(res) {
+            if (res.code == '0') {
+                if (res.data.length == 0) {
+                    $('.js-tbody').html('<p class="dataNull">还没有票务信息</p>');
+                } else {
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data }));
                 }
-            });
+
+                $('.js-tpage').createPage({
+                    pageCount: Math.ceil(100 / limit), //todo
+                    current: pageNum,
+                    backFn: function (selectedPageNum) {
+                        pageNum = selectedPageNum;
+                        getTicketList();
+                    }
+                });
+            } else {
+                //todo
+            }            
         });
     }
 
     return {
         init: function () {
-          //bindActions();
-          //getUrlParams();
-          //getFlightDiary();
+            bindActions();
+            initPage();
+            getTicketList();
         }
     }
 });

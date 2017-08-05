@@ -1,4 +1,3 @@
-
 define(['jCookie'], function(jCookie) {
     function _initPage() {
         $('.js-header-username').html($.cookie('userName'));

@@ -8,9 +8,12 @@ requirejs.config({
         mustache: 'libs/mustache.min',
         bootstrap: 'libs/bootstrap.min',
         jCookie: 'libs/jquery.cookie',
+        dateTimePicker: 'libs/bootstrap-datetimepicker.min',
         //datepicker: 'libs/bootstrap-datepicker',
         //dateTimePicker: 'libs/bootstrap-datetimepicker.min',
         /******************* utils *****************/
+        message: 'util/message',
+        paginator: 'util/paginator',
         modern: 'util/modern',
         common: 'util/common',
         helper: 'util/helper',

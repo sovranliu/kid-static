@@ -13,6 +13,16 @@ define(['url', 'helper'], function (url, helper) {
         ticketType = helper.getQueryStr('ticketType');
     }
 
+    function initPage() {
+        var $refundInsurance = $('.js-refund-insurance');
+
+        if (ticketType == '1') {
+            $refundInsurance.show();
+        } else {
+            $refundInsurance.hide();
+        }
+    }
+
     function checkTicketType() {
         if (ticketType == '1') {
             $('.js-num-single').show();
@@ -29,7 +39,8 @@ define(['url', 'helper'], function (url, helper) {
 
         helper.ajax(url.getUserInfo, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
+
+            if (res.code == 0) {
                 $('.js-name').text(data.userName);
                 $('.js-phone').text(data.telephone);
             }
@@ -42,11 +53,14 @@ define(['url', 'helper'], function (url, helper) {
 
         helper.ajax(url.getTicketPrice, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
+
+            if (res.code == 0) {
                 ticketPrice = ticketType == '1' ? data.single : data.group;
                 ticketRefundInsurance = data.refundInsurance;
 
                 setRefundInsurance();
+            } else {
+                //toto
             }
         });
     }
@@ -95,7 +109,7 @@ define(['url', 'helper'], function (url, helper) {
 
     function calculateTotal() {
         var ticketNum = ticketType == '1' ? 1 : Number($('.js-current-num').val());
-        var refundInsurance = Number($('.js-refundInsurance').text()) || 0;
+        var refundInsurance = ticketType == '1' ? Number($('.js-refundInsurance').text()) : 0;
         var total = ticketPrice * ticketNum + refundInsurance;
 
         $('.js-price').text(total);
@@ -113,7 +127,8 @@ define(['url', 'helper'], function (url, helper) {
 
         helper.ajax(url.buyTicket, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
+
+            if (res.code == 0) {
                 //调起微信支付
                 wx.chooseWXPay({
                     timestamp: data.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
@@ -128,6 +143,8 @@ define(['url', 'helper'], function (url, helper) {
                     error: function() {
                     }
                 });
+            } else {
+                //todo
             }
         });
     }
@@ -137,6 +154,7 @@ define(['url', 'helper'], function (url, helper) {
         init: function () {
           bindActions();
           getUrlParams();
+          initPage();
           checkTicketType();
           getUserInfo();
           getTicketPrice();
