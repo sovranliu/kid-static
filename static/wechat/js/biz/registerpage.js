@@ -1,4 +1,4 @@
-define(['url', 'helper','handshake'], function(url, helper,handshake) {
+define(['url', 'helper'], function(url, helper) {
 
     function bindActions() {
         $('.js-submit').on('click',_postRegisterData);
@@ -8,6 +8,9 @@ define(['url', 'helper','handshake'], function(url, helper,handshake) {
         $('.js-send').on('click',_getVerificationCode);
     }
 
+    function _getAuth() {
+        helper.ajax(url.getAuthorize,{},function(res) {})
+    }
 
     //发送验证码
     function _getVerificationCode() {
@@ -89,7 +92,7 @@ define(['url', 'helper','handshake'], function(url, helper,handshake) {
 
     return {
         init: function() {
-            handshake.init();
+            _getAuth();
             bindActions();
         }
     }
