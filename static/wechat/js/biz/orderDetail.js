@@ -10,7 +10,17 @@ define(['url', 'helper'], function (url, helper) {
     }
 
     function getUrlParams() {
-        ticketType = helper.getQueryStr('type');
+        ticketType = helper.getQueryStr('ticketType');
+    }
+
+    function initPage() {
+        var $refundInsurance = $('.js-refund-insurance');
+
+        if (ticketType == '1') {
+            $refundInsurance.show();
+        } else {
+            $refundInsurance.hide();
+        }
     }
 
     /*
@@ -29,10 +39,11 @@ define(['url', 'helper'], function (url, helper) {
     function checkPhone() {
         var phone =  helper.getQueryStr('mobileNo');
         var openId =  helper.getQueryStr('openId');
+
         if(!phone || !openId) {
-            helper.ajax(url.prepayAction,{},function() {})
+            helper.ajax(url.prepayAction, {}, function() {});
         }else{
-            helper.ajax(url.payInfo,{"mobileNo":phone},function() {
+            helper.ajax(url.payInfo, {"mobileNo": phone}, function() {
                 var data = res.data;
                 if(res.code == 0) {
                     $('.js-name').text(data.userName);
@@ -41,7 +52,6 @@ define(['url', 'helper'], function (url, helper) {
             })
         }
     }
-
 
     function checkTicketType() {
         if (ticketType == '1') {
@@ -54,18 +64,19 @@ define(['url', 'helper'], function (url, helper) {
         }
     }
 
-
-
     function getTicketPrice() {
         var params = {};
 
         helper.ajax(url.getTicketPrice, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
+
+            if (res.code == 0) {
                 ticketPrice = ticketType == '1' ? data.single : data.group;
                 ticketRefundInsurance = data.refundInsurance;
 
                 setRefundInsurance();
+            } else {
+                //toto
             }
         });
     }
@@ -114,7 +125,7 @@ define(['url', 'helper'], function (url, helper) {
 
     function calculateTotal() {
         var ticketNum = ticketType == '1' ? 1 : Number($('.js-current-num').val());
-        var refundInsurance = Number($('.js-refundInsurance').text()) || 0;
+        var refundInsurance = ticketType == '1' ? Number($('.js-refundInsurance').text()) : 0;
         var total = ticketPrice * ticketNum + refundInsurance;
 
         $('.js-price').text(total);
@@ -132,15 +143,16 @@ define(['url', 'helper'], function (url, helper) {
 
         helper.ajax(url.buyTicket, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
-                if (typeof WeixinJSBridge == "undefined"){
-                   if( document.addEventListener ){
+
+            if (res.code == 0) {
+                if (typeof WeixinJSBridge == "undefined") {
+                   if ( document.addEventListener ) {
                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-                   }else if (document.attachEvent){
+                   } else if (document.attachEvent) {
                        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
                        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
                    }
-                }else{
+                } else {
                     onBridgeReady(res);
                 }
             }
@@ -149,7 +161,8 @@ define(['url', 'helper'], function (url, helper) {
 
     function onBridgeReady(res){
         var data = res.data;
-       WeixinJSBridge.invoke(
+
+        WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
                "appId":data.appId,     //公众号名称，由商户传入     
                "timeStamp":data.timestamp,         //时间戳，自1970年以来的秒数     
@@ -159,9 +172,9 @@ define(['url', 'helper'], function (url, helper) {
                "paySign":data.paySign//微信签名 
            },
            function(res){     
-               if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+               if (res.err_msg == "get_brand_wcpay_request:ok") {
                     window.location.href = "PayResult.html";
-               }else{
+               } else {
                     $('popup').show().find('p').html(res.msg)
                }
            }
@@ -172,6 +185,7 @@ define(['url', 'helper'], function (url, helper) {
         init: function () {
           bindActions();
           getUrlParams();
+          initPage();
           checkTicketType();
           getTicketPrice();
         }

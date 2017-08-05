@@ -378,6 +378,7 @@ a,div,img {
 }
 
 .fd-con {
+    margin-bottom: 100px;
 }
 
 .fd-list-con {
@@ -812,9 +813,8 @@ a,div,img {
 
 .bt-payment {
     overflow: hidden;
-    margin-top: 15px;
-    padding-top: 15px;
-    position: relative;
+    position: absolute;
+    bottom: 75px;
 }
 
 .bt-payment .fl {

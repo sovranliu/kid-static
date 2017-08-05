@@ -1,11 +1,12 @@
-define(['url', 'helper', 'mustache', 'datePicker','handshake'], function (url, helper, mustache, datePicker,handshake) {
+define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, helper, mustache, datePicker, handshake) {
 
     var serialNumber, optType;
 
     function bindActions() {
         $('.js-time-list').on('click', '.js-select-time', selectTime);
-        //$('.js-year').on('click', changeYear);
-        //$('.js-month').on('click', changeMonth)
+        $('.js-year').on('change', getBookingTime);
+        $('.js-month').on('change', getBookingTime);
+        $('.js-day').on('change', getBookingTime);
         $('.js-submit').on('click', submitBooking);
         $('.js-confirm').on('click', hidePopup);
     }
@@ -36,13 +37,18 @@ define(['url', 'helper', 'mustache', 'datePicker','handshake'], function (url, h
 
         helper.ajax(url.getBookingTime, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
+
+            if (res.code == 0) {
                 if (data.length == 0) {
                     $('.js-time-list').html('<p class="dataNull">您选择的日期不可预约，请重新选择。</p>');
                 } else {
                     $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': data }));
                     $('.js-select-time').eq(0).click();
                 }
+
+                selectTime();
+            } else {
+                //todo
             }
         });
     }
@@ -75,7 +81,8 @@ define(['url', 'helper', 'mustache', 'datePicker','handshake'], function (url, h
 
         helper.ajax(url.getBookableNum, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
+
+            if (res.code == 0) {
                 $('.js-bookable-num').text(data.count);
             }
         });
@@ -111,10 +118,11 @@ define(['url', 'helper', 'mustache', 'datePicker','handshake'], function (url, h
         };
 
         helper.ajax(url.submitBooking, params, function(res) {
-            if(res.code == 0) {
+            if (res.code == 0) {
                 showPopup(1);
+            } else {
+                showPopup(2); //预约满  todo 依赖后端信息
             }
-            //showPopup(2); //预约满
         });
     }
 

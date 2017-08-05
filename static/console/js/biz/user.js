@@ -7,20 +7,26 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         $('.js-reset').on('click', handleReset);
     }
 
+    function initPage() {
+        $('.js-filter-telephone').val(helper.getQueryStr('telephone') || '');
+    }
+
     function handleReset() {
-        pageNum = 1;
         $('.js-filter-input').val('');
+
+        pageNum = 1;
         getUserList();
     }
 
     function buildSearchParams() {
         var userName = $('.js-filter-username').val();
-        var telephone = $('.js-filter-phone').val();
+        var telephone = $('.js-filter-telephone').val();
 
         var params = {
             'userName': $.trim(userName),
             'telephone': $.trim(telephone),
-            'pageNum': pageNum
+            'begin': pageNum,
+            'limit': 20
         };
 
         return params;
@@ -41,6 +47,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     return {
         init: function () {
             bindActions();
+            initPage();
             getUserList();
         }
     }
