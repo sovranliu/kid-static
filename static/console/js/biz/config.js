@@ -7,7 +7,6 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         $('.js-dialog').on('click','.js-save',saveConfigData)
     }
 
-   
 
     function getConfigData() {
         helper.ajax(url.getConfig, {}, function(res) {
@@ -34,7 +33,8 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         }
         helper.ajax(url.postConfig, data, function(res) {
             if(res.code == 0) {
-                //todo
+                $('.js-dialog').modal('hide');
+                getConfigData();
             }
         });
     }

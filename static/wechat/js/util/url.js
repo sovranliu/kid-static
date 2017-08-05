@@ -5,7 +5,7 @@ define([], function() {
         //购票
         getTicketPrice: _basePath + 'getTicketPrice',
         getTickets: _basePath + 'getTickets',
-        buyTicket: _basePath + 'buyTicket',
+        buyTicket: _basePath + 'pay',
         //预约飞行
         getBookingTime: _basePath + 'getBookingTime',
         getBookableNum: _basePath + 'getBookableNum',

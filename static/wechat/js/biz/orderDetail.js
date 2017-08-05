@@ -1,16 +1,21 @@
 define(['url', 'helper'], function (url, helper) {
 
-    var ticketType, ticketPrice, ticketRefundInsurance;
+    var ticketType, openId, mobileNo, ticketPrice, ticketRefundInsurance;
 
     function bindActions() {
         $('.js-minus-num').on('click', minusNum);
         $('.js-add-num').on('click', addNum);
         $('.js-switch-refundInsurance').on('change', setRefundInsurance);
         $('.js-buy-ticket').on('click', buyTicket);
+        $('.popup').on('click', '.js-confirm',function() {
+            $popup.hide();
+        });
     }
 
     function getUrlParams() {
-        ticketType = helper.getQueryStr('ticketType');
+        ticketType = helper.getQueryStr('type');
+        openId =  helper.getQueryStr('openId');
+        mobileNo = helper.getQueryStr('mobileNo');
     }
 
     function initPage() {
@@ -34,20 +39,18 @@ define(['url', 'helper'], function (url, helper) {
             alert('您好，页面入口不合法，请注册后登陆购买。谢谢。');
             window.location.href = "Registerpage.html";
         }
+        checkPhone();
     }
 
     function checkPhone() {
-        var phone =  helper.getQueryStr('mobileNo');
-        var openId =  helper.getQueryStr('openId');
-
-        if(!phone || !openId) {
-            helper.ajax(url.prepayAction, {}, function() {});
+        if(!mobileNo || !openId) {
+            helper.ajax(url.prepayAction,{},function() {})
         }else{
-            helper.ajax(url.payInfo, {"mobileNo": phone}, function() {
-                var data = res.data;
+            helper.ajax(url.payInfo,{"mobileNo":mobileNo,"openId":openId},function() {
                 if(res.code == 0) {
-                    $('.js-name').text(data.userName);
-                    $('.js-phone').text(data.mobileNo);
+                    var data = res.data;
+                    $('.js-name').text(data.user.userName);
+                    $('.js-phone').text(data.user.mobileNo);
                 }
             })
         }
@@ -134,11 +137,24 @@ define(['url', 'helper'], function (url, helper) {
     function buyTicket() {
         var ticketNum = ticketType == '1' ? 1 : Number($('.js-current-num').val());
         var needRefundInsurance = $('.js-switch-refundInsurance').is(':checked');
+        var insurance = 0;
+        var goodsType;
 
+        if(needRefundInsurance) {
+            insurance = 1000;
+        }
+        switch(ticketType) {
+            case 0:
+                goodsType = 20000 + ticketNum;
+                break;
+            case 1:
+                goodsType = 10000 + insurance + 1;
+                break;
+        }
+        
         var params = {
-            'ticketType': ticketType,
-            'ticketNum': ticketNum,
-            'needRefundInsurance': needRefundInsurance
+            "goodsType":goodsType,
+            "openId":openId
         };
 
         helper.ajax(url.buyTicket, params, function(res) {
@@ -166,10 +182,10 @@ define(['url', 'helper'], function (url, helper) {
            'getBrandWCPayRequest', {
                "appId":data.appId,     //公众号名称，由商户传入     
                "timeStamp":data.timestamp,         //时间戳，自1970年以来的秒数     
-               "nonceStr":data.nonceStr, //随机串     
-               "package":data.package,     
+               "nonceStr":data.nonceString, //随机串     
+               "package":"prepay_id=" + data.prepayId ,     
                "signType":"MD5",         //微信签名方式：     
-               "paySign":data.paySign//微信签名 
+               "paySign":data.signature//微信签名 
            },
            function(res){     
                if (res.err_msg == "get_brand_wcpay_request:ok") {
@@ -185,6 +201,7 @@ define(['url', 'helper'], function (url, helper) {
         init: function () {
           bindActions();
           getUrlParams();
+          checkType();
           initPage();
           checkTicketType();
           getTicketPrice();

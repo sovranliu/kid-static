@@ -19,6 +19,9 @@ define([], function() {
         postConfig: _basePath + 'modifyConfig',
         //支付记录
         getOrder: _basePath + 'query/order',
-        getRefund: _basePath + 'query/refund'
+        getRefund: _basePath + 'query/refund',
+        //留言回复
+        getMessages: _basePath + 'getMessages',
+        postMessageReply: _basePath + 'postMessageReply'
     };
 });

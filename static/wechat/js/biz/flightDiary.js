@@ -1,14 +1,33 @@
-define(['url', 'helper', 'mustache','handshake'], function (url, helper, mustache,handshake) {
+define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
-    var serialNumber;
+    var serialNumber,openId,mobileNo;
 
     function bindActions() {
         $('.js-tab-item').on('click', switchTab);
+        $('.popup').on('click', '.js-confirm',function() {
+            $('.popup').hide();
+        });
         $('.js-buy-flightDiary').on('click', buyFlightDiary);
     }
 
     function getUrlParams() {
         serialNumber = helper.getQueryStr('serialNumber');
+        openId =  helper.getQueryStr('openId');
+        mobileNo = helper.getQueryStr('mobileNo');
+    }
+
+    function checkPhone() {
+        if(!mobileNo || !openId) {
+            helper.ajax(url.prepayAction,{},function() {})
+        }else{
+            helper.ajax(url.payInfo,{"mobileNo":mobileNo,"openId":openId},function() {
+                if(res.code == 0) {
+                    var data = res.data;
+                    $('.js-name').text(data.user.userName);
+                    $('.js-phone').text(data.user.mobileNo);
+                }
+            })
+        }
     }
 
     function switchTab(e) {
@@ -24,7 +43,7 @@ define(['url', 'helper', 'mustache','handshake'], function (url, helper, mustach
 
     function getFlightDiary() {
         var params = {
-            'serialNumber': serialNumber
+            'mobileNo': mobileNo
         };
 
         helper.ajax(url.getFlightDiary, params, function(res) {
@@ -82,10 +101,11 @@ define(['url', 'helper', 'mustache','handshake'], function (url, helper, mustach
 
     function buyFlightDiary() {
         var params = {
-            'serialNumber': serialNumber
+            "goodsType":'30000',
+            "openId":openId
         };
 
-        helper.ajax(url.buyFlightDiary, params, function(res) {
+        helper.ajax(url.buyTicket, params, function(res) {
             if (res.code == 0) {
                 if (typeof WeixinJSBridge == "undefined") {
                    if ( document.addEventListener ) {
@@ -103,29 +123,26 @@ define(['url', 'helper', 'mustache','handshake'], function (url, helper, mustach
 
     function onBridgeReady(res){
         var data = res.data;
-
         WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
                "appId":data.appId,     //公众号名称，由商户传入     
                "timeStamp":data.timestamp,         //时间戳，自1970年以来的秒数     
-               "nonceStr":data.nonceStr, //随机串     
-               "package":data.package,     
+               "nonceStr":data.nonceString, //随机串     
+               "package":"prepay_id=" + data.prepayId ,     
                "signType":"MD5",         //微信签名方式：     
-               "paySign":data.paySign//微信签名 
+               "paySign":data.signature//微信签名 
            },
            function(res){     
-               if (res.err_msg == "get_brand_wcpay_request:ok") {
+               if(res.err_msg == "get_brand_wcpay_request:ok" ) {
                     window.location.href = "PayResult.html";
-               } else {
+               }else{
                     $('popup').show().find('p').html(res.msg)
                }
            }
        ); 
     }
-
     return {
         init: function () {
-          handshake.init();
           bindActions();
           getUrlParams();
           getFlightDiary();
