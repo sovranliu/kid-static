@@ -144,6 +144,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     return {
         init: function () {
           bindActions();
+          checkPhone();
           getUrlParams();
           getFlightDiary();
         }
