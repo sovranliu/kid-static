@@ -1,15 +1,11 @@
 define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
-    var serialNumber;
-
     function getUrlParams() {
-        serialNumber = helper.getQueryStr('serialNumber');
+        
     }
 
     function getFlightDiary() {
-        var params = {
-            'serialNumber': serialNumber
-        };
+        var params = {};
 
         helper.ajax(url.getFlightDiary, params, function(res) {
             var data = res.data;

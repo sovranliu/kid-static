@@ -1,6 +1,6 @@
 define(['url', 'helper'], function (url, helper) {
 
-    var ticketType;
+    var ticketType = 1;
 
     function bindActions() {
         $('.js-ticket-type').on('click', checkTicketType);
@@ -51,7 +51,8 @@ define(['url', 'helper'], function (url, helper) {
             var data = res.data;
 
             if (res.code == 0) {
-                $('.js-pay').show().find('img').attr('scr', data.qrcode);
+                $('.js-pay').show();
+                $('.js-pay-qrcode').attr('src', data.qrcode);
             } else {
                 //todo
             }
