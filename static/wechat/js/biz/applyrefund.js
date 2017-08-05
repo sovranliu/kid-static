@@ -21,9 +21,11 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
         }
 
         helper.ajax(url.getRefund, params, function(res) {
-            var template = $('#template').html();
-            Mustache.parse(template);
-            $('.ar-content').html(Mustache.render(template, res));
+            if(res.code == 0) {
+                var template = $('#template').html();
+                Mustache.parse(template);
+                $('.ar-content').html(Mustache.render(template, res.data));
+            }
         })
     }
 

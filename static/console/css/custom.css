@@ -1,3 +1,9 @@
+/* Write your custom CSS here */
+.input-span{
+	display: inline-block;
+    padding-top: 7px;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     color: #242a30;
@@ -26,6 +32,7 @@ h1, h2, h3, h4, h5, h6 {
     border-color: #eee
 }
 
+/************ 模态框 *************/
 .modal-content {
     border: none;
     -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.3);
@@ -69,8 +76,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
 }
 
-
-
+/************ 分页 *************/
 .dataTables_paginate a,.dataTables_paginate span {
     color: #242a30;
     margin-left: 5px;

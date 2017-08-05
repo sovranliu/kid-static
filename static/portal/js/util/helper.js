@@ -207,7 +207,14 @@ define(['jquery'], function($) {
                 }
             },
             success: function(data) {
-                callback(data);
+                if(data.msg != null && data.msg != "") {
+                    alert(data.msg);
+                    return;
+                }
+                if(data.redirect != null && data.redirect != "") {
+                    window.location.href = data.redirect;
+                }
+                callback(data)
             }
         });
     };

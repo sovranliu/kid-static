@@ -93,10 +93,16 @@
                             <p>预约管理</p>
                         </a>
                     </li>
-                    <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-envelope"></span><p>支付管理</p><span class="arrow"></span></a>
+                    <li>
+                        <a href="gift.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-gift"></span>
+                            <p>礼品管理</p>
+                        </a>
+                    </li>
+                    <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-usd"></span><p>支付管理</p><span class="arrow"></span></a>
                         <ul class="sub-menu">
-                            <li><a href="payment.html">购买记录</a></li>
-                            <li><a href="refund.html">退款记录</a></li>
+                            <li><a href="">购买记录</a></li>
+                            <li><a href="">退款记录</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -104,99 +110,94 @@
         </div><!-- Page Sidebar -->
         <div class="page-inner">
             <div class="page-title">
-                <h3>会员管理</h3>
+                <h3>系统参数配置</h3>
             </div>
             <div id="main-wrapper">
                 <div class="row">
-
-
-<div class="col-md-12 ui-sortable">
-    <div class="panel panel-inverse">
-        <div class="panel-body">
-            <div class="table-responsive">
-                <!-- begin serach -->
-                <div class="panel-body search-body">
-                    <div class="form-inline">
-                        <div class="form-group m-r-10">
-                            <label class="control-label">手机号：</label>
-                            <input type="text" class="js-filter-input js-filter-telephone form-control" placeholder="请输入手机号">
+                    <div class="col-md-12 ui-sortable">
+                        <div class="panel panel-inverse">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="js-table table table-striped table-bordered">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>名称</th>
+                                                <th>值</th>
+                                                <th>更新时间</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="js-tbody"></tbody>
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group m-r-10">
-                            <label class="control-label">会员姓名：</label>
-                            <input type="text" class="js-filter-input js-filter-username form-control" placeholder="请输入会员姓名">
-                        </div>
-                        <button class="js-search btn btn-sm btn-success m-r-5">查询</button>
-                        <button class="js-reset btn btn-sm btn-default">重置</button>
                     </div>
                 </div>
-                <!-- end serach -->
-
-                <!-- begin table -->
-                <table class="js-table table table-striped table-bordered">
-                    <thead>
-                        <tr role="row">
-                            <th>姓名</th>
-                            <th>手机号码</th>
-                            <th>性别</th>
-                            <th>地址</th>
-                            <th>注册时间</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody class="js-tbody"></tbody>
-                </table>
-                <!-- end table -->
-
-                <!-- begin paginator -->
-                <div id="data-table_paginate" class="js-tpage pull-right dataTables_paginate paging_simple_numbers">
-                    <a id="data-table_previous" aria-controls="data-table" class="paginate_button previous disabled">上一页</a>
-                    <span></span>
-                    <a id="data-table_next" aria-controls="data-table" class="paginate_button next">下一页</a>
-                </div>
-                <!-- begin paginator -->
             </div>
+    <!-- begin dialog -->
+            <div id="modal-dialog" class="js-dialog modal fade in" style="display: none;"></div>
+    <!-- end dialog -->
         </div>
-    </div>
-</div>
-
-<!-- 数据表格模板 -->
-<script id="tpl-tbody" type="x-tmpl-mustache">
-    {{#data}}
-    <tr>
-        <td>{{userName}}</td>
-        <td>{{telephone}}</td>
-        <td>{{sex}}</td>
-        <td>{{address}}</td>
-        <td>{{createTime}}</td>
-        <td>
-            <a href="ticket.html?telephone={{telephone}}">
-                <span class="btn btn-sm btn-success">
-                    <i class="fa fa-edit text-edit"></i>票务
-                </span>
-            </a>
-            <a href="reservation.html?telephone={{telephone}}">
-                <span class="btn btn-sm btn-success">
-                    <i class="fa fa-edit text-edit"></i>预约
-                </span>
-            </a>
-            <a href="">
-                <span class="btn btn-sm btn-success">
-                    <i class="fa fa-edit text-edit"></i>财务
-                </span>
-            </a>
-        </td>
-    </tr>
-    {{/data}}
-</script>
-
-                </div><!-- Row -->
-            </div><!-- Main Wrapper -->
-        </div><!-- Page Inner -->
     </main><!-- Page Content -->
     <div class="cd-overlay"></div>
 
+    <!-- 数据表格模板 -->
+    <script id="tpl-tbody" type="x-tmpl-mustache">
+        {{#data}}
+        <tr data-id="{{mapID}}">
+            <td class="js-td-name limit-width" data-key="{{name}}">{{title}}</td>
+            <td class="js-td-content limit-width">{{{content}}}</td>
+            <td>{{lastRevision}}</td>
+            <td>
+                <a href="#modal-dialog" data-toggle="modal">
+                    <span class="js-edit label label-danger" title="编辑"><i class="fa fa-trash-o text-edit"></i>编辑</span>
+                </a>
+            </td>
+        </tr>
+        {{/data}}
+    </script>
 
-    <script data-main="js/boot.js" data-start="js/biz/user.js" src="js/libs/require.min.js"></script>
+    <!-- 编辑弹框区域：弹框内容模板 -->
+    <script id="tpl-edit-dialog" type="x-tmpl-mustache">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="alert alert-message alert-dismissable" style="display:none;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <span></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">名称 <i class="form-required">*</i></label>
+                                <div class="col-md-10">
+                                    <span class="input-span">{{title}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">值 <i class="form-required">*</i></label>
+                                <div class="col-md-10">
+                                    <input type="text" class="js-input js-new-content form-control" placeholder="" value="{{content}}">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
+                    <a href="javascript:;" class="js-save btn btn-sm btn-success" data-key="{{name}}">保存</a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script data-main="js/boot.js" data-start="js/biz/config.js" src="js/libs/require.min.js"></script>
     
 </body>
 </html>

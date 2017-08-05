@@ -21,7 +21,7 @@ define(['url','helper'], function(url,helper) {
             if(res.data != null) {
                 $('.sign-in').html('<div class="fl"><span>姓名：' + res.data.userName + '</span><span>会员级别：初级飞行员</spam></div>')
             }else{
-                $('.sign-in').html('<button class="js-login">登录</button><button class="js-register">注册</button>');
+                $('.sign-in').html('<button class="js-login">登录</button> <button class="js-register">注册</button>');
             }
         })
     }

@@ -7,11 +7,9 @@ define(['url', 'helper'], function (url, helper) {
         $('.js-buy-ticket').on('click', buyTicket);
         $('.js-notes-open').on('click', openNote);
         $('.js-notes-close').on('click', closeNote);
+        $('.js-confirm').on('click',closePay)
     }
 
-    function getUrlParams() {
-        ticketType = helper.getQueryStr('ticketType');
-    }
 
     function checkTicketType(e) {
         $('.js-ticket-type').removeClass('current');
@@ -27,19 +25,23 @@ define(['url', 'helper'], function (url, helper) {
                 $('.js-single-price').text(data.single);
                 $('.js-group-price').text(data.group); 
             }
+            
         });
     }
 
     function buyTicket() {
         var needRefundInsurance = $('.js-switch-refundInsurance').is(':checked');
-
+        ticketType = $('current').data('type')
         var params = {
-            'ticketType': ticketType,
+            'ticketType': parseInt(ticketType),
             'needRefundInsurance': needRefundInsurance
         };
 
         helper.ajax(url.buyTicket, params, function(res) {
-            //服务端返回二维码，用于微信端操作
+            var data = res.data;
+            if(res.code == 0) {
+                $('.js-pay').show().find('img').attr('scr',data.qrcode);
+            }
         });
     }
 
@@ -50,11 +52,13 @@ define(['url', 'helper'], function (url, helper) {
     function closeNote() {
         $('.js-notes').hide();
     }
+    function closePay() {
+        $('.js-pay').hide();
+    }
 
     return {
         init: function () {
           bindActions();
-          getUrlParams();
           getTicketPrice();
         }
     }
