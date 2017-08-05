@@ -74,7 +74,7 @@
 		                    <p class="rsv-tip">当前时段还可预约<span class="js-bookable-num"></span>人</p>
 						</div>
 		                
-		                <a class="rsv-disclaimer" href="/Disclaimer.html">免责协议</a>
+		                <a class="js-open-disclaimer rsv-disclaimer" style="cursor: pointer;">免责协议</a>
 		                <div class="rsv-agree">
 		                    <input class="js-disclaimer" type="checkbox" checked="checked"> 我已阅读并同意免责协议
 		                </div>
@@ -122,6 +122,21 @@
 	        </div>
 	    </div>
 
+	    <!-- 免责协议弹框 -->
+		<div class="js-disclaimer-wrapper popup">
+	        <div class="pop-mask"></div>
+	        <div class="pop-main" style="width: 45%;">
+	            <p class="cen">
+	            	1、免责协议免责协议免责协议免责协议免责协议免责协议<br>
+		            2、免责协议免责协议免责协议免责协议免责协议免责协议<br>
+		            3、免责协议免责协议免责协议免责协议免责协议免责协议<br>
+		            4、免责协议免责协议免责协议免责协议免责协议免责协议<br>
+	            </p>
+	            <button class="js-confirm confirm-btn">确认</button>
+	            <div class="js-confirm close"></div>
+	        </div>
+	    </div>
+
 	    <!-- 时间段模板 -->
 	    <script type="text/template" id="timeTmpl">
 	    {{#timeList}}
@@ -130,7 +145,7 @@
 	    </script>
 
 		<!-- Swiper JS -->
-	    <script src="js/swiper.min.js"></script>
+	    <script src="js/libs/swiper.min.js"></script>
 
 	    <!-- Initialize Swiper -->
 	    <script>

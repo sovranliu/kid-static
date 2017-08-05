@@ -680,6 +680,10 @@
     font-weight: bold;
 }
 
+.rsv-timeframe {
+    display: flex;
+}
+
 .rsv-disclaimer {
     margin: 10px 0;
     font-size: 13px;

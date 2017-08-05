@@ -52,7 +52,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     function getBookingList() {
         var params = buildSearchParams();
 
-        helper.ajax(url.getBookingList, params, function(data) {
+        helper.ajax(url.getBookingList, params, function(res) {
+            var data = res.data;
+            
             if (data.length == 0) {
                 $('.js-tbody').html('<p class="dataNull">还没有预约信息</p>');
             } else {

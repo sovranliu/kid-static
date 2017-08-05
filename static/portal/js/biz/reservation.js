@@ -4,10 +4,12 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
 
     function bindActions() {
         $('.js-time-list').on('click', '.js-select-time', selectTime);
-        //$('.js-year').on('click', changeYear);
-        //$('.js-month').on('click', changeMonth)
+        $('.js-year').on('change', getBookingTime);
+        $('.js-month').on('change', getBookingTime);
+        $('.js-day').on('change', getBookingTime);
         $('.js-submit').on('click', submitBooking);
         $('.js-confirm').on('click', hidePopup);
+        $('.js-open-disclaimer').on('click', openDisclaimer);
     }
 
     //获取url参数
@@ -35,7 +37,8 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
 
         helper.ajax(url.getBookingTime, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
+            
+            if (res.code == 0) {
                 if (data.length == 0) {
                     $('.js-time-list').html('<p class="dataNull">您选择的日期不可预约，请重新选择。</p>');
                 } else {
@@ -108,9 +111,10 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
         };
 
         helper.ajax(url.submitBooking, params, function(res) {
-            if(res.code == 0) {
+            if (res.code == 0) {
                 showPopup(1);
-                //showPopup(2); //预约满
+            } else {
+                showPopup(2); //预约满 todo
             }
         });
     }
@@ -138,8 +142,12 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
     }
 
     //关闭弹框
-    function hidePopup() {
-        $('.js-result-wrapper').hide();
+    function hidePopup(e) {
+        $(e.currentTarget).closest('.popup').hide();
+    }
+
+    function openDisclaimer() {
+        $('.js-disclaimer-wrapper').show();
     }
 
     return {
