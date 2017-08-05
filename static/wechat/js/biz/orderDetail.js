@@ -31,7 +31,7 @@ define(['url', 'helper'], function (url, helper) {
     /*
     1，检查url是否有type参数，不存在就弹错，流程结束
     2，检查url是否有mobileno和openid，有一个没有就调prepayaction
-    3，两个都有，则调payinfo，入参url上拿手机号，返回渲染数据
+    3，两个都有，则调payinfo，入参url上拿手机号和openid，返回渲染数据
     4，点支付，调支付接口
     */
     function checkType() {

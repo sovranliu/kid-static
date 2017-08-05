@@ -1,6 +1,6 @@
 define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
-    var serialNumber,openId,mobileNo;
+    var openId, mobileNo;
 
     function bindActions() {
         $('.js-tab-item').on('click', switchTab);
@@ -11,17 +11,16 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     }
 
     function getUrlParams() {
-        serialNumber = helper.getQueryStr('serialNumber');
         openId =  helper.getQueryStr('openId');
         mobileNo = helper.getQueryStr('mobileNo');
     }
 
     function checkPhone() {
-        if(!mobileNo || !openId) {
+        if (!mobileNo || !openId) {
             helper.ajax(url.prepayAction,{},function() {})
-        }else{
-            helper.ajax(url.payInfo,{"mobileNo":mobileNo,"openId":openId},function() {
-                if(res.code == 0) {
+        } else {
+            helper.ajax(url.payInfo, {"mobileNo":mobileNo, "openId":openId}, function() {
+                if (res.code == 0) {
                     var data = res.data;
                     $('.js-name').text(data.user.userName);
                     $('.js-phone').text(data.user.mobileNo);
@@ -47,7 +46,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         };
 
         helper.ajax(url.getFlightDiary, params, function(res) {
-            if(res.code == 0) {
+            if (res.code == 0) {
                 var data = res.data;
                 var $dqVideoItem;
                 var $ygVideoItem;
@@ -108,7 +107,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         helper.ajax(url.buyTicket, params, function(res) {
             if (res.code == 0) {
                 if (typeof WeixinJSBridge == "undefined") {
-                   if ( document.addEventListener ) {
+                   if (document.addEventListener) {
                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
                    } else if (document.attachEvent) {
                        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
@@ -123,6 +122,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
     function onBridgeReady(res){
         var data = res.data;
+
         WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
                "appId":data.appId,     //公众号名称，由商户传入     
@@ -133,9 +133,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                "paySign":data.signature//微信签名 
            },
            function(res){     
-               if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+               if (res.err_msg == "get_brand_wcpay_request:ok") {
                     window.location.href = "PayResult.html";
-               }else{
+               } else {
                     $('popup').show().find('p').html(res.msg)
                }
            }
@@ -144,6 +144,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     return {
         init: function () {
           bindActions();
+          checkPhone();
           getUrlParams();
           getFlightDiary();
         }
