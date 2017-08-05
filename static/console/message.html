@@ -116,110 +116,110 @@
         </div><!-- Page Sidebar -->
         <div class="page-inner">
             <div class="page-title">
-                <h3>会员管理</h3>
+                <h3>留言回复</h3>
             </div>
             <div id="main-wrapper">
                 <div class="row">
+                    <div class="col-md-12 ui-sortable">
+                        <div class="panel panel-inverse">
+                            <div class="panel-body">
+                                <div class="table-responsive">
 
+                                    <div class="panel-body search-body">
+                                        <div class="form-inline">
+                                            <div class="form-group m-r-10">
+                                                <label class="control-label">手机号：</label>
+                                                <input type="text" class="js-filter-input js-phone form-control" placeholder="请输入手机号">
+                                            </div>
+                                            <div class="form-group m-r-10">
+                                                <label class="control-label">留言时间：</label>
+                                                <input type="text" class="js-filter-input js-begin-time form-control" placeholder="请输入起始时间">
+                                            </div>
+                                            <div class="form-group m-r-10">
+                                                <label class="control-label">结束时间：</label>
+                                                <input type="text" class="js-filter-input js-end-time form-control" placeholder="请输入结束时间">
+                                            </div>
+                                            <button class="js-search btn btn-sm btn-success m-r-5">查询</button>
+                                            <button class="js-reset btn btn-sm btn-default">重置</button>
+                                        </div>
+                                    </div>
 
-<div class="col-md-12 ui-sortable">
-    <div class="panel panel-inverse">
-        <div class="panel-body">
-            <div class="table-responsive">
-                <!-- begin serach -->
-                <div class="panel-body search-body">
-                    <div class="form-inline">
-                        <div class="form-group m-r-10">
-                            <label class="control-label">手机号：</label>
-                            <input type="text" class="js-filter-input js-filter-phone form-control" placeholder="请输入手机号">
+                                    <table class="js-table table table-striped table-bordered">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>手机号</th>
+                                                <th>留言内容</th>
+                                                <th>回复内容</th>
+                                                <th>留言时间</th>
+                                                <th>回复时间</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="js-tbody"></tbody>
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group m-r-10">
-                            <label class="control-label">会员姓名：</label>
-                            <input type="text" class="js-filter-input js-filter-username form-control" placeholder="请输入会员姓名">
-                        </div>
-                        <button class="js-search btn btn-sm btn-success m-r-5">查询</button>
-                        <button class="js-reset btn btn-sm btn-default">重置</button>
                     </div>
                 </div>
-                <!-- end serach -->
-
-                <!-- begin table -->
-                <div class="pull-right mrgb15">
-                    <a href="#modal-dialog" class="js-add btn btn-sm btn-success" data-toggle="modal">新增</a>
-                </div>
-                <table class="js-table table table-striped table-bordered">
-                    <thead>
-                        <tr role="row">
-                            <th>姓名</th>
-                            <th>性别</th>
-                            <th>手机号码</th>
-                            <th>地址</th>
-                            <th>注册时间</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody class="js-tbody"></tbody>
-                </table>
-                <!-- end table -->
-
-                <!-- begin paginator -->
-                <div id="data-table_paginate" class="js-tpage pull-right dataTables_paginate paging_simple_numbers">
-                    <a id="data-table_previous" aria-controls="data-table" class="paginate_button previous disabled">上一页</a>
-                    <span></span>
-                    <a id="data-table_next" aria-controls="data-table" class="paginate_button next">下一页</a>
-                </div>
-                <!-- begin paginator -->
             </div>
+    <!-- begin dialog -->
+            <div id="modal-dialog" class="js-dialog modal fade in" style="display: none;"></div>
+    <!-- end dialog -->
         </div>
-    </div>
-</div>
-
-<!-- 数据表格模板 -->
-<script id="tpl-tbody" type="x-tmpl-mustache">
-    {{#data}}
-    <tr>
-        <td>{{userName}}</td>
-        <td>{{telephone}}</td>
-        <td>{{sex}}</td>
-        <td>{{address}}</td>
-        <td>{{createTime}}</td>
-        <td>
-            <a href="ticket.html?phone={{telephone}}">
-                <span class="btn btn-sm btn-success">
-                    <i class="fa fa-edit text-edit"></i>票务
-                </span>
-            </a>
-            <a href="reservation.html?phone={{telephone}}">
-                <span class="btn btn-sm btn-success">
-                    <i class="fa fa-edit text-edit"></i>预约
-                </span>
-            </a>
-            <a href="">
-                <span class="btn btn-sm btn-success">
-                    <i class="fa fa-edit text-edit"></i>财务
-                </span>
-            </a>
-        </td>
-    </tr>
-    {{/data}}
-</script>
-
-
-                </div><!-- Row -->
-            </div><!-- Main Wrapper -->
-        </div><!-- Page Inner -->
     </main><!-- Page Content -->
     <div class="cd-overlay"></div>
 
-
-    <!-- 时间段模板 -->
-    <script type="text/template" id="timeTmpl">
-    <!--{{#timeList}}
-        <li class="js-select-time rsv-li-item"><span>{{start}}-{{end}}</span></li>
-    {{/timeList}}-->
+    <!-- 数据表格模板 -->
+    <script id="tpl-tbody" type="x-tmpl-mustache">
+        {{#data}}
+        <tr data-id="{{id}}">
+            <td class="js-td-phone limit-width">{{mobileNo}}</td>
+            <td class="js-td-message limit-width">{{message}}</td>
+            <td class="js-td-reply limit-width">{{reply}}</td>
+            <td class="js-td-beginTime limit-width">{{beginDate}}</td>
+            <td class="js-td-endTime limit-width">{{endDate}}</td>
+            <td>
+                {{^reply}}
+                <a href="#modal-dialog" data-toggle="modal">
+                    <span class="js-edit label label-success" title="编辑"><i class="fa fa-edit text-edit"></i> 回复</span>
+                </a>
+                {{/reply}}
+            </td>
+        </tr>
+        {{/data}}
     </script>
 
-    <script data-main="js/boot.js" data-start="js/biz/user.js" src="js/libs/require.min.js"></script>
+    <!-- 编辑弹框区域：弹框内容模板 -->
+    <script id="tpl-edit-dialog" type="x-tmpl-mustache">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">回复内容<i class="form-required">*</i></label>
+                                <div class="col-md-10">
+                                    <textarea class="js-reply form-control" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
+                    <a href="javascript:;" class="js-save btn btn-sm btn-success" data-id="{{id}}">保存</a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script data-main="js/boot.js" data-start="js/biz/message.js" src="js/libs/require.min.js"></script>
     
 </body>
 </html>

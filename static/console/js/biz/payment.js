@@ -1,6 +1,7 @@
 define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
     var serialNumber;
+    var begin = 0;
 
     function bindActions() {
         $('.js-search').on('click',getOrderData);
@@ -15,7 +16,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         params['endTime'] = $.trim($('.js-end-time').val());
         params['status'] = parseInt($('.js-status').val()) || "";
         params['size'] = 10;
-        params['begin'] = 0;
+        params['begin'] = begin;
 
         return params;
    }
