@@ -182,11 +182,13 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
 
         if(_checkMobileNumber(tel)) {
             helper.ajax(url.giveTicket, params, function(res) {
+                $('.send-message').hide();
+                $('.send-message-result').show();
+
                 if(res.code == 0) {
-                    //todo 对方非会员的处理
-                    $('.send-message').hide();
-                    $('.send-message-result').show();
                     $('.js-send-message-result').html('您的票券已成功送出，请对方至会员中心的预约飞行中，查看并使用他的票券。');
+                } else {
+                    $('.js-send-message-result').html('被赠送者还不是会员，请通知对方先注册成为会员，才能成功接收该票券。如24小时内对方未完成注册，票券将返还到您的帐号。');
                 }
             });
         }
@@ -215,7 +217,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
     
     return {
         init: function() {
-            handshake.init();
+            //handshake.init();
             bindActions();
             _changeTabs();
             _getTicketData();
