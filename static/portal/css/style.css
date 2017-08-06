@@ -692,6 +692,11 @@
     display: flex;
 }
 
+.rsv-ul-list {
+    display: block;
+    width: 100%;
+}
+
 .rsv-disclaimer {
     margin: 10px 0;
     font-size: 13px;
@@ -1119,4 +1124,8 @@
 .qrcode-img{
     width: 300px;
     height: 300px;
+}
+.dataNull {
+    text-align: center!important;
+    font-size: 18px!important;
 }
