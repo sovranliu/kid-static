@@ -131,6 +131,11 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             return;
         }
 
+        if(!serialNumber) {
+            showPopup(5);
+            return;
+        }
+
         if (!agreeDisclaimer) {
             showPopup(3);
             return;
@@ -174,8 +179,10 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                 break; 
             case 4:
                 $resText.html('请选择有效预约时间段');
+                break;
             case 5:
                 $resText.html('请选择您要预约的飞行票');
+                break;
         }
     }
 
