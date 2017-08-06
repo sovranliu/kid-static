@@ -157,6 +157,7 @@ define(['url', 'helper'], function (url, helper) {
             "openId":openId
         };
 
+        debugger;
         helper.ajax(url.buyTicket, params, function(res) {
             var data = res.data;
 
