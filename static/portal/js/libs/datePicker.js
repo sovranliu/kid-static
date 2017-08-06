@@ -46,7 +46,7 @@
         for (var i = 1; i <= 12; i++) {
             //if ((DefaultYearRel != Number($YearSelector.val())) || i >= DefaultMonthRel ) {
               var sed = monthSel==i?"selected":""; 
-              var monthStr = "<option value=\"" + i + "\" "+sed+">"+i+"</option>"; 
+              var monthStr = "<option value=\"" + i + "\" "+sed+">"+ (i.toString().length < 2 ? "0" + i : i) +"</option>"; 
               $MonthSelector.append(monthStr); 
             //} 
         } 
@@ -93,7 +93,7 @@
                 var daySel = $DaySelector.attr("rel") || DefaultDayRel; 
                 for (var i = 1; i <= dayCount; i++) { 
                     var sed = daySel==i?"selected":""; 
-                    var dayStr = "<option value=\"" + i + "\" "+sed+">" + i + "</option>"; 
+                    var dayStr = "<option value=\"" + i + "\" "+sed+">" + (i.toString().length < 2 ? "0" + i : i) + "</option>"; 
                     $DaySelector.append(dayStr); 
                  } 
              } 

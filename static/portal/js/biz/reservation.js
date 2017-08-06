@@ -30,16 +30,16 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
     //获取可预约时间段
     function getBookingTime() {
         var params = {
-            'year': $('.js-year').val(),
-            'month': $('.js-month').val(),
-            'day': $('.js-day').val()
+            'year': $('.js-year option:selected').text(),
+            'month': $('.js-month option:selected').text(),
+            'day': $('.js-day option:selected').text()
         };
 
         helper.ajax(url.getBookingTime, params, function(res) {
             var data = res.data;
             
             if (res.code >= 0) {
-                if (data.length == 0) {
+                if (!data || data.length == 0) {
                     $('.js-time-list').html('<p class="dataNull">您选择的日期不可预约，请重新选择。</p>');
                 } else {
                     $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': data }));

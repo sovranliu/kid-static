@@ -129,9 +129,9 @@ define(['url', 'helper'], function (url, helper) {
     function calculateTotal() {
         var ticketNum = ticketType == '1' ? 1 : Number($('.js-current-num').val());
         var refundInsurance = ticketType == '1' ? Number($('.js-refundInsurance').text()) : 0;
-        var total = ticketPrice * ticketNum + refundInsurance;
+        var total = Number(ticketPrice * ticketNum + refundInsurance);
 
-        $('.js-price').text(total);
+        $('.js-price').text(!isNaN(total) ? total : '' );
     }
 
     function buyTicket() {

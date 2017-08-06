@@ -485,6 +485,9 @@
 	margin: 20px auto;
 	padding-left: 35px;
 }
+.yh-bt-tn a {
+    color: #000;
+}
 .yh-bt-box{
 	width: 572px;
 	margin: auto;
@@ -687,6 +690,11 @@
 
 .rsv-timeframe {
     display: flex;
+}
+
+.rsv-ul-list {
+    display: block;
+    width: 100%;
 }
 
 .rsv-disclaimer {
@@ -1120,4 +1128,8 @@
 .yh-bt-con .confirm-btn{
     margin: 20px 40%;
     display: inline-block;
+}
+.dataNull {
+    text-align: center!important;
+    font-size: 18px!important;
 }
