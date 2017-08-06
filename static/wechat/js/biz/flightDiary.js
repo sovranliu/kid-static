@@ -17,7 +17,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
     function checkPhone() {
         if (!mobileNo || !openId) {
-            helper.ajax(url.prepayAction,{},function() {})
+            helper.ajax(url.prepay,{},function() {})
         } else {
             helper.ajax(url.payInfo, {"mobileNo":mobileNo, "openId":openId}, function() {
                 if (res.code >= 0) {
