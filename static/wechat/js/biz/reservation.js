@@ -122,9 +122,9 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         var agreeDisclaimer = $('.js-disclaimer').is(':checked');
         var $activeTime = $('.js-select-time.current');
         var activeTime = $activeTime.text() ? $activeTime.text().split('-') : [];
-        var year = $('.js-year').val();
-        var month = $('.js-month').val();
-        var day = $('.js-day').val();
+        var year = $('.js-year option:selected').text();
+        var month = $('.js-month option:selected').text();
+        var day = $('.js-day option:selected').text();
 
         if (activeTime.length < 2) {
             showPopup(4);
@@ -141,6 +141,9 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             return;
         }
 
+        month = month.length < 2 ? "0" + month : month;
+        day = day.length < 2 ? "0" + day : day;
+
         var params = {
             'type': optType,
             'serialNumber': serialNumber,
@@ -155,7 +158,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             if (res.code >= 0) {
                 showPopup(1);
             } else {
-                showPopup(2); //预约满  todo 依赖后端信息
+                showPopup(2); //预约满
             }
         });
     }
