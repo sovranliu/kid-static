@@ -56,7 +56,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
                                 data[i].statusStyle = "";
                                 data[i].operate = true;
                                 //团体票可赠送
-                                if (data[i].type == 0) {
+                                if (data[i].type == 0 && data[i].isGive) {
                                     data[i].gift  = true;
                                 } else {
                                 //单人票可退款
@@ -160,7 +160,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
 
         helper.ajax(url.postRevoke, params, function(res) {
             if(res.code >= 0) {
-                $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
+                $('.revoke-popup').find('p').html('撤销成功，请等待管理员审核。');
                 $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
             }
         })

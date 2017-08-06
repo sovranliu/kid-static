@@ -6,7 +6,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         $('.book-list').on('click','.js-revoke',_openRevoke);
         $('.ticket-list').on('click', '.js-give', _openGiveShare);
         $('.ticket-list').on('click','.js-return',_openRefund);
-        $('.js-submit-refund').on('click',_postRufund)
+        $('.js-submit-refund').on('click',_postRufund);
         $('.js-submit').on('click',_postRevoke);
         $('.js-ticket-share').on('click', _shareTicket);
         $('.js-send-message').on('click', _sendMessage);
@@ -60,7 +60,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                                 res[i].statusStyle = "";
                                 res[i].operate = true;
                                 //团体票可赠送
-                                if (res[i].type == 0) {
+                                if (res[i].type == 0 && res[i].isGive) {
                                     res[i].gift  = true;
                                 } else {
                                 //单人票可退款
@@ -165,7 +165,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
         helper.ajax(url.postRevoke, params, function(res) {
             if(res.code >= 0) {
-                $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
+                $('.revoke-popup').find('p').html('撤销成功，请等待管理员审核。');
                 $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
             }
         })
@@ -215,6 +215,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                 $popup.find('.confirm-btn').removeClass('js-submit-refund').addClass('js-confirm');
             }
         });
+        $(this).off('click',_postRufund)
     }
 
     function _confirmMessgeResult() {
