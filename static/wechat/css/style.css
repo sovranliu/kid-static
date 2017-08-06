@@ -735,6 +735,7 @@ a,div,img {
     left: 0;
     opacity: 0;
     filter: alpha(opacity: 0;);
+    border-radius: 0!important;
 }
 
 .rsv-date-item select option {
