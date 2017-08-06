@@ -1,5 +1,5 @@
 define(['url','helper'], function(url,helper) {
-    
+    var checkLogin;
     var _qrcodepopup = '<div class="js-qrcode-popup popup">' 
             		 + '<div class="pop-mask"></div>'
            			 + '<div class="pop-con">'
@@ -13,6 +13,7 @@ define(['url','helper'], function(url,helper) {
     	$('.sign-in').on('click','.js-login',_getLogin);
     	$('body').on('click','.js-confirm',function() {
     		$('.js-qrcode-popup').hide();
+            clearInterval(checkLogin);
     	})
     }
     //判断是不是首页
@@ -51,7 +52,7 @@ define(['url','helper'], function(url,helper) {
             if(res.code >= 0) {
                 $('body').append(_qrcodepopup);
                 $('.js-qrcode-popup').show().find('img').attr('src',res.data.qrcode);
-                setInterval(function() {
+                checkLogin = setInterval(function() {
                     _checkLogin(res.data.code)
                 },2000);
             }
