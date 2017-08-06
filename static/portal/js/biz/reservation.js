@@ -1,6 +1,6 @@
 define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, mustache, datePicker) {
 
-    var serialNumber;
+    var serialNumber, optType;
 
     function bindActions() {
         $('.js-time-list').on('click', '.js-select-time', selectTime);
@@ -14,7 +14,8 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
 
     //获取url参数
     function getUrlParams() {
-        serialNumber = helper.getQueryStr('serialNumber');
+        serialNumber = helper.getQueryStr('ticketId');
+        optType = helper.getQueryStr('type');
     }
 
     //初始化年月日选择框
@@ -116,7 +117,11 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
             return;
         }
 
+        month = month.length < 2 ? "0" + month : month;
+        day = day.length < 2 ? "0" + day : day;
+
         var params = {
+            'type': optType || '0',
             'serialNumber': serialNumber,
             'year': year,
             'month': month,
@@ -124,9 +129,6 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
             'start': activeTime[0],
             'end': activeTime[1]
         };
-
-        month = month.length < 2 ? "0" + month : month;
-        day = day.length < 2 ? "0" + day : day;
 
         helper.ajax(url.submitBooking, params, function(res) {
             if (res.code >= 0) {

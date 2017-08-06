@@ -145,7 +145,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         day = day.length < 2 ? "0" + day : day;
 
         var params = {
-            'type': optType,
+            'type': optType || '0',
             'serialNumber': serialNumber,
             'year': year,
             'month': month,
