@@ -43,7 +43,6 @@ define(['url', 'helper'], function (url, helper) {
     }
 
     function checkPhone() {
-        debugger
         if(!mobileNo || !openId) {
             helper.ajax(url.prepayAction,{},function() {})
         }else{
