@@ -36,6 +36,9 @@ define([], function() {
         postRegister: _basePath + 'postRegister',
         //支付页面相关
         prepayAction: _basePath + 'prepay',
-        payInfo: _basePath + 'payInfo'
+        payInfo: _basePath + 'payInfo',
+        //分享
+        getShareConfig: _basePath + 'getShareConfig',
+        receiveTicket: _basePath + 'receiveTicket'
     };
 });
