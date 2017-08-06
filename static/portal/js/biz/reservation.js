@@ -117,6 +117,9 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
             return;
         }
 
+        month = month.length < 2 ? "0" + month : month;
+        day = day.length < 2 ? "0" + day : day;
+
         var params = {
             'type': optType || '0',
             'serialNumber': serialNumber,
@@ -126,9 +129,6 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
             'start': activeTime[0],
             'end': activeTime[1]
         };
-
-        month = month.length < 2 ? "0" + month : month;
-        day = day.length < 2 ? "0" + day : day;
 
         helper.ajax(url.submitBooking, params, function(res) {
             if (res.code >= 0) {
