@@ -14,7 +14,7 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
 
     //获取url参数
     function getUrlParams() {
-        serialNumber = helper.getQueryStr('serialNumber');
+        serialNumber = helper.getQueryStr('ticketId');
     }
 
     //初始化年月日选择框
