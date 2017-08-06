@@ -37,16 +37,25 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         var $dateInput = $dateItem.find('.js-date-text');
         var selectedVal = $dateItem.find('select').val();
 
+        selectedVal = selectedVal.toString().length < 2 ? "0" + selectedVal : selectedVal;
+
         $dateInput.text(selectedVal);
         getBookingTime();
     }
 
     //获取可预约时间段
     function getBookingTime() {
+        var year = $('.js-year option:selected').text();
+        var month = $('.js-month option:selected').text();
+        var day = $('.js-day option:selected').text();
+
+        month = month.length < 2 ? "0" + month : month;
+        day = day.length < 2 ? "0" + day : day;
+
         var params = {
-            'year': $('.js-year option:selected').text(),
-            'month': $('.js-month option:selected').text(),
-            'day': $('.js-day option:selected').text()
+            'year': year,
+            'month': month,
+            'day': day
         };
 
         helper.ajax(url.getBookingTime, params, function(res) {
@@ -69,9 +78,9 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
     function selectTime(e) {
         var $activeTime = $(e.currentTarget);
         var activeTime = $activeTime.text() ? $activeTime.text().split('-') : [];
-        var year = $('.js-year').val();
-        var month = $('.js-month').val();
-        var day = $('.js-day').val();
+        var year = $('.js-year option:selected').text();
+        var month = $('.js-month option:selected').text();
+        var day = $('.js-day option:selected').text();
         var params = {};
 
         if (activeTime.length < 2) {
@@ -79,8 +88,16 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             return;
         }
 
+        if(!serialNumber) {
+            showPopup(5);
+            return;
+        }
+
         $('.js-select-time').removeClass('current');
         $activeTime.addClass('current');
+
+        month = month.length < 2 ? "0" + month : month;
+        day = day.length < 2 ? "0" + day : day;
 
         params = {
             'serialNumber': serialNumber,
@@ -147,7 +164,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
 
         switch(type) {
             case 1:
-                $resText.html('您已成功预约改时段，请提前1小时抵达现场，进行飞行前的培训。如需调整行程，请拨打电话<i>021-57127021</i>咨询。');
+                $resText.html('您已成功预约该时段，请提前1小时抵达现场，进行飞行前的培训。如需调整行程，请拨打电话<i>021-57127021</i>咨询。');
                 break;
             case 2:
                 $resText.html('非常抱歉，该时段已约满，请重新选择，谢谢。');
@@ -157,6 +174,8 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                 break; 
             case 4:
                 $resText.html('请选择有效预约时间段');
+            case 5:
+                $resText.html('请选择您要预约的飞行票');
         }
     }
 
