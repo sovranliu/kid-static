@@ -40,6 +40,7 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
             if(res.code >= 0) {
                 //todo 弹层提示成功
                 alert('修改成功');
+                window.location.href = 'MemberCenter.html';
             }else{
                 alert('修改失败')
             }

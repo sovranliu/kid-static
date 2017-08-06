@@ -9,7 +9,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
 
     //提交会员权益确认
     function _postBenefitData() {
-        window.history.go(-1);
+        window.history.href = "MemberCenter.html";
     }
 
     return {
