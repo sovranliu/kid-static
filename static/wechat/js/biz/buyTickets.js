@@ -7,8 +7,8 @@ define(['url', 'helper','handshake'], function (url, helper,handshake) {
             var data = res.data;
 
             if (res.code >= 0) {
-                $('.js-single-price').text(data.single);
-                $('.js-group-price').text(data.group); 
+                $('.js-single-price').text(data.single / 100);
+                $('.js-group-price').text(data.group / 100); 
             }
         });
     }

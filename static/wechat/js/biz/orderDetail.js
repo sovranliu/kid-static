@@ -74,8 +74,8 @@ define(['url', 'helper'], function (url, helper) {
             var data = res.data;
 
             if (res.code >= 0) {
-                ticketPrice = ticketType == '1' ? data.single : data.group;
-                ticketRefundInsurance = data.refundInsurance;
+                ticketPrice = ticketType == '1' ? (data.single / 100) : (data.group / 100);
+                ticketRefundInsurance = data.refundInsurance / 100;
 
                 setRefundInsurance();
             } else {
