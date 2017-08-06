@@ -39,7 +39,6 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     function _getTicketData() {
         helper.ajax(url.getTickets, {}, function(data) {
             var res = data.data;
-            debugger
             if(data.code >= 0) {
                 //如果没有飞行票则引导用户去购票页面
                 if(res == null || res.length == 0) {

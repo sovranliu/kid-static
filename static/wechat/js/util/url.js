@@ -35,7 +35,7 @@ define([], function() {
         handshake:_basePath + 'handshake',
         postRegister: _basePath + 'postRegister',
         //支付页面相关
-        prepayAction: _basePath + 'prepayAction',
+        prepayAction: _basePath + 'prepay',
         payInfo: _basePath + 'payInfo'
     };
 });
