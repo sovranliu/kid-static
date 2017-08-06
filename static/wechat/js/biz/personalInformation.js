@@ -35,10 +35,10 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
         params.address = $.trim($('.js-address').val());
         params.sex = sex;
 
+
         helper.ajax(url.postUserInfo,params,function (res) {
             var data = res.data;
             if(res.code >= 0) {
-                //todo 弹层提示成功
                 alert('修改成功');
                 window.location.href = 'MemberCenter.html';
             }else{
