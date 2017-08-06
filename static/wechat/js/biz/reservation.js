@@ -4,9 +4,9 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
 
     function bindActions() {
         $('.js-time-list').on('click', '.js-select-time', selectTime);
-        $('.js-year').on('change', getBookingTime);
-        $('.js-month').on('change', getBookingTime);
-        $('.js-day').on('change', getBookingTime);
+        $('.js-year').on('change', changeDate);
+        $('.js-month').on('change', changeDate);
+        $('.js-day').on('change', changeDate);
         $('.js-submit').on('click', submitBooking);
         $('.js-confirm').on('click', hidePopup);
     }
@@ -25,6 +25,16 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             DaySelector: ".js-day",
             ShowDefaultText: false
         });
+    }
+
+    //切换日期选择
+    function changeDate(e) {
+        var $dateItem = $(e.currentTarget).closest('.js-date-item');
+        var $dateInput = $dateItem.find('.js-date-text');
+        var selectedVal = $dateItem.find('select').val();
+
+        $dateInput.text(selectedVal);
+        getBookingTime();
     }
 
     //获取可预约时间段
