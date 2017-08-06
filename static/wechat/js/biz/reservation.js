@@ -25,6 +25,10 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             DaySelector: ".js-day",
             ShowDefaultText: false
         });
+
+        $('.js-year-text').text($('.js-year option:selected').text());
+        $('.js-month-text').text($('.js-month option:selected').text());
+        $('.js-day-text').text($('.js-day option:selected').text());
     }
 
     //切换日期选择
