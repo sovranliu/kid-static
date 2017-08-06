@@ -27,7 +27,27 @@
         <dl class="table-main">
             <dd style="display:block">
                 <a href="BuyTickets.html" class="large-btn">购票</a>
-                <ul class="ticket-list voucher-list"></ul>
+                <ul class="ticket-list voucher-list">
+                    <li class="voucher-item" data-id="3214324">
+                        <div class="num">
+                            <span>票流水号：3214324</span>
+                        </div>
+                        <div class="cont">
+                            <div class="lcon">
+                                <p class="p-class">订单性质：单人票</p>
+                                <p class="p-day">有效期：2019-01-01</p>
+                            </div>
+                            <div class="rcon">
+                                <span class="pir">¥321</span>
+                                <span class="status">预约</span>
+                            </div>
+                        </div>
+                        <div class="oper">
+                            <button class="js-give btn-give">赠送</button>
+                            <a class="js-book" href="Reservation.html?ticketId={{3214324}}">预约</a>
+                        </div>
+                    </li>
+                </ul>
             </dd>
             <dd>
                 <ul class="book-list voucher-list"></ul>
@@ -118,5 +138,6 @@
     {{/data}}
     </script>
     <script data-main="js/boot.js" data-start="js/biz/myorder.js" src="js/libs/require.min.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </body>
 </html>
