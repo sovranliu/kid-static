@@ -9,17 +9,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
 
     //提交会员权益确认
     function _postBenefitData() {
-        var isCheck = $('.js-check').prop('checked');
-        if(isCheck) {
-            var params = {};
-            helper.ajax(url.postBenefit,params,function (res) {
-                if(res.code >= 0) {
-                    window.history.go(-1);
-                }
-            })
-        }else{
-            $('.popup').show();
-        }
+        window.history.go(-1);
     }
 
     return {
