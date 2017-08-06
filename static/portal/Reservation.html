@@ -58,6 +58,10 @@
 			<div class="yh-wid744">
 				<h2 class="yh-title">预约飞行</h2>
 				<div class="yh-cp-rsv">
+					<!--<div class="rsv-ticket">
+						<span class="rsv-text">票务</span>
+						<select class="js-rsv-ticket" rel=""></select> 
+					</div>-->
 					<div class="rsv-con">
 						<div class="bor">
 							<div class="rsv-date">
@@ -140,6 +144,13 @@
 	    {{#timeList}}
 	        <li class="js-select-time rsv-li-item"><span>{{start}}-{{end}}</span></li>
 	    {{/timeList}}
+	    </script>
+
+	    <!-- 票务模板 -->
+	    <script type="x-tmpl-mustache" id="ticketTmpl" >
+	    {{#data}}
+	        <option data-val="{{serialNumber}}">{{sno}} {{expire}}前使用</option>
+	    {{/data}}
 	    </script>
 
 		<!-- Swiper JS -->

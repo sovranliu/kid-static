@@ -69,8 +69,22 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
                 $('.js-timeDuration').html(data.timeDuration);
                 $('.js-price').html(data.canPurchasePrice);
+
+                //动态设置遮罩的宽度，高度在样式中写死200px
+                $dqVideoItem = $('.js-video-can-purchase-list .fd-video-item');
+                if ($dqVideoItem.length > 0) {
+                    dqWidth = $dqVideoItem.eq(0).width();
+                    $('.fd-dq-pop').css('width', dqWidth+'px');
+                }
+
+                $ygVideoItem = $('.js-video-has-purchase-list .fd-video-item');
+                if ($ygVideoItem.length > 0) {
+                    ygWidth = $ygVideoItem.eq(0).width();
+                    $('.fd-yg-pop').css('width', ygWidth+'px');
+                }
                 
-                var timer = setInterval(function() {
+                //动态设置遮罩的宽高
+                /*var timer = setInterval(function() {
                     if (document.getElementsByTagName("video")[0].readyState != 0) {
                         $dqVideoItem = $('.js-video-can-purchase-list .fd-video-item');
                         if ($dqVideoItem.length > 0) {
@@ -92,8 +106,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                 
                         clearInterval(timer);
                     }
-                }, 10);
-                
+                }, 10);*/
             }
         });
     }

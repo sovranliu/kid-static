@@ -7,6 +7,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         $('.js-year').on('change', changeDate);
         $('.js-month').on('change', changeDate);
         $('.js-day').on('change', changeDate);
+        $('.js-rsv-ticket').on('change', changeTicket);
         $('.js-submit').on('click', submitBooking);
         $('.js-confirm').on('click', hidePopup);
     }
@@ -41,6 +42,43 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
 
         $dateInput.text(selectedVal);
         getBookingTime();
+    }
+
+    //获取所有票券
+    function getTicketList() {
+        if (!serialNumber) {
+
+            helper.ajax(url.getTickets, {}, function(res) {
+                if (res.code >= 0) {
+                    var data = res.data;
+                    var tcList = [];
+
+                    //只显示“”状态的票券，以便预约
+                    _.each(data, function(item, i) {
+                        if (item.status == 0) {
+                            var serialNo = item.serialNumber;
+                            item.type = item.ticketType == 0 ? '团体票' : '单人票';
+                            item.sno = serialNo.replace(serialNo.substring(10, serialNo.length-5), '****');
+                            tcList.push(item);
+                        }
+                    });
+
+                    if (!data || data.length == 0) {
+                        $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': '您没有飞行票，请购买后查看'}));
+                    } else {
+                        $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': data}));
+                    }
+
+                    $('.js-ticket-text').html($('.js-rsv-ticket option:selected').text());
+
+                    changeTicket();
+                }
+            })
+        }
+    }
+
+    function changeTicket() {
+        serialNumber = $('.js-rsv-ticket option:selected').data('val');
     }
 
     //获取可预约时间段
@@ -167,12 +205,14 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
     function showPopup(type) {
         var $resWrapper = $('.js-result-wrapper');
         var $resText = $('.js-result');
+        var text = '';
         
         $resWrapper.show();
 
         switch(type) {
             case 1:
-                $resText.html('您已成功预约该时段，请提前1小时抵达现场，进行飞行前的培训。如需调整行程，请拨打电话<i>021-57127021</i>咨询。');
+                text = Number(optType) == 0 ? '您已成功预约该时段，请提前1小时抵达现场，进行飞行前的培训。如需调整行程，请拨打电话<i>021-57127021</i>咨询。' : '您已成功提交改期申请，请耐心等待管理员审核。如有任何问题，请拨打电话<i>021-57127021</i>咨询。';
+                $resText.html(text);
                 break;
             case 2:
                 $resText.html('非常抱歉，该时段已约满，请重新选择，谢谢。');
@@ -200,6 +240,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             bindActions();
             getUrlParams();
             initDateSelectbox();
+            getTicketList();
             getBookingTime();
         }
     }

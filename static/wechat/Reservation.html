@@ -21,6 +21,14 @@
         <div class="shadow">
             <div class="box">
                 <div class="rsv-con">
+                    <div class="rsv-ticket">
+                        <span class="rsv-text">票务</span>
+                        <div class="rsv-date-item">
+                            <span class="js-ticket-text cur-select"></span>
+                            <select class="js-rsv-ticket" rel=""></select> 
+                        </div>
+                    </div>
+
                     <div class="rsv-date">
 
                         <span class="rsv-text">日期</span>
@@ -69,6 +77,13 @@
     {{#timeList}}
         <li class="js-select-time rsv-li-item"><span>{{start}}-{{end}}</span></li>
     {{/timeList}}
+    </script>
+
+    <!-- 票务模板 -->
+    <script type="x-tmpl-mustache" id="ticketTmpl" >
+    {{#data}}
+        <option data-val="{{serialNumber}}">{{sno}} {{expire}}前使用</option>
+    {{/data}}
     </script>
 
     <script data-main="js/boot.js" data-start="js/biz/reservation.js" src="js/libs/require.min.js"></script>

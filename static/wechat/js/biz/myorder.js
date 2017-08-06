@@ -9,6 +9,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
         $('.js-ticket-give').on('click', _openGive);
         $('.js-ticket-share').on('click', _shareTicket);
         $('.js-send-message').on('click', _sendMessage);
+        $('.js-close').on('click', _closePopup);
         $('.js-confirm-message-result').on('click', _confirmMessgeResult);
         $('.revoke-popup').on('click','.js-confirm',function() {
             $('.revoke-popup').hide();
@@ -268,6 +269,10 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
     function _checkMobileNumber(num) {
         var reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证规则
         return reg.test(num); //true
+    }
+
+    function _closePopup() {
+        $('.give-popup').hide();
     }
     
     return {
