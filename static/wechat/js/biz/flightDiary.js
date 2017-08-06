@@ -55,13 +55,13 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                 var ygWidth = 0;
                 var ygHeight = 0;
 
-                if (data.canPurchase.length == 0) {
+                if (!data || !data.canPurchase || data.canPurchase.length == 0) {
                     $('.js-video-can-purchase-list').html('<p class="dataNull">您还没有飞行礼品</p>');
                 } else {
                     $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.canPurchase, 'isPurchased': false }));
                 }
                 
-                if (data.hasPurchased.length == 0) {
+                if (!data || !data.hasPurchased || data.hasPurchased.length == 0) {
                     $('.js-video-has-purchase-list').html('<p class="dataNull">您还没有购买飞行礼品。</p>');
                 } else {
                     $('.js-video-has-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.hasPurchased, 'isPurchased': true }));
