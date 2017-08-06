@@ -43,13 +43,14 @@ define(['url', 'helper'], function (url, helper) {
     }
 
     function checkPhone() {
+        debugger
         if(!mobileNo || !openId) {
             helper.ajax(url.prepayAction,{},function() {})
         }else{
-            helper.ajax(url.payInfo,{"mobileNo":mobileNo,"openId":openId},function() {
+            helper.ajax(url.payInfo,{"mobileNo":mobileNo,"openId":openId},function(res) {
                 if(res.code >= 0) {
                     var data = res.data;
-                    $('.js-name').text(data.user.userName);
+                    $('.js-name').text(data.user.name);
                     $('.js-phone').text(data.user.mobileNo);
                 }
             })
@@ -144,10 +145,10 @@ define(['url', 'helper'], function (url, helper) {
             insurance = 1000;
         }
         switch(ticketType) {
-            case 0:
+            case "0":
                 goodsType = 20000 + ticketNum;
                 break;
-            case 1:
+            case "1":
                 goodsType = 10000 + insurance + 1;
                 break;
         }
