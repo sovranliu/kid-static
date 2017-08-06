@@ -1,6 +1,6 @@
 define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, mustache, datePicker) {
 
-    var serialNumber;
+    var serialNumber, optType;
 
     function bindActions() {
         $('.js-time-list').on('click', '.js-select-time', selectTime);
@@ -15,6 +15,7 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
     //获取url参数
     function getUrlParams() {
         serialNumber = helper.getQueryStr('ticketId');
+        optType = helper.getQueryStr('type');
     }
 
     //初始化年月日选择框
@@ -117,6 +118,7 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
         }
 
         var params = {
+            'type': optType || '0',
             'serialNumber': serialNumber,
             'year': year,
             'month': month,
