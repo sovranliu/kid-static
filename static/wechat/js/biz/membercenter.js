@@ -23,7 +23,11 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
         $('.popup').show();
         helper.ajax(url.getMessageData,params,function (res) {
             if(res.code >= 0) {
-                $('.popup').find('p').html(res.data.content);
+                if(res.data.content != null || res.data.content != "") {
+                    $('.popup').find('p').html(res.data.content);
+                }else{
+                    $('.popup').find('p').html('暂无回复');
+                }
             }
         })
     }
