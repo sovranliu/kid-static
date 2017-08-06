@@ -28,7 +28,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     function _getUserInfo() {
         var params = {};
         helper.ajax(url.getUserInfo,params,function (res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 userInfo = res.data;
                 $('.userInfo').html('姓名：' + userInfo.userName + '   |   会员级别：初级飞行员');
             }else{
@@ -50,7 +50,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
 
         helper.ajax(url.postUserInfo,params,function (res) {
             //todo 弹层提示成功
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('.js-edit-popup').hide();
                 $('.js-confirm-popup').show().find('p').html('编辑成功。');
             }
@@ -63,7 +63,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         $('.js-confirm-popup').show();
         helper.ajax(url.getMessageData,params,function (res) {
             var data = res.data;
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('.js-confirm-popup').find('p').html(data.content);
             }
         })

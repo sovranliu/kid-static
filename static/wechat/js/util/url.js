@@ -30,8 +30,10 @@ define([], function() {
         //赠送票券
         giveTicket: _basePath + 'giveTicket',
         //登陆授权
+        getAuthorize: _basePath + "authorize",
         getVerificationCode: _basePath + 'getVerificationCode',
         handshake:_basePath + 'handshake',
+        postRegister: _basePath + 'postRegister',
         //支付页面相关
         prepayAction: _basePath + 'prepayAction',
         parInfo: _basePath + 'parInfo'

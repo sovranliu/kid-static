@@ -1,10 +1,10 @@
 define(['url','helper'], function(url,helper) {
-    
+    var checkLogin;
     var _qrcodepopup = '<div class="js-qrcode-popup popup">' 
             		 + '<div class="pop-mask"></div>'
            			 + '<div class="pop-con">'
-                	 + '<img>'
-                     + '<p class="cen">请打开微信客户端“扫一扫” </p>'
+                	 + '<img class="qrcode-img">'
+                     + '<p class="cen">请打开微信客户端 扫一扫</p>'
                 	 + '<button class="js-confirm fl">确认</button>'
                 	 + '<div class="js-confirm close"></div></div></div>';
 
@@ -13,7 +13,22 @@ define(['url','helper'], function(url,helper) {
     	$('.sign-in').on('click','.js-login',_getLogin);
     	$('body').on('click','.js-confirm',function() {
     		$('.js-qrcode-popup').hide();
+            clearInterval(checkLogin);
     	})
+    }
+    //判断是不是首页
+    function checkHomePage() {
+        var path = window.location.pathname;
+        if(path.indexOf("HomePage.html") != -1) {
+            var islogin = helper.getQueryStr('login');
+            if(islogin) {
+                _getLogin();
+            }else{
+                _init();
+            }
+        }else{
+            _init();
+        }
     }
 
     //获取用户信息
@@ -29,24 +44,26 @@ define(['url','helper'], function(url,helper) {
 
     function _getRegister() {
     		$('body').append(_qrcodepopup);
-    		$('.js-qrcode-popup').show().find('img').attr('scr','/kid/portal/register/qrcode.jpg');
+    		$('.js-qrcode-popup').show().find('img').attr('src','/kid/portal/register/qrcode.jpg');
     }
 
     function _getLogin() {
     	helper.ajax(url.getLogin,{},function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('body').append(_qrcodepopup);
-                $('.js-qrcode-popup').show().find('img').attr('scr',res.qrcode);
+                $('.js-qrcode-popup').show().find('img').attr('src',res.data.qrcode);
+                checkLogin = setInterval(function() {
+                    _checkLogin(res.data.code)
+                },2000);
             }
     	})
-        setInterval(_checkLogin(res.code),2000);
     }
 
     function _checkLogin(code) {
         helper.ajax(url.checkLogin,{"code":code},function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 if(res.data != null && res.data != "") {
-                    window.location.reload();
+                    window.location.href = "MemberCenter.html";
                 }
             }
         })
@@ -54,8 +71,8 @@ define(['url','helper'], function(url,helper) {
 
     return {
         init: function () {
-            _init();
         	bindActions();
+            checkHomePage();
         }
 
     };

@@ -1,4 +1,4 @@
-define(['url', 'helper','handshake'], function(url, helper,handshake) {
+define(['url', 'helper'], function(url, helper) {
 
     function bindActions() {
         $('.js-submit').on('click',_postRegisterData);
@@ -8,20 +8,26 @@ define(['url', 'helper','handshake'], function(url, helper,handshake) {
         $('.js-send').on('click',_getVerificationCode);
     }
 
+    function _getAuth() {
+        var openId = helper.getQueryStr('openId');
+        if(!openId || openId == "") {
+            helper.ajax(url.getAuthorize,{},function(res) {})
+        }
+    }
 
     //发送验证码
     function _getVerificationCode() {
         var phone = $.trim($('.phone').val());
         var $btn = $('.code-btn');
         var params = {
-            "mobileNumber": phone
+            "mobileNo": phone
         };
-
+        $('.count').html('(60)秒');
         if (_checkMobileNumber(phone)) {
             //$btn.html("短信发送中");
             _loadingCodeTime($btn);
             helper.ajax(url.getVerificationCode, params, function(res) {
-                if(res.code == 0) {
+                if(res.code >= 0) {
                     $btn.html("已发送");
                 }else{
                     $btn.html("重新发送");
@@ -51,7 +57,7 @@ define(['url', 'helper','handshake'], function(url, helper,handshake) {
                 $btnSend.show();
             }
             else {
-                $msg.html('(' + left_time + ')秒后重新发送');
+                $msg.html('(' + left_time + ')秒');
             }
         }, 1000);
     }  
@@ -63,15 +69,15 @@ define(['url', 'helper','handshake'], function(url, helper,handshake) {
         var code = $.trim($('.code').val());
 
         var params = {
-            "mobileNumber":phone,
+            "mobileNo":phone,
             "code":code,
             "name":name,
             "openId":helper.getQueryStr('openId')
         }
 
-        if(name != "" && code != "" && _checkMobileNumber()) {
+        if(name != "" && code != "" && _checkMobileNumber(phone)) {
             helper.ajax(url.postRegister, params, function(res) {
-                if(res.code == 0) {
+                if(res.code >= 0) {
                     window.location.href = "MemberCenter.html";
                 }
             })
@@ -89,7 +95,7 @@ define(['url', 'helper','handshake'], function(url, helper,handshake) {
 
     return {
         init: function() {
-            handshake.init();
+            _getAuth();
             bindActions();
         }
     }

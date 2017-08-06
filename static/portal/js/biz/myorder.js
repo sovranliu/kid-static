@@ -39,7 +39,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     function _getTicketData() {
         helper.ajax(url.getTickets, {}, function(data) {
             var res = data.data;
-            if(data.code == 0) {
+            if(data.code >= 0) {
                 //如果没有飞行票则引导用户去购票页面
                 if(res == null) {
                     var _html = '<p class="no-title">您没有飞行票，请购买后查看。</p>';
@@ -102,7 +102,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     function _getBookData() {
         helper.ajax(url.getUserBooks, {}, function(data) {
             var res = data.data;
-            if(data.code == 0) {
+            if(data.code >= 0) {
                 for (var i = 0; i < res.length; i++) {
                     switch (res[i].status) {
                         case 0:
@@ -158,7 +158,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         };
 
         helper.ajax(url.postRevoke, params, function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
                 $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
             }
@@ -180,7 +180,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
         if(_checkMobileNumber(tel)) {
             helper.ajax(url.giveTicket, params, function(res) {
-                if(res.code == 0) {
+                if(res.code >= 0) {
                     $('.send-message').hide();
                     $('.send-message-result').show();
                     $('.js-send-message-result').html('您的票券已成功送出，请对方至会员中心的预约飞行中，查看并使用他的票券。');
@@ -204,7 +204,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         };
 
         helper.ajax(url.postRefund, params, function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $popup.find('p').html('退款成功，零钱支付的退款20分钟内到账，银行卡支付的退款3个工作日后到账，请知晓。');
                 $popup.find('.confirm-btn').removeClass('js-submit-refund').addClass('js-confirm');
             }
@@ -218,7 +218,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     function _shareTicket() {
 
         helper.ajax(url.getTickets, params, function(res) {
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
                 $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
             }

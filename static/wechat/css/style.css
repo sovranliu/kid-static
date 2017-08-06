@@ -1572,6 +1572,15 @@ a,div,img {
     vertical-align: sub;
     margin-right: 10px;
 }
+.scan-result-img{
+    text-align: center;
+    margin: 50% auto 0;
+}
+.scan-result-img img{
+    width: 30px;
+    margin-bottom:10px;
+    margin-right: 10px;
+}
 .large-btn{
     width: 80%;
     display: block;
@@ -1595,4 +1604,8 @@ a,div,img {
 .dataNull {
     text-align: center!important;
     font-size: 18px!important;
+}
+.count{
+    line-height: 40px;
+    padding-left: 10px;
 }
