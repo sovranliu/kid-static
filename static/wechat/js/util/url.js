@@ -33,6 +33,7 @@ define([], function() {
         getAuthorize: _basePath + "authorize",
         getVerificationCode: _basePath + 'getVerificationCode',
         handshake:_basePath + 'handshake',
+        postRegister: _basePath + 'postRegister',
         //支付页面相关
         prepayAction: _basePath + 'prepayAction',
         parInfo: _basePath + 'parInfo'

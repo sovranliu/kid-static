@@ -1605,3 +1605,7 @@ a,div,img {
     text-align: center!important;
     font-size: 18px!important;
 }
+.count{
+    line-height: 40px;
+    padding-left: 10px;
+}

@@ -9,7 +9,10 @@ define(['url', 'helper'], function(url, helper) {
     }
 
     function _getAuth() {
-        helper.ajax(url.getAuthorize,{},function(res) {})
+        var openId = helper.getQueryStr('openId');
+        if(!openId || openId == "") {
+            helper.ajax(url.getAuthorize,{},function(res) {})
+        }
     }
 
     //发送验证码
@@ -17,9 +20,9 @@ define(['url', 'helper'], function(url, helper) {
         var phone = $.trim($('.phone').val());
         var $btn = $('.code-btn');
         var params = {
-            "mobileNumber": phone
+            "mobileNo": phone
         };
-
+        $('.count').html('(60)秒');
         if (_checkMobileNumber(phone)) {
             //$btn.html("短信发送中");
             _loadingCodeTime($btn);
@@ -54,7 +57,7 @@ define(['url', 'helper'], function(url, helper) {
                 $btnSend.show();
             }
             else {
-                $msg.html('(' + left_time + ')秒后重新发送');
+                $msg.html('(' + left_time + ')秒');
             }
         }, 1000);
     }  
@@ -66,13 +69,13 @@ define(['url', 'helper'], function(url, helper) {
         var code = $.trim($('.code').val());
 
         var params = {
-            "mobileNumber":phone,
+            "mobileNo":phone,
             "code":code,
             "name":name,
             "openId":helper.getQueryStr('openId')
         }
 
-        if(name != "" && code != "" && _checkMobileNumber()) {
+        if(name != "" && code != "" && _checkMobileNumber(phone)) {
             helper.ajax(url.postRegister, params, function(res) {
                 if(res.code >= 0) {
                     window.location.href = "MemberCenter.html";
