@@ -218,6 +218,8 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
     }
 
     function _shareTicket(){
+        alert('trigger share');
+        
         WeixinJSBridge.on('menu:share:appmessage', function(argv) {
 
         WeixinJSBridge.invoke('sendAppMessage',{
