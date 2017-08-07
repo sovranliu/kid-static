@@ -619,21 +619,21 @@
     background: #fff;
 }
 
-.rsv-date {
+.rsv-date, .rsv-ticket {
     overflow: hidden;
     margin: 20px 0;
     font-size: 18px;
     color: #a3a3a3;
 }
 
-.rsv-date span {
+.rsv-date span, .rsv-ticket span {
     position: relative;
     top: 8px;
     float: left;
     text-indent: 5px;
 }
 
-.rsv-date select {
+.rsv-date select, .rsv-ticket select {
     position: relative;
     display: block;
     float: left;
@@ -647,7 +647,7 @@
     color: #a3a3a3;
 }
 
-.rsv-date select:after {
+.rsv-date select:after, .rsv-ticket select:after {
     content: "";
     position: absolute;
     right: 5px;

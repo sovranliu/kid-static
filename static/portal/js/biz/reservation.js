@@ -56,6 +56,9 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
                     changeTicket();
                 }
             })
+        } else {
+            $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': [{'serialNumber': serialNumber}]})).attr('disabled', 'disabled');
+            //$('.js-ticket-text').html($('.js-rsv-ticket option:selected').text()).addClass('hideAfter');
         }
     }
 
@@ -216,7 +219,7 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
           bindActions();
           getUrlParams();
           initDateSelectbox();
-          //getTicketList();
+          getTicketList();
           getBookingTime();
         }
     }
