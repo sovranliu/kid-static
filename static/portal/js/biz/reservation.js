@@ -7,7 +7,7 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
         $('.js-year').on('change', getBookingTime);
         $('.js-month').on('change', getBookingTime);
         $('.js-day').on('change', getBookingTime);
-        //$('.js-rsv-ticket').on('change', changeTicket);
+        $('.js-rsv-ticket').on('change', changeTicket);
         $('.js-submit').on('click', submitBooking);
         $('.js-confirm').on('click', hidePopup);
         $('.js-open-disclaimer').on('click', openDisclaimer);
@@ -67,12 +67,19 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
 
     //获取可预约时间段
     function getBookingTime() {
+        var curDate = new Date();
+        var curYear = curDate.getFullYear().toString();
+        var curMonth = (curDate.getMonth() + 1).toString();
+        var curDay = curDate.getDate().toString();
+        var curHour = curDate.getHours();
         var year = $('.js-year option:selected').text();
         var month = $('.js-month option:selected').text();
         var day = $('.js-day option:selected').text();
 
         month = month.length < 2 ? "0" + month : month;
         day = day.length < 2 ? "0" + day : day;
+        curMonth = curMonth.length < 2 ? "0" + curMonth : curMonth;
+        curDay = curDay.length < 2 ? "0" + curDay : curDay;
 
         var params = {
             'year': year,
@@ -82,12 +89,28 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
 
         helper.ajax(url.getBookingTime, params, function(res) {
             var data = res.data;
-            
+            var timeList = [];
+
             if (res.code >= 0) {
-                if (!data || data.length == 0) {
+                //只显示比当天当时晚的时间段
+                if ((year == curYear && month < curMonth) ||
+                    (year == curYear && month == curMonth && day < curDay)) {
+                    timeList = [];
+                } else if (year == curYear && month == curMonth && day == curDay) {
+                    _.each(data, function(item, i) {
+                        if (Number(item.start.split(':')[0]) > curHour) {
+                            timeList.push(item);
+                        }
+                    });
+                } else {
+                    timeList = data;
+                }
+                
+                //渲染页面
+                if (!timeList || timeList.length == 0) {
                     $('.js-time-list').html('<p class="dataNull">您选择的日期不可预约，请重新选择。</p>');
                 } else {
-                    $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': data }));
+                    $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': timeList }));
                     $('.js-select-time').eq(0).click();
                 }
             }
