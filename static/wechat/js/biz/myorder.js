@@ -59,7 +59,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                                 //团体票可赠送
                                 if (data[i].type == 0 && data[i].isGive) {
                                     data[i].gift  = true;
-                                } else {
+                                } else if(data[i].type == 1) {
                                 //单人票可退款
                                     data[i].return = true;
                                 }

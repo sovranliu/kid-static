@@ -59,7 +59,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                                 //团体票可赠送
                                 if (res[i].type == 0 && res[i].isGive) {
                                     res[i].gift  = true;
-                                } else {
+                                } else if(res[i].type == 1){
                                 //单人票可退款
                                     res[i].return = true;
                                 }
