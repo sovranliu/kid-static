@@ -116,7 +116,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
             "goodsType":'30000',
             "openId":openId
         };
-        
+
         helper.ajax(url.buyTicket, params, function(res) {
             alert(res.code)
             if (res.code >= 0) {
@@ -159,8 +159,8 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     return {
         init: function () {
           bindActions();
-          checkPhone();
           getUrlParams();
+          checkPhone();
           getFlightDiary();
         }
     }
