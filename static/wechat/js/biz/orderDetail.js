@@ -158,6 +158,7 @@ define(['url', 'helper'], function (url, helper) {
         };
 
         helper.ajax(url.buyTicket, params, function(res) {
+            alert(res.code);
             var data = res.data;
             if (res.code >= 0) {
                 alert(typeof WeixinJSBridge);
