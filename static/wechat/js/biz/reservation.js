@@ -195,7 +195,6 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         helper.ajax(url.submitBooking, params, function(res) {
             if (res.code >= 0) {
                 showPopup(1);
-                window.location.href = "MemberCenter.html";
             } else {
                 showPopup(2); //预约满
             }
@@ -210,6 +209,9 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         
         $resWrapper.show();
 
+        if(type == 1) {
+            $('.js-confirm').attr('data-type','success');
+        }
         switch(type) {
             case 1:
                 text = Number(optType) == 0 ? '您已成功预约该时段，请提前1小时抵达现场，进行飞行前的培训。如需调整行程，请拨打电话<i>021-57127021</i>咨询。' : '您已成功提交改期申请，请耐心等待管理员审核。如有任何问题，请拨打电话<i>021-57127021</i>咨询。';
@@ -232,8 +234,14 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
 
     //关闭弹框
     function hidePopup() {
+        
         $('.js-result-wrapper').hide();
+
+        if($(this).data('type') == 'success') {
+            window.location.href = "MemberCenter.html";
+        }
     }
+
 
     return {
         init: function () {
