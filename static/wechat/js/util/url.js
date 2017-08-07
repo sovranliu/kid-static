@@ -39,6 +39,7 @@ define([], function() {
         payInfo: _basePath + 'payInfo',
         //分享
         getShareConfig: _basePath + 'getShareConfig',
-        receiveTicket: _basePath + 'receiveTicket'
+        receiveTicket: _basePath + 'receiveTicket',
+        getTicketDetail: _basePath + 'getTicketDetail'
     };
 });

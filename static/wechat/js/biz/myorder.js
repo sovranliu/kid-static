@@ -236,6 +236,10 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
     }
 
     function _shareTicket() {
+        window.location.href = "../TicketDetail.html?serialNumber=" + serialNumber;
+    }
+    
+    /*function _shareTicket() {
         var params = {};
 
         helper.ajax(url.getShareConfig, params, function(res) {
@@ -254,7 +258,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                    }
                 } else {
                     onBridgeReady(data);
-                }*/
+                }
 
                 alert('wx config');
                 wx.config({  
@@ -330,7 +334,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
 
             }
         })
-    }
+    }*/
 
     //验证手机号
     function _checkMobileNumber(num) {

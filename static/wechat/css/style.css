@@ -1716,3 +1716,23 @@ a,div,img {
     height: 150px;
     object-fit:fill;
 }
+.detail-item {
+    display: block;
+}
+.detail-item  div {
+    display: inline-block;
+    font-size: 10px;
+}
+.ticket-detail .tips{
+    width: 50px;
+}
+.share-wrapper {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    left: 54%;
+}
+.share-image {
+    width: 100px;
+    margin-left: 70px;
+}
