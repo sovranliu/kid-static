@@ -203,6 +203,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     $('.js-send-message-result').html('您的票券已成功送出，请对方至会员中心的预约飞行中，查看并使用他的票券。');
                     $('.send-message-result').show();
                     $('.give-popup').hide();
+                    window.location.reload();
                 } else {
                     $('.js-send-message-result').html('被赠送者还不是会员，请通知对方先注册成为会员，才能成功接收该票券。如24小时内对方未完成注册，票券将返还到您的帐号。');
                     $('.send-message-result').show();
@@ -236,7 +237,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
     }
 
     function _shareTicket() {
-        window.location.href = "../TicketDetail.html?serialNumber=" + serialNumber;
+        window.location.href = "TicketDetail.html?serialNumber=" + serialNumber;
     }
     
     /*function _shareTicket() {
