@@ -39,6 +39,9 @@
              <div>
                  <p>¥{{price}}元</p>
              </div>
+             {{^isInsurance}}
+             <small>*未购买退票险，仅退订单金额的70%</small>
+             {{/isInsurance}}
              <h2>退还方式</h2>
              <div>
                  <p class="tips">原路退回（15个工作日内退款至原支付方）</p>

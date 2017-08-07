@@ -1290,6 +1290,11 @@ a,div,img {
     overflow-y: scroll;
 }
 
+.ar-content small{
+    font-size: 12px;
+    padding: 10px;
+    color: #777;
+}
 .ar-content h2 {
     margin: 18px 0 12px 0;
     height: 36px;
