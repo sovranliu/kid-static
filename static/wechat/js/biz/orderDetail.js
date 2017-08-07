@@ -181,7 +181,7 @@ define(['url', 'helper'], function (url, helper) {
 
     function onBridgeReady(res){
         var data = res.data;
-        alert(data.appId + '===' + data.timestamp + '===' + data.nonceString + "===" + data.prepayId + '===' + data.signature)
+        alert(JSON.stringify(res))
         WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
                "appId":data.appId,     //公众号名称，由商户传入     
