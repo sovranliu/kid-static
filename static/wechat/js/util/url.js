@@ -35,7 +35,7 @@ define([], function() {
         handshake:_basePath + 'handshake',
         postRegister: _basePath + 'postRegister',
         //支付页面相关
-        prepayAction: _basePath + 'prepay',
+        prepay: _basePath + 'prepay',
         payInfo: _basePath + 'payInfo',
         //分享
         getShareConfig: _basePath + 'getShareConfig',

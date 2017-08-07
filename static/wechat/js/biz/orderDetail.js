@@ -44,7 +44,7 @@ define(['url', 'helper'], function (url, helper) {
 
     function checkPhone() {
         if(!mobileNo || !openId) {
-            helper.ajax(url.prepayAction,{},function() {})
+            helper.ajax(url.prepay,{},function() {})
         }else{
             helper.ajax(url.payInfo,{"mobileNo":mobileNo,"openId":openId},function(res) {
                 if(res.code >= 0) {
