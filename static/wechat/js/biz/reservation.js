@@ -74,6 +74,9 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                     changeTicket();
                 }
             })
+        } else {
+            $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': [{'serialNumber': serialNumber}]})).hide();
+            $('.js-ticket-text').html($('.js-rsv-ticket option:selected').text()).addClass('hideAfter');
         }
     }
 
