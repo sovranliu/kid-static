@@ -142,7 +142,11 @@ a,div,img {
 }
 
 .box {
-    margin: 0 30px;
+    margin: 0 44px;
+}
+
+.reservation-box {
+    margin: 0 30px!important;
 }
 
 .om-text {
