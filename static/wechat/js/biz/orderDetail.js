@@ -154,8 +154,11 @@ define(['url', 'helper'], function (url, helper) {
         
         var params = {
             "goodsType":goodsType,
-            "openId":openId
+            "openId":openId,
+            "mobileNo":mobileNo
         };
+
+        alert(params.goodsType);
 
         helper.ajax(url.buyTicket, params, function(res) {
             alert(res.code);
