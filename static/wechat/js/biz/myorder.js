@@ -265,18 +265,18 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     signature: data.signature,// 必填，签名  
                     jsApiList: [  
                         'checkJsApi',  
-                        'onMenuShareTimeline',  
+                        //'onMenuShareTimeline',  
                         'onMenuShareAppMessage' 
                     ]
                 });  
               
                 wx.ready(function () {  
-                    alert('wx ready');
+                    alert('http://solution.slfuture.cn//kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber);
                     wx.onMenuShareAppMessage({ 
                         title: '赠送飞行票', // 分享标题  
                         desc: '赠送飞行票给我的朋友', // 分享描述  
-                        link: window.location.origin + '/kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber, // 分享链接  
-                        imgUrl: window.location.origin + '/kid/static/wechat/images/logo.png', // 分享图标  
+                        link: 'http://solution.slfuture.cn//kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber, // 分享链接  
+                        imgUrl: 'http://solution.slfuture.cn//kid/static/wechat/images/logo.png', // 分享图标  
                         type: 'link', // 分享类型,music、video或link，不填默认为link  
                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空  
                         success: function () {   

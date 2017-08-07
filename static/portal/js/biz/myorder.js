@@ -181,19 +181,26 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
             'serialNumber': serialNumber
         };
 
-        if(_checkMobileNumber(tel)) {
+        if (!serialNumber) {
+            $('.js-send-message-result').html('请选择您要赠送的飞行票。');
+            $('.send-message-result').show();
+        } else if (!_checkMobileNumber(tel)) {
+            $('.js-send-message-result').html('请填写有效的手机号码。');
+            $('.send-message-result').show();
+        } else {
             helper.ajax(url.giveTicket, params, function(res) {
                 $('.send-message').hide();
+                $('.send-message-result').show();
+
                 if(res.code >= 0) {
-                    $('.send-message-result').show();
                     $('.js-send-message-result').html('您的票券已成功送出，请对方至会员中心的预约飞行中，查看并使用他的票券。');
-                }else{
                     $('.send-message-result').show();
-                    $('.js-send-message-result').html('赠送失败，请确认手机号码是否正确。');
+                } else {
+                    $('.js-send-message-result').html('被赠送者还不是会员，请通知对方先注册成为会员，才能成功接收该票券。如24小时内对方未完成注册，票券将返还到您的帐号。');
+                    $('.send-message-result').show();
                 }
             });
         }
-        
     }
 
     //打开退票弹框
