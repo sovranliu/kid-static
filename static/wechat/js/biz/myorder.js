@@ -218,41 +218,62 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
     }
 
     function _shareTicket(){
-        alert('trigger share');
         
-        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+        
+    }
+
+    function onBridgeReady(data) {
+
+        //WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+            
+        alert('start share');
 
         WeixinJSBridge.invoke('sendAppMessage',{
 
-            "appid":"", //appid 设置空就好了。
+            "appid":data.appId, //appid 设置空就好了。
             "img_url": window.location.origin + '/kid/static/wechat/images/logo.png', //分享时所带的图片路径
             "img_width": "120", //图片宽度
             "img_height": "120", //图片高度
             "link":window.location.origin + '/kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber, //分享附带链接地址
             "desc":"赠送飞行票给我的朋友", //分享内容介绍
             "title":"赠送飞行票"
-            }, function(res){/*** 回调函数，最好设置为空 ***/
-                $('.send-message-result').show();
-                $('.js-send-message-result').html('分享成功');
-            });
-
+        }, function(res){
+            $('.send-message-result').show();
+            $('.js-send-message-result').html('分享成功');
         });
+
+        //});
     }
 
 
-    /*function _shareTicket() {
+    function _shareTicket() {
         var params = {
 
         };
 
+        alert('trigger share');
+
         helper.ajax(url.getShareConfig, params, function(res) {
             var data = res.data;
 
+            alert(JSON.stringify(res));
+
             if(res.code >= 0) {
 
-                _wxShare(data.appId);
+                alert('trigger share');
 
-                wx.config({  
+                if (typeof WeixinJSBridge == "undefined") {
+                   if (document.addEventListener) {
+                       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                   } else if (document.attachEvent) {
+                       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+                       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                   }
+                } else {
+                    onBridgeReady(data);
+                }
+
+                /*wx.config({  
                     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
                     appId: data.appId, // 必填，公众号的唯一标识  
                     timestamp: data.timestamp, // 必填，生成签名的时间戳  
@@ -286,10 +307,10 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                         $('.send-message-result').show();
                         $('.js-send-message-result').html('错误信息：' + res); 
                     });  
-                });
+                });*/
             }
         })
-    }*/
+    }
 
     //验证手机号
     function _checkMobileNumber(num) {
