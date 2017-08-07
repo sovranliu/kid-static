@@ -609,10 +609,10 @@
 }
 .yh-cp-rsv video {
     object-fit: fill;
-    width: 40%;
+    width: 24%;
     height: 200px;
     float: left;
-    padding: 20px;
+    padding: 2px 2px 50px 2px;
     text-align: center;
 }
 .rsv-con {			
