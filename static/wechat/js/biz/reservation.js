@@ -234,11 +234,11 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
 
     //关闭弹框
     function hidePopup() {
-        
+
         $('.js-result-wrapper').hide();
 
         if($(this).data('type') == 'success') {
-            window.location.href = "MemberCenter.html";
+            window.location.href = "MyOrder.html";
         }
     }
 
