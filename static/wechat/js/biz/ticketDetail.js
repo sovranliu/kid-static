@@ -1,4 +1,4 @@
-define(['url', 'helper','handshake'], function (url, helper,handshake) {
+define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,wx) {
 
     var serialNumber;
 
