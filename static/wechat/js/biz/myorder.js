@@ -273,6 +273,18 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                 wx.ready(function () {  
                     alert('http://solution.slfuture.cn/kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber);
                     
+                    wx.checkJsApi({ 
+                      jsApiList: [
+                        'onMenuShareAppMessage'
+                      ],
+                      success: function (res) {
+                        alert('分享接口可调用');
+                      },
+                      fail:function(){
+                        alert('抱歉您的微信版本有问题不支持分享功能！');
+                      }
+                  });
+
                     setTimeout(function() {
                         wx.onMenuShareAppMessage({ 
                             title: '赠送飞行票', // 分享标题  
@@ -281,13 +293,19 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                             imgUrl: 'http://solution.slfuture.cn/kid/static/wechat/images/error.png', // 分享图标  
                             type: 'link', // 分享类型,music、video或link，不填默认为link  
                             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空  
+                            trigger: function (res) {
+                              alert('用户点击发送给朋友');
+                            },
                             success: function () {   
                                  $('.send-message-result').show();
                                  $('.js-send-message-result').html('<p style="text-align:center;">分享成功</p>');
                             },  
-                            cancel: function () {   
-                                // 用户取消分享后执行的回调函数  
-                            }  
+                            cancel: function (res) {   
+                               alert(JSON.stringify(res)); 
+                            },
+                            fail: function (res) {
+                              alert(JSON.stringify(res));
+                            }
                         });
                     }, 2000);
 
