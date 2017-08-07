@@ -157,14 +157,10 @@ define(['url', 'helper'], function (url, helper) {
             "openId":openId
         };
 
-        alert(params.goodsType + '-----' + params.openId)
-
         helper.ajax(url.buyTicket, params, function(res) {
-            alert(res.code)
             var data = res.data;
-
             if (res.code >= 0) {
-                alert(typeof WeixinJSBridge)
+                alert(typeof WeixinJSBridge);
                 if (typeof WeixinJSBridge == "undefined") {
                    if ( document.addEventListener ) {
                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
@@ -181,7 +177,7 @@ define(['url', 'helper'], function (url, helper) {
 
     function onBridgeReady(res){
         var data = res.data;
-        alert(data.appId + '<br/>' + data.timestamp + '<br/>' + data.nonceString + '<br/>' + data.prepayId + '<br/>' + data.signature)
+        alert(data.appId + '===' + data.timestamp + '===' + data.nonceString + "===" + data.prepayId + '===' + data.signature)
         WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
                "appId":data.appId,     //公众号名称，由商户传入     
