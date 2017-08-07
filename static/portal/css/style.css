@@ -607,6 +607,14 @@
     background: #fff;
     text-align: center;
 }
+.yh-cp-rsv video {
+    object-fit: fill;
+    width: 40%;
+    height: 200px;
+    float: left;
+    padding: 20px;
+    text-align: center;
+}
 .rsv-con {			
     position: relative;
     text-align: right;

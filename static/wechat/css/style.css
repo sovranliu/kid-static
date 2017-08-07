@@ -412,6 +412,7 @@ a,div,img {
 }
 
 .fd-dq video {
+    object-fit:fill;
     width: 100%;
     /* 若要改成动态设置高度，将height改成 100% */
     /*height: 100%;*/
@@ -488,6 +489,7 @@ a,div,img {
 }
 
 .fd-yg video {
+    object-fit:fill;
     width: 100%;
     /*width: 48%;
     float: left;*/
@@ -1708,4 +1710,9 @@ a,div,img {
     width: 20px;
     height: 1px;
     background: #0068b7;
+}
+.fd-yg-item {
+    float: left;
+    height: 150px;
+    object-fit:fill;
 }
