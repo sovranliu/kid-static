@@ -285,29 +285,24 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                       }
                     });
 
-                    setTimeout(function() {
-                        wx.onMenuShareAppMessage({ 
-                            title: '赠送飞行票', // 分享标题  
-                            desc: '赠送飞行票给我的朋友', // 分享描述  
-                            link: 'http://solution.slfuture.cn/kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber, // 分享链接  
-                            imgUrl: 'http://solution.slfuture.cn/kid/static/wechat/images/error.png', // 分享图标  
-                            type: 'link', // 分享类型,music、video或link，不填默认为link  
-                            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空  
-                            trigger: function (res) {
-                              alert('用户点击发送给朋友');
-                            },
-                            success: function () {   
-                                 $('.send-message-result').show();
-                                 $('.js-send-message-result').html('<p style="text-align:center;">分享成功</p>');
-                            },  
-                            cancel: function (res) {   
-                               alert(JSON.stringify(res)); 
-                            },
-                            fail: function (res) {
-                              alert(JSON.stringify(res));
-                            }
-                        });
-                    }, 2000);
+                    wx.onMenuShareAppMessage({ 
+                        title: '赠送飞行票', // 分享标题  
+                        link: 'http://solution.slfuture.cn/kid/static/wechat/ReceiveTicket.html', // 分享链接  
+                        imgUrl: '', // 分享图标  
+                        trigger: function (res) {
+                          alert('用户点击发送给朋友');
+                        },
+                        success: function () {   
+                            $('.send-message-result').show();
+                            $('.js-send-message-result').html('<p style="text-align:center;">分享成功</p>');
+                        },  
+                        cancel: function (res) {   
+                           alert(JSON.stringify(res)); 
+                        },
+                        fail: function (res) {
+                          alert(JSON.stringify(res));
+                        }
+                    });
 
                     wx.error(function(res){  
                         alert('wx error');
