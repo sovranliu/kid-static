@@ -53,20 +53,20 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                     var data = res.data;
                     var tcList = [];
 
-                    //只显示“”状态的票券，以便预约
+                    //只显示“可用”状态的票券，以便预约
                     _.each(data, function(item, i) {
-                        if (item.status == 0) {
-                            var serialNo = item.serialNumber;
-                            item.type = item.ticketType == 0 ? '团体票' : '单人票';
-                            item.sno = serialNo.replace(serialNo.substring(10, serialNo.length-5), '****');
+                        if (Number(item.status) == 0) {
+                            //var serialNo = item.serialNumber;
+                            //item.type = item.ticketType == 0 ? '团体票' : '单人票';
+                            //item.sno = serialNo.replace(serialNo.substring(10, serialNo.length-5), '****');
                             tcList.push(item);
                         }
                     });
 
-                    if (!data || data.length == 0) {
+                    if (!tcList || tcList.length == 0) {
                         $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': '您没有飞行票，请购买后查看'}));
                     } else {
-                        $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': data}));
+                        $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': tcList}));
                     }
 
                     $('.js-ticket-text').html($('.js-rsv-ticket option:selected').text());
