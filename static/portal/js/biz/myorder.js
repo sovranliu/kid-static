@@ -11,12 +11,9 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         $('.js-ticket-share').on('click', _shareTicket);
         $('.js-send-message').on('click', _sendMessage);
         $('.js-confirm-message-result').on('click', _confirmMessgeResult);
+        $('.js-confirm').on('click',_closePopup);
         $('.revoke-popup').on('click','.js-confirm',function() {
-            $('.revoke-popup').hide();
             window.location.reload();
-        })
-        $('.refund-popup').on('click','.js-confirm',function() {
-            $('.refund-popup').hide();
         })
     }
 
@@ -186,12 +183,14 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
         if(_checkMobileNumber(tel)) {
             helper.ajax(url.giveTicket, params, function(res) {
+                $('.send-message').hide();
                 if(res.code >= 0) {
-                    $('.send-message').hide();
                     $('.send-message-result').show();
                     $('.js-send-message-result').html('您的票券已成功送出，请对方至会员中心的预约飞行中，查看并使用他的票券。');
+                }else{
+                    $('.send-message-result').show();
+                    $('.js-send-message-result').html('赠送失败，请确认手机号码是否正确。');
                 }
-            //todo 对方非会员的处理
             });
         }
         
@@ -235,6 +234,10 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     function _checkMobileNumber(num) {
         var reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证规则
         return reg.test(num); //true
+    }
+
+    function _closePopup() {
+        $(this).parent().parent('.popup').hide();
     }
     
     return {

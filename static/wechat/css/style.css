@@ -81,6 +81,18 @@ a,div,img {
     background: url(../images/shadow.png) no-repeat 0 0;
     background-size: 100% 100%;
 }
+.shadow-repeat{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 75%;
+    background: url(../images/shadow.png) no-repeat 0 0;
+    background-size: cover;
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    overflow-y: scroll;
+    padding-bottom: 20px;
+}
 
 .mb-body {
     position: absolute;
@@ -1114,7 +1126,9 @@ a,div,img {
 
 .img-box .log {
     width: 40%;
-    margin-top: -5px;
+    background: #fff;
+    box-shadow: 0 0 5px #989898;
+    padding: 5px;
 }
 
 .img-box .life {
@@ -1650,7 +1664,7 @@ a,div,img {
     line-height: 40px;
     padding-left: 10px;
 }
-.give-popup .close {
+.close{
     position: absolute;
     right: 0;
     top: 0;
@@ -1658,18 +1672,18 @@ a,div,img {
     height: 40px;
 }
 
-.give-popup .close:after{
+.close:after{
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     -o-transform: rotate(45deg);
 }
-.give-popup .close:before{
+.close:before{
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
 }
-.give-popup .close:before, .give-popup .close:after{
+.close:before, .close:after{
     position: absolute;
     top: 50%;
     content: "";

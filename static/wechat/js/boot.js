@@ -8,6 +8,7 @@ requirejs.config({
         bootstrap: 'libs/bootstrap.min',
         jCookie: 'libs/jquery.cookie',
         datePicker: 'libs/datePicker',
+        wechat:'libs/weixin-1.2.0',
         /******************* utils *****************/
         helper: 'util/helper',
         url: 'util/url',

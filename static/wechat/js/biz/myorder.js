@@ -1,4 +1,4 @@
-define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,handshake) {
+define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url, helper,handshake,wx) {
 
     var serialNumber;
 
@@ -272,7 +272,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
     }
 
     function _closePopup() {
-        $('.give-popup').hide();
+        $(this).parent().parent('.popup').hide();
     }
     
     return {

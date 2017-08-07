@@ -14,13 +14,16 @@
 	background: #fff;
 }
 .yh-header .logo{
-	position: relative;
-	top: -62px;
-	float: left;
-	width: 251px;
-	height: 153px;
-	display: block;
-	background: url(../images/logo.png) no-repeat;
+    position: relative;
+    top: -62px;
+    float: left;
+    width: 220px;
+    height: 134px;
+    display: block;
+    background: url(../images/logo.png) no-repeat center center;
+    background-size: 75% 75%;
+    background-color: #fff;
+    box-shadow: 0 0 5px #989898;
 }
 .yh-header p{
 	width: 100%;
