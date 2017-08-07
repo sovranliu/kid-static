@@ -223,35 +223,25 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
     }
 
     function onBridgeReady(data) {
-
-        //WeixinJSBridge.on('menu:share:appmessage', function(argv) {
-            
         alert('start share');
-
-        WeixinJSBridge.invoke('sendAppMessage',{
-
-            "appid":data.appId, //appid 设置空就好了。
-            "img_url": window.location.origin + '/kid/static/wechat/images/logo.png', //分享时所带的图片路径
-            "img_width": "120", //图片宽度
-            "img_height": "120", //图片高度
-            "link":window.location.origin + '/kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber, //分享附带链接地址
-            "desc":"赠送飞行票给我的朋友", //分享内容介绍
-            "title":"赠送飞行票"
-        }, function(res){
-            $('.send-message-result').show();
-            $('.js-send-message-result').html('分享成功');
-        });
-
-        //});
+        WeixinJSBridge.on('menu:share:appmessage', function(argv) {  
+            WeixinJSBridge.invoke('sendAppMessage',{
+                "appid":data.appId, //appid 设置空就好了。
+                "img_url": window.location.origin + '/kid/static/wechat/images/logo.png', //分享时所带的图片路径
+                "img_width": "120", //图片宽度
+                "img_height": "120", //图片高度
+                "link":window.location.origin + '/kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber, //分享附带链接地址
+                "desc":"赠送飞行票给我的朋友", //分享内容介绍
+                "title":"赠送飞行票"
+            }, function(res){
+                $('.send-message-result').show();
+                $('.js-send-message-result').html('<p style="text-align:center">分享成功</p>');
+            }); 
+        });  
     }
 
-
     function _shareTicket() {
-        var params = {
-
-        };
-
-        alert('trigger share');
+        var params = {};
 
         helper.ajax(url.getShareConfig, params, function(res) {
             var data = res.data;
@@ -259,8 +249,6 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
             alert(JSON.stringify(res));
 
             if(res.code >= 0) {
-
-                alert('trigger share');
 
                 if (typeof WeixinJSBridge == "undefined") {
                    if (document.addEventListener) {
@@ -272,42 +260,6 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                 } else {
                     onBridgeReady(data);
                 }
-
-                /*wx.config({  
-                    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
-                    appId: data.appId, // 必填，公众号的唯一标识  
-                    timestamp: data.timestamp, // 必填，生成签名的时间戳  
-                    nonceStr: data.nonceStr, // 必填，生成签名的随机串  
-                    signature: data.signature,// 必填，签名  
-                    jsApiList: [  
-                        'checkJsApi',  
-                        'onMenuShareTimeline',  
-                        'onMenuShareAppMessage' 
-                    ]
-                });  
-              
-                wx.ready(function () {  
-                    wx.onMenuShareAppMessage({  
-                        title: '赠送飞行票', // 分享标题  
-                        desc: '赠送飞行票给我的朋友', // 分享描述  
-                        link: window.location.origin + '/kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber, // 分享链接  
-                        imgUrl: window.location.origin + '/kid/static/wechat/images/logo.png', // 分享图标  
-                        type: 'link', // 分享类型,music、video或link，不填默认为link  
-                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空  
-                        success: function () {   
-                             $('.send-message-result').show();
-                             $('.js-send-message-result').html('分享成功');
-                        },  
-                        cancel: function () {   
-                            // 用户取消分享后执行的回调函数  
-                        }  
-                    });   
-                    wx.error(function(res){  
-                        // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。  
-                        $('.send-message-result').show();
-                        $('.js-send-message-result').html('错误信息：' + res); 
-                    });  
-                });*/
             }
         })
     }
@@ -324,7 +276,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
     
     return {
         init: function() {
-            //handshake.init();
+            handshake.init();
             bindActions();
             _changeTabs();
             _getTicketData();
