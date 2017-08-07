@@ -264,7 +264,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     nonceStr: data.nonceStr, // 必填，生成签名的随机串  
                     signature: data.signature,// 必填，签名  
                     jsApiList: [  
-                        //'checkJsApi',  
+                        'checkJsApi',  
                         //'onMenuShareTimeline',  
                         'onMenuShareAppMessage' 
                     ]
@@ -283,7 +283,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                       fail:function(){
                         alert('抱歉您的微信版本有问题不支持分享功能！');
                       }
-                  });
+                    });
 
                     setTimeout(function() {
                         wx.onMenuShareAppMessage({ 
