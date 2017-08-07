@@ -265,7 +265,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     signature: data.signature,// 必填，签名  
                     jsApiList: [  
                         'checkJsApi',  
-                        //'onMenuShareTimeline',  
+                        'onMenuShareTimeline',  
                         'onMenuShareAppMessage' 
                     ]
                 });  
@@ -275,6 +275,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     
                     wx.checkJsApi({ 
                       jsApiList: [
+                        'onMenuShareTimeline',
                         'onMenuShareAppMessage'
                       ],
                       success: function (res) {
@@ -283,6 +284,20 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                       fail:function(){
                         alert('抱歉您的微信版本有问题不支持分享功能！');
                       }
+                    });
+
+                    wx.onMenuShareTimeline({
+                        title: '赠送飞行票', // 分享标题
+                        link: 'http://solution.slfuture.cn/kid/static/wechat/ReceiveTicket.html',
+                        imgUrl: '', // 分享图标
+                        success: function () {
+                            $('.send-message-result').show();
+                            $('.js-send-message-result').html('<p style="text-align:center;">分享成功</p>');
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                            //alert('cancel');
+                        }
                     });
 
                     wx.onMenuShareAppMessage({ 
