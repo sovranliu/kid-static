@@ -14,13 +14,13 @@ define(['url', 'helper','handshake'], function (url, helper,handshake) {
         helper.ajax(url.receiveTicket, params, function(res) {
             var data = res.data;
 
-            if (res.code >= 0) {
+            if (res.code == 0) {
                 $('.js-result-success').show();
                 $('.js-result-fail').hide();
             } else {
                 $('.js-result-success').hide();
                 $('.js-result-fail').show();
-                $('.js-fail-text').html('很抱歉，这张飞行票已经被其他人抢完了哦。');
+                $('.js-fail-text').html(res.msg);
             }
         });
     }
