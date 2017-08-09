@@ -2,6 +2,7 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
 
     function bindActions () {
         $('.js-submit').on("click", _postUserInfoData);
+        $('.js-confirm').on("click", _closePopup);
     }
 
     //获取用户编辑过的信息
@@ -27,7 +28,7 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
     //提交用户信息
     function _postUserInfoData() {
         var params = {};
-
+        var $pop = $('.popup');
         var sex = $('.js-sex').prop('checked') ? 0 : 1;
 
         params.userName = $.trim($('.js-username').val());
@@ -39,12 +40,16 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
         helper.ajax(url.postUserInfo,params,function (res) {
             var data = res.data;
             if(res.code >= 0) {
-                alert('修改成功');
-                window.location.href = 'MemberCenter.html';
+                $pop.show().find('p').html('修改成功');
             }else{
-                alert('修改失败')
+                $pop.show().find('p').html('修改失败')
             }
         })
+    }
+
+    function _closePopup() {
+        $(this).parent().parent('.popup').hide();
+        window.location.href = 'MemberCenter.html';
     }
 
     return {
