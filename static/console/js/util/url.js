@@ -11,9 +11,14 @@ define([], function() {
         //退票
         refundTicket: _basePath + 'refundTicket',
         //飞行日志列表
-        getFlightDiary: _basePath + 'getFlightDiary',
+        getFlightDiary: _basePath + 'getFlightDiary', //todo
+        deleteFlightDiary: _basePath + 'deleteFlightDiary', //todo
+        saveFlightDiary: _basePath + 'saveFlightDiary', //todo
         //预约列表
         getBookingList: _basePath + 'getBookingList',
+        getStock: _basePath + 'getStock', //todo
+        enableStock: _basePath + 'enableStock', //todo
+        disableStock: _basePath + 'disableStock', //todo
         //参数配置
         getConfig: _basePath + 'getConfig',
         postConfig: _basePath + 'modifyConfig',

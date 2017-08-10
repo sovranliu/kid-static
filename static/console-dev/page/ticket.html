@@ -61,10 +61,10 @@
                         <tr role="row">
                             <th>姓名（手机号码）</th>
                             <th>票号</th>
+                            <th>价格</th>
                             <th>售出日期</th>
                             <th>有效日期</th>
                             <th>状态</th>
-                            <th>价格</th>
                         </tr>
                     </thead>
                     <tbody class="js-tbody"></tbody>
@@ -89,12 +89,12 @@
 <script id="tpl-tbody" type="x-tmpl-mustache">
     {{#data}}
     <tr data-id="{{serialNumber}}">
-        <td>{{name}}（{{telephone}}）</td>
-        <td>{{serialNumber}}</td>
+        <td>{{userName}}（{{telephone}}）</td>
+        <td>{{serialNumber}}（{{type}}）</td>
+        <td>{{price}}</td>
         <td>{{createTime}}</td>
         <td>{{expireTime}}</td>
         <td>{{status}}</td>
-        <td>{{payPrice}}</td>
     </tr>
     {{/data}}
 </script>

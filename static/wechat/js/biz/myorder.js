@@ -11,6 +11,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
         $('.js-send-message').on('click', _sendMessage);
         $('.js-close').on('click', _closePopup);
         $('.js-confirm-message-result').on('click', _confirmMessgeResult);
+        $('.js-revoke').on('click', _handleRevoke);
         $('.revoke-popup').on('click','.js-confirm',function() {
             $('.revoke-popup').hide();
             window.location.reload();
@@ -241,14 +242,10 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
     
     /*function _shareTicket() {
         var params = {};
-
         helper.ajax(url.getShareConfig, params, function(res) {
             var data = res.data;
-
             alert(JSON.stringify(res));
-
             if(res.code >= 0) {
-
                 /*if (typeof WeixinJSBridge == "undefined") {
                    if (document.addEventListener) {
                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
@@ -259,7 +256,6 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                 } else {
                     onBridgeReady(data);
                 }
-
                 alert('wx config');
                 wx.config({  
                     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
@@ -289,7 +285,6 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                         alert('抱歉您的微信版本有问题不支持分享功能！');
                       }
                     });
-
                     wx.onMenuShareTimeline({
                         title: '赠送飞行票', // 分享标题
                         link: 'http://solution.slfuture.cn/kid/static/wechat/ReceiveTicket.html',
@@ -303,7 +298,6 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                             //alert('cancel');
                         }
                     });
-
                     wx.onMenuShareAppMessage({ 
                         title: '赠送飞行票', // 分享标题  
                         link: 'http://solution.slfuture.cn/kid/static/wechat/ReceiveTicket.html', // 分享链接  
@@ -322,7 +316,6 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                           alert(JSON.stringify(res));
                         }
                     });
-
                     wx.error(function(res){  
                         alert('wx error');
                         // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。  
@@ -330,8 +323,6 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                         $('.js-send-message-result').html('错误信息：' + res); 
                     });  
                 });
-
-
             }
         })
     }*/

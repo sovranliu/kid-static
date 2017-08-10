@@ -9,6 +9,7 @@ requirejs.config({
         bootstrap: 'libs/bootstrap.min',
         jCookie: 'libs/jquery.cookie',
         dateTimePicker: 'libs/bootstrap-datetimepicker.min',
+        fileupload: 'libs/jquery.fileupload',
         //datepicker: 'libs/bootstrap-datepicker',
         //dateTimePicker: 'libs/bootstrap-datetimepicker.min',
         /******************* utils *****************/
@@ -30,6 +31,10 @@ requirejs.config({
         bootstrap: {
             deps: ['jquery'],
             exports: 'bootstrap'
+        },
+        fileupload: {
+            deps: ['jquery'],
+            exports: 'fileupload'
         }
     }
 });
