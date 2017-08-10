@@ -137,3 +137,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .form-required {color: red;}
+.upload-btn-wrapper {
+    width: 100px;
+    height: 32px;
+}
+.upload-btn {
+    opacity: 0;
+    width: 100px;
+    height: 32px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

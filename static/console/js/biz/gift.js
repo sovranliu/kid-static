@@ -8,6 +8,8 @@ define(['url', 'helper', 'mustache', 'fileupload'], function (url, helper, musta
         $('.js-add').on('click', openAdd);
         $('.js-tbody').on('click', '.js-delete', openDelete);
         $('.js-dialog').on('click', '.js-upload', uploadVideo);
+        $('.js-dialog').on('click', '.js-cancel', cancelUpload);
+        $('.js-dialog').on('click', '.js-delete', deleteVideo);
         $('.js-dialog').on('click', '.js-confirm', deleteFlightDiary);
     }
 
@@ -95,33 +97,15 @@ define(['url', 'helper', 'mustache', 'fileupload'], function (url, helper, musta
     }
 
     function uploadVideo() {
-        $(".js-upload").fileupload({  
-            url: "", //todo
-            dataType: "json",  
-            formData:function(form){
-                return [{name:"param1",value:$(".js-upload").attr("param1")},  
-                        {name:"param2",value:$(".param2").val()}];  
-            },  
-            done:function(e,data){  
-                if(data.result.sta) {  
-                    // 上传成功：  
-                    $(".upstatus").html(data.result.msg);  
-                    $(".preview").html("<embed src="+data.result.previewSrc+  
-                        " allowscriptaccess='always' allowfullscreen='true' wmode='opaque'"+  
-                        " width='480' height='400'></embed>");  
-                } else {  
-                    // 上传失败：  
-                    $(".progress .bar").css("width", "0%");  
-                    $(".upstatus").html("<span style='color:red;'>"+data.result.msg+"</span>");  
-                }  
-                  
-            },  
-            progress: function (e, data) {//上传进度  
-                var progress = parseInt(data.loaded / data.total * 100, 10);  
-                $(".progress .bar").css("width", progress + "%");  
-                $(".upstatus").html("正在上传...");  
-            }  
-        });  
+         
+    }
+
+    function cancelUpload() {
+
+    }
+
+    function deleteVideo() {
+
     }
 
 
