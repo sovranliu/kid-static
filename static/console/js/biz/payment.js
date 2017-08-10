@@ -1,14 +1,19 @@
-define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
+define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url, helper, mustache,dateTimePicker,paginator) {
 
     var serialNumber;
-    var begin = 0;
+    var pageNum = 1, limit = 20;
 
     function bindActions() {
         $('.js-search').on('click',getOrderData);
         // $('.js-dialog').on('click','.js-save',saveConfigData)
     }
 
-   function buildParams() {
+    function initPage() {
+        $('.js-filter-startTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
+        $('.js-filter-endTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
+    }
+
+   function buildSearchParams() {
         var params = {};
         params['orderNo'] = $.trim($('.js-order').val());
         params['mobileNo'] = $.trim($('.js-phone').val());
@@ -16,16 +21,24 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         params['endTime'] = $.trim($('.js-end-time').val());
         params['status'] = parseInt($('.js-status').val()) || "";
         params['size'] = 10;
-        params['begin'] = begin;
+        params['begin'] = pageNum;
 
         return params;
    }
 
+   function handleReset() {
+        $('.js-filter-input').val('');
+        $('.js-filter-select').find('option:first').prop('selected', 'selected');
+
+        pageNum = 1;
+        getTicketList();
+    }
+
     function getOrderData() {
-        var params = buildParams();
+        var params = buildSearchParams();
 
         helper.ajax(url.getOrder, params, function(res) {
-            var data = res.data;
+            var data = res.data.list;
             if(res.code >= 0) {
                 for(var i = 0;i < data.length; i++) {
                     switch(data[i].status) {
@@ -40,7 +53,19 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                             break;
                     }
                 }
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data }));
+                if(data.length == 0) {
+                     $('.js-tbody').html('<p class="dataNull">还没有收款纪录</p>');
+                }else{
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data }));
+                }
+                $('.js-tpage').createPage({
+                    pageCount: Math.ceil(res.data.total / limit), //todo
+                    current: pageNum,
+                    backFn: function (selectedPageNum) {
+                        pageNum = selectedPageNum;
+                        getOrderData();
+                    }
+                });
             }
         });
     }
@@ -49,6 +74,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     return {
         init: function () {
           bindActions();
+          initPage();
           getOrderData();
           //getFlightDiary();
         }

@@ -22,6 +22,11 @@ define([], function() {
         getRefund: _basePath + 'query/refund',
         //留言回复
         getMessages: _basePath + 'getMessages',
-        postMessageReply: _basePath + 'postMessageReply'
+        postMessageReply: _basePath + 'postMessageReply',
+        //申请
+        //退票申请
+        getAllRefund: _basePath + 'getAllRefund',
+        accessRefund: _basePath + 'accessRefund',
+        refuseRefund: _basePath + 'refuseRefund'
     };
 });

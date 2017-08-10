@@ -76,7 +76,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
             'endTime': endTime,
             'status': status,
             'begin': pageNum,
-            'limit': limit
+            'limit': '10'
         };
 
         return params;
