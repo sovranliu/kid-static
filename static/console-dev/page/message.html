@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    @@include('include/head.html',{
+    "title":"回复管理"
+    })
+    
+</head>
+<body class="page-header-fixed">
+    <div class="overlay"></div>
+    <main class="page-content content-wrap">
+        @@include('include/navbar.html')
+        @@include('include/sidebar.html')
+        <div class="page-inner">
+            <div class="page-title">
+                <h3>回复管理</h3>
+            </div>
+            <div id="main-wrapper">
+                <div class="row">
+                    <div class="col-md-12 ui-sortable">
+                        <div class="panel panel-inverse">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="js-table table table-striped table-bordered">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>姓名（手机号）</th>
+                                                <th>留言内容</th>
+                                                <th>回复内容</th>
+                                                <th>留言时间</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="js-tbody"></tbody>
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <!-- begin dialog -->
+            <div id="modal-dialog" class="js-dialog modal fade in" style="display: none;"></div>
+    <!-- end dialog -->
+        </div>
+    </main><!-- Page Content -->
+    <div class="cd-overlay"></div>
+
+    <!-- 数据表格模板 -->
+    <script id="tpl-tbody" type="x-tmpl-mustache">
+        {{#data}}
+        <tr data-id="{{id}}">
+            <td class="js-td-phone limit-width">{{mobileNo}}</td>
+            <td class="js-td-message limit-width">{{message}}</td>
+            <td class="js-td-reply limit-width">{{reply}}</td>
+            <td class="js-td-beginTime limit-width">{{beginDate}}</td>
+            <td>
+                {{^reply}}
+                <a href="#modal-dialog" data-toggle="modal">
+                    <span class="js-edit btn btn-sm btn-success"  data-toggle="tooltip" data-placement="top" title="回复"><i class="fa fa-edit text-edit"></i> 回复</span>
+                </a>
+                {{/reply}}
+            </td>
+        </tr>
+        {{/data}}
+    </script>
+
+    <!-- 编辑弹框区域：弹框内容模板 -->
+    <script id="tpl-edit-dialog" type="x-tmpl-mustache">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">回复内容<i class="form-required">*</i></label>
+                                <div class="col-md-10">
+                                    <textarea class="js-reply form-control" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
+                    <a href="javascript:;" class="js-save btn btn-sm btn-success" data-id="{{id}}">保存</a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script data-main="js/boot.js" data-start="js/biz/message.js" src="js/libs/require.min.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    @@include('include/head.html',{
+    "title":"礼品管理"
+    })
+    
+</head>
+<body class="page-header-fixed">
+    <div class="overlay"></div>
+    <main class="page-content content-wrap">
+        @@include('include/navbar.html')
+        @@include('include/sidebar.html')
+        <div class="page-inner">
+            <div class="page-title">
+                <h3>礼品管理</h3>
+            </div>
+            <div id="main-wrapper">
+                <div class="row">
+
+
+        <div class="col-md-12 ui-sortable">
+            <div class="panel panel-inverse">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <!-- begin serach -->
+                        <div class="panel-body search-body">
+                            <div class="form-inline">
+                                <div class="form-group m-r-10">
+                                    <label class="control-label">票号：</label>
+                                    <input type="text" class="js-filter-input js-filter-keyword form-control" placeholder="请输入手机号">
+                                </div>
+                                <button class="js-search btn btn-sm btn-success m-r-5">查询</button>
+                                <button class="js-reset btn btn-sm btn-default">重置</button>
+                            </div>
+                        </div>
+                        <!-- end serach -->
+
+                        <!-- begin table -->
+                        <div class="pull-right mrgb15">
+                            <a href="#modal-dialog" class="js-add btn btn-sm btn-success" data-toggle="modal">新增</a>
+                        </div>
+                        <table class="js-table table table-striped table-bordered">
+                            <thead>
+                                <tr role="row">
+                                    <th>票号</th>
+                                    <th>视频</th>
+                                    <th>上传时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="js-tbody"></tbody>
+                        </table>
+                        <!-- end table -->
+
+                        <!-- begin paginator -->
+                        <div id="data-table_paginate" class="js-tpage pull-right dataTables_paginate paging_simple_numbers">
+                            <a id="data-table_previous" aria-controls="data-table" class="paginate_button previous disabled">上一页</a>
+                            <span></span>
+                            <a id="data-table_next" aria-controls="data-table" class="paginate_button next">下一页</a>
+                        </div>
+                        <!-- begin paginator -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- begin dialog -->
+    <div id="modal-dialog" class="js-dialog modal fade in" style="display: none;"></div>
+    <!-- end dialog -->
+</div>
+
+<!-- 数据表格模板 -->
+<script id="tpl-tbody" type="x-tmpl-mustache">
+    {{#data}}
+    <tr>
+        <td>{{serialNo}}</td>
+        <td class="js-keyword-content limit-width">{{video}}</td>
+        <td>{{lastRevision}}</td>
+        <td>
+            <a href="#modal-dialog" data-toggle="modal">
+                <span class="js-edit btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o"></i> 删除</span>
+            </a>
+        </td>
+    </tr>
+    {{/data}}
+</script>
+
+<!-- 新增/编辑弹框区域：弹框内容模板 -->
+<script id="tpl-addEdit-dialog" type="x-tmpl-mustache">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="alert alert-message alert-dismissable" style="display:none;">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <span></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">关键字 <i class="form-required">*</i></label>
+                            <div class="col-md-10">
+                                <input type="text" class="js-input js-new-keyword form-control" placeholder="请输入关键字名称" value="{{keyword}}">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
+                <a href="javascript:;" class="js-save btn btn-sm btn-success">保存</a>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<!-- 删除弹框区域：弹框内容模板 -->
+<script id="tpl-delete-dialog" type="x-tmpl-mustache">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">删除</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-message alert-dismissable" style="display:none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <span></span>
+                </div>
+                <div class="alert alert-danger m-b-0">
+                    <p>确认删除关键字 【{{keyword}}】及回复【{{preview}}】 吗？</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
+                <a href="javascript:;" class="js-confirm btn btn-sm btn-success">确认</a>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+
+
+                </div><!-- Row -->
+            </div><!-- Main Wrapper -->
+        </div><!-- Page Inner -->
+    </main><!-- Page Content -->
+    <div class="cd-overlay"></div>
+
+
+    <!-- 时间段模板 -->
+    <script type="text/template" id="timeTmpl">
+    <!--{{#timeList}}
+        <li class="js-select-time rsv-li-item"><span>{{start}}-{{end}}</span></li>
+    {{/timeList}}-->
+    </script>
+
+    <script data-main="js/boot.js" data-start="js/biz/gift.js" src="js/libs/require.min.js"></script>
+    
+</body>
+</html>

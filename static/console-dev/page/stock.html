@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    @@include('include/head.html',{
+    "title":"库存管理"
+    })
+    
+</head>
+<body class="page-header-fixed">
+    <div class="overlay"></div>
+    <main class="page-content content-wrap">
+        @@include('include/navbar.html')
+        @@include('include/sidebar.html')
+        <div class="page-inner">
+            <div class="page-title">
+                <h3>库存管理</h3>
+            </div>
+            <div id="main-wrapper">
+                <div class="row">
+                    <div class="col-md-12 ui-sortable">
+                        <div class="panel panel-inverse">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <!-- begin serach -->
+                                    <div class="panel-body search-body">
+                                        <div class="form-inline">
+                                            <div class="form-group m-r-10">
+                                                <label class="control-label">选择日期：</label>
+                                                <input type="text" class="js-filter-input js-begin-time form-control" placeholder="请输入查询日期">
+                                            </div>
+                                            <button class="js-search btn btn-sm btn-success m-r-5">查询</button>
+                                            <button class="js-reset btn btn-sm btn-default">重置</button>
+                                        </div>
+                                    </div>
+                                    <!-- end serach -->
+
+                                    <!-- begin table -->
+                                    <table class="js-table table table-striped table-bordered">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>日期</th>
+                                                <th>时间段</th>
+                                                <th>是否有预约</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="js-tbody"></tbody>
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div><!-- Row -->
+            </div><!-- Main Wrapper -->
+        </div><!-- Page Inner -->
+    </main><!-- Page Content -->
+    <div class="cd-overlay"></div>
+
+    <!-- 数据表格模板 -->
+    <script id="tpl-tbody" type="x-tmpl-mustache">
+        {{#data}}
+        <tr>
+            <td>{{date}}</td>
+            <td>{{start}}-{{end}}</td>
+            <td>{{isReservation}}</td>
+            <td>
+                <a href="#modal-dialog" data-toggle="modal">
+                    <span class="js-edit btn btn-sm btn-success"  data-toggle="tooltip" data-placement="top" title="开张"><i class="fa fa-sign-in"></i> 开张</span>
+                </a>
+                <a href="#modal-dialog" data-toggle="modal">
+                    <span class="js-edit btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="打烊"><i class="fa fa-power-off"></i> 打烊</span>
+                </a>
+            </td>
+        </tr>
+        {{/data}}
+    </script>
+
+    <script data-main="js/boot.js" data-start="js/biz/payment.js" src="js/libs/require.min.js"></script>
+    
+</body>
+</html>

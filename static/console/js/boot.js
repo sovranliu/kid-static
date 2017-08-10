@@ -30,21 +30,17 @@ requirejs.config({
         bootstrap: {
             deps: ['jquery'],
             exports: 'bootstrap'
-        },
-        modern: {
-            deps: ['jquery'],
-            exports: 'modern'
         }
     }
 });
 
-require(['jquery', 'underscore', 'bootstrap', 'jCookie', 'modern', 'common'], function($, _, bootstrap, jCookie, modern, common) {
+require(['jquery', 'underscore', 'bootstrap', 'jCookie', 'common'], function($, _, bootstrap, jCookie, common) {
     (function() {
         var dataStart = $("script[data-main][data-start]").attr("data-start") || '';
         var startModules = dataStart.split(',');
 
         _.each(startModules, function(module) {
-            require([module], function(moduleObj) {
+            require([module,'util/modern'], function(moduleObj) {
                 if (moduleObj && moduleObj.init) {
                     moduleObj.init();
                 }
