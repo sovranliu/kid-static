@@ -135,3 +135,5 @@ h1, h2, h3, h4, h5, h6 {
     border-color: #242a30!important;
     color: #fff;
 }
+
+.form-required {color: red;}
