@@ -36,9 +36,10 @@
     </div>
     <div class="give-popup popup">
         <div class="pop-mask"></div>
-        <div class="pop-main">
+        <div class="pop-main" style="padding-top: 30px; padding-bottom: 30px;">
             <button class="js-ticket-share confirm-btn">分享</button>
             <button class="js-ticket-give confirm-btn">手机号赠送</button>
+            <div class="js-close close"></div>
         </div>
     </div>
     <div class="revoke-popup popup">
@@ -46,6 +47,7 @@
         <div class="pop-main">
             <p>确认撤销此次预约嘛？</p>
             <button class="js-submit confirm-btn">确认</button>
+            <div class="js-close close"></div>
         </div>
     </div>
     <div class="send-message popup">
@@ -54,6 +56,7 @@
             <p>请输入被赠送者的手机号码</p>
             <input class="js-phone" type="text" name="">
             <button class="js-send-message confirm-btn">确认</button>
+            <div class="js-close close"></div>
         </div>
     </div>
     <div class="send-message-result popup">
@@ -64,7 +67,7 @@
         </div>
     </div>
     <script id="ticketTemplate" type="x-tmpl-mustache">
-    {{#res}}
+    {{#data}}
         <li class="voucher-item {{statusStyle}}" data-id="{{serialNumber}}">
             <div class="num">
                 <span>票流水号：{{serialNumber}}</span>
@@ -87,14 +90,14 @@
                 {{#return}}
                 <a class="js-return" href="ApplyRefund.html?ticketId={{serialNumber}}">退款</a>
                 {{/return}}
-                <a class="js-book" href="Reservation.html?ticketId={{serialNumber}}">预约</a>
+                <a class="js-book" href="Reservation.html?ticketId={{serialNumber}}&type=0">预约</a>
             </div>
             {{/operate}}
         </li>
-    {{/res}}
+    {{/data}}
     </script>
     <script id="bookTemplate" type="x-tmpl-mustache">
-    {{#res}}
+    {{#data}}
         <li class="voucher-item {{statusStyle}}" data-id="{{serialNumber}}">
             <div class="num">
                 <span>票流水号：{{serialNumber}}</span>
@@ -110,12 +113,12 @@
             </div>
             {{#operate}}
             <div class="oper">
-                <a class="js-changedate btn-give" href="Reservation.html?ticketId={{serialNumber}}">改期</a>
+                <a class="js-changedate btn-give" href="Reservation.html?ticketId={{serialNumber}}&type=1">改期</a>
                 <button type="button" class="js-revoke">撤销</button>
             </div>
             {{/operate}}
         </li>
-    {{/res}}
+    {{/data}}
     </script>
     <script data-main="js/boot.js" data-start="js/biz/myorder.js" src="js/libs/require.min.js"></script>
 </body>

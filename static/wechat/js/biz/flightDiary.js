@@ -17,10 +17,10 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
     function checkPhone() {
         if (!mobileNo || !openId) {
-            helper.ajax(url.prepayAction,{},function() {})
+            helper.ajax(url.prepay,{},function() {})
         } else {
             helper.ajax(url.payInfo, {"mobileNo":mobileNo, "openId":openId}, function() {
-                if (res.code == 0) {
+                if (res.code >= 0) {
                     var data = res.data;
                     $('.js-name').text(data.user.userName);
                     $('.js-phone').text(data.user.mobileNo);
@@ -46,7 +46,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         };
 
         helper.ajax(url.getFlightDiary, params, function(res) {
-            if (res.code == 0) {
+            if (res.code >= 0) {
                 var data = res.data;
                 var $dqVideoItem;
                 var $ygVideoItem;
@@ -55,13 +55,13 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                 var ygWidth = 0;
                 var ygHeight = 0;
 
-                if (data.canPurchase.length == 0) {
+                if (!data || !data.canPurchase || data.canPurchase.length == 0) {
                     $('.js-video-can-purchase-list').html('<p class="dataNull">您还没有飞行礼品</p>');
                 } else {
                     $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.canPurchase, 'isPurchased': false }));
                 }
                 
-                if (data.hasPurchased.length == 0) {
+                if (!data || !data.hasPurchased || data.hasPurchased.length == 0) {
                     $('.js-video-has-purchase-list').html('<p class="dataNull">您还没有购买飞行礼品。</p>');
                 } else {
                     $('.js-video-has-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.hasPurchased, 'isPurchased': true }));
@@ -69,8 +69,22 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
                 $('.js-timeDuration').html(data.timeDuration);
                 $('.js-price').html(data.canPurchasePrice);
+
+                //动态设置遮罩的宽度，高度在样式中写死200px
+                $dqVideoItem = $('.js-video-can-purchase-list .fd-video-item');
+                if ($dqVideoItem.length > 0) {
+                    dqWidth = $dqVideoItem.eq(0).width();
+                    $('.fd-dq-pop').css('width', dqWidth+'px');
+                }
+
+                $ygVideoItem = $('.js-video-has-purchase-list .fd-video-item');
+                if ($ygVideoItem.length > 0) {
+                    ygWidth = $ygVideoItem.eq(0).width();
+                    $('.fd-yg-pop').css('width', ygWidth+'px');
+                }
                 
-                var timer = setInterval(function() {
+                //动态设置遮罩的宽高
+                /*var timer = setInterval(function() {
                     if (document.getElementsByTagName("video")[0].readyState != 0) {
                         $dqVideoItem = $('.js-video-can-purchase-list .fd-video-item');
                         if ($dqVideoItem.length > 0) {
@@ -92,8 +106,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                 
                         clearInterval(timer);
                     }
-                }, 10);
-                
+                }, 10);*/
             }
         });
     }
@@ -105,7 +118,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         };
 
         helper.ajax(url.buyTicket, params, function(res) {
-            if (res.code == 0) {
+            alert(res.code)
+            if (res.code >= 0) {
+                alert(typeof WeixinJSBridge)
                 if (typeof WeixinJSBridge == "undefined") {
                    if (document.addEventListener) {
                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
@@ -122,7 +137,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
     function onBridgeReady(res){
         var data = res.data;
-
+        alert(data.appId + '<br/>' + data.timestamp + '<br/>' + data.nonceString + '<br/>' + data.prepayId + '<br/>' + data.signature)
         WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
                "appId":data.appId,     //公众号名称，由商户传入     
@@ -144,8 +159,8 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     return {
         init: function () {
           bindActions();
-          checkPhone();
           getUrlParams();
+          checkPhone();
           getFlightDiary();
         }
     }

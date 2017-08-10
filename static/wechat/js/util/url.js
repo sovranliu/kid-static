@@ -1,6 +1,6 @@
 define([], function() {
-    var _basePath = 'http://121.40.90.141:8003/kid/wechat/'; //todo 发布时改成生产地址
-
+    //var _basePath = 'http://121.40.90.141:8003/kid/wechat/'; //todo 发布时改成生产地址
+    var _basePath = '/kid/wechat/'; //todo 发布时改成生产地址
     return {
         //购票
         getTicketPrice: _basePath + 'getTicketPrice',
@@ -30,10 +30,16 @@ define([], function() {
         //赠送票券
         giveTicket: _basePath + 'giveTicket',
         //登陆授权
+        getAuthorize: _basePath + "authorize",
         getVerificationCode: _basePath + 'getVerificationCode',
         handshake:_basePath + 'handshake',
+        postRegister: _basePath + 'postRegister',
         //支付页面相关
-        prepayAction: _basePath + 'prepayAction',
-        parInfo: _basePath + 'parInfo'
+        prepay: _basePath + 'prepay',
+        payInfo: _basePath + 'payInfo',
+        //分享
+        getShareConfig: _basePath + 'getShareConfig',
+        receiveTicket: _basePath + 'receiveTicket',
+        getTicketDetail: _basePath + 'getTicketDetail'
     };
 });

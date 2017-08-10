@@ -18,14 +18,35 @@
 <body>
     <div class="background2">
         <div class="tb-title">预约飞行</div>
-        <div class="shadow">
-            <div class="box">
+        <div class="shadow shadow-repeat">
+            <div class="reservation-box box">
                 <div class="rsv-con">
-                    <div class="rsv-date">
-                        <span>日期</span>
-                        <select class="js-year" rel=""></select>
-                        <select class="js-month" rel=""></select> 
-                        <select class="js-day" rel=""></select> 
+                    <div class="js-rsv-ticket-wrapper rsv-ticket">
+                        <span class="rsv-text">票务</span>
+                        <div class="rsv-date-item">
+                            <span class="js-ticket-text cur-select"></span>
+                            <select class="js-rsv-ticket" rel=""></select> 
+                        </div>
+                    </div>
+
+                    <div class="rsv-date" style="margin-top: -20px;">
+
+                        <span class="rsv-text">日期</span>
+
+                        <div class="js-date-item rsv-date-item">
+                            <span class="js-date-text js-year-text cur-select">年</span>
+                            <select class="js-year" rel=""></select> 
+                        </div>
+
+                        <div class="js-date-item rsv-date-item">
+                            <span class="js-date-text js-month-text cur-select">月</span>
+                            <select class="js-month" rel=""></select> 
+                        </div>
+
+                        <div class="js-date-item rsv-date-item">
+                            <span class="js-date-text js-day-text cur-select">日</span>
+                            <select class="js-day" rel=""></select> 
+                        </div>
                     </div>
                     <div class="rsv-timeframe">
                         <ul class="js-time-list rsv-ul-list"></ul>
@@ -56,6 +77,13 @@
     {{#timeList}}
         <li class="js-select-time rsv-li-item"><span>{{start}}-{{end}}</span></li>
     {{/timeList}}
+    </script>
+
+    <!-- 票务模板 -->
+    <script type="x-tmpl-mustache" id="ticketTmpl" >
+    {{#data}}
+        <option data-val="{{serialNumber}}">{{serialNumber}}</option>
+    {{/data}}
     </script>
 
     <script data-main="js/boot.js" data-start="js/biz/reservation.js" src="js/libs/require.min.js"></script>

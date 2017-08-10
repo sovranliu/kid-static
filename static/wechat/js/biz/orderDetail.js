@@ -44,12 +44,12 @@ define(['url', 'helper'], function (url, helper) {
 
     function checkPhone() {
         if(!mobileNo || !openId) {
-            helper.ajax(url.prepayAction,{},function() {})
+            helper.ajax(url.prepay,{},function() {})
         }else{
-            helper.ajax(url.payInfo,{"mobileNo":mobileNo,"openId":openId},function() {
-                if(res.code == 0) {
+            helper.ajax(url.payInfo,{"mobileNo":mobileNo,"openId":openId},function(res) {
+                if(res.code >= 0) {
                     var data = res.data;
-                    $('.js-name').text(data.user.userName);
+                    $('.js-name').text(data.user.name);
                     $('.js-phone').text(data.user.mobileNo);
                 }
             })
@@ -73,9 +73,9 @@ define(['url', 'helper'], function (url, helper) {
         helper.ajax(url.getTicketPrice, params, function(res) {
             var data = res.data;
 
-            if (res.code == 0) {
-                ticketPrice = ticketType == '1' ? data.single : data.group;
-                ticketRefundInsurance = data.refundInsurance;
+            if (res.code >= 0) {
+                ticketPrice = ticketType == '1' ? (data.single / 100) : (data.group / 100);
+                ticketRefundInsurance = data.refundInsurance / 100;
 
                 setRefundInsurance();
             } else {
@@ -129,9 +129,9 @@ define(['url', 'helper'], function (url, helper) {
     function calculateTotal() {
         var ticketNum = ticketType == '1' ? 1 : Number($('.js-current-num').val());
         var refundInsurance = ticketType == '1' ? Number($('.js-refundInsurance').text()) : 0;
-        var total = ticketPrice * ticketNum + refundInsurance;
+        var total = Number(ticketPrice * ticketNum + refundInsurance);
 
-        $('.js-price').text(total);
+        $('.js-price').text(!isNaN(total) ? total : '' );
     }
 
     function buyTicket() {
@@ -144,23 +144,27 @@ define(['url', 'helper'], function (url, helper) {
             insurance = 1000;
         }
         switch(ticketType) {
-            case 0:
+            case "0":
                 goodsType = 20000 + ticketNum;
                 break;
-            case 1:
+            case "1":
                 goodsType = 10000 + insurance + 1;
                 break;
         }
         
         var params = {
             "goodsType":goodsType,
-            "openId":openId
+            "openId":openId,
+            "mobileNo":mobileNo
         };
 
-        helper.ajax(url.buyTicket, params, function(res) {
-            var data = res.data;
+        alert(params.goodsType);
 
-            if (res.code == 0) {
+        helper.ajax(url.buyTicket, params, function(res) {
+            alert(res.code);
+            var data = res.data;
+            if (res.code >= 0) {
+                alert(typeof WeixinJSBridge);
                 if (typeof WeixinJSBridge == "undefined") {
                    if ( document.addEventListener ) {
                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
@@ -177,7 +181,7 @@ define(['url', 'helper'], function (url, helper) {
 
     function onBridgeReady(res){
         var data = res.data;
-
+        alert(JSON.stringify(res))
         WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
                "appId":data.appId,     //公众号名称，由商户传入     

@@ -4,6 +4,7 @@ define(['url','helper'], function (url,helper) {
         $('.js-submit').on('click',_postMessageData);
         $('.js-confirm').on("click", function () {
             $(".popup").hide();
+            window.location.href = "MemberCenter.html"
         });
     }
 
@@ -16,7 +17,7 @@ define(['url','helper'], function (url,helper) {
             };
 
             helper.ajax(url.postMessageData,params,function (res) {
-                if(res.code == 0) {
+                if(res.code >= 0) {
                     $(".popup").show();
                 }
             })

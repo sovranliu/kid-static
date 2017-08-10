@@ -26,7 +26,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
         helper.ajax(url.getOrder, params, function(res) {
             var data = res.data;
-            if(res.code == 0) {
+            if(res.code >= 0) {
                 for(var i = 0;i < data.length; i++) {
                     switch(data[i].status) {
                         case 1:

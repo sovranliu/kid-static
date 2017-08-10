@@ -14,13 +14,16 @@
 	background: #fff;
 }
 .yh-header .logo{
-	position: relative;
-	top: -62px;
-	float: left;
-	width: 251px;
-	height: 153px;
-	display: block;
-	background: url(../images/logo.png) no-repeat;
+    position: relative;
+    top: -62px;
+    float: left;
+    width: 220px;
+    height: 134px;
+    display: block;
+    background: url(../images/logo.png) no-repeat center center;
+    background-size: 75% 75%;
+    background-color: #fff;
+    box-shadow: 0 0 5px #989898;
 }
 .yh-header p{
 	width: 100%;
@@ -56,6 +59,10 @@
 	border: 1px solid #949494;
 	border-radius: 30px;
 	background: transparent;
+}
+.sign-in a{
+    text-decoration: underline;
+    color: blue
 }
 .yh-content{
 
@@ -255,6 +262,7 @@
 	position: relative;
 	background: #fff;
 	text-align: center;
+    min-height: 400px;
 }
 .yh-problem{
     position: relative;
@@ -480,6 +488,9 @@
 	margin: 20px auto;
 	padding-left: 35px;
 }
+.yh-bt-tn a {
+    color: #000;
+}
 .yh-bt-box{
 	width: 572px;
 	margin: auto;
@@ -596,6 +607,14 @@
     background: #fff;
     text-align: center;
 }
+.yh-cp-rsv video {
+    object-fit: fill;
+    width: 24%;
+    height: 200px;
+    float: left;
+    padding: 2px 2px 50px 2px;
+    text-align: center;
+}
 .rsv-con {			
     position: relative;
     text-align: right;
@@ -608,21 +627,21 @@
     background: #fff;
 }
 
-.rsv-date {
+.rsv-date, .rsv-ticket {
     overflow: hidden;
     margin: 20px 0;
     font-size: 18px;
     color: #a3a3a3;
 }
 
-.rsv-date span {
+.rsv-date span, .rsv-ticket span {
     position: relative;
     top: 8px;
     float: left;
     text-indent: 5px;
 }
 
-.rsv-date select {
+.rsv-date select, .rsv-ticket select {
     position: relative;
     display: block;
     float: left;
@@ -636,7 +655,7 @@
     color: #a3a3a3;
 }
 
-.rsv-date select:after {
+.rsv-date select:after, .rsv-ticket select:after {
     content: "";
     position: absolute;
     right: 5px;
@@ -682,6 +701,11 @@
 
 .rsv-timeframe {
     display: flex;
+}
+
+.rsv-ul-list {
+    display: block;
+    width: 100%;
 }
 
 .rsv-disclaimer {
@@ -1107,4 +1131,16 @@
     border-radius: 20px;
     margin: 20px auto;
     display: block;
+}
+.qrcode-img{
+    width: 300px;
+    height: 300px;
+}
+.yh-bt-con .confirm-btn{
+    margin: 20px 40%;
+    display: inline-block;
+}
+.dataNull {
+    text-align: center!important;
+    font-size: 18px!important;
 }

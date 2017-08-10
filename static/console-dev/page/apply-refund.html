@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    @@include('include/head.html',{
+    "title":"退票申请"
+    })
+    
+</head>
+<body class="page-header-fixed">
+    <div class="overlay"></div>
+    <main class="page-content content-wrap">
+        @@include('include/navbar.html')
+        @@include('include/sidebar.html')
+        <div class="page-inner">
+            <div class="page-title">
+                <h3>退票申请</h3>
+            </div>
+            <div id="main-wrapper">
+                <div class="row">
+                    <div class="col-md-12 ui-sortable">
+                        <div class="panel panel-inverse">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                
+                                    <!-- begin table -->
+                                    <table class="js-table table table-striped table-bordered">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>姓名（手机）</th>
+                                                <th>票号</th>
+                                                <th>有效期</th>
+                                                <th>支付金额</th>
+                                                <th>退款金额</th>
+                                                <th>申请时间</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="js-tbody"></tbody>
+                                    </table>
+                                    <!-- end table -->
+
+                                    <!-- begin paginator -->
+                                    <div id="data-table_paginate" class="js-tpage pull-right dataTables_paginate paging_simple_numbers">
+                                        <a id="data-table_previous" aria-controls="data-table" class="paginate_button previous disabled">上一页</a>
+                                        <span></span>
+                                        <a id="data-table_next" aria-controls="data-table" class="paginate_button next">下一页</a>
+                                    </div>
+                                    <!-- begin paginator -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div><!-- Row -->
+            </div><!-- Main Wrapper -->
+        </div><!-- Page Inner -->
+    </main><!-- Page Content -->
+    <div class="cd-overlay"></div>
+
+    <!-- 数据表格模板 -->
+    <script id="tpl-tbody" type="x-tmpl-mustache">
+        {{#data}}
+        <tr>
+            <td>{{userName}}({{mobileNo}})</td>
+            <td>{{serialNo}}</td>
+            <td>{{expire}}</td>
+            <td>{{payPrice}}</td>
+            <td>{{refundPrice}}</td>
+            <td>{{applyTime}}</td>
+            <td>
+                <a href="#modal-dialog" data-toggle="modal">
+                    <span class="js-agree btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="同意"><i class="fa fa-check"></i> 同意</span>
+                </a>
+                <a href="#modal-dialog" data-toggle="modal">
+                    <span class="js-oppose btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="驳回"><i class="fa fa-times"></i> 驳回</span>
+                </a>
+            </td>
+        </tr>
+        {{/data}}
+    </script>
+
+    <script data-main="js/boot.js" data-start="js/biz/payment.js" src="js/libs/require.min.js"></script>
+    
+</body>
+</html>

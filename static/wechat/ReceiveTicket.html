@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="x5-page-mode" content="app">
+    <meta name="browsermode" content="application">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>亚海飞行俱乐部</title>
+    <!-- 我要购票 -->
+</head>
+<body>
+    <div class="background2">
+        <div class="mb-body">
+            <div class="js-result-success">
+                <div class="result-img">
+                  <img src="images/right.png" alt="">
+                  <span>抢票成功</span>
+                </div>
+                <div class="box">
+                  <div class="mb-text">
+                    您已成功抢到赠票，请稍后在订单中查看您所有飞行票信息。
+                  </div>
+                </div>
+            </div>
+            <div class="js-result-fail" style="display: none;">
+                <div class="result-img">
+                  <img src="images/right.png" alt="">
+                  <span>抢票失败</span>
+                </div>
+                <div class="box">
+                  <div class="js-fail-text mb-text"></div>
+                </div>
+            </div>
+            <a class="back-btn" href="MyOrder.html">返回我的订单</a>
+        </div>
+    </div>
+
+    <script data-main="js/boot.js" data-start="js/biz/receiveTicket.js" src="js/libs/require.min.js"></script>
+</body>
+</html>

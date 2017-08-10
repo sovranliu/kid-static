@@ -26,12 +26,19 @@
             </div>
         </div>
     </div>
+    <div class="popup">
+        <div class="pop-mask"></div>
+        <div class="pop-main">
+            <p></p>
+            <button class="js-confirm confirm-btn">确认</button>
+        </div>
+    </div>
     <script id="template" type="x-tmpl-mustache">
         <ul class="pi-list">
             <li class="pi-item">
                 <span class="pi-left">姓名</span>
                 <div class="pi-right">
-                    <input type="text" placeholder="请填写姓名" name="" value="{{userName}}">
+                    <input class="js-username" type="text" placeholder="请填写姓名" name="" value="{{userName}}">
                 </div>
             </li>
             <li class="pi-item">
@@ -56,13 +63,13 @@
             <li class="pi-item">
                 <span class="pi-left">手机</span>
                 <div class="pi-right">
-                    <input type="number" placeholder="请填写手机号码" name="" value="{{telephone}}">
+                    <input type="number" class="js-telephone" placeholder="请填写手机号码" name="" value="{{telephone}}">
                 </div>
             </li>
             <li class="pi-item">
                 <span class="pi-left">地址</span>
                 <div class="pi-right">
-                    <input type="text" placeholder="请填写详细收货地址" name="" value={{address}}>
+                    <input type="text" class="js-address" placeholder="请填写详细收货地址" name="" value={{address}}>
                 </div>
             </li>
         </ul>

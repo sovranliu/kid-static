@@ -32,8 +32,6 @@
 					</li>
 				</ul>
 				<div class="sign-in">
-					<button>登录</button>
-					<button>注册</button>
 				</div>
 			</div>
 		</div>
@@ -62,6 +60,10 @@
 				<div class="yh-cp-rsv">
 					<div class="rsv-con">
 						<div class="bor">
+							<div class="rsv-ticket">
+								<span class="rsv-text">票务</span>
+								<select class="js-rsv-ticket" rel="" style="width: 50%"></select> 
+							</div>
 							<div class="rsv-date">
 		                        <span>日期</span>
 		                        <select class="js-year" rel=""></select>
@@ -126,7 +128,7 @@
 		<div class="js-disclaimer-wrapper popup">
 	        <div class="pop-mask"></div>
 	        <div class="pop-main" style="width: 45%;">
-	            <p class="cen">
+	            <p>
 	            	1、免责协议免责协议免责协议免责协议免责协议免责协议<br>
 		            2、免责协议免责协议免责协议免责协议免责协议免责协议<br>
 		            3、免责协议免责协议免责协议免责协议免责协议免责协议<br>
@@ -142,6 +144,13 @@
 	    {{#timeList}}
 	        <li class="js-select-time rsv-li-item"><span>{{start}}-{{end}}</span></li>
 	    {{/timeList}}
+	    </script>
+
+	    <!-- 票务模板 -->
+	    <script type="x-tmpl-mustache" id="ticketTmpl" >
+	    {{#data}}
+	        <option data-val="{{serialNumber}}">{{serialNumber}}</option>
+	    {{/data}}
 	    </script>
 
 		<!-- Swiper JS -->

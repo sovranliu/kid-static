@@ -15,7 +15,13 @@ h1, h2, h3, h4, h5, h6 {
 .h4, h4 {
     font-size: 18px;
 }
-
+.mrgb15{
+    margin-bottom: 15px;
+}
+.panel .panel-body .btn{
+    height: 34px;
+    margin-top: -4px;
+}
 .btn.btn-white {
     font-weight: 400;
     color: #333;

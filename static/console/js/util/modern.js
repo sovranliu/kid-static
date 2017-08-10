@@ -41,9 +41,10 @@ $( document ).ready(function() {
  
     
     // tooltips
-    $( '[data-toggle~="tooltip"]' ).tooltip({
-        container: 'body'
-    });
+    $('body').tooltip({
+        selector:'[data-toggle="tooltip"]'
+    })
+    
     
     
     // Element Blocking

@@ -207,6 +207,7 @@ define(['jquery'], function($) {
                 // }
             },
             success: function(data) {
+                $('body').css('visibility','visible');
                 if(data.msg != null && data.msg != "") {
                     alert(data.msg);
                     return;

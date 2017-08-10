@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>库存管理</title>
+    
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta charset="UTF-8">
+    
+    <!-- Styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="css/line-icons/simple-line-icons.css" rel="stylesheet" type="text/css"/>	
+    
+    <!-- Theme Styles -->
+    <link href="css/modern.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/blue.css" class="theme-color" rel="stylesheet" type="text/css"/>
+    <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+    
+</head>
+<body class="page-header-fixed">
+    <div class="overlay"></div>
+    <main class="page-content content-wrap">
+                <div class="navbar">
+            <div class="navbar-inner">
+                <div class="logo-box">
+                    <a href="index.html" class="logo-text">
+                        <span>后台管理</span>
+                    </a>
+                </div><!-- Logo Box -->
+                <div class="topmenu-outer">
+                    <div class="top-menu">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>        
+                                <a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
+                            </li>
+                            <li>        
+                                <a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                           
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
+                                    <span class="user-name">David<i class="fa fa-angle-down"></i></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-list" role="menu">
+                                    <li role="presentation"><a href="profile.html"><i class="fa fa-user"></i>信息配置</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="login.html" class="log-out waves-effect waves-button waves-classic">
+                                    <span><i class="fa fa-sign-out m-r-xs"></i>注销</span>
+                                </a>
+                            </li>
+                        </ul><!-- Nav -->
+                    </div><!-- Top Menu -->
+                </div>
+            </div>
+        </div>
+                <div class="page-sidebar sidebar">
+            <div class="page-sidebar-inner slimscroll">
+                <ul class="menu accordion-menu">
+                    <li>
+                        <a href="config.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-cog"></span>
+                            <p>系统参数配置</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="user.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-user"></span>
+                            <p>会员管理</p>
+                        </a>
+                    </li>
+                    <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-transfer"></span><p>申请审批</p><span class="arrow"></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="apply-refund.html">退票申请</a></li>
+                            <li><a href="apply-revoke.html">撤销申请</a></li>
+                            <li><a href="apply-change.html">改期申请</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="ticket.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-th-list"></span>
+                            <p>票务管理</p>
+                        </a>
+                    </li>
+                    <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-briefcase"></span><p>预约管理</p><span class="arrow"></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="reservation.html">预约管理</a></li>
+                            <li><a href="stock.html">库存管理</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="gift.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-gift"></span>
+                            <p>礼品管理</p>
+                        </a>
+                    </li>
+                    <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-usd"></span><p>财务报表</p><span class="arrow"></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="payment.html">收款记录</a></li>
+                            <li><a href="refundment.html">退款记录</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="message.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-envelope"></span>
+                            <p>留言管理</p>
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- Page Sidebar Inner -->
+        </div><!-- Page Sidebar -->
+        <div class="page-inner">
+            <div class="page-title">
+                <h3>库存管理</h3>
+            </div>
+            <div id="main-wrapper">
+                <div class="row">
+                    <div class="col-md-12 ui-sortable">
+                        <div class="panel panel-inverse">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <!-- begin serach -->
+                                    <div class="panel-body search-body">
+                                        <div class="form-inline">
+                                            <div class="form-group m-r-10">
+                                                <label class="control-label">选择日期：</label>
+                                                <input type="text" class="js-filter-input js-begin-time form-control" placeholder="请输入查询日期">
+                                            </div>
+                                            <button class="js-search btn btn-sm btn-success m-r-5">查询</button>
+                                            <button class="js-reset btn btn-sm btn-default">重置</button>
+                                        </div>
+                                    </div>
+                                    <!-- end serach -->
+
+                                    <!-- begin table -->
+                                    <table class="js-table table table-striped table-bordered">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>日期</th>
+                                                <th>时间段</th>
+                                                <th>是否有预约</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="js-tbody"></tbody>
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div><!-- Row -->
+            </div><!-- Main Wrapper -->
+        </div><!-- Page Inner -->
+    </main><!-- Page Content -->
+    <div class="cd-overlay"></div>
+
+    <!-- 数据表格模板 -->
+    <script id="tpl-tbody" type="x-tmpl-mustache">
+        {{#data}}
+        <tr>
+            <td>{{date}}</td>
+            <td>{{start}}-{{end}}</td>
+            <td>{{isReservation}}</td>
+            <td>
+                <a href="#modal-dialog" data-toggle="modal">
+                    <span class="js-edit btn btn-sm btn-success"  data-toggle="tooltip" data-placement="top" title="开张"><i class="fa fa-sign-in"></i> 开张</span>
+                </a>
+                <a href="#modal-dialog" data-toggle="modal">
+                    <span class="js-edit btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="打烊"><i class="fa fa-power-off"></i> 打烊</span>
+                </a>
+            </td>
+        </tr>
+        {{/data}}
+    </script>
+
+    <script data-main="js/boot.js" data-start="js/biz/payment.js" src="js/libs/require.min.js"></script>
+    
+</body>
+</html>
