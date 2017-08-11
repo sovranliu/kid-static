@@ -32,6 +32,10 @@ define([], function() {
         //退票申请
         getAllRefund: _basePath + 'getAllRefund',
         accessRefund: _basePath + 'accessRefund',
-        refuseRefund: _basePath + 'refuseRefund'
+        refuseRefund: _basePath + 'refuseRefund',
+        //撤销申请&&&&改期申请    
+        getRevokeBooks: _basePath + 'getRevokeBooks',
+        approveBookChange: _basePath + 'approveBookChange',
+        getRescheduleBooks: _basePath + 'getRescheduleBooks'
     };
 });

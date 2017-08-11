@@ -41,9 +41,9 @@
                                                 <label class="control-label">订单状态：</label>
                                                 <select class="js-status form-control">
                                                     <option value="">选择订单状态</option>
-                                                    <option value="1">未支付</option>
-                                                    <option value="2">已支付</option>
-                                                    <option value="3">已退款</option>
+                                                    <option value="1">退款中</option>
+                                                    <option value="2">已退款</option>
+                                                    <option value="3">退款失败</option>
                                                 </select>
                                             </div>
                                             <button class="js-search btn btn-sm btn-success m-r-5">查询</button>
@@ -96,18 +96,18 @@
         {{#data}}
         <tr>
             <td>{{userName}}({{mobileNo}})</td>
-            <td>{{goodsName}}</td>
+            <td>{{goodsTypeTitle}}</td>
             <td>{{refundNo}}</td>
-            <td>{{refundPrice}}</td>
-            <td>{{payPrice}}<td>
+            <td>{{refundFee}}</td>
+            <td>{{fee}}</td>
             <td>{{serialNo}}</td>
-            <td>{{refundTime}}</td>
+            <td>{{time}}</td>
             <td>{{statusName}}</td>
         </tr>
         {{/data}}
     </script>
 
-    <script data-main="js/boot.js" data-start="js/biz/payment.js" src="js/libs/require.min.js"></script>
+    <script data-main="js/boot.js" data-start="js/biz/refundment.js" src="js/libs/require.min.js"></script>
     
 </body>
 </html>
