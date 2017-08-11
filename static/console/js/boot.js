@@ -9,9 +9,7 @@ requirejs.config({
         bootstrap: 'libs/bootstrap.min',
         jCookie: 'libs/jquery.cookie',
         dateTimePicker: 'libs/bootstrap-datetimepicker.min',
-        fileupload: 'libs/jquery.fileupload',
-        //datepicker: 'libs/bootstrap-datepicker',
-        //dateTimePicker: 'libs/bootstrap-datetimepicker.min',
+        //fileupload: 'libs/jquery.fileupload',
         /******************* utils *****************/
         message: 'util/message',
         paginator: 'util/paginator',

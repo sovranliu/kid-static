@@ -1,4 +1,4 @@
-define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
+define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], function (url, helper, mustache, dateTimePicker, msg, paginator) {
 
     var pageNum = 1, gId;
 
@@ -10,6 +10,8 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     }
 
     function initPage() {
+        $('.js-filter-startTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
+        $('.js-filter-endTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
         $('.js-filter-serialNumber').val(helper.getQueryStr('serialNumber') || '');
     }
 

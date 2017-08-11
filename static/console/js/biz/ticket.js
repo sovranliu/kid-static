@@ -1,4 +1,4 @@
-define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], function (url, helper, mustache, dateTimePicker, message, paginator) {
+define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], function (url, helper, mustache, dateTimePicker, msg, paginator) {
 
     var pageNum = 1, limit = 20, gId;
 

@@ -1,4 +1,4 @@
-define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], function (url, helper, mustache, dateTimePicker, message, paginator) {
+define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], function (url, helper, mustache, dateTimePicker, msg, paginator) {
 
     function bindActions() {
         $('.js-search').on('click', getStock);
@@ -20,7 +20,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
 
     function getStock() {
         var params = {
-            'date': $('js-filter-date').val()
+            'date': $('.js-filter-date').val()
         };
 
         helper.ajax(url.getStock, params, function(res) {
@@ -48,7 +48,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
                 msg.success('操作成功');
                 getStock();
             } else {
-                msg.success('操作失败，请稍候重试');
+                msg.error('操作失败，请稍候重试');
             }
         });
     }
@@ -65,7 +65,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
                 msg.success('操作成功');
                 getStock();
             } else {
-                msg.success('操作失败，请稍候重试');
+                msg.error('操作失败，请稍候重试');
             }
         });
     }
