@@ -52,7 +52,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
                 if (!data || !data.list || data.list.length == 0) {
                     $('.js-tbody').html('<td colspan=7 class="dataNull">还没有票务信息</td>');
                 } else {
-                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': processData(res.data.list) }));
 
                     $('.js-tpage').createPage({
                         pageCount: Math.ceil(data.total / pageLimit),
@@ -67,6 +67,33 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
                 msg.error('获取票务数据失败，请稍候重试');
             }            
         });
+    }
+
+    function processData(data) {
+        var statusDesc = '';
+
+        _.each(data, function(item, i) {
+            switch(Number(item.status)) {
+                case 0:
+                    statusDesc = '可用';
+                    break;
+                case 1:
+                    statusDesc = '已使用';
+                    break;
+                case 2:
+                    statusDesc = '已过期';
+                    break;
+                case 3:
+                    statusDesc = '退款申请中';
+                    break;
+                case 4:
+                    statusDesc = '已退票';
+                    break;
+
+            }
+            
+            item.statusDesc = statusDesc;
+        })
     }
 
     return {
