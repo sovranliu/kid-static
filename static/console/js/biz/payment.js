@@ -5,6 +5,7 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
 
     function bindActions() {
         $('.js-search').on('click',getOrderData);
+        $('.js-reset').on('click', handleReset);
         // $('.js-dialog').on('click','.js-save',saveConfigData)
     }
 
@@ -14,20 +15,28 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
         $('.js-phone').val(helper.getQueryStr('telephone') || '');
     }
 
-   function buildSearchParams() {
+    function handleReset() {
+        $('.js-filter-input').val('');
+        $('.js-table').hide();
+
+        pageNum = 1;
+        getOrderData();
+    }
+
+    function buildSearchParams() {
         var params = {};
         params['orderNo'] = $.trim($('.js-order').val());
         params['mobileNo'] = $.trim($('.js-phone').val());
-        params['beginTime'] = $.trim($('.js-begin-time').val());
-        params['endTime'] = $.trim($('.js-end-time').val());
+        params['beginTime'] = $.trim($('.js-filter-startTime').val());
+        params['endTime'] = $.trim($('.js-filter-endTime').val());
         params['status'] = parseInt($('.js-status').val()) || "";
         params['limit'] = limit;
         params['begin'] = pageNum;
 
         return params;
-   }
+    }    
 
-   function handleReset() {
+    function handleReset() {
         $('.js-filter-input').val('');
         $('.js-filter-select').find('option:first').prop('selected', 'selected');
 
