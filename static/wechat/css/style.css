@@ -271,6 +271,13 @@ a,div,img {
     height: 38px;
     line-height: 38px;
 }
+.pop-main .check-register{
+    width:auto;
+    background:none;
+    margin:0;
+    height:auto;
+    line-height:1;
+}
 
 .pop-main p {
     padding: 20px 38px;
@@ -279,7 +286,9 @@ a,div,img {
     line-height: 1.5;
     text-align: left;
 }
-
+.pop-main .mb-tips{
+    font-size: 12px;
+}
 .pop-main p.cen {
     text-align: center;
 }

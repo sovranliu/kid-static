@@ -2,6 +2,7 @@ define(['url', 'helper'], function(url, helper) {
 
     function bindActions() {
         $('.js-submit').on('click',_postRegisterData);
+        $('.js-check').on('click',_checkMemberBenefit);
         $('.js-confirm').on('click', function() {
             $('.popup').hide();
         });
@@ -84,6 +85,13 @@ define(['url', 'helper'], function(url, helper) {
         }else{
             $('.popup').show();
             $('.popup').find('p').html('请完善输入内容');
+        }
+    }
+
+    function _checkMemberBenefit() {
+        var isCheck = $(this).prop('checked');
+        if(isCheck) {
+            $('.js-mbship').css('display','none');
         }
     }
 
