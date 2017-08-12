@@ -169,8 +169,6 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
 
         var formData = new FormData();
         formData.append('file', file);
-        //formData.append('qrCodesCommonReq', JSON.stringify(params));
-
 
         $.ajax({
             url: url.uploadVideo,
@@ -182,7 +180,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
         }).done(function (res) {
             if (res.code >= 0) {
                 msg.success('上传成功', $('.js-dialog').find('.alert-message'));
-                $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': res.data }));
+                $('.js-video-list').append(mustache.render($('#tpl-video-item').html(), { 'data': res.data }));
                 cancelUpload();
             } else {
                 msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
