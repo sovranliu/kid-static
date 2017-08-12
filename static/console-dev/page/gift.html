@@ -40,7 +40,6 @@
                         <table class="js-table table table-striped table-bordered" style="display: none;">
                             <thead>
                                 <tr role="row">
-                                    <th>票号</th>
                                     <th>视频</th>
                                     <th>上传时间</th>
                                     <th>操作</th>
@@ -49,14 +48,6 @@
                             <tbody class="js-tbody"></tbody>
                         </table>
                         <!-- end table -->
-
-                        <!-- begin paginator -->
-                        <div id="data-table_paginate" class="js-tpage pull-right dataTables_paginate paging_simple_numbers" style="display: none;">
-                            <a id="data-table_previous" aria-controls="data-table" class="paginate_button previous disabled">上一页</a>
-                            <span></span>
-                            <a id="data-table_next" aria-controls="data-table" class="paginate_button next">下一页</a>
-                        </div>
-                        <!-- begin paginator -->
                     </div>
                 </div>
             </div>
@@ -71,10 +62,9 @@
 <!-- 数据表格模板 -->
 <script id="tpl-tbody" type="x-tmpl-mustache">
     {{#data}}
-    <tr>
-        <td>{{serialNo}}</td>
-        <td>{{video}}</td>
-        <td>{{lastRevision}}</td>
+    <tr data-id="{{id}}">
+        <td>{{url}}</td>
+        <td>{{createTime}}</td>
         <td>
             <a href="#modal-dialog" data-toggle="modal">
                 <span class="js-delete btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o"></i> 删除</span>

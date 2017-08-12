@@ -12,7 +12,7 @@ define([], function() {
         refundTicket: _basePath + 'refundTicket',
         //飞行日志列表
         getFlightDiary: _basePath + 'getFlightDiary', //todo
-        deleteFlightDiary: _basePath + 'deleteFlightDiary', //todo
+        deleteFlightDiary: _basePath + 'deleteFlightDiary',
         saveFlightDiary: _basePath + 'saveFlightDiary', //todo
         uploadVideo: _basePath + 'uploadFlightDiary',
         deleteVideo: _basePath + 'deleteVideo', //todo

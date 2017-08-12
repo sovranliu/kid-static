@@ -1,6 +1,6 @@
-define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, helper, mustache, msg, paginator) {
+define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache, msg) {
 
-    var pageNum = 1, pageLimit = 20, gId;
+    var gId;
 
     function bindActions() {
         $('.js-search').on('click', getFlightDiary);
@@ -26,9 +26,7 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
     function handleReset() {
         $('.js-filter-input').val('');
         $('.js-table').hide();
-        $('.js-tpage').hide();
 
-        pageNum = 1;
         getFlightDiary();
     }
 
@@ -36,9 +34,7 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
         var serialNumber = $('.js-filter-serialNumber').val();
 
         var params = {
-            'serialNumber': $.trim(serialNumber),
-            'begin': pageNum,
-            'limit': pageLimit
+            'serialNumber': $.trim(serialNumber)
         };
 
         return params;
@@ -51,22 +47,12 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
             var data = res.data;
             
             $('.js-table').show();
-            $('.js-tpage').show();
 
             if (res.code >= 0) {
-                if (!data || !data.list || data.list.length == 0) {
+                if (!data || data.length == 0) {
                     $('.js-tbody').html('<td colspan=4 class="dataNull">该票号暂无礼品信息</td>');
                 } else {
-                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data.list }));
-
-                    $('.js-tpage').createPage({
-                        pageCount: Math.ceil(data.total / pageLimit),
-                        current: pageNum,
-                        backFn: function (selectedPageNum) {
-                            pageNum = selectedPageNum;
-                            getFlightDiary();
-                        }
-                    });
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data }));
                 }
             } else {
                 msg.error('获取礼品数据失败，请稍候重试');
@@ -176,20 +162,6 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
         formData.append('video', file);
         //formData.append('qrCodesCommonReq', JSON.stringify(params));
 
-
-        //todo 删除mock
-        msg.success('上传成功', $('.js-dialog').find('.alert-message'));
-        $('.js-video-list').append(mustache.render($('#tpl-video-item').html(), { 'data': processVideo([
-            {'id': 1, 'url': 'http://solution.slfuture.cn/kid/static/record/2017-07/201707271830459527.mp4'},
-        ] )}));
-        cancelUpload();
-        $('.js-video-item').hover(function() {
-            $('.js-video-mask').stop().animate({height:'200px'}, 400).show();
-        }, function() {
-            $('.js-video-mask').stop().animate({height:'0px'}, 400).hide();
-        });
-
-
         helper.ajax({
             url: url.uploadVideo,
             type: 'POST',
@@ -198,20 +170,12 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
             processData: false,
             contentType: false
         }).done(function (data) {
-            //$('.js-upload-result').html('<i class="fa fa-check"></i>').addClass('upload-success').removeClass('upload-fail');
-            //$('.js-upload-name').addClass('upload-success').removeClass('upload-fail');
-            //$('.js-upload-size').addClass('upload-success').removeClass('upload-fail');
-            
             msg.success('上传成功', $('.js-dialog').find('.alert-message'));
             $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': processVideo(data) }));
             cancelUpload();
         }).fail(function (data) {
             msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
             cancelUpload();
-
-            //$('.js-upload-result').html('<i class="fa fa-close"></i>').addClass('upload-fail').removeClass('upload-success');
-            //$('.js-upload-name').addClass('upload-fail').removeClass('upload-success');
-            //$('.js-upload-size').addClass('upload-fail').removeClass('upload-success');
         });
     }
 
