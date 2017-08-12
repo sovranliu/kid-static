@@ -1,24 +1,33 @@
 define(['url', 'helper', 'mustache','paginator','message'], function (url, helper, mustache,paginator,msg) {
 
     var serialNumber;
-    var begin = 1;
+    var pageNum = 1;
 
     function bindActions() {
         $('.js-table').on('click','.js-edit',openEdit);
         $('.js-dialog').on('click','.js-save',saveConfigData);
-        $('.js-search').on('click',getMessageData)
+        $('.js-search').on('click',getMessageData);
+        $('.js-reset').on('click', handleReset);
     }
 
-   function buildParams() {
+    function buildParams() {
         var params = {};
         params['mobileNo'] = $.trim($('.js-phone').val());
         params['beginDate'] = $.trim($('.js-begin-time').val());
         params['endDate'] = $.trim($('.js-end-time').val());
         params['size'] = 20;
-        params['begin'] = begin;
+        params['begin'] = pageNum;
 
         return params;
-   }
+    }
+
+    function handleReset() {
+        $('.js-filter-input').val('');
+        $('.js-table').hide();
+
+        pageNum = 1;
+        getMessageData();
+    }
 
     function getMessageData() {
         var params = buildParams();

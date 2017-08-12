@@ -7,6 +7,7 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
         $('.js-add').on('click',openAdd);
         $('.js-table').on('click','.js-edit',openEdit);
         $('.js-table').on('click','.js-del',openDel);
+        $('.js-reset').on('click', handleReset);
         $('.js-dialog').on('click','.js-save',saveEditData);
         $('.js-dialog').on('click','.js-confirm',saveDelData);
         $('.js-dialog').on('click','.js-change-img', showUpload);
@@ -16,6 +17,13 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
         $('.js-dialog').on('click', '.js-upload-delete', deleteImage);
     }
 
+    function handleReset() {
+        $('.js-filter-input').val('');
+        $('.js-table').hide();
+
+        pageNum = 1;
+        getMaterielData();
+    }
 
     function getMaterielData() {
         var params = {

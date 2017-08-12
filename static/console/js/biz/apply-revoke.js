@@ -17,7 +17,7 @@ define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,
         helper.ajax(url.getRevokeBooks, params, function(res) {
             if(res.code >= 0) {
                 if(res.data.list.length == 0) {
-                    $('.js-tbody').html('<td colspan="6" class="dataNull">暂无退票申请</td>');
+                    $('.js-tbody').html('<td colspan="6" class="dataNull">暂无撤销申请</td>');
                 }else{
                     $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
                 }
