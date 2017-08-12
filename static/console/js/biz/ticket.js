@@ -1,13 +1,10 @@
 define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], function (url, helper, mustache, dateTimePicker, msg, paginator) {
 
-    var pageNum = 1, limit = 20, gId;
+    var pageNum = 1, pageLimit = 20, gId;
 
     function bindActions() {
         $('.js-search').on('click', getTicketList);
         $('.js-reset').on('click', handleReset);
-        $('.js-tbody').on('click', '.js-refund', openDelete);
-        $('.js-tbody').on('click', '.js-flightDiary', getFlightDiary);
-        $('.js-dialog').on('click', '.js-confirm', refundTicket);
     }
 
     function initPage() {
@@ -25,43 +22,6 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
         getTicketList();
     }
 
-    function openDelete() {
-        var $row = $(this).closest('tr');
-
-        gId = $row.data('id');
-
-        $('.js-dialog').html(mustache.render($('#tpl-delete-dialog').html(), { 'id': gId })).modal();
-    }
-
-    function refundTicket() {
-        var params = {
-            'serialNumber': gId
-        };
-
-        helper.ajax(url.postConfig, params, function(res) {
-            if (res.code == '0') {
-                $('.js-dialog').modal('hide');
-                msg.success('退票成功');
-            } else {
-                msg.error(res.msg);
-            }
-        });
-    }
-
-    function getFlightDiary() {
-        var params = {
-            'serialNumber': gId
-        };
-
-        helper.ajax(url.getFlightDiary, params, function(res) {
-            if (res.code == '0') {
-                //todo
-            } else {
-                //todo
-            }
-        });
-    }
-
     function buildSearchParams() {
         var serialNumber = $('.js-filter-serialNumber').val();
         var telephone = $('.js-filter-telephone').val();
@@ -76,7 +36,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
             'endTime': endTime,
             'status': status,
             'begin': pageNum,
-            'limit': '10'
+            'limit': pageLimit
         };
 
         return params;
@@ -86,23 +46,25 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
         var params = buildSearchParams();
 
         helper.ajax(url.getTicketList, params, function(res) {
-            if (res.code == '0') {
-                if (res.data.length == 0) {
-                    $('.js-tbody').html('<p class="dataNull">还没有票务信息</p>');
-                } else {
-                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data }));
-                }
+            var data = res.data;
 
-                $('.js-tpage').createPage({
-                    pageCount: Math.ceil(100 / limit), //todo
-                    current: pageNum,
-                    backFn: function (selectedPageNum) {
-                        pageNum = selectedPageNum;
-                        getTicketList();
-                    }
-                });
+            if (res.code >= 0) {
+                if (!data || !data.list || data.list.length == 0) {
+                    $('.js-tbody').html('<td colspan=7 class="dataNull">还没有票务信息</td>');
+                } else {
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
+
+                    $('.js-tpage').createPage({
+                        pageCount: Math.ceil(data.total / pageLimit),
+                        current: pageNum,
+                        backFn: function (selectedPageNum) {
+                            pageNum = selectedPageNum;
+                            getTicketList();
+                        }
+                    });
+                }
             } else {
-                //todo
+                msg.error('获取票务数据失败，请稍候重试');
             }            
         });
     }

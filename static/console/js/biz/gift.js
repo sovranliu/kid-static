@@ -1,6 +1,6 @@
 define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, helper, mustache, msg, paginator) {
 
-    var pageNum = 1, limit = 20, gId;
+    var pageNum = 1, pageLimit = 20, gId;
 
     function bindActions() {
         $('.js-search').on('click', getFlightDiary);
@@ -13,6 +13,14 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
         $('.js-dialog').on('click', '.js-upload-delete', deleteVideo);
         $('.js-dialog').on('click', '.js-save', saveFlightDiary);
         $('.js-dialog').on('click', '.js-confirm', deleteFlightDiary);
+    }
+
+    function initPage() {
+        $('.js-filter-serialNumber').val(helper.getQueryStr('serialNumber') || '');
+
+        if (helper.getQueryStr('serialNumber')) {
+           getFlightDiary(); 
+        }
     }
 
     function handleReset() {
@@ -30,7 +38,7 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
         var params = {
             'serialNumber': $.trim(serialNumber),
             'begin': pageNum,
-            'limit': 20
+            'limit': pageLimit
         };
 
         return params;
@@ -45,10 +53,23 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
             $('.js-table').show();
             $('.js-tpage').show();
 
-            if (data.length == 0) {
-                $('.js-tbody').html('<p class="dataNull">该票号暂无礼品信息</p>');
+            if (res.code >= 0) {
+                if (!data || !data.list || data.list.length == 0) {
+                    $('.js-tbody').html('<td colspan=4 class="dataNull">该票号暂无礼品信息</td>');
+                } else {
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data.list }));
+
+                    $('.js-tpage').createPage({
+                        pageCount: Math.ceil(data.total / pageLimit),
+                        current: pageNum,
+                        backFn: function (selectedPageNum) {
+                            pageNum = selectedPageNum;
+                            getFlightDiary();
+                        }
+                    });
+                }
             } else {
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data }));
+                msg.error('获取礼品数据失败，请稍候重试');
             }
         });
     }
@@ -89,9 +110,7 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
         };
 
         helper.ajax(url.saveFlightDiary, params, function(res) {
-            var data = res.data;
-            
-            if (data.code == 0) {
+            if (res.code >= 0) {
                 msg.success('用户礼品添加成功');
                 getFlightDiary();
             } else {
@@ -106,9 +125,7 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
         };
 
         helper.ajax(url.deleteFlightDiary, params, function(res) {
-            var data = res.data;
-            
-            if (data.code == 0) {
+            if (res.code >= 0) {
                 msg.success('用户礼品删除成功');
                 getFlightDiary();
             } else {
@@ -123,11 +140,11 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
         var $file = $('.js-upload-input');
         var file = $file.length > 0 ? $file[0].files[0] : "";
 
-        if (!file || file.size >= 20480000) { //20M
+        /*if (!file || file.size >= 20480000) { //20M
             msg.error('您上传的视频超出限制，请处理后重试', $('.js-dialog').find('.alert-message'));
             cancelUpload();
             return;
-        }
+        }*/
 
         if (!file || file.size == 0) {
             msg.error('请选择上传视频', $('.js-dialog').find('.alert-message'));
@@ -155,23 +172,23 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
             return;
         }
 
-        msg.success('上传成功', $('.js-dialog').find('.alert-message'));
-            $('.js-upload-result').html('<i class="fa fa-check"></i>').addClass('upload-success').removeClass('upload-fail');
-            $('.js-upload-name').addClass('upload-success').removeClass('upload-fail');
-            $('.js-upload-size').addClass('upload-success').removeClass('upload-fail');
-            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': [
-                {'id':1, 'url': 'http://solution.slfuture.cn/kid/static/record/2017-07/201707271830459527.mp4', 'name': '11111111111111111'},
-                {'id':1, 'url': 'http://solution.slfuture.cn/kid/static/record/2017-07/201707271830459527.mp4', 'name': '222'},
-                {'id':1, 'url': 'http://solution.slfuture.cn/kid/static/record/2017-07/201707271830459527.mp4', 'name': '333'},
-                {'id':1, 'url': 'http://solution.slfuture.cn/kid/static/record/2017-07/201707271830459527.mp4', 'name': '444'},
-                {'id':1, 'url': 'http://solution.slfuture.cn/kid/static/record/2017-07/201707271830459527.mp4', 'name': '555'},
-                {'id':1, 'url': 'http://solution.slfuture.cn/kid/static/record/2017-07/201707271830459527.mp4', 'name': '666'},
-                {'id':1, 'url': 'http://solution.slfuture.cn/kid/static/record/2017-07/201707271830459527.mp4', 'name': '777'}
-                ] }));
-
         var formData = new FormData();
         formData.append('video', file);
         //formData.append('qrCodesCommonReq', JSON.stringify(params));
+
+
+        //todo 删除mock
+        msg.success('上传成功', $('.js-dialog').find('.alert-message'));
+        $('.js-video-list').append(mustache.render($('#tpl-video-item').html(), { 'data': processVideo([
+            {'id': 1, 'url': 'http://solution.slfuture.cn/kid/static/record/2017-07/201707271830459527.mp4'},
+        ] )}));
+        cancelUpload();
+        $('.js-video-item').hover(function() {
+            $('.js-video-mask').stop().animate({height:'200px'}, 400).show();
+        }, function() {
+            $('.js-video-mask').stop().animate({height:'0px'}, 400).hide();
+        });
+
 
         helper.ajax({
             url: url.uploadVideo,
@@ -181,22 +198,21 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
             processData: false,
             contentType: false
         }).done(function (data) {
-            //返回视频地址
+            //$('.js-upload-result').html('<i class="fa fa-check"></i>').addClass('upload-success').removeClass('upload-fail');
+            //$('.js-upload-name').addClass('upload-success').removeClass('upload-fail');
+            //$('.js-upload-size').addClass('upload-success').removeClass('upload-fail');
+            
             msg.success('上传成功', $('.js-dialog').find('.alert-message'));
-            $('.js-upload-result').html('<i class="fa fa-check"></i>').addClass('upload-success').removeClass('upload-fail');
-            $('.js-upload-name').addClass('upload-success').removeClass('upload-fail');
-            $('.js-upload-size').addClass('upload-success').removeClass('upload-fail');
-
-            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': data }));
+            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': processVideo(data) }));
+            cancelUpload();
         }).fail(function (data) {
             msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
-            $('.js-upload-result').html('<i class="fa fa-close"></i>').addClass('upload-fail').removeClass('upload-success');
-            $('.js-upload-name').addClass('upload-fail').removeClass('upload-success');
-            $('.js-upload-size').addClass('upload-fail').removeClass('upload-success');
+            cancelUpload();
+
+            //$('.js-upload-result').html('<i class="fa fa-close"></i>').addClass('upload-fail').removeClass('upload-success');
+            //$('.js-upload-name').addClass('upload-fail').removeClass('upload-success');
+            //$('.js-upload-size').addClass('upload-fail').removeClass('upload-success');
         });
-
-
-       cancelUpload();  
     }
 
     function cancelUpload() {
@@ -218,9 +234,7 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
         };
 
         helper.ajax(url.deleteVideo, params, function(res) {
-            var data = res.data;
-            
-            if (data.code == 0) {
+            if (res.code >= 0) {
                 msg.success('视频删除成功', $('.js-dialog').find('.alert-message'));
                 $item.remove();
             } else {
@@ -229,10 +243,23 @@ define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, hel
         });
     }
 
+    function processVideo(data) {
+        var name = '';
+        var urlItems = [];
+
+        _.each(data, function(item, i) {
+            urlItems = item.url.split('/');
+            item.name = urlItems[urlItems.length - 1];
+        });
+
+        return data;
+    }
+
 
     return {
         init: function () {
             bindActions();
+            initPage();
         }
     }
 });

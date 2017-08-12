@@ -18,8 +18,7 @@
             <div id="main-wrapper">
                 <div class="row">
 
-
- <div class="col-md-12 ui-sortable">
+<div class="col-md-12 ui-sortable">
             <div class="panel panel-inverse">
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -116,11 +115,11 @@
                             <div class="col-md-10" style="margin-top:20px;margin-left:100px;">
 
                             
-                           <div class="row fileupload-buttonbar">
+                           <div class="row fileupload-buttonbar" style="margin-bottom:30px;">
                                 <div class="fileupload-file">
-                                    <div class="pull-left upload-btn-wrapper">
+                                    <div class="pull-left upload-btn-wrapper" style="cursor: pointer;">
                                         <span class="btn btn-success fileinput-button">
-                                            <i class="icon-plus icon-white"></i>
+                                            <i class="icon-plus icon-white" style="cursor: pointer;"></i>
                                             <span>选择文件</span>
                                             <input type="file" name="files" accept=".mp4" class="js-upload-input upload-btn" style="cursor: pointer;">
                                         </span>
@@ -128,10 +127,7 @@
 
                                     <div class="col-md-3 js-upload-name text-center upload-filename" style="line-height:32px;"></div>
 
-
                                     <div class="col-md-2 js-upload-size text-center upload-filesize" style="line-height:32px;"></div>
-
-                                    <div class="col-md-2 js-upload-result text-center" style="line-height:32px;"></div>
 
                                     <div class="pull-right">
                                         <button type="submit" class="js-upload-submit btn btn-primary start">
@@ -145,17 +141,9 @@
                                         <span class="fileupload-process"></span>
                                     </div>
                                 </div>
-                                <div class="col-lg-5 fileupload-progress">
-                                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="background-color:#fff;webkit-box-shadow:none;-webkit-box-shadow:none;">
-                                        <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                                    </div>
-                                    <div class="progress-extended">&nbsp;</div>
-                                </div>
                             </div>
                             
-                            <div class="js-video-list video-list-wrapper">
-                            </div>
-                            
+                            <div class="js-video-list video-list-wrapper"></div>
       
                         </div>
                         </div>
@@ -180,10 +168,8 @@
             <video controls="controls">
                 <source src="{{url}}" type="video/mp4" />
             </video>
-            <div>
-                <div class="upload-item-name pull-left">{{name}}</div>
-
-                <div class="js-upload-delete pull-right btn btn-sm btn-warning"><i class="fa fa-trash-o" style="font-size:16px;cursor:pointer;"></i></div>
+            <div class="js-video-mask video-mask" style="display:none;">
+                <i class="js-upload-delete video-delete fa fa-trash-o"></i>
             </div>
         </div>
     {{/data}}
@@ -213,7 +199,6 @@
         </div>
     </div>
 </script>
-
 
 
 
