@@ -13,7 +13,7 @@ define([], function() {
         //飞行日志列表
         getFlightDiary: _basePath + 'getFlightDiary',
         deleteFlightDiary: _basePath + 'deleteFlightDiary',
-        saveFlightDiary: _basePath + 'saveFlightDiary', //todo
+        saveFlightDiary: _basePath + 'postFlightDiary',
         uploadVideo: _basePath + 'uploadFlightDiary',
         deleteVideo: _basePath + 'deleteVideo', //todo
         //预约列表

@@ -92,7 +92,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
 
         var params = {
             'serialNumber': serialNumber,
-            'videos': videos
+            'idStr': videos.join(',')
         };
 
         helper.ajax(url.saveFlightDiary, params, function(res) {
@@ -176,7 +176,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
             contentType: false
         }).done(function (data) {
             msg.success('上传成功', $('.js-dialog').find('.alert-message'));
-            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': processVideo(data) }));
+            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': data }));
             cancelUpload();
         }).fail(function (data) {
             msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
@@ -210,18 +210,6 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
                 msg.error('视频删除失败，请稍后重试', $('.js-dialog').find('.alert-message'));
             }
         });
-    }
-
-    function processVideo(data) {
-        var name = '';
-        var urlItems = [];
-
-        _.each(data, function(item, i) {
-            urlItems = item.url.split('/');
-            item.name = urlItems[urlItems.length - 1];
-        });
-
-        return data;
     }
 
 
