@@ -13,6 +13,8 @@ define(['url', 'helper'], function (url, helper) {
         }
         helper.ajax(url.getLogin, params, function(res) {
             if(res.code >= 0) {
+                $.cookie('id', result.id);
+                $.cookie('userName', result.userName);
                 window.location.href = "config.html"
             }
         });
