@@ -163,7 +163,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
         }
 
         var formData = new FormData();
-        formData.append('video', file);
+        formData.append('file', file);
         //formData.append('qrCodesCommonReq', JSON.stringify(params));
 
 
@@ -175,9 +175,14 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
             processData: false,
             contentType: false
         }).done(function (res) {
-            msg.success('上传成功', $('.js-dialog').find('.alert-message'));
-            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': res.data }));
-            cancelUpload();
+            if (res.code >= 0) {
+                msg.success('上传成功', $('.js-dialog').find('.alert-message'));
+                $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': res.data }));
+                cancelUpload();
+            } else {
+                msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
+                cancelUpload();
+            }
         }).fail(function (res) {
             msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
             cancelUpload();

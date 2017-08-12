@@ -19,7 +19,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
     function initPage() {
         $('.js-filter-startTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
         $('.js-filter-endTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
-        $('.js-filter-serialNumber').val(helper.getQueryStr('serialNumber') || '');
+        $('.js-filter-telephone').val(helper.getQueryStr('telephone') || '');
     }
 
     function handleReset() {
