@@ -16,7 +16,11 @@ define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,
         }
         helper.ajax(url.getAllRefund, params, function(res) {
             if(res.code >= 0) {
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data }));
+                if(res.data.length == 0){
+                    $('.js-tbody').html('<td colspan="7" class="dataNull">暂无退票申请</td>');
+                }else{
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data}));
+                }
             }
         });
     }

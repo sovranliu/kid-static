@@ -25,7 +25,11 @@ define(['url', 'helper', 'mustache','paginator','message'], function (url, helpe
 
         helper.ajax(url.getMessages, params, function(res) {
             if(res.code >= 0) {
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
+                if(res.data.list.length == 0) {
+                    $('.js-tbody').html('<td colspan="5" class="dataNull">暂无留言</td>');
+                }else{
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
+                }
                 $('.js-tpage').createPage({
                     pageCount: Math.ceil(res.data.total / limit), //todo
                     current: pageNum,

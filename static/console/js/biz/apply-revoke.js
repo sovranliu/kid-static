@@ -1,4 +1,4 @@
-define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,message) {
+define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,msg) {
 
     var serialNumber;
 
@@ -16,7 +16,11 @@ define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,
         }
         helper.ajax(url.getRevokeBooks, params, function(res) {
             if(res.code >= 0) {
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
+                if(res.data.list.length == 0) {
+                    $('.js-tbody').html('<td colspan="6" class="dataNull">暂无退票申请</td>');
+                }else{
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
+                }
             }
         });
     }

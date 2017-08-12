@@ -12,7 +12,11 @@ define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,
     function getRescheduleData() {
         helper.ajax(url.getRescheduleBooks, {}, function(res) {
             if(res.code >= 0) {
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
+                if(res.data.list.length == 0) {
+                    $('.js-tbody').html('<td colspan="7" class="dataNull">暂无改期申请</td>');
+                }else{
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
+                }
             }
         });
     }
