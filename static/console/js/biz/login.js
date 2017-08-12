@@ -14,8 +14,8 @@ define(['url', 'helper'], function (url, helper) {
         helper.ajax(url.getLogin, params, function(res) {
             if(res.code >= 0) {
                 if (res && res.data) {
-                    $.cookie('id', result.data.id);
-                    $.cookie('userName', result.data.userName);
+                    $.cookie('id', res.data.id);
+                    $.cookie('userName', res.data.userName);
                 }
                 window.location.href = "config.html"
             }
