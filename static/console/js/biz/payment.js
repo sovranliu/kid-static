@@ -11,6 +11,7 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
     function initPage() {
         $('.js-filter-startTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
         $('.js-filter-endTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
+        $('.js-phone').val(helper.getQueryStr('telephone') || '');
     }
 
    function buildSearchParams() {
