@@ -108,6 +108,8 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
                     msg.success('更新成功。');
                     $('.js-dialog').modal('hide');
                     getMaterielData();
+                }else{
+                    msg.error(res.msg);
                 }
             });
         }else{
@@ -116,6 +118,8 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
                     msg.success('新增成功。');
                     $('.js-dialog').modal('hide');
                     getMaterielData();
+                }else{
+                    msg.error(res.msg);
                 }
             });
         }
