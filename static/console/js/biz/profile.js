@@ -6,7 +6,7 @@ define(['url', 'helper', 'message'], function (url, helper, msg) {
     }
 
     function initPage() {
-        $('.js-username').val()$.cookie('userName');
+        $('.js-username').val($.cookie('userName'));
     }
 
     function saveProfile() {

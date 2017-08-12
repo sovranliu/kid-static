@@ -91,9 +91,12 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
                     break;
 
             }
-            
+
             item.statusDesc = statusDesc;
-        })
+            item.price = Number(item.price) / 100;
+        });
+
+        return data;
     }
 
     return {
