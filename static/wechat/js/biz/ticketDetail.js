@@ -61,12 +61,10 @@ define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,w
                             window.location.href = 'MyOrder.html';
                         },  
                         fail: function (res) {
-                          alert(JSON.stringify(res));
                         }
                     });
 
                     wx.error(function(res){  
-                        alert(JSON.stringify(res));
                     });  
                 });
 

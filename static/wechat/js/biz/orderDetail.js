@@ -158,13 +158,10 @@ define(['url', 'helper'], function (url, helper) {
             "mobileNo":mobileNo
         };
 
-        alert(params.goodsType);
 
         helper.ajax(url.buyTicket, params, function(res) {
-            alert(res.code);
             var data = res.data;
             if (res.code >= 0) {
-                alert(typeof WeixinJSBridge);
                 if (typeof WeixinJSBridge == "undefined") {
                    if ( document.addEventListener ) {
                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
@@ -181,7 +178,6 @@ define(['url', 'helper'], function (url, helper) {
 
     function onBridgeReady(res){
         var data = res.data;
-        alert(JSON.stringify(res))
         WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
                "appId":data.appId,     //公众号名称，由商户传入     
@@ -192,7 +188,6 @@ define(['url', 'helper'], function (url, helper) {
                "paySign":data.signature//微信签名 
            },
            function(res){  
-                alert(res.err_msg);
                if (res.err_msg == "get_brand_wcpay_request:ok") {
                     window.location.href = "PayResult.html";
                } else {
