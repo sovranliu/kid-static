@@ -25,7 +25,7 @@ define(['url', 'helper', 'mustache','paginator'], function (url, helper, mustach
 
         helper.ajax(url.getMessages, params, function(res) {
             if(res.code >= 0) {
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data }));
+                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
                 $('.js-tpage').createPage({
                     pageCount: Math.ceil(res.data.total / limit), //todo
                     current: pageNum,

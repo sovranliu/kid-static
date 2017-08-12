@@ -169,7 +169,7 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
         var formData = new FormData();
         formData.append('img', file);
         //formData.append('qrCodesCommonReq', JSON.stringify(params));
-        helper.ajax({
+        $.ajax({
             url: url.uploadImage,
             type: 'POST',
             cache: false,
