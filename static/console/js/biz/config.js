@@ -11,7 +11,11 @@ define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,
     function getConfigData() {
         helper.ajax(url.getConfig, {}, function(res) {
             if(res.code >= 0) {
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data }));
+                if(res.data.length == 0) {
+                    $('.js-tbody').html('<td colspan="4" class="dataNull">暂无参数</td>');
+                }else{
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data }));
+                }
             }
         });
     }

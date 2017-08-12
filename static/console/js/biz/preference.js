@@ -25,7 +25,11 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
         }
         helper.ajax(url.getMateriel, params, function(res) {
             if(res.code >= 0) {
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
+                if(res.data.list.length == 0) {
+                    $('.js-tbody').html('<td colspan="5" class="dataNull">还没有资讯信息</td>');
+                }else{
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list}));
+                }
                 $('.js-tpage').createPage({
                     pageCount: Math.ceil(res.data.total / limit), //todo
                     current: pageNum,
@@ -86,7 +90,7 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
         var data = {
             "id":id || "",
             "title":$modal.find('.js-title').val(),
-            "imgUrl":$modal .find('.js-img-item img').attr('src'),
+            "imgUrl":$modal.find('.js-img-item img').attr('src'),
             "link":$modal.find('.js-link').val(),
         }
 
