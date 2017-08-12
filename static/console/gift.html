@@ -81,7 +81,7 @@
                     </li>
                     <li>
                         <a href="ticket.html" class="waves-effect waves-button">
-                            <span class="menu-icon glyphicon glyphicon-th-list"></span>
+                            <span class="menu-icon glyphicon glyphicon-bookmark"></span>
                             <p>票务管理</p>
                         </a>
                     </li>
@@ -103,6 +103,11 @@
                             <li><a href="refundment.html">退款记录</a></li>
                         </ul>
                     </li>
+                    <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-asterisk"></span><p>资讯管理</p><span class="arrow"></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="preference.html">会员特惠</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="message.html" class="waves-effect waves-button">
                             <span class="menu-icon glyphicon glyphicon-envelope"></span>
@@ -119,8 +124,7 @@
             <div id="main-wrapper">
                 <div class="row">
 
-
-        <div class="col-md-12 ui-sortable">
+<div class="col-md-12 ui-sortable">
             <div class="panel panel-inverse">
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -150,14 +154,6 @@
                             <tbody class="js-tbody"></tbody>
                         </table>
                         <!-- end table -->
-
-                        <!-- begin paginator -->
-                        <div id="data-table_paginate" class="js-tpage pull-right dataTables_paginate paging_simple_numbers" style="display: none;">
-                            <a id="data-table_previous" aria-controls="data-table" class="paginate_button previous disabled">上一页</a>
-                            <span></span>
-                            <a id="data-table_next" aria-controls="data-table" class="paginate_button next">下一页</a>
-                        </div>
-                        <!-- begin paginator -->
                     </div>
                 </div>
             </div>
@@ -173,7 +169,7 @@
 <script id="tpl-tbody" type="x-tmpl-mustache">
     {{#data}}
     <tr data-id="{{id}}">
-        <td><a href="{{url}}" target="_blank">{{url}}</a></td>
+        <td>{{url}}</td>
         <td>{{createTime}}</td>
         <td>
             <a href="#modal-dialog" data-toggle="modal">
@@ -215,41 +211,38 @@
                             <div class="col-md-10" style="margin-top:20px;margin-left:100px;">
 
                             
-                           <div class="row fileupload-buttonbar" style="margin-bottom:30px;">
-                                <div class="fileupload-file">
-                                    <div class="pull-left upload-btn-wrapper" style="cursor: pointer;">
-                                        <span class="btn btn-success fileinput-button">
-                                            <i class="icon-plus icon-white" style="cursor: pointer;"></i>
-                                            <span>选择文件</span>
-                                            <input type="file" name="files" accept=".mp4" class="js-upload-input upload-btn" style="cursor: pointer;">
-                                        </span>
-                                    </div>
+                                <div class="row fileupload-buttonbar" style="margin-bottom:30px;">
+                                    <div class="fileupload-file">
+                                        <div class="pull-left upload-btn-wrapper" style="cursor: pointer;">
+                                            <span class="btn btn-success fileinput-button">
+                                                <i class="icon-plus icon-white" style="cursor: pointer;"></i>
+                                                <span>选择文件</span>
+                                                <input type="file" name="files" accept=".mp4" class="js-upload-input upload-btn" style="cursor: pointer;">
+                                            </span>
+                                        </div>
 
-                                    <div class="col-md-3 js-upload-name text-center upload-filename" style="line-height:32px;"></div>
+                                        <div class="col-md-3 js-upload-name text-center upload-filename" style="line-height:32px;"></div>
 
-                                    <div class="col-md-2 js-upload-size text-center upload-filesize" style="line-height:32px;"></div>
+                                        <div class="col-md-2 js-upload-size text-center upload-filesize" style="line-height:32px;"></div>
 
-                                    <div class="pull-right">
-                                        <button type="submit" class="js-upload-submit btn btn-primary start">
-                                            <i class="icon-upload icon-white"></i>
-                                            <span>上传</span>
-                                        </button>
-                                        <button type="reset" class="js-upload-cancel btn btn-warning cancel">
-                                            <i class="icon-ban-circle icon-white"></i>
-                                            <span>取消</span>
-                                        </button>
-                                        <span class="fileupload-process"></span>
+                                        <div class="pull-right">
+                                            <button type="submit" class="js-upload-submit btn btn-primary start">
+                                                <i class="icon-upload icon-white"></i>
+                                                <span>上传</span>
+                                            </button>
+                                            <button type="reset" class="js-upload-cancel btn btn-warning cancel">
+                                                <i class="icon-ban-circle icon-white"></i>
+                                                <span>取消</span>
+                                            </button>
+                                            <span class="fileupload-process"></span>
+                                        </div>
                                     </div>
                                 </div>
+                                
+                                <div class="js-video-list video-list-wrapper"></div>
                             </div>
-                            
-                            <div class="js-video-list video-list-wrapper"></div>
       
                         </div>
-                        </div>
-
-
-                        
                     </fieldset>
                 </div>
             </div>
@@ -299,7 +292,6 @@
         </div>
     </div>
 </script>
-
 
 
 

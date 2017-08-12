@@ -1,7 +1,7 @@
-define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
+define(['url', 'helper', 'mustache','paginator'], function (url, helper, mustache,paginator) {
 
     var serialNumber;
-    var begin = 0;
+    var begin = 1;
 
     function bindActions() {
         $('.js-table').on('click','.js-edit',openEdit);
@@ -14,7 +14,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         params['mobileNo'] = $.trim($('.js-phone').val());
         params['beginDate'] = $.trim($('.js-begin-time').val());
         params['endDate'] = $.trim($('.js-end-time').val());
-        params['size'] = 10;
+        params['size'] = 20;
         params['begin'] = begin;
 
         return params;
@@ -26,6 +26,14 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         helper.ajax(url.getMessages, params, function(res) {
             if(res.code >= 0) {
                 $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data }));
+                $('.js-tpage').createPage({
+                    pageCount: Math.ceil(res.data.total / limit), //todo
+                    current: pageNum,
+                    backFn: function (selectedPageNum) {
+                        pageNum = selectedPageNum;
+                        getMessageData();
+                    }
+                });
             }
         });
     }

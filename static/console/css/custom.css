@@ -16,6 +16,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 18px;
 }
 .mrgb15{
+    margin-top:0!important;
     margin-bottom: 15px;
 }
 .panel .panel-body .btn{
@@ -256,4 +257,14 @@ h1, h2, h3, h4, h5, h6 {
 .rsv-ul-list {
     display: block;
     width: 90%;
+}
+.form-horizontal .preview-img{
+    width: 100%
+}
+.preview-img{
+    width: 120px;
+}
+.change-btn{
+    position: absolute;
+    bottom: 0
 }

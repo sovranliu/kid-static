@@ -31,6 +31,12 @@ define([], function() {
         //支付记录
         getOrder: _basePath + 'query/order',
         getRefund: _basePath + 'query/refund',
+        //物料
+        getMateriel: _basePath + 'getMateriel',
+        uploadImage: _basePath + 'uploadImage',
+        insertMateriel: _basePath + 'insertMateriel',
+        updateMateriel: _basePath + 'updateMateriel',
+        deleteMateriel: _basePath + 'deleteMateriel',
         //留言回复
         getMessages: _basePath + 'getMessages',
         postMessageReply: _basePath + 'postMessageReply',

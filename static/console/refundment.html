@@ -81,7 +81,7 @@
                     </li>
                     <li>
                         <a href="ticket.html" class="waves-effect waves-button">
-                            <span class="menu-icon glyphicon glyphicon-th-list"></span>
+                            <span class="menu-icon glyphicon glyphicon-bookmark"></span>
                             <p>票务管理</p>
                         </a>
                     </li>
@@ -101,6 +101,11 @@
                         <ul class="sub-menu">
                             <li><a href="payment.html">收款记录</a></li>
                             <li><a href="refundment.html">退款记录</a></li>
+                        </ul>
+                    </li>
+                    <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-asterisk"></span><p>资讯管理</p><span class="arrow"></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="preference.html">会员特惠</a></li>
                         </ul>
                     </li>
                     <li>
@@ -142,9 +147,9 @@
                                                 <label class="control-label">订单状态：</label>
                                                 <select class="js-status form-control">
                                                     <option value="">选择订单状态</option>
-                                                    <option value="1">未支付</option>
-                                                    <option value="2">已支付</option>
-                                                    <option value="3">已退款</option>
+                                                    <option value="1">退款中</option>
+                                                    <option value="2">已退款</option>
+                                                    <option value="3">退款失败</option>
                                                 </select>
                                             </div>
                                             <button class="js-search btn btn-sm btn-success m-r-5">查询</button>
