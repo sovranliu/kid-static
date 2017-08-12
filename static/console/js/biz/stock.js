@@ -19,9 +19,16 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
     }
 
     function getStock() {
+        var date = $('.js-filter-date').val();
+
         var params = {
-            'bookDate': $('.js-filter-date').val()
+            'bookDate': $.trim(date)
         };
+
+        if (!date) {
+            msg.error('请选择您要查询的日期');
+            return;
+        }
 
         helper.ajax(url.getStock, params, function(res) {
             var data = res.data;

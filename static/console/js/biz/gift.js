@@ -37,6 +37,11 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
             'serialNumber': $.trim(serialNumber)
         };
 
+        if (!serialNumber) {
+            msg.error('请选择您要查询的票号');
+            return;
+        }
+
         return params;
     }
 
