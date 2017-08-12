@@ -99,10 +99,10 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
             $('.js-dialog').modal('hide');
             
             if (res.code >= 0) {
-                msg.success('用户礼品添加成功');
+                msg.success('礼品添加成功');
                 getFlightDiary();
             } else {
-                msg.error('用户礼品添加失败，请稍后重试');
+                msg.error('礼品添加失败，请稍后重试');
             }
         });
     }
@@ -167,18 +167,18 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
         //formData.append('qrCodesCommonReq', JSON.stringify(params));
 
 
-        helper.ajax({
+        $.ajax({
             url: url.uploadVideo,
             type: 'POST',
             cache: false,
             data: formData,
             processData: false,
             contentType: false
-        }).done(function (data) {
+        }).done(function (res) {
             msg.success('上传成功', $('.js-dialog').find('.alert-message'));
-            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': data }));
+            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': res.data }));
             cancelUpload();
-        }).fail(function (data) {
+        }).fail(function (res) {
             msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
             cancelUpload();
         });
