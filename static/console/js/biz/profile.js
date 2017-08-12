@@ -5,22 +5,23 @@ define(['url', 'helper', 'message'], function (url, helper, msg) {
         $('.js-save').on('click', saveProfile);
     }
 
+    function initPage() {
+        $('.js-username').val()$.cookie('userName');
+    }
+
     function saveProfile() {
+        var id = $.cookie('userName');
+        var userName = $('.js-username').val();
         var password = $('.js-password').val();
-        //var userName = $('.js-userName').val();
-        //var email = $('.js-email').val();
-        //var phone = $('.js-phone').val();
 
         var params = {
-            //'userName': ,
-            'password': password,
-            //'email': ,
-            //'mobile': ,
-
+            'id': id,
+            'userName': userName,
+            'password': password
         };
 
-        if (!password) {
-            msg.error('请填写密码');
+        if (!password || !userName) {
+            msg.error('请填写管理员信息');
             return;
         }
 
@@ -36,6 +37,7 @@ define(['url', 'helper', 'message'], function (url, helper, msg) {
     return {
         init: function () {
             bindActions();
+            initPage();
         }
     }
 });
