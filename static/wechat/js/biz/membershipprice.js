@@ -2,7 +2,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
 
     function _getMaterielData() {
         var params = {
-            "type": 'preference'
+            "type": 1
         }
 
         helper.ajax(url.getMateriel, params, function(res) {

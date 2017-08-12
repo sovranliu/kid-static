@@ -19,7 +19,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         if (!mobileNo || !openId) {
             helper.ajax(url.prepay,{},function() {})
         } else {
-            helper.ajax(url.payInfo, {"mobileNo":mobileNo, "openId":openId}, function() {
+            helper.ajax(url.payInfo, {"mobileNo":mobileNo, "openId":openId}, function(res) {
                 if (res.code >= 0) {
                     var data = res.data;
                     $('.js-name').text(data.user.userName);
