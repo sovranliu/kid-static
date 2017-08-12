@@ -11,14 +11,14 @@ define([], function() {
         //退票
         refundTicket: _basePath + 'refundTicket',
         //飞行日志列表
-        getFlightDiary: _basePath + 'getFlightDiary', //todo
+        getFlightDiary: _basePath + 'getFlightDiary',
         deleteFlightDiary: _basePath + 'deleteFlightDiary',
         saveFlightDiary: _basePath + 'saveFlightDiary', //todo
         uploadVideo: _basePath + 'uploadFlightDiary',
         deleteVideo: _basePath + 'deleteVideo', //todo
         //预约列表
         getBookingList: _basePath + 'getBookingList',
-        getBookingTime: _basePath + 'getBookingTime', //todo
+        getBookingTime: _basePath + 'getBookingTime',
         isCanBook: _basePath + 'isViableDate',
         rescheduleBooking: _basePath + 'rescheduleBooking',
         revokeBooking: _basePath + 'revokeBooking',
@@ -42,6 +42,9 @@ define([], function() {
         //撤销申请&&&&改期申请    
         getRevokeBooks: _basePath + 'getRevokeBooks',
         approveBookChange: _basePath + 'approveBookChange',
-        getRescheduleBooks: _basePath + 'getRescheduleBooks'
+        getRescheduleBooks: _basePath + 'getRescheduleBooks',
+        //更新管理员
+        updateAdmin: _basePath + 'updateAdmin',
+        modifyPassword: _basePath + 'modifyPassword'
     };
 });

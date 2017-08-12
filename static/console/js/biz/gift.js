@@ -96,6 +96,8 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
         };
 
         helper.ajax(url.saveFlightDiary, params, function(res) {
+            $('.js-dialog').modal('hide');
+            
             if (res.code >= 0) {
                 msg.success('用户礼品添加成功');
                 getFlightDiary();
@@ -111,6 +113,8 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
         };
 
         helper.ajax(url.deleteFlightDiary, params, function(res) {
+            $('.js-dialog').modal('hide');
+
             if (res.code >= 0) {
                 msg.success('用户礼品删除成功');
                 getFlightDiary();
@@ -161,6 +165,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
         var formData = new FormData();
         formData.append('video', file);
         //formData.append('qrCodesCommonReq', JSON.stringify(params));
+
 
         helper.ajax({
             url: url.uploadVideo,

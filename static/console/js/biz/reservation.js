@@ -226,6 +226,8 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
         };
 
         helper.ajax(url.rescheduleBooking, params, function(res) {
+            $('.js-dialog').modal('hide');
+
             if (res.code >= 0) {
                 msg.success('预约改期成功');
                 getBookingList();
@@ -241,6 +243,8 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
         };
 
         helper.ajax(url.revokeBooking, params, function(res) {
+            $('.js-dialog').modal('hide');
+            
             if (res.code >= 0) {
                 msg.success('预约撤销成功');
                 getBookingList();

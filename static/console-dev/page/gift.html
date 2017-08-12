@@ -18,7 +18,15 @@
             <div id="main-wrapper">
                 <div class="row">
 
-<div class="col-md-12 ui-sortable">
+
+<!-- begin alert message -->
+<div class="alert alert-message alert-dismissable" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <span></span>
+</div>
+<!-- end alert message -->
+
+        <div class="col-md-12 ui-sortable">
             <div class="panel panel-inverse">
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -48,6 +56,14 @@
                             <tbody class="js-tbody"></tbody>
                         </table>
                         <!-- end table -->
+
+                        <!-- begin paginator -->
+                        <div id="data-table_paginate" class="js-tpage pull-right dataTables_paginate paging_simple_numbers" style="display: none;">
+                            <a id="data-table_previous" aria-controls="data-table" class="paginate_button previous disabled">上一页</a>
+                            <span></span>
+                            <a id="data-table_next" aria-controls="data-table" class="paginate_button next">下一页</a>
+                        </div>
+                        <!-- begin paginator -->
                     </div>
                 </div>
             </div>
@@ -63,7 +79,7 @@
 <script id="tpl-tbody" type="x-tmpl-mustache">
     {{#data}}
     <tr data-id="{{id}}">
-        <td>{{url}}</td>
+        <td><a href="{{url}}" target="_blank">{{url}}</a></td>
         <td>{{createTime}}</td>
         <td>
             <a href="#modal-dialog" data-toggle="modal">
@@ -189,7 +205,6 @@
         </div>
     </div>
 </script>
-
 
 
                 </div><!-- Row -->
