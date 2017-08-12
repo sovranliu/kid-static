@@ -20,7 +20,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
 
     function getStock() {
         var params = {
-            'date': $('.js-filter-date').val()
+            'bookDate': $('.js-filter-date').val()
         };
 
         helper.ajax(url.getStock, params, function(res) {
