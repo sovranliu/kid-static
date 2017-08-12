@@ -1,4 +1,4 @@
-define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
+define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,msg) {
 
     var serialNumber;
 
@@ -33,8 +33,11 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         }
         helper.ajax(url.postConfig, data, function(res) {
             if(res.code >= 0) {
+                msg.success('操作成功');
                 $('.js-dialog').modal('hide');
                 getConfigData();
+            }else{
+                msg.error(res.msg)
             }
         });
     }

@@ -1,4 +1,4 @@
-define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
+define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,message) {
 
     var serialNumber;
 
@@ -51,8 +51,11 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
         helper.ajax(url.approveBookChange, data, function(res) {
             if(res.code >= 0) {
+                msg.success('操作成功');
                 $('.js-dialog').modal('hide');
                 getRevokeData();
+            }else{
+                msg.error(res.msg);
             }
         });
     }

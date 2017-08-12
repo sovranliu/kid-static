@@ -1,4 +1,4 @@
-define(['url', 'helper', 'mustache','paginator'], function (url, helper, mustache,paginator) {
+define(['url', 'helper', 'mustache','paginator','message'], function (url, helper, mustache,paginator,msg) {
 
     var serialNumber;
     var begin = 1;
@@ -54,8 +54,11 @@ define(['url', 'helper', 'mustache','paginator'], function (url, helper, mustach
         }
         helper.ajax(url.postMessageReply, data, function(res) {
             if(res.code >= 0) {
+                msg.success('操作成功。')
                 $('.js-dialog').modal('hide');
                 getMessageData();
+            }else{
+                msg.error(res.msg)
             }
         });
     }

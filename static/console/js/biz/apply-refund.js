@@ -1,4 +1,4 @@
-define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
+define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,msg) {
 
     var serialNumber;
 
@@ -45,8 +45,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         var type = $(this).attr('data-type');
 
         var data = {
-            "serialNumber":$(this).attr('data-id'),
-            "type":$(this).attr('data-type')
+            "serialNumber":$(this).attr('data-id')
         }
 
         if(type == "agree") {
@@ -54,13 +53,18 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                 if(res.code >= 0) {
                     $('.js-dialog').modal('hide');
                     getRefundData();
+                }else{
+                    msg.error(res.msg);
                 }
             });
         }else{
             helper.ajax(url.refuseRefund, data, function(res) {
                 if(res.code >= 0) {
+                    msg.success('操作成功');
                     $('.js-dialog').modal('hide');
                     getRefundData();
+                }else{
+                    msg.error(res.msg);
                 }
             });
         }
