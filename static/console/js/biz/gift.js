@@ -105,6 +105,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
             
             if (res.code >= 0) {
                 msg.success('礼品添加成功');
+                $('.js-filter-serialNumber').val(serialNumber);
                 getFlightDiary();
             } else {
                 msg.error('礼品添加失败，请稍后重试');
