@@ -13,6 +13,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
         helper.ajax(url.getUserInfo,params,function (res) {
             if(res.code >= 0) {
                 $('.username').html(res.data.userName);
+                $('.user-img').attr('src',res.data.avatarUrl);
             }
         })
     }
