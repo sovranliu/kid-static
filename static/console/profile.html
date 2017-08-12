@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>会员管理</title>
+    
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta charset="UTF-8">
+    
+    <!-- Styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="css/line-icons/simple-line-icons.css" rel="stylesheet" type="text/css"/>	
+    
+    <!-- Theme Styles -->
+    <link href="css/modern.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/blue.css" class="theme-color" rel="stylesheet" type="text/css"/>
+    <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+    
+</head>
+<body class="page-header-fixed">
+    <div class="overlay"></div>
+    <main class="page-content content-wrap">
+                <div class="navbar">
+            <div class="navbar-inner">
+                <div class="logo-box">
+                    <a href="index.html" class="logo-text">
+                        <span>后台管理</span>
+                    </a>
+                </div><!-- Logo Box -->
+                <div class="topmenu-outer">
+                    <div class="top-menu">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>        
+                                <a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
+                            </li>
+                            <li>        
+                                <a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                           
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
+                                    <span class="user-name">David<i class="fa fa-angle-down"></i></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-list" role="menu">
+                                    <li role="presentation"><a href="profile.html"><i class="fa fa-user"></i>信息配置</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="login.html" class="log-out waves-effect waves-button waves-classic">
+                                    <span><i class="fa fa-sign-out m-r-xs"></i>注销</span>
+                                </a>
+                            </li>
+                        </ul><!-- Nav -->
+                    </div><!-- Top Menu -->
+                </div>
+            </div>
+        </div>
+                <div class="page-sidebar sidebar">
+            <div class="page-sidebar-inner slimscroll">
+                <ul class="menu accordion-menu">
+                    <li>
+                        <a href="config.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-cog"></span>
+                            <p>系统参数配置</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="user.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-user"></span>
+                            <p>会员管理</p>
+                        </a>
+                    </li>
+                    <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-transfer"></span><p>申请审批</p><span class="arrow"></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="apply-refund.html">退票申请</a></li>
+                            <li><a href="apply-revoke.html">撤销申请</a></li>
+                            <li><a href="apply-change.html">改期申请</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="ticket.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-th-list"></span>
+                            <p>票务管理</p>
+                        </a>
+                    </li>
+                    <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-briefcase"></span><p>预约管理</p><span class="arrow"></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="reservation.html">预约管理</a></li>
+                            <li><a href="stock.html">库存管理</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="gift.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-gift"></span>
+                            <p>礼品管理</p>
+                        </a>
+                    </li>
+                    <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-usd"></span><p>财务报表</p><span class="arrow"></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="payment.html">收款记录</a></li>
+                            <li><a href="refundment.html">退款记录</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="message.html" class="waves-effect waves-button">
+                            <span class="menu-icon glyphicon glyphicon-envelope"></span>
+                            <p>留言管理</p>
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- Page Sidebar Inner -->
+        </div><!-- Page Sidebar -->
+
+
+        <div class="page-inner">
+            <div class="page-title">
+                <h3>会员管理</h3>
+            </div>
+            <div id="main-wrapper">
+                <div class="row">
+                
+<!-- begin alert message -->
+<div class="alert alert-message alert-dismissable" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <span></span>
+</div>
+<!-- end alert message -->
+
+<div class="col-md-12 ui-sortable">
+    <div class="panel panel-inverse">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <div class="profile-wrapper panel-body search-body">
+
+                    <!--<div class="form-group m-r-10">
+                        <label class="col-md-2 control-label">用户名：</label>
+                        <div class="col-md-5">
+                            <input type="text" class="js-filter-input js-username form-control" placeholder="">
+                        </div>
+                    </div>-->
+
+                    <div class="form-group m-r-10">
+                        <label class="col-md-2 control-label">密码：</label>
+                        <div class="col-md-5">
+                            <input type="text" class="js-filter-input js-password form-control" placeholder="">
+                        </div>
+                    </div>
+
+                    <!--<div class="form-group m-r-10">
+                        <label class="col-md-2 control-label">邮箱：</label>
+                        <div class="col-md-5">
+                            <input type="text" class="js-filter-input js-email form-control" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="form-group m-r-10">
+                        <label class="col-md-2 control-label">手机号：</label>
+                        <div class="col-md-5">
+                            <input type="text" class="js-filter-input js-phone form-control" placeholder="">
+                        </div>
+                    </div>-->
+
+                    <div class="form-group m-r-10">
+                        <div class="col-md-8" style="text-align: center;">
+                            <button class="js-save btn btn-sm btn-success m-r-5" style="height: 40px;width: 80px;">保存</button>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div><!-- Row -->
+            </div><!-- Main Wrapper -->
+        </div><!-- Page Inner -->
+    </main><!-- Page Content -->
+    <div class="cd-overlay"></div>
+
+
+    <script data-main="js/boot.js" data-start="js/biz/profile.js" src="js/libs/require.min.js"></script>
+    
+</body>
+</html>

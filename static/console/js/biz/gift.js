@@ -92,10 +92,12 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
 
         var params = {
             'serialNumber': serialNumber,
-            'videos': videos
+            'idStr': videos.join(',')
         };
 
         helper.ajax(url.saveFlightDiary, params, function(res) {
+            $('.js-dialog').modal('hide');
+            
             if (res.code >= 0) {
                 msg.success('用户礼品添加成功');
                 getFlightDiary();
@@ -111,11 +113,13 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
         };
 
         helper.ajax(url.deleteFlightDiary, params, function(res) {
+            $('.js-dialog').modal('hide');
+
             if (res.code >= 0) {
-                msg.success('用户礼品删除成功');
+                msg.success('礼品删除成功');
                 getFlightDiary();
             } else {
-                msg.error('用户礼品删除失败，请稍后重试');
+                msg.error('礼品删除失败，请稍后重试');
             }
         });
     }
@@ -162,6 +166,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
         formData.append('video', file);
         //formData.append('qrCodesCommonReq', JSON.stringify(params));
 
+
         helper.ajax({
             url: url.uploadVideo,
             type: 'POST',
@@ -171,7 +176,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
             contentType: false
         }).done(function (data) {
             msg.success('上传成功', $('.js-dialog').find('.alert-message'));
-            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': processVideo(data) }));
+            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': data }));
             cancelUpload();
         }).fail(function (data) {
             msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
@@ -197,7 +202,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
             'id': videoId
         };
 
-        helper.ajax(url.deleteVideo, params, function(res) {
+        helper.ajax(url.deleteFlightDiary, params, function(res) {
             if (res.code >= 0) {
                 msg.success('视频删除成功', $('.js-dialog').find('.alert-message'));
                 $item.remove();
@@ -205,18 +210,6 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
                 msg.error('视频删除失败，请稍后重试', $('.js-dialog').find('.alert-message'));
             }
         });
-    }
-
-    function processVideo(data) {
-        var name = '';
-        var urlItems = [];
-
-        _.each(data, function(item, i) {
-            urlItems = item.url.split('/');
-            item.name = urlItems[urlItems.length - 1];
-        });
-
-        return data;
     }
 
 
