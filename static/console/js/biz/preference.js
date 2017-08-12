@@ -167,7 +167,7 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
         }
 
         var formData = new FormData();
-        formData.append('img', file);
+        formData.append('file', file);
         //formData.append('qrCodesCommonReq', JSON.stringify(params));
         $.ajax({
             url: url.uploadImage,
@@ -177,9 +177,13 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
             processData: false,
             contentType: false
         }).done(function (data) {
-            msg.success('上传成功', $('.js-dialog').find('.alert-message'));
-            $('.js-img-list').html(mustache.render($('#tpl-img-item').html(), { 'data': data.data }));
-            cancelUpload();
+            if(data.code >= 0) {
+                msg.success('上传成功', $('.js-dialog').find('.alert-message'));
+                $('.js-img-list').html(mustache.render($('#tpl-img-item').html(), { 'data': data.data }));
+                cancelUpload();
+            }else{
+                msg.error(data.msg);
+            }
         }).fail(function (data) {
             msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
             cancelUpload();

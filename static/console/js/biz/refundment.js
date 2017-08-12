@@ -54,7 +54,7 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
                     }
                 }
                 if(data.length == 0) {
-                     $('.js-tbody').html('<p class="dataNull">还没有退款纪录</p>');
+                     $('.js-tbody').html('<td colspan="8" class="dataNull">还没有退款纪录</td>');
                 }else{
                     $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data }));
                 }
