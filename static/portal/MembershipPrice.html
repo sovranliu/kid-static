@@ -58,14 +58,6 @@
 			<div class="yh-wid744">
 				<h2 class="yh-title">会员特惠</h2>
 				<ul class="yh-mp-list">
-					<li class="yh-mp-item">
-						<img src="images/img6.jpg">
-						<span>会员暑期团购风暴</span>
-					</li>
-					<li class="yh-mp-item">
-						<img src="images/img5.jpg">
-						<span>动力三角翼项目飞行资格培训</span>
-					</li>
 				</ul>
 			</div>
 		</div>
@@ -98,6 +90,16 @@
 				</div>
 			</div>
 		</div>
-		<script data-main="js/boot.js" src="js/libs/require.min.js"></script>
+		<script id="template" type="x-tmpl-mustache">
+        {{#data}}
+        <li class="yh-mp-item">
+        <a href="{{link}}">
+            <img src="{{imgUrl}}">
+            <span>{{title}}</span>
+        </a>
+        </li>
+        {{/data}}
+    </script>
+		<script data-main="js/boot.js" data-start="js/biz/membershipprice.js" src="js/libs/require.min.js"></script>
 	</body>
 </html>

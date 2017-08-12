@@ -111,12 +111,19 @@
                     <span class="status">{{statusName}}</span>
                 </div>
             </div>
+            {{#isSingle}}
             {{#operate}}
             <div class="oper">
                 <a class="js-changedate btn-give" href="Reservation.html?ticketId={{serialNumber}}&type=1">改期</a>
                 <button type="button" class="js-revoke">撤销</button>
             </div>
             {{/operate}}
+            {{/isSingle}}
+            {{^isSingle}}
+            <div class="oper">
+                团体票不可撤销与改期
+            </div>
+            {{/isSingle}}
         </li>
     {{/data}}
     </script>

@@ -10,7 +10,11 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
 
     function getRevokeData() {
-        helper.ajax(url.getRevokeBooks, {}, function(res) {
+        var params = {
+            "begin": 1,
+            "limit": 999
+        }
+        helper.ajax(url.getRevokeBooks, params, function(res) {
             if(res.code >= 0) {
                 $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data.list }));
             }

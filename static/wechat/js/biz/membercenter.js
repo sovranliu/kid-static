@@ -23,14 +23,10 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
         $('.popup').show();
         helper.ajax(url.getMessageData,params,function (res) {
             if(res.code >= 0) {
-                if(res.data == null || res.data == "" || res.data == {}) {
+                if(!res.data.content) {
                     $('.popup').find('p').html('暂无回复');
                 }else{
-                    if(res.data.content != null || res.data.content != "") {
-                        $('.popup').find('p').html(res.data.content);
-                    }else{
-                        $('.popup').find('p').html('暂无回复');
-                    }
+                    $('.popup').find('p').html(res.data.content);
                 }
                 
             }

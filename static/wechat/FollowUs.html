@@ -13,25 +13,24 @@
     <meta name="browsermode" content="application">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
     <title>亚海飞行俱乐部</title>
-    <!-- 会员特价 -->
+    <!-- 会员权益 -->
 </head>
-<body>
-    <div class="menberPages">
-        <div class="menber-header">会员特惠</div>
-        <ul class="msp-list">
-        </ul>
-        <div class="move-down hide"></div>
+<body style="visibility: visible;">
+    <div class="background2">
+        <div class="mb-body">
+            <div class="th-title">关注我们</div>
+            <div class="box">
+                <div class="mb-tips">
+                    请先关注亚海飞行俱乐部微信公众号
+                </div>
+                <div class="mb-img">
+                    <img src="images/qrcode.jpg" alt="">
+                </div>
+                <div class="mb-red">
+                    长按二维码关注
+                </div>
+            </div>
+        </div>
     </div>
-    <script id="template" type="x-tmpl-mustache">
-        {{#data}}
-        <li class="msp-item">
-        <a href="{{link}}">
-            <img src="{{imgUrl}}">
-            <span>{{title}}</span>
-        </a>
-        </li>
-        {{/data}}
-    </script>
-    <script data-main="js/boot.js" data-start="js/biz/membershipprice.js" src="js/libs/require.min.js"></script>
 </body>
 </html>

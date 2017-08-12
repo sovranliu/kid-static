@@ -63,6 +63,10 @@ a,div,img {
     user-select: none
 }
 
+.hide{
+    display: none;
+}
+
 .background,.background2 {
     position: absolute;
     width: 100%;
@@ -332,6 +336,15 @@ a,div,img {
     text-align: center;
     margin-bottom: 20px;
     color: #132648;
+    font-size: 13px;
+    font-family: HiraginoSansGB-W6;
+    line-height: 1.8;
+}
+
+.mb-red {
+    text-align: center;
+    margin-top: 20px;
+    color: #f00;
     font-size: 13px;
     font-family: HiraginoSansGB-W6;
     line-height: 1.8;

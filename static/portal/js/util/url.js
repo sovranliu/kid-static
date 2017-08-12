@@ -29,9 +29,10 @@ define([], function() {
         postRefund: _basePath + 'postRefund',
         //赠送票券
         giveTicket: _basePath + 'giveTicket',
+        //会员特惠
+        getMateriel: _basePath + 'getMateriel',
         //登陆注册
         getLogin: _basePath + 'login/qrcode',
         checkLogin: _basePath + 'login/check'
-
     };
 });
