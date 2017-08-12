@@ -15,7 +15,6 @@ define([], function() {
         deleteFlightDiary: _basePath + 'deleteFlightDiary',
         saveFlightDiary: _basePath + 'postFlightDiary',
         uploadVideo: _basePath + 'uploadFlightDiary',
-        deleteVideo: _basePath + 'deleteVideo', //todo
         //预约列表
         getBookingList: _basePath + 'getBookingList',
         getBookingTime: _basePath + 'getBookingTime',

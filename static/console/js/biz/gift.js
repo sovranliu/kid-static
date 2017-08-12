@@ -116,10 +116,10 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
             $('.js-dialog').modal('hide');
 
             if (res.code >= 0) {
-                msg.success('用户礼品删除成功');
+                msg.success('礼品删除成功');
                 getFlightDiary();
             } else {
-                msg.error('用户礼品删除失败，请稍后重试');
+                msg.error('礼品删除失败，请稍后重试');
             }
         });
     }
@@ -202,7 +202,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
             'id': videoId
         };
 
-        helper.ajax(url.deleteVideo, params, function(res) {
+        helper.ajax(url.deleteFlightDiary, params, function(res) {
             if (res.code >= 0) {
                 msg.success('视频删除成功', $('.js-dialog').find('.alert-message'));
                 $item.remove();
