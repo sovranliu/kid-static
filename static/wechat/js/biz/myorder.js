@@ -11,7 +11,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
         $('.js-send-message').on('click', _sendMessage);
         $('.js-close').on('click', _closePopup);
         $('.js-confirm-message-result').on('click', _confirmMessgeResult);
-        $('.js-revoke').on('click', _handleRevoke);
+        //$('.js-revoke').on('click', _handleRevoke);
         $('.revoke-popup').on('click','.js-confirm',function() {
             $('.revoke-popup').hide();
             window.location.reload();
@@ -106,6 +106,14 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     $('.book-list').html(_html);
                 }else{
                     for (var i = 0; i < data.length; i++) {
+                        switch (data[i].type) {
+                            case 0:
+                                data[i].isSingle = false;
+                                break;
+                            case 1:
+                                data[i].isSingle = true;
+                                break;
+                        }
                         switch (data[i].status) {
                             case 0:
                                 data[i].statusName = "已预约";

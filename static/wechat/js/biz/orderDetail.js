@@ -191,11 +191,12 @@ define(['url', 'helper'], function (url, helper) {
                "signType":"MD5",         //微信签名方式：     
                "paySign":data.signature//微信签名 
            },
-           function(res){     
+           function(res){  
+                alert(res.err_msg);
                if (res.err_msg == "get_brand_wcpay_request:ok") {
                     window.location.href = "PayResult.html";
                } else {
-                    $('popup').show().find('p').html(res.msg)
+                    $('popup').show().find('p').html(res.err_msg)
                }
            }
        ); 

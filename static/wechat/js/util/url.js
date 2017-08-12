@@ -21,6 +21,8 @@ define([], function() {
         postMessageData: _basePath + 'postMessage',
         //会员权益
         postBenefit: _basePath + 'postBenefit',
+        //会员特惠
+        getMateriel: _basePath + 'getMateriel',
         //预约相关
         getUserBooks: _basePath + 'getBooks',
         postRevoke: _basePath + 'postRevoke',

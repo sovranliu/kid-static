@@ -26,6 +26,8 @@ define(['url','helper'], function(url,helper) {
             }else{
                 _init();
             }
+        } else if(path.indexOf("MembershipPrice") != -1 || path.indexOf("TicketNotes") != -1 || path.indexOf("QRCode") != -1) {
+            $('.sign-in').html('<button class="js-login">登录</button> <button class="js-register">注册</button>');
         }else{
             _init();
         }
@@ -35,7 +37,7 @@ define(['url','helper'], function(url,helper) {
     function _init() {
         helper.ajax(url.getUserInfo,{},function(res) {
             if(res.data != null) {
-                $('.sign-in').html('<div class="fl"><span>姓名：' + res.data.userName + '</span><a href="MemberCenter.html"><span>会员级别：初级飞行员</span></a></div>')
+                $('.sign-in').html('<img class="fl" src="' + res.data.avatarUrl + '"></img><div class="fl"><span>姓名：' + res.data.userName + '</span><a href="MemberCenter.html"><span>会员级别：初级飞行员</span></a></div>')
             }else{
                 $('.sign-in').html('<button class="js-login">登录</button> <button class="js-register">注册</button>');
             }
