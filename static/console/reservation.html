@@ -167,6 +167,7 @@
                             <th>票号</th>
                             <th>预约时间</th>
                             <th>状态</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody class="js-tbody"></tbody>
@@ -195,10 +196,86 @@
         <td>
             <a href="ticket.html?serialNumber={{serialNumber}}">{{serialNumber}}</a>
         </td>
-        <td>{{time}}</td>
+        <td class="js-td-time">{{time}}</td>
         <td>{{status}}</td>
+        <td>
+            <a href="#modal-dialog" data-toggle="modal">
+                <span class="js-reschedule btn btn-sm btn-success"  data-toggle="tooltip" data-placement="top" title="改期"><i class="fa fa-edit"></i> 改期</span>
+            </a>
+            <a href="#modal-dialog" data-toggle="modal">
+                <span class="js-revoke btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="撤销"><i class="fa fa-trash-o"></i> 撤销</span>
+            </a>
+        </td>
     </tr>
     {{/data}}
+</script>
+
+
+<!-- 预约改期 -->
+<script id="tpl-reschedule-dialog" type="x-tmpl-mustache">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">预约改期</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-message alert-dismissable" style="display:none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <span></span>
+                </div>
+                
+
+                <div class="rsv-date">
+                    <span>日期</span>
+                    <select class="js-year" rel=""></select>
+                    <select class="js-month" rel=""></select> 
+                    <select class="js-day" rel=""></select> 
+                </div>
+                <div class="rsv-timeframe">
+                    <ul class="js-time-list rsv-ul-list"></ul>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
+                <a href="javascript:;" class="js-confirm-reschedule btn btn-sm btn-success">确认</a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 预约撤销 -->
+<script id="tpl-revoke-dialog" type="x-tmpl-mustache">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">撤销预约</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-message alert-dismissable" style="display:none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <span></span>
+                </div>
+                <div class="alert alert-danger m-b-0">
+                    <p>确认撤销预约吗？</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
+                <a href="javascript:;" class="js-confirm-revoke btn btn-sm btn-success">确认</a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 时间段模板 -->
+<script type="text/template" id="timeTmpl">
+{{#timeList}}
+    <li class="js-select-time rsv-li-item"><span>{{start}}-{{end}}</span></li>
+{{/timeList}}
 </script>
 
 

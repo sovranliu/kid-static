@@ -140,9 +140,9 @@
                                     <table class="js-table table table-striped table-bordered" style="display: none;">
                                         <thead>
                                             <tr role="row">
-                                                <th>日期</th>
                                                 <th>时间段</th>
-                                                <th>是否有预约</th>
+                                                <th>已预约数量</th>
+                                                <th>剩余库存</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
@@ -167,15 +167,15 @@
     <script id="tpl-tbody" type="x-tmpl-mustache">
         {{#data}}
         <tr data-id="{{id}}">
-            <td>{{date}}</td>
-            <td>{{start}}-{{end}}</td>
-            <td>{{isReservated}}</td>
+            <td>{{bookTime}}</td>
+            <td>{{bookedDesc}}</td>
+            <td>{{bookAbleDesc}}</td>
             <td>
-                <a class="{{#isReservated}}disabled{{/isReservated}}">
-                    <span class="js-enable btn btn-sm btn-success"  data-toggle="tooltip" data-placement="top" title="开张"><i class="fa fa-sign-in"></i> 开张</span>
+                <a>
+                    <span class="{{#canBook}}disabled{{/canBook}} js-enable btn btn-sm btn-success"  data-toggle="tooltip" data-placement="top" title="开张"><i class="fa fa-sign-in"></i> 开张</span>
                 </a>
-                <a class="{{^isReservated}}disabled{{/isReservated}}">
-                    <span class="js-disbale btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="打烊"><i class="fa fa-power-off"></i> 打烊</span>
+                <a>
+                    <span class="{{^canBook}}disabled{{/canBook}} js-disbale btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="打烊"><i class="fa fa-power-off"></i> 打烊</span>
                 </a>
             </td>
         </tr>
@@ -183,7 +183,7 @@
     </script>
     
 
-    <script data-main="js/boot.js" data-start="js/biz/payment.js" src="js/libs/require.min.js"></script>
+    <script data-main="js/boot.js" data-start="js/biz/stock.js" src="js/libs/require.min.js"></script>
     
 </body>
 </html>

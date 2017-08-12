@@ -1,6 +1,6 @@
-define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
+define(['url', 'helper', 'mustache', 'message', 'paginator'], function (url, helper, mustache, msg, paginator) {
 
-    var pageNum = 1;
+    var pageNum = 1, pageLimit = 20;
 
     function bindActions() {
         $('.js-search').on('click', getUserList);
@@ -26,7 +26,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
             'userName': $.trim(userName),
             'telephone': $.trim(telephone),
             'begin': pageNum,
-            'limit': 20
+            'limit': pageLimit
         };
 
         return params;
@@ -38,11 +38,24 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         helper.ajax(url.getUserList, params, function(res) {
             var data = res.data;
             
-            if (data.length == 0) {
-                $('.js-tbody').html('<p class="dataNull">还没有注册会员信息</p>');
+            if (res.code >= 0) {
+                if (!data || !data.list || data.list.length == 0) {
+                    $('.js-tbody').html('<td colspan=6 class="dataNull">还没有注册会员信息</td>');
+                } else {
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data.list }));
+
+                    $('.js-tpage').createPage({
+                        pageCount: Math.ceil(data.total / pageLimit),
+                        current: pageNum,
+                        backFn: function (selectedPageNum) {
+                            pageNum = selectedPageNum;
+                            getUserList();
+                        }
+                    });
+                }
             } else {
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data }));
-            }
+                msg.error('获取会员数据失败，请稍候重试');
+            } 
         });
     }
 

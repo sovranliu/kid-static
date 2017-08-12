@@ -12,13 +12,19 @@ define([], function() {
         refundTicket: _basePath + 'refundTicket',
         //飞行日志列表
         getFlightDiary: _basePath + 'getFlightDiary', //todo
-        deleteFlightDiary: _basePath + 'deleteFlightDiary', //todo
+        deleteFlightDiary: _basePath + 'deleteFlightDiary',
         saveFlightDiary: _basePath + 'saveFlightDiary', //todo
+        uploadVideo: _basePath + 'uploadFlightDiary',
+        deleteVideo: _basePath + 'deleteVideo', //todo
         //预约列表
         getBookingList: _basePath + 'getBookingList',
-        getStock: _basePath + 'getStock', //todo
-        enableStock: _basePath + 'enableStock', //todo
-        disableStock: _basePath + 'disableStock', //todo
+        getBookingTime: _basePath + 'getBookingTime', //todo
+        isCanBook: _basePath + 'isViableDate',
+        rescheduleBooking: _basePath + 'rescheduleBooking',
+        revokeBooking: _basePath + 'revokeBooking',
+        getStock: _basePath + 'getBookRepositories',
+        enableStock: _basePath + 'switchBookRepository',
+        disableStock: _basePath + 'switchBookRepository',
         //参数配置
         getConfig: _basePath + 'getConfig',
         postConfig: _basePath + 'modifyConfig',

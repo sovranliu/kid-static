@@ -1,24 +1,32 @@
-define(['url', 'helper', 'mustache', 'fileupload'], function (url, helper, mustache, fileupload) {
+define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache, msg) {
 
-    var pageNum = 1, limit = 20, gId;
+    var gId;
 
     function bindActions() {
         $('.js-search').on('click', getFlightDiary);
         $('.js-reset').on('click', handleReset);
         $('.js-add').on('click', openAdd);
         $('.js-tbody').on('click', '.js-delete', openDelete);
-        $('.js-dialog').on('click', '.js-upload', uploadVideo);
-        $('.js-dialog').on('click', '.js-cancel', cancelUpload);
-        $('.js-dialog').on('click', '.js-delete', deleteVideo);
+        $('.js-dialog').on('change', '.js-upload-input', uploadFile);
+        $('.js-dialog').on('click', '.js-upload-submit', submitUpload);
+        $('.js-dialog').on('click', '.js-upload-cancel', cancelUpload);
+        $('.js-dialog').on('click', '.js-upload-delete', deleteVideo);
+        $('.js-dialog').on('click', '.js-save', saveFlightDiary);
         $('.js-dialog').on('click', '.js-confirm', deleteFlightDiary);
+    }
+
+    function initPage() {
+        $('.js-filter-serialNumber').val(helper.getQueryStr('serialNumber') || '');
+
+        if (helper.getQueryStr('serialNumber')) {
+           getFlightDiary(); 
+        }
     }
 
     function handleReset() {
         $('.js-filter-input').val('');
         $('.js-table').hide();
-        $('.js-tpage').hide();
 
-        pageNum = 1;
         getFlightDiary();
     }
 
@@ -26,9 +34,7 @@ define(['url', 'helper', 'mustache', 'fileupload'], function (url, helper, musta
         var serialNumber = $('.js-filter-serialNumber').val();
 
         var params = {
-            'serialNumber': $.trim(serialNumber),
-            'begin': pageNum,
-            'limit': 20
+            'serialNumber': $.trim(serialNumber)
         };
 
         return params;
@@ -41,12 +47,15 @@ define(['url', 'helper', 'mustache', 'fileupload'], function (url, helper, musta
             var data = res.data;
             
             $('.js-table').show();
-            $('.js-tpage').show();
 
-            if (data.length == 0) {
-                $('.js-tbody').html('<p class="dataNull">该票号暂无礼品信息</p>');
+            if (res.code >= 0) {
+                if (!data || data.length == 0) {
+                    $('.js-tbody').html('<td colspan=4 class="dataNull">该票号暂无礼品信息</td>');
+                } else {
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data }));
+                }
             } else {
-                $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data }));
+                msg.error('获取礼品数据失败，请稍候重试');
             }
         });
     }
@@ -62,19 +71,36 @@ define(['url', 'helper', 'mustache', 'fileupload'], function (url, helper, musta
     }
 
     function saveFlightDiary() {
+        var serialNumber = $('.js-new-serialNumber').val();
+        var $videoItem = $('.js-video-item');
+        var videos = [];
+
+        _.each($videoItem, function(item, i) {
+            if ($(item).data('id')) {
+                videos.push($(item).data('id'));
+            }
+        });
+
+        if (!serialNumber) {
+            msg.error('请输入票全流水号', $('.js-dialog').find('.alert-message'));
+            return;
+        }
+        if (videos.length == 0) {
+            msg.error('请上传视频', $('.js-dialog').find('.alert-message'));
+            return;
+        }
+
         var params = {
-            'serialNumber': gId,
-            'videos': [] //todo
+            'serialNumber': serialNumber,
+            'videos': videos
         };
 
         helper.ajax(url.saveFlightDiary, params, function(res) {
-            var data = res.data;
-            
-            if (data.code == 0) {
-                msg.success('视频添加成功');
+            if (res.code >= 0) {
+                msg.success('用户礼品添加成功');
                 getFlightDiary();
             } else {
-                msg.success('视频添加失败，请稍后重试');
+                msg.error('用户礼品添加失败，请稍后重试');
             }
         });
     }
@@ -85,33 +111,119 @@ define(['url', 'helper', 'mustache', 'fileupload'], function (url, helper, musta
         };
 
         helper.ajax(url.deleteFlightDiary, params, function(res) {
-            var data = res.data;
-            
-            if (data.code == 0) {
-                msg.success('视频删除成功');
+            if (res.code >= 0) {
+                msg.success('用户礼品删除成功');
                 getFlightDiary();
             } else {
-                msg.success('视频删除失败，请稍后重试');
+                msg.error('用户礼品删除失败，请稍后重试');
             }
         });
     }
 
-    function uploadVideo() {
-         
+    function uploadFile() {
+        var filenameAttr = $(this).val().split('\\');
+        var filename = filenameAttr[filenameAttr.length - 1];
+        var $file = $('.js-upload-input');
+        var file = $file.length > 0 ? $file[0].files[0] : "";
+
+        /*if (!file || file.size >= 20480000) { //20M
+            msg.error('您上传的视频超出限制，请处理后重试', $('.js-dialog').find('.alert-message'));
+            cancelUpload();
+            return;
+        }*/
+
+        if (!file || file.size == 0) {
+            msg.error('请选择上传视频', $('.js-dialog').find('.alert-message'));
+            cancelUpload();
+            return;
+        }
+
+        if (!/\.(mp4)$/.test(filename)) {
+            msg.error('仅支持mp4格式的视频，请重新上传', $('.js-dialog').find('.alert-message'));
+            cancelUpload();
+            return;
+        }
+
+        $('.js-upload-name').text(filename);
+        $('.js-upload-size').text((file.size / 1000).toFixed(2) + 'KB');
+    }
+
+    function submitUpload() {
+        var $file = $('.js-upload-input');
+        var file = $file.length > 0 ? $file[0].files[0] : "";
+
+        if ($file.length == 0 || !file || file.size == 0) {
+            msg.error('请选择上传视频', $('.js-dialog').find('.alert-message'));
+            cancelUpload();
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append('video', file);
+        //formData.append('qrCodesCommonReq', JSON.stringify(params));
+
+        helper.ajax({
+            url: url.uploadVideo,
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            msg.success('上传成功', $('.js-dialog').find('.alert-message'));
+            $('.js-video-list').html(mustache.render($('#tpl-video-item').html(), { 'data': processVideo(data) }));
+            cancelUpload();
+        }).fail(function (data) {
+            msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
+            cancelUpload();
+        });
     }
 
     function cancelUpload() {
+        //清空文件名和文件大小显示容器
+        $('.js-upload-name').text('');
+        $('.js-upload-size').text('');
+        $('.js-upload-result').text('');
 
+        //清空input file中的内容
+        $('.js-upload-input').val('');
     }
 
     function deleteVideo() {
+        var $item = $(this).closest('.js-video-item');
+        var videoId = $item.data('id');
 
+        var params = {
+            'id': videoId
+        };
+
+        helper.ajax(url.deleteVideo, params, function(res) {
+            if (res.code >= 0) {
+                msg.success('视频删除成功', $('.js-dialog').find('.alert-message'));
+                $item.remove();
+            } else {
+                msg.error('视频删除失败，请稍后重试', $('.js-dialog').find('.alert-message'));
+            }
+        });
+    }
+
+    function processVideo(data) {
+        var name = '';
+        var urlItems = [];
+
+        _.each(data, function(item, i) {
+            urlItems = item.url.split('/');
+            item.name = urlItems[urlItems.length - 1];
+        });
+
+        return data;
     }
 
 
     return {
         init: function () {
             bindActions();
+            initPage();
         }
     }
 });

@@ -120,7 +120,7 @@
                 <div class="row">
 
 
-         <div class="col-md-12 ui-sortable">
+        <div class="col-md-12 ui-sortable">
             <div class="panel panel-inverse">
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -142,7 +142,6 @@
                         <table class="js-table table table-striped table-bordered" style="display: none;">
                             <thead>
                                 <tr role="row">
-                                    <th>票号</th>
                                     <th>视频</th>
                                     <th>上传时间</th>
                                     <th>操作</th>
@@ -173,10 +172,9 @@
 <!-- 数据表格模板 -->
 <script id="tpl-tbody" type="x-tmpl-mustache">
     {{#data}}
-    <tr>
-        <td>{{serialNo}}</td>
-        <td>{{video}}</td>
-        <td>{{lastRevision}}</td>
+    <tr data-id="{{id}}">
+        <td><a href="{{url}}" target="_blank">{{url}}</a></td>
+        <td>{{createTime}}</td>
         <td>
             <a href="#modal-dialog" data-toggle="modal">
                 <span class="js-delete btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o"></i> 删除</span>
@@ -197,14 +195,14 @@
             <div class="modal-body">
                 <div class="form-horizontal">
                     <fieldset>
-                        <div class="alert alert-message alert-danger alert-dismissable" style="display:none;">
+                        <div class="alert alert-message alert-dismissable" style="display:none;">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <span></span>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">票号 <i class="form-required">*</i></label>
                             <div class="col-md-8">
-                                <input type="text" class="js-input js-new-type form-control" placeholder="请输入票号">
+                                <input type="text" class="js-input js-new-serialNumber form-control" placeholder="请输入票号">
                             </div>
                         </div>
 
@@ -216,43 +214,36 @@
                             </div>  
                             <div class="col-md-10" style="margin-top:20px;margin-left:100px;">
 
-                            <form id="fileupload" action="../server/php/" method="POST" enctype="multipart/form-data">
-                           <div class="row fileupload-buttonbar">
+                            
+                           <div class="row fileupload-buttonbar" style="margin-bottom:30px;">
                                 <div class="fileupload-file">
-                                    <div class="pull-left upload-btn-wrapper">
+                                    <div class="pull-left upload-btn-wrapper" style="cursor: pointer;">
                                         <span class="btn btn-success fileinput-button">
-                                            <i class="icon-plus icon-white"></i>
+                                            <i class="icon-plus icon-white" style="cursor: pointer;"></i>
                                             <span>选择文件</span>
-                                            <input type="file" name="files[]" multiple class="upload-btn">
+                                            <input type="file" name="files" accept=".mp4" class="js-upload-input upload-btn" style="cursor: pointer;">
                                         </span>
                                     </div>
 
+                                    <div class="col-md-3 js-upload-name text-center upload-filename" style="line-height:32px;"></div>
+
+                                    <div class="col-md-2 js-upload-size text-center upload-filesize" style="line-height:32px;"></div>
+
                                     <div class="pull-right">
-                                        <button type="submit" class="js-upload btn btn-primary start">
+                                        <button type="submit" class="js-upload-submit btn btn-primary start">
                                             <i class="icon-upload icon-white"></i>
                                             <span>上传</span>
                                         </button>
-                                        <button type="reset" class="je-cancel btn btn-warning cancel">
+                                        <button type="reset" class="js-upload-cancel btn btn-warning cancel">
                                             <i class="icon-ban-circle icon-white"></i>
                                             <span>取消</span>
                                         </button>
-                                        <button type="button" class="js-delete btn btn-danger delete">
-                                            <i class="icon-trash icon-white"></i>
-                                            <span>删除</span>
-                                        </button>
-                                        <input type="checkbox" class="toggle ">
                                         <span class="fileupload-process"></span>
                                     </div>
                                 </div>
-                                <div class="col-lg-5 fileupload-progress">
-                                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="background-color:#fff;webkit-box-shadow:none;-webkit-box-shadow:none;">
-                                        <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                                    </div>
-                                    <div class="progress-extended">&nbsp;</div>
-                                </div>
                             </div>
-                            <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-                        </form>
+                            
+                            <div class="js-video-list video-list-wrapper"></div>
       
                         </div>
                         </div>
@@ -268,6 +259,20 @@
             </div>
         </div>
     </div>
+</script>
+
+<!-- 上传视频列表区域 -->
+<script id="tpl-video-item" type="x-tmpl-mustache">
+    {{#data}}
+        <div class="js-video-item fd-video-item" data-id="{{id}}">
+            <video controls="controls">
+                <source src="{{url}}" type="video/mp4" />
+            </video>
+            <div class="js-video-mask video-mask" style="display:none;">
+                <i class="js-upload-delete video-delete fa fa-trash-o"></i>
+            </div>
+        </div>
+    {{/data}}
 </script>
 
 <!-- 删除弹框区域 -->
