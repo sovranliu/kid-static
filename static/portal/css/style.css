@@ -61,8 +61,7 @@
 	background: transparent;
 }
 .sign-in a{
-    text-decoration: underline;
-    color: blue
+    color: #0068b7;
 }
 .yh-content{
 
@@ -442,6 +441,7 @@
 	height: 24px;
 	line-height: 24px;
 	display: block;
+    color: #0068b7
 }
 .yh-bt-table{
 	width: 1000px;

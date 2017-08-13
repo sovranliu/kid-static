@@ -19,8 +19,8 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
     }
 
     function initPage() {
-        $('.js-filter-startTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
-        $('.js-filter-endTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
+        $('.js-filter-startTime').datetimepicker({language: 'zh',minView: "month",format: 'yyyy-mm-dd'});
+        $('.js-filter-endTime').datetimepicker({language: 'zh',minView: "month",format: 'yyyy-mm-dd'});
         $('.js-filter-telephone').val(helper.getQueryStr('telephone') || '');
     }
 
