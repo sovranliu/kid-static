@@ -29,7 +29,7 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
     function _postUserInfoData() {
         var params = {};
         var $pop = $('.popup');
-        var sex = $('.js-sex').prop('checked') ? 0 : 1;
+        var sex = $('.js-sex').prop('checked') ? 1 : 2;
 
         params.userName = $.trim($('.js-username').val());
         params.telephone = $.trim($('.js-telephone').val());

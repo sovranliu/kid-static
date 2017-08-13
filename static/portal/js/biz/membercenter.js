@@ -12,6 +12,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
 
     //打开编辑弹框
     function _openUserInfo() {
+        _getUserInfo();
         $('.js-edit-popup').show();
         userInfo.ismale = function(){  
             if(this.sex == 0 ){  
@@ -42,7 +43,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     function _postUserInfoData() {
         var params = {};
 
-        var sex = $('.js-sex').prop('checked') ? 0 : 1;
+        var sex = $('.js-sex').prop('checked') ? 1 : 2;
 
         params.userName = $.trim($('.js-username').val());
         params.telephone = $.trim($('.js-telephone').val());
