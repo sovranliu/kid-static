@@ -169,6 +169,12 @@ $( document ).ready(function() {
         }
         return false;
     });
+
+    var collapseSidebar = function() {
+            $('body').toggleClass("small-sidebar");
+            $('.navbar .logo-box a span').html($('.navbar .logo-box a span').text() == smTxt ? str : smTxt);
+            sidebarAndContentHeight();
+    }
     
     // Makes .page-inner height same as .page-sidebar height
     var sidebarAndContentHeight = function () {
