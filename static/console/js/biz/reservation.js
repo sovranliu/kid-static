@@ -296,7 +296,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
                     statusDesc = '已预约';
                     break;
                 case 2:
-                    statusDesc = '改期申请中';
+                    statusDesc = '改期审批中';
                     break;
                 case 3:
                     statusDesc = '改期通过';
@@ -308,7 +308,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
                     statusDesc = '核销完成';
                     break;
                 case 6:
-                    statusDesc = '撤销申请中';
+                    statusDesc = '撤销审批中';
                     break;
                 case 7:
                     statusDesc = '撤销通过';
