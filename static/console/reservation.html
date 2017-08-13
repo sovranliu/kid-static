@@ -210,15 +210,15 @@
             <a href="ticket.html?serialNumber={{serialNumber}}">{{serialNumber}}</a>
         </td>
         <td class="js-td-time">{{time}}</td>
-        <td>{{status}}</td>
+        <td>{{statusDesc}}</td>
         <td>
-            <a href="#modal-dialog" data-toggle="modal">
+            <a class="{{^canOperate}}disabled pointerNone{{/canOperate}}" href="#modal-dialog" data-toggle="modal">
                 <span class="js-reschedule btn btn-sm btn-success"  data-toggle="tooltip" data-placement="top" title="改期"><i class="fa fa-edit"></i> 改期</span>
             </a>
-            <a href="#modal-dialog" data-toggle="modal">
+            <a class="{{^canOperate}}disabled pointerNone{{/canOperate}}" href="#modal-dialog" data-toggle="modal">
                 <span class="js-revoke btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="撤销"><i class="fa fa-trash-o"></i> 撤销</span>
             </a>
-            <a href="#modal-dialog" data-toggle="modal">
+            <a class="{{^canOperate}}disabled pointerNone{{/canOperate}}" href="#modal-dialog" data-toggle="modal">
                 <span class="js-writeoff btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="核销"><i class="fa fa-trash-o"></i> 核销</span>
             </a>
         </td>
