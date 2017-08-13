@@ -62,7 +62,7 @@
 					<dl class="yh-bt-con">
 						<dd>
 							<p class="js-notes-open yh-bt-tn">
-								<a href="TicketNotes.html" target="_blank">购票前请务必详细阅读购票须知</a></p>
+								<a class="js-notes-open">购票前请务必详细阅读购票须知</a></p>
 							<div class="yh-bt-box">
 								<h3>选择票价:</h3>
 								<ul class="yh-bt-q">
@@ -79,7 +79,7 @@
 							<div class="yh-bt-b">
 								<p class="tip">*团队购票，三张起订，且不接受退票。</p>
 								<div class="input">
-								<p class="js-refundInsurance"><input class="js-switch-refundInsurance" type="checkbox" name="" />退票险 <img src="images/doubt.png"></p>
+								<p class="js-refundInsurance"><input class="js-switch-refundInsurance" type="checkbox" name="" />退票险 <img class="js-insurance" src="images/doubt.png"></p>
 								</div>
 								<button class="js-buy-ticket btn">支付订单</button>
 							</div>
@@ -141,6 +141,18 @@
 		            <p>5、如遇天气、俱乐部运营等意外状况发生的无法飞行，可延长有效期或申请退款（团购除外）</p>
 		            <p>6、如遇天气、俱乐部运营等意外状况发生的无法飞行，单人票购票者可全额退款（如购买退票险的该金额不退款）</p>
 		            <p>7、所有票务支付需先注册成为微信会员，并通过微信支付。</p>
+		        </p>
+		        <button class="js-notes-close confirm-btn">确认</button>
+	            <div class="js-notes-close close"></div>
+	        </div>
+	    </div>
+
+	    <!-- 购票须知，弹窗 -->
+		<div class="js-insurance-notes popup">
+	        <div class="pop-mask"></div>
+	        <div class="pop-main notes">
+	            <p class="cen">
+	            	<p>购买退票险，退票后票价全额退还，未购买退票险，仅退票价的70%，请知晓，谢谢。</p>
 		        </p>
 		        <button class="js-notes-close confirm-btn">确认</button>
 	            <div class="js-notes-close close"></div>

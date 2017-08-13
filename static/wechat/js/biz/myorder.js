@@ -82,6 +82,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                                 data[i].statusStyle = "gray";
                                 break;
                         }
+                        data[i].price = parseFloat((parseInt(data[i].price)/100).toFixed(2));
                     }
 
                     var ticketList = {
