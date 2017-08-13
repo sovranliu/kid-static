@@ -93,7 +93,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
             }
 
             item.statusDesc = statusDesc;
-            item.price = Number(item.price) / 100;
+            item.price = (Number(item.price) / 100).toFixed(2);
         });
 
         return data;
