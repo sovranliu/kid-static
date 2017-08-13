@@ -122,7 +122,8 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     function buyFlightDiary() {
         var params = {
             "goodsType":'30000',
-            "openId":openId
+            "openId":openId,
+            "mobileNo":mobileNo
         };
 
         helper.ajax(url.buyTicket, params, function(res) {
