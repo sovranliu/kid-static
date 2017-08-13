@@ -130,7 +130,7 @@ define(['url', 'helper'], function (url, helper) {
         var refundInsurance = ticketType == '1' ? Number($('.js-refundInsurance').text()) : 0;
         var total = Number(ticketPrice * ticketNum + refundInsurance);
 
-        $('.js-price').text(!isNaN(total) ? total : '' );
+        $('.js-price').text(!isNaN(total) ? total.toFixed(2) : '' );
     }
 
     function buyTicket() {
