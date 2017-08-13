@@ -24,6 +24,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
 
         helper.ajax(url.getRefund, params, function(res) {
             if(res.code >= 0) {
+                res.data.price = parseFloat((parseInt(res.data.price)/100).toFixed(2))
                 var template = $('#template').html();
                 Mustache.parse(template);
                 $('.ar-content').html(Mustache.render(template, res.data));
