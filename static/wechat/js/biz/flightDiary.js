@@ -50,6 +50,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                     $('.fd-time').hide();
                     $('.fd-dq-desc').hide();
                     $('.js-fd-payment').hide();
+                    $('.js-rsv-ticket').hide();
                 } else {
                     gData = data.canPurchase;
                     $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': gData}));
@@ -83,6 +84,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                 $('.fd-time').hide();
                 $('.fd-dq-desc').hide();
                 $('.js-fd-payment').hide();
+                $('.js-rsv-ticket').hide();
             }
         });
     }
@@ -103,17 +105,19 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
             $('.fd-time').show();
             $('.fd-dq-desc').show();
             $('.js-fd-payment').show();
+            $('.js-rsv-ticket').show();
         } else {
             $('.js-video-can-purchase-list').html('<p class="dataNull">您还没有飞行礼品</p>');
             $('.fd-time').hide();
             $('.fd-dq-desc').hide();
             $('.js-fd-payment').hide();
+            $('.js-rsv-ticket').hide();
         }
     }
 
     function buyFlightDiary() {
         var params = {
-            "serialNumber": serialNumber,
+            "serialNo": serialNumber,
             "goodsType":'30000',
             "openId":openId,
             "mobileNo":mobileNo
