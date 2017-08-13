@@ -57,8 +57,10 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
                 if (!data || !data.canPurchase || data.canPurchase.length == 0) {
                     $('.js-video-can-purchase-list').html('<p class="dataNull">您还没有飞行礼品</p>');
+                    $('.js-fd-payment').hide();
                 } else {
                     $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.canPurchase, 'isPurchased': false }));
+                    $('.js-fd-payment').show();
                 }
                 
                 if (!data || !data.hasPurchased || data.hasPurchased.length == 0) {
@@ -67,8 +69,10 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                     $('.js-video-has-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.hasPurchased, 'isPurchased': true }));
                 }
 
-                $('.js-timeDuration').html(data.timeDuration);
-                $('.js-price').html(data.canPurchasePrice);
+                if (data) {
+                    $('.js-timeDuration').html(data.timeDuration);
+                    $('.js-price').html(data.canPurchasePrice);
+                }
 
                 //动态设置遮罩的宽度，高度在样式中写死200px
                 $dqVideoItem = $('.js-video-can-purchase-list .fd-video-item');
