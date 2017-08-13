@@ -10,8 +10,8 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
     }
 
     function initPage() {
-        $('.js-filter-startTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
-        $('.js-filter-endTime').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
+        $('.js-filter-startTime').datetimepicker({language: 'zh',minView: "month",format: 'yyyy-mm-dd'});
+        $('.js-filter-endTime').datetimepicker({language: 'zh',minView: "month",format: 'yyyy-mm-dd'});
     }
 
    function buildSearchParams() {

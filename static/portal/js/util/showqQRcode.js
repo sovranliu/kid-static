@@ -28,7 +28,7 @@ define(['url','helper'], function(url,helper) {
             }
         } else if(path.indexOf("MembershipPrice") != -1 || path.indexOf("TicketNotes") != -1 || path.indexOf("QRCode") != -1) {
             if($.cookie('userName') && $.cookie('avatarUrl')) {
-                $('.sign-in').html('<img class="fl" src="' + $.cookie('avatarUrl') + '"></img><div class="fl"><span>姓名：' + $.cookie('userName')+ '</span><a href="MemberCenter.html"><span>会员级别：初级飞行员</span></a></div>')
+                $('.sign-in').html('<img class="fl" src="' + $.cookie('avatarUrl') + '"></img><div class="fl"><a href="MemberCenter.html"><span>姓名：' + $.cookie('userName')+ '</span><span>会员级别：初级飞行员</span></a></div>')
             }else{
                 $('.sign-in').html('<button class="js-login">登录</button> <button class="js-register">注册</button>');
             }
@@ -43,7 +43,7 @@ define(['url','helper'], function(url,helper) {
             if(res.data != null) {
                 $.cookie('userName',res.data.userName);
                 $.cookie('avatarUrl',res.data.avatarUrl);
-                $('.sign-in').html('<img class="fl" src="' + res.data.avatarUrl + '"></img><div class="fl"><span>姓名：' + res.data.userName + '</span><a href="MemberCenter.html"><span>会员级别：初级飞行员</span></a></div>')
+                $('.sign-in').html('<img class="fl" src="' + res.data.avatarUrl + '"></img><div class="fl"><a href="MemberCenter.html"><span>姓名：' + res.data.userName + '</span><span>会员级别：初级飞行员</span></a></div>')
             }else{
                 $('.sign-in').html('<button class="js-login">登录</button> <button class="js-register">注册</button>');
             }

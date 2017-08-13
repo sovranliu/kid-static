@@ -8,7 +8,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
     }
 
     function initPage() {
-        $('.js-filter-date').datetimepicker({minView: "month",format: 'yyyy-mm-dd'});
+        $('.js-filter-date').datetimepicker({language: 'zh',minView: "month",format: 'yyyy-mm-dd'});
     }
 
     function handleReset() {

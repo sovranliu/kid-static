@@ -284,7 +284,6 @@ a,div,img {
     font-size: 16px;
     color: #666;
     line-height: 1.5;
-    text-align: left;
 }
 .pop-main .mb-tips{
     font-size: 12px;
@@ -1254,7 +1253,7 @@ a,div,img {
 
 .msp-item {
     position: relative;
-    margin-top: 25px;
+    margin-bottom: 25px;
     line-height: 1;
     font-size: 0;
 }
