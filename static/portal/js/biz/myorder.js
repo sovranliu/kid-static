@@ -162,7 +162,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
         helper.ajax(url.postRevoke, params, function(res) {
             if(res.code >= 0) {
-                $('.revoke-popup').find('p').html('撤销成功，请等待管理员审核。');
+                $('.revoke-popup').find('p').html('您的撤销申请已提交，请等待管理员审核，谢谢。');
                 $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
             }
         })
@@ -232,7 +232,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
         helper.ajax(url.getTickets, params, function(res) {
             if(res.code >= 0) {
-                $('.revoke-popup').find('p').html('撤销成功，请至我的飞行票查看。');
+                $('.revoke-popup').find('p').html('您的撤销申请已提交，请等待管理员审核，谢谢。');
                 $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
             }
         })
