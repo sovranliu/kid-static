@@ -7,9 +7,8 @@ define(['url', 'helper'], function (url, helper) {
         $('.js-add-num').on('click', addNum);
         $('.js-switch-refundInsurance').on('change', setRefundInsurance);
         $('.js-buy-ticket').on('click', buyTicket);
-        $('.popup').on('click', '.js-confirm',function() {
-            $popup.hide();
-        });
+        $('.js-insurance').on('click',showInsuranceNote);
+        $('.popup').on('click', '.js-confirm',closePopup);
     }
 
     function getUrlParams() {
@@ -191,12 +190,19 @@ define(['url', 'helper'], function (url, helper) {
                if (res.err_msg == "get_brand_wcpay_request:ok") {
                     window.location.href = "PayResult.html";
                } else {
-                    $('popup').show().find('p').html(res.err_msg)
+                    $('.popup').show().find('p').html(res.err_msg)
                }
            }
        ); 
     }
+
+    function showInsuranceNote() {
+        $('.popup').show().find('p').html('购买退票险，退票后票价全额退还，未购买退票险，仅退票价的70%，请知晓，谢谢。')
+    }
     
+    function closePopup() {
+        $(this).parent().parent('.popup').hide();
+    }
     return {
         init: function () {
           bindActions();

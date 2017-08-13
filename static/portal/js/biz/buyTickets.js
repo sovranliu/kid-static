@@ -5,8 +5,9 @@ define(['url', 'helper'], function (url, helper) {
     function bindActions() {
         $('.js-ticket-type').on('click', checkTicketType);
         $('.js-buy-ticket').on('click', buyTicket);
-        //$('.js-notes-open').on('click', openNote);
-        //$('.js-notes-close').on('click', closeNote);
+        $('.js-notes-open').on('click', openNote);
+        $('.js-notes-close').on('click', closeNote);
+        $('.js-insurance').on('click',openInsuranceNote)
         $('.js-confirm').on('click',closePay)
     }
 
@@ -60,12 +61,17 @@ define(['url', 'helper'], function (url, helper) {
     }
 
     function openNote() {
-        //$('.js-notes').show();
+        $('.js-notes').show();
     }
 
     function closeNote() {
-        $('.js-notes').hide();
+        $('.popup').hide();
     }
+
+    function openInsuranceNote() {
+        $('.js-insurance-notes').show();
+    }
+
     function closePay() {
         $('.js-pay').hide();
     }

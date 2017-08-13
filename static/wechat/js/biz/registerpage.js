@@ -1,18 +1,18 @@
 define(['url', 'helper'], function(url, helper) {
 
     function bindActions() {
-        $('.js-submit').on('click',_postRegisterData);
-        $('.js-check').on('click',_checkMemberBenefit);
+        $('.js-submit').on('click', _postRegisterData);
+        $('.js-check').on('click', _checkMemberBenefit);
         $('.js-confirm').on('click', function() {
             $('.popup').hide();
         });
-        $('.js-send').on('click',_getVerificationCode);
+        $('.js-send').on('click', _getVerificationCode);
     }
 
     function _getAuth() {
         var openId = helper.getQueryStr('openId');
-        if(!openId || openId == "") {
-            helper.ajax(url.getAuthorize,{},function(res) {})
+        if (!openId || openId == "") {
+            helper.ajax(url.getAuthorize, {}, function(res) {})
         }
     }
 
@@ -28,9 +28,9 @@ define(['url', 'helper'], function(url, helper) {
             //$btn.html("短信发送中");
             _loadingCodeTime($btn);
             helper.ajax(url.getVerificationCode, params, function(res) {
-                if(res.code >= 0) {
+                if (res.code >= 0) {
                     $btn.html("已发送");
-                }else{
+                } else {
                     $btn.html("重新发送");
                 }
             })
@@ -50,18 +50,17 @@ define(['url', 'helper'], function(url, helper) {
         $msg.show();
 
         var left_time = 60;
-        var timeCount = window.setInterval(function(){
+        var timeCount = window.setInterval(function() {
             left_time = left_time - 1;
             if (left_time <= 0) {
                 window.clearInterval(timeCount);
                 $msg.hide();
                 $btnSend.show();
-            }
-            else {
+            } else {
                 $msg.html('(' + left_time + ')秒');
             }
         }, 1000);
-    }  
+    }
 
     //发送注册信息
     function _postRegisterData() {
@@ -70,19 +69,19 @@ define(['url', 'helper'], function(url, helper) {
         var code = $.trim($('.code').val());
 
         var params = {
-            "mobileNo":phone,
-            "code":code,
-            "name":name,
-            "openId":helper.getQueryStr('openId')
+            "mobileNo": phone,
+            "code": code,
+            "name": name,
+            "openId": helper.getQueryStr('openId')
         }
 
-        if(name != "" && code != "" && _checkMobileNumber(phone)) {
+        if (name != "" && code != "" && _checkMobileNumber(phone)) {
             helper.ajax(url.postRegister, params, function(res) {
-                if(res.code >= 0) {
+                if (res.code >= 0) {
                     window.location.href = "MemberCenter.html";
                 }
             })
-        }else{
+        } else {
             $('.popup').show();
             $('.popup').find('p').html('请完善输入内容');
         }
@@ -90,8 +89,10 @@ define(['url', 'helper'], function(url, helper) {
 
     function _checkMemberBenefit() {
         var isCheck = $(this).prop('checked');
-        if(isCheck) {
-            $('.js-mbship').css('display','none');
+        if (isCheck) {
+            setTimeout(function() {
+                $('.js-mbship').css('display', 'none');
+            }, 800)
         }
     }
 

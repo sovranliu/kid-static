@@ -272,10 +272,10 @@ a,div,img {
     line-height: 38px;
 }
 .pop-main .check-register{
-    width:auto;
+    width:20px;
     background:none;
     margin:0;
-    height:auto;
+    height:20px;
     line-height:1;
 }
 
@@ -1261,6 +1261,7 @@ a,div,img {
 
 .msp-list img {
     width: 100%;
+    height: 220px
 }
 
 .msp-list span {
