@@ -204,7 +204,7 @@
 <!-- 数据表格模板 -->
 <script id="tpl-tbody" type="x-tmpl-mustache">
     {{#data}}
-    <tr data-id="{{serialNumber}}">
+    <tr data-id="{{id}}" data-serNo="{{serialNumber}}">
         <td>{{name}}（{{telephone}}）</td>
         <td>
             <a href="ticket.html?serialNumber={{serialNumber}}">{{serialNumber}}</a>
@@ -217,6 +217,9 @@
             </a>
             <a href="#modal-dialog" data-toggle="modal">
                 <span class="js-revoke btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="撤销"><i class="fa fa-trash-o"></i> 撤销</span>
+            </a>
+            <a href="#modal-dialog" data-toggle="modal">
+                <span class="js-writeoff btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="核销"><i class="fa fa-trash-o"></i> 核销</span>
             </a>
         </td>
     </tr>
@@ -279,6 +282,32 @@
             <div class="modal-footer">
                 <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
                 <a href="javascript:;" class="js-confirm-revoke btn btn-sm btn-success">确认</a>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<!-- 预约核销 -->
+<script id="tpl-writeoff-dialog" type="x-tmpl-mustache">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">核销预约</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-message alert-dismissable" style="display:none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <span></span>
+                </div>
+                <div class="alert alert-danger m-b-0">
+                    <p>确认核销预约吗？</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
+                <a href="javascript:;" class="js-confirm-writeoff btn btn-sm btn-success">确认</a>
             </div>
         </div>
     </div>

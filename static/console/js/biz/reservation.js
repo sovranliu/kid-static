@@ -1,14 +1,16 @@
 define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', 'datePicker'], function (url, helper, mustache, dateTimePicker, msg, paginator, datePicker) {
 
-    var pageNum = 1, pageLimit = 20, gId;
+    var pageNum = 1, pageLimit = 20, gId, gSerNo;
 
     function bindActions() {
         $('.js-search').on('click', getBookingList);
         $('.js-reset').on('click', handleReset);
         $('.js-tbody').on('click', '.js-reschedule', openReschedule);
         $('.js-tbody').on('click', '.js-revoke', openRevoke);
+        $('.js-tbody').on('click', '.js-writeoff', openWriteoff);
         $('.js-dialog').on('click', '.js-confirm-reschedule', confirmReschedule);
         $('.js-dialog').on('click', '.js-confirm-revoke', confirmRevoke);
+        $('.js-dialog').on('click', '.js-confirm-writeoff', confirmWriteoff);
         $('.js-dialog').on('click', '.js-select-time', selectTime);
         $('.js-dialog').on('change', '.js-year', getBookingTime);
         $('.js-dialog').on('change', '.js-month', getBookingTime);
@@ -94,6 +96,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
         }*/
 
         gId = $row.data('id');
+        gSerNo = $row.data('serNo');
 
         $('.js-dialog').html(mustache.render($('#tpl-reschedule-dialog').html(), { }));
 
@@ -172,7 +175,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
             return;
         }
 
-        if(!gId) {
+        if(!gSerNo) {
             msg.error('请选择要改期的飞行票', $('.js-dialog').find('.alert-message'));
             return;
         }
@@ -184,7 +187,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
         day = day.length < 2 ? "0" + day : day;
 
         params = {
-            'serialNumber': gId,
+            'serialNumber': gSerNo,
             'year': year,
             'month': month,
             'day': day,
@@ -200,9 +203,21 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
     }
 
     function openRevoke() {
-        gId = $(this).closest('tr').data('id');
+        var $row = $(this).closest('tr');
+
+        gId = $row.data('id');
+        gSerNo = $row.data('serNo');
 
         $('.js-dialog').html(mustache.render($('#tpl-revoke-dialog').html(), { }));
+    }
+
+    function openWriteoff() {
+        var $row = $(this).closest('tr');
+        
+        gId = $row.data('id');
+        gSerNo = $row.data('serNo');
+
+        $('.js-dialog').html(mustache.render($('#tpl-writeoff-dialog').html(), { }));
     }
 
     function confirmReschedule() {
@@ -217,7 +232,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
         day = day.length < 2 ? "0" + day : day;
 
         var params = {
-            'serialNumber': gId,
+            'id': gId,
             'year': year,
             'month': month,
             'day': day,
@@ -239,7 +254,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
 
     function confirmRevoke() {
         var params = {
-            'serialNumber': gId
+            'id': gId
         };
 
         helper.ajax(url.revokeBooking, params, function(res) {
@@ -250,6 +265,23 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
                 getBookingList();
             } else {
                 msg.error('预约撤销失败，请稍后重试');
+            }
+        });
+    }
+
+    function confirmWriteoff() {
+        var params = {
+            'id': gId
+        };
+
+        helper.ajax(url.completeBooking, params, function(res) {
+            $('.js-dialog').modal('hide');
+            
+            if (res.code >= 0) {
+                msg.success('预约核销成功');
+                getBookingList();
+            } else {
+                msg.error('预约核销失败，请稍后重试');
             }
         });
     }

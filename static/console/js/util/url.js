@@ -21,6 +21,7 @@ define([], function() {
         isCanBook: _basePath + 'isViableDate',
         rescheduleBooking: _basePath + 'rescheduleBooking',
         revokeBooking: _basePath + 'revokeBooking',
+        completeBooking: _basePath + 'completeBooking',
         getStock: _basePath + 'getBookRepositories',
         enableStock: _basePath + 'switchBookRepository',
         disableStock: _basePath + 'switchBookRepository',
