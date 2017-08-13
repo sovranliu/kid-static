@@ -67,16 +67,16 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                         showPopup(5);
                     } else {
                         $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': tcList}));
+                        $('.js-ticket-text').html($('.js-rsv-ticket option:selected').text());
+                        changeTicket();
+                        getBookingTime();
                     }
-
-                    $('.js-ticket-text').html($('.js-rsv-ticket option:selected').text());
-
-                    changeTicket();
                 }
             })
         } else {
             $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': [{'serialNumber': serialNumber}]})).hide();
             $('.js-ticket-text').html($('.js-rsv-ticket option:selected').text()).addClass('hideAfter');
+            getBookingTime();
         }
     }
 
@@ -277,7 +277,6 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             getUrlParams();
             initDateSelectbox();
             getTicketList();
-            getBookingTime();
         }
     }
 });
