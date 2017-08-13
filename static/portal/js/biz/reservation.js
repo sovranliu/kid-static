@@ -48,7 +48,7 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
                     });
 
                     if (!tcList || tcList.length == 0) {
-                        $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': '您没有飞行票，请购买后查看'}));
+                        showPopup(5);
                     } else {
                         $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': tcList}));
                     }
@@ -222,7 +222,7 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
                 $resText.html('请选择有效预约时间段');
                 break;
             case 5:
-                $resText.html('请选择您要预约的飞行票');
+                $resText.html('请先购买飞行票，再进行预约');
                 $('.js-confirm').on('click', function() {
                     window.location.href = 'BuyTickets.html';
                 });
