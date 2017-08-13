@@ -109,6 +109,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     for (var i = 0; i < data.length; i++) {
                         switch (data[i].type) {
                             case 0:
+                                data[i].isSingle = false;
                                 break;
                             case 1:
                                 data[i].isSingle = true;
