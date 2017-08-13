@@ -15,8 +15,14 @@ define(['url', 'helper','handshake'], function (url, helper,handshake) {
             var data = res.data;
 
             if (res.code == 0) {
-                $('.js-result-success').show();
-                $('.js-result-fail').hide();
+                if (data && data.result) {
+                    $('.js-result-success').show();
+                    $('.js-result-fail').hide();
+                } else {
+                    $('.js-result-success').hide();
+                    $('.js-result-fail').show();
+                    $('.js-fail-text').html(res.msg);
+                }
             } else {
                 $('.js-result-success').hide();
                 $('.js-result-fail').show();
