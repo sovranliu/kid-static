@@ -40,9 +40,6 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
                     
                     _.each(data, function(item, i) {
                         if (Number(item.status) == 0) {
-                            //var serialNo = item.serialNumber;
-                            //item.type = item.ticketType == 0 ? '团体票' : '单人票';
-                            //item.sno = serialNo.replace(serialNo.substring(10, serialNo.length-5), '****');
                             tcList.push(item);
                         }
                     });
@@ -51,13 +48,14 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
                         showPopup(5);
                     } else {
                         $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': tcList}));
+                        changeTicket();
+                        getBookingTime();
                     }
-
-                    changeTicket();
                 }
             })
         } else {
             $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': [{'serialNumber': serialNumber}]})).attr('disabled', 'disabled');
+            getBookingTime();
         }
     }
 
@@ -245,7 +243,6 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
           getUrlParams();
           initDateSelectbox();
           getTicketList();
-          getBookingTime();
         }
     }
 });
