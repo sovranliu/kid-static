@@ -190,7 +190,7 @@ define(['url', 'helper'], function (url, helper) {
                if (res.err_msg == "get_brand_wcpay_request:ok") {
                     window.location.href = "PayResult.html";
                } else {
-                    $('.popup').show().find('p').html(res.err_msg)
+                    $('.popup').show().find('p').html("支付失败")
                }
            }
        ); 
