@@ -67,7 +67,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
 
     function openAdd() {
         var serialNumber = $('.js-filter-serialNumber').val();
-        
+
         $('.js-dialog').html(mustache.render($('#tpl-add-dialog').html(), { }));
         $('.js-new-serialNumber').val(serialNumber);
     }
@@ -199,9 +199,9 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
 
     function setVideoMask() {
         $('.js-video-item').hover(function() {
-            $('.js-video-mask').stop().animate({height:'200px'}, 400).show();
+            $(this).find('.js-video-mask').stop().animate({height:'200px'}, 400).show();
         }, function() {
-            $('.js-video-mask').stop().animate({height:'0px'}, 400).hide();
+            $(this).find('.js-video-mask').stop().animate({height:'0px'}, 400).hide();
         });
     }
 
