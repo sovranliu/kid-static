@@ -69,7 +69,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
                 if(!res.data.content) {
                     $('.js-confirm-popup').find('p').html('暂无回复');
                 }else{
-                    $('.js-confirm-popup').find('p').html(res.data.content);
+                    $('.js-confirm-popup').find('p').html("最新消息：" + res.data.content);
                 }
             }
         })
