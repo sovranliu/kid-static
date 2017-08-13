@@ -62,7 +62,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
                 if (!data || !data.list || data.list.length == 0) {
                     $('.js-tbody').html('<td colspan=5 class="dataNull">还没有预约信息</td>');
                 } else {
-                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': data.list }));
+                    $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': processData(data.list) }));
 
                     $('.js-tpage').createPage({
                         pageCount: Math.ceil(data.total / pageLimit),
@@ -284,6 +284,43 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
                 msg.error('预约核销失败，请稍后重试');
             }
         });
+    }
+
+    function processData(data) {
+        var statusDesc = '';
+
+        _.each(data, function(item, i) {
+            switch(Number(item.status)) {
+                case 1:
+                    statusDesc = '已预约';
+                    break;
+                case 2:
+                    statusDesc = '改期申请中';
+                    break;
+                case 3:
+                    statusDesc = '改期通过';
+                    break;
+                case 4:
+                    statusDesc = '改期拒绝';
+                    break;
+                case 5:
+                    statusDesc = '核销完成';
+                    break;
+                case 6:
+                    statusDesc = '撤销申请中';
+                    break;
+                case 7:
+                    statusDesc = '撤销通过';
+                    break;
+                case 8:
+                    statusDesc = '拒绝撤销';
+                    break;
+            }
+
+            item.statusDesc = statusDesc;
+        });
+
+        return data;
     }
 
     return {
