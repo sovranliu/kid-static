@@ -43,6 +43,9 @@ define(['url','helper'], function(url,helper) {
             if(res.data != null) {
                 $.cookie('userName',res.data.userName);
                 $.cookie('avatarUrl',res.data.avatarUrl);
+                if(!res.data.avatarUrl){
+                    $.cookie('avatarUrl','images/user-default.png');
+                }
                 $('.sign-in').html('<img class="fl" src="' + res.data.avatarUrl + '"></img><div class="fl"><a href="MemberCenter.html"><span>姓名：' + res.data.userName + '</span><span>会员级别：初级飞行员</span></a></div>')
             }else{
                 $('.sign-in').html('<button class="js-login">登录</button> <button class="js-register">注册</button>');

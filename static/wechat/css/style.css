@@ -1410,6 +1410,7 @@ a,div,img {
     height: 80px;
     border-radius: 100%;
     border: 3px solid #0068b7;
+    background:#fff;
 }
 
 .mc-header-top div {

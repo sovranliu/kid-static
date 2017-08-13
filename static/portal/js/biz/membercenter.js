@@ -31,7 +31,9 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         helper.ajax(url.getUserInfo,params,function (res) {
             if(res.code >= 0) {
                 userInfo = res.data;
-                $('.user-img').attr('src',userInfo.avatarUrl);
+                if(userInfo.avatarUrl){
+                    $('.user-img').attr('src',userInfo.avatarUrl);
+                }
                 $('.userInfo').html('姓名：' + userInfo.userName + '   |   会员级别：初级飞行员');
             }else{
                 $('.userInfo').html('获取用户信息失败');
