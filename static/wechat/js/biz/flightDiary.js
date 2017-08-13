@@ -1,6 +1,6 @@
 define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
-    var openId, mobileNo;
+    var openId, mobileNo, gData;
 
     function bindActions() {
         $('.js-tab-item').on('click', switchTab);
@@ -8,6 +8,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
             $('.popup').hide();
         });
         $('.js-buy-flightDiary').on('click', buyFlightDiary);
+        $('.js-rsv-ticket').on('change', changeTicket);
     }
 
     function getUrlParams() {
@@ -27,17 +28,6 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                 }
             })
         }
-    }
-
-    function switchTab(e) {
-        var $activeTab = $(e.currentTarget);
-        var tabIndex = Number($activeTab.data('index'));
-
-        $('.js-tab-item').removeClass('current');
-        $('.js-tab-content').hide();
-
-        $activeTab.addClass('current');
-        $('.js-tab-content').eq(tabIndex).show();
     }
 
     function getFlightDiary() {
@@ -61,10 +51,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                     $('.fd-dq-desc').hide();
                     $('.js-fd-payment').hide();
                 } else {
-                    $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.canPurchase, 'isPurchased': false }));
-                    $('.fd-time').show();
-                    $('.fd-dq-desc').show();
-                    $('.js-fd-payment').show();
+                    gData = data.canPurchase;
+                    $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': gData}));
+                    changeTicket();
                 }
                 
                 if (!data || !data.hasPurchased || data.hasPurchased.length == 0) {
@@ -90,31 +79,6 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                     ygWidth = $ygVideoItem.eq(0).width();
                     $('.fd-yg-pop').css('width', ygWidth+'px');
                 }
-                
-                //动态设置遮罩的宽高
-                /*var timer = setInterval(function() {
-                    if (document.getElementsByTagName("video")[0].readyState != 0) {
-                        $dqVideoItem = $('.js-video-can-purchase-list .fd-video-item');
-                        if ($dqVideoItem.length > 0) {
-                            dqWidth = $dqVideoItem.eq(0).width();
-                            dqHeight = $dqVideoItem.eq(0).height();
-                            $('.fd-dq-pop').css('width', dqWidth+'px');
-                            $('.fd-dq-pop').css('height', dqHeight+'px');
-                            $('.fd-dq-pop').css('margin-top', '-'+dqHeight+'px');
-                        }
-
-                        $ygVideoItem = $('.js-video-has-purchase-list .fd-video-item');
-                        if ($ygVideoItem.length > 0) {
-                            ygWidth = $ygVideoItem.eq(0).width();
-                            ygHeight = $ygVideoItem.eq(0).height();
-                            $('.fd-yg-pop').css('width', ygWidth+'px');
-                            $('.fd-yg-pop').css('height', ygHeight+'px');
-                            $('.fd-yg-pop').css('margin-top', '-'+ygHeight+'px');
-                        }
-                
-                        clearInterval(timer);
-                    }
-                }, 10);*/
             } else {
                 $('.fd-time').hide();
                 $('.fd-dq-desc').hide();
@@ -123,8 +87,33 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         });
     }
 
+    function changeTicket() {
+        var selectedList = [];
+
+        serialNumber = $('.js-rsv-ticket option:selected').data('val');
+
+        _.each(gData, function(item, i) {
+            if (item.serialNo == serialNumber) {
+                selectedList = item.records;
+            }
+        });
+
+        if (selectedList && selectedList.length > 0) {
+            $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': selectedList, 'isPurchased': false }));
+            $('.fd-time').show();
+            $('.fd-dq-desc').show();
+            $('.js-fd-payment').show();
+        } else {
+            $('.js-video-can-purchase-list').html('<p class="dataNull">您还没有飞行礼品</p>');
+            $('.fd-time').hide();
+            $('.fd-dq-desc').hide();
+            $('.js-fd-payment').hide();
+        }
+    }
+
     function buyFlightDiary() {
         var params = {
+            "serialNumber": serialNumber,
             "goodsType":'30000',
             "openId":openId,
             "mobileNo":mobileNo
@@ -144,6 +133,17 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                 }
             }
         });
+    }
+
+    function switchTab(e) {
+        var $activeTab = $(e.currentTarget);
+        var tabIndex = Number($activeTab.data('index'));
+
+        $('.js-tab-item').removeClass('current');
+        $('.js-tab-content').hide();
+
+        $activeTab.addClass('current');
+        $('.js-tab-content').eq(tabIndex).show();
     }
 
     function onBridgeReady(res){
@@ -166,6 +166,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
            }
        ); 
     }
+
     return {
         init: function () {
           bindActions();
