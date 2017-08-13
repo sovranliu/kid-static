@@ -75,7 +75,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
                 if (data) {
                     $('.js-timeDuration').html(data.timeDuration);
-                    $('.js-price').html(data.canPurchasePrice);
+                    $('.js-price').html(data.canPurchasePrice.toFixed(2));
                 }
 
                 //动态设置遮罩的宽度，高度在样式中写死200px
