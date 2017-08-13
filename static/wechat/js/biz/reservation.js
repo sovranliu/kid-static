@@ -251,7 +251,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                 $resText.html('请选择有效预约时间段');
                 break;
             case 5:
-                $resText.html('请选择您要预约的飞行票');
+                $resText.html('请先购买飞行票，再进行预约');
                 $('.js-confirm').on('click', function() {
                     window.location.href = 'BuyTickets.html';
                 });
