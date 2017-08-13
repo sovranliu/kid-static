@@ -1253,7 +1253,7 @@ a,div,img {
 
 .msp-item {
     position: relative;
-    margin-top: 25px;
+    margin-bottom: 25px;
     line-height: 1;
     font-size: 0;
 }
