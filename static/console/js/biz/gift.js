@@ -66,7 +66,10 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
     }
 
     function openAdd() {
+        var serialNumber = $('.js-filter-serialNumber').val();
+        
         $('.js-dialog').html(mustache.render($('#tpl-add-dialog').html(), { }));
+        $('.js-new-serialNumber').val(serialNumber);
     }
 
     function openDelete() {
