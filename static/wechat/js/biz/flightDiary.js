@@ -62,9 +62,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                     $('.js-fd-payment').hide();
                 } else {
                     $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.canPurchase, 'isPurchased': false }));
-                    $('.js-fd-payment').show();
                     $('.fd-time').show();
                     $('.fd-dq-desc').show();
+                    $('.js-fd-payment').show();
                 }
                 
                 if (!data || !data.hasPurchased || data.hasPurchased.length == 0) {
@@ -75,7 +75,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
                 if (data) {
                     $('.js-timeDuration').html(data.timeDuration);
-                    $('.js-price').html(data.canPurchasePrice.toFixed(2));
+                    $('.js-price').html((Number(data.canPurchasePrice) / 100).toFixed(2));
                 }
 
                 //动态设置遮罩的宽度，高度在样式中写死200px
@@ -115,6 +115,10 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                         clearInterval(timer);
                     }
                 }, 10);*/
+            } else {
+                $('.fd-time').hide();
+                $('.fd-dq-desc').hide();
+                $('.js-fd-payment').hide();
             }
         });
     }
