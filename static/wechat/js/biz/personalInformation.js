@@ -12,7 +12,7 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
             var data = res.data;
             if(res.code >= 0) {
                 data.ismale = function(){  
-                    if(this.sex == 0 ){  
+                    if(this.sex == 1 ){  
                         return true;  
                     }else{
                         return false;  

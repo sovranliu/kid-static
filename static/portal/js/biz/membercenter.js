@@ -15,7 +15,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         _getUserInfo();
         $('.js-edit-popup').show();
         userInfo.ismale = function(){  
-            if(this.sex == 0 ){  
+            if(this.sex == 1 ){  
                 return true;  
             }else{
                 return false;  
