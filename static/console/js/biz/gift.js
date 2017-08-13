@@ -70,7 +70,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
     }
 
     function openDelete() {
-        var gId = $(this).closest('tr').data('id');
+        gId = $(this).closest('tr').data('id');
 
         $('.js-dialog').html(mustache.render($('#tpl-delete-dialog').html(), { }));
     }
