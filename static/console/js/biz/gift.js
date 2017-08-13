@@ -182,6 +182,7 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
             if (res.code >= 0) {
                 msg.success('上传成功', $('.js-dialog').find('.alert-message'));
                 $('.js-video-list').append(mustache.render($('#tpl-video-item').html(), { 'data': res.data }));
+                setVideoMask();
                 cancelUpload();
             } else {
                 msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
@@ -190,6 +191,14 @@ define(['url', 'helper', 'mustache', 'message'], function (url, helper, mustache
         }).fail(function (res) {
             msg.error('上传失败，请重试', $('.js-dialog').find('.alert-message'));
             cancelUpload();
+        });
+    }
+
+    function setVideoMask() {
+        $('.js-video-item').hover(function() {
+            $('.js-video-mask').stop().animate({height:'200px'}, 400).show();
+        }, function() {
+            $('.js-video-mask').stop().animate({height:'0px'}, 400).hide();
         });
     }
 
