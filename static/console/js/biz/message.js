@@ -1,7 +1,7 @@
 define(['url', 'helper', 'mustache','paginator','message'], function (url, helper, mustache,paginator,msg) {
 
     var serialNumber;
-    var pageNum = 1;
+    var pageNum = 1,limit = 20;
 
     function bindActions() {
         $('.js-table').on('click','.js-edit',openEdit);
@@ -15,7 +15,7 @@ define(['url', 'helper', 'mustache','paginator','message'], function (url, helpe
         params['mobileNo'] = $.trim($('.js-phone').val());
         params['beginDate'] = $.trim($('.js-begin-time').val());
         params['endDate'] = $.trim($('.js-end-time').val());
-        params['size'] = 20;
+        params['limit'] = limit;
         params['begin'] = pageNum;
 
         return params;

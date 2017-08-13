@@ -21,7 +21,7 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
         params['beginTime'] = $.trim($('.js-filter-startTime').val());
         params['endTime'] = $.trim($('.js-filter-endTime').val());
         params['status'] = parseInt($('.js-status').val()) || "";
-        params['size'] = limit;
+        params['limit'] = limit;
         params['begin'] = pageNum;
 
         return params;
