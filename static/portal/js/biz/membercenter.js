@@ -66,7 +66,11 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         helper.ajax(url.getMessageData,params,function (res) {
             var data = res.data;
             if(res.code >= 0) {
-                $('.js-confirm-popup').find('p').html(data.content);
+                if(!res.data.content) {
+                    $('.js-confirm-popup').find('p').html('暂无回复');
+                }else{
+                    $('.js-confirm-popup').find('p').html(res.data.content);
+                }
             }
         })
     }
