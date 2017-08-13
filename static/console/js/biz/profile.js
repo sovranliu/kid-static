@@ -10,7 +10,7 @@ define(['url', 'helper', 'message'], function (url, helper, msg) {
     }
 
     function saveProfile() {
-        var id = $.cookie('userName');
+        var id = $.cookie('id');
         var userName = $('.js-username').val();
         var password = $('.js-password').val();
 

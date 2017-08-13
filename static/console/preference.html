@@ -232,7 +232,7 @@
                                                     </span>
                                                 </div>
 
-                                                <div class="col-md-3 js-upload-name text-center upload-filename" style="line-height:32px;"></div>
+                                                <div class="col-md-3 js-upload-name text-center upload-filename" style="line-height:32px;text-overflow: ellipsis;overflow: hidden;"></div>
 
                                                 <div class="col-md-2 js-upload-size text-center upload-filesize" style="line-height:32px;"></div>
 
@@ -250,7 +250,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="js-img-list img-list-wrapper"></div>
+                                        <div class="js-img-list img-list-wrapper" style="padding-bottom:20px;"></div>
                   
                                     </div>
                                 </div> 
@@ -297,7 +297,7 @@
     <!-- 上传图片区域 -->
     <script id="tpl-img-item" type="x-tmpl-mustache">
             <div class="js-img-item fd-img-item">
-                <img src="{{data}}"/>
+                <img src="{{data}}" style="max-width: 50%;max-height: 200px;" />
                 <div class="js-img-mask img-mask" style="display:none;">
                     <i class="js-upload-delete img-delete fa fa-trash-o"></i>
                 </div>
