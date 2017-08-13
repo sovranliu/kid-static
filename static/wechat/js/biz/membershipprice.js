@@ -10,10 +10,13 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
                 if(res.data.length > 2) {
                     //$('.move-down').removeClass('hide');
                 }
-
-                var template = $('#template').html();
-                Mustache.parse(template);
-                $('.msp-list').html(Mustache.render(template, res));
+                if(res.data.length == 0) {
+                    $('.msp-list').html('<p class="result-img">暂无会员特惠信息</p>');
+                }else{
+                    var template = $('#template').html();
+                    Mustache.parse(template);
+                    $('.msp-list').html(Mustache.render(template, res));
+                }
             }
         })
     }
