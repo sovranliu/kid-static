@@ -1,4 +1,5 @@
 define(['url', 'helper'], function(url, helper) {
+    var openId = helper.getQueryStr('openId');
 
     function bindActions() {
         $('.js-submit').on('click', _postRegisterData);
@@ -10,10 +11,21 @@ define(['url', 'helper'], function(url, helper) {
     }
 
     function _getAuth() {
-        var openId = helper.getQueryStr('openId');
         if (!openId || openId == "") {
             helper.ajax(url.getAuthorize, {}, function(res) {})
         }
+    }
+
+    function _getIsFollow() {
+        helper.ajax(url.hasSubscribed, {
+            "openId": openId
+        }, function(res) {
+            if (res.code >= 0) {
+                if (!res.data) {
+                    window.location.href = "FollowUs.html"
+                }
+            }
+        })
     }
 
     //发送验证码
@@ -105,6 +117,7 @@ define(['url', 'helper'], function(url, helper) {
     return {
         init: function() {
             _getAuth();
+            _getIsFollow();
             bindActions();
         }
     }

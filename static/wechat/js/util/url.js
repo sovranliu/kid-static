@@ -39,6 +39,8 @@ define([], function() {
         //支付页面相关
         prepay: _basePath + 'prepay',
         payInfo: _basePath + 'payInfo',
+        //是否关注
+        hasSubscribed: _basePath + 'hasSubscribed',
         //分享
         getShareConfig: _basePath + 'getShareConfig',
         receiveTicket: _basePath + 'receiveTicket',
