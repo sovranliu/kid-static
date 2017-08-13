@@ -315,6 +315,12 @@
 .yh-tn-con{
 	padding: 40px;
 	background: #fff;
+    line-height: 1.6;
+}
+.yh-tn-con h2{
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
 }
 .yh-tn-con h3{
 	color: #000;
