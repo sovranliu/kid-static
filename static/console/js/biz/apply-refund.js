@@ -20,8 +20,8 @@ define(['url', 'helper', 'mustache','message'], function (url, helper, mustache,
                     $('.js-tbody').html('<td colspan="7" class="dataNull">暂无退票申请</td>');
                 }else{
                     for(var i = 0;i < res.data.length; i++) {
-                        res.data[i].price = parseFloat(res.data[i].price/100);
-                        res.data[i].backPrice = parseFloat(res.data[i].backPrice/100);
+                        res.data[i].price = parseFloat(res.data[i].price/100).toFixed(2);
+                        res.data[i].backPrice = parseFloat(res.data[i].backPrice/100).toFixed(2);
                     }
                     $('.js-tbody').html(mustache.render($('#tpl-tbody').html(), { 'data': res.data}));
                 }

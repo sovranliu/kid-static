@@ -62,7 +62,7 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
                             data[i].statusName = "已退款";
                             break;
                     }
-                    data[i].fee = parseFloat(data[i].fee/100);
+                    data[i].fee = parseFloat(data[i].fee/100).toFixed(2);
                 }
                 if(data.length == 0) {
                      $('.js-tbody').html('<td colspan="7" class="dataNull">还没有收款纪录</td>');
