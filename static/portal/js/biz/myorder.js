@@ -73,7 +73,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                                 res[i].statusStyle = "gray";
                                 break;
                             case 3:
-                                res[i].statusName = "退款申请中";
+                                res[i].statusName = "退票审批中";
                                 res[i].statusStyle = "gray";
                                 break;
                             case 4:
@@ -121,7 +121,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                                 res[i].statusStyle = "gray";
                                 break;
                             case 3:
-                                res[i].statusName = "改期申请中";
+                                res[i].statusName = "改期审批中";
                                 res[i].statusStyle = "";
                                 break;
                             case 4:
@@ -129,7 +129,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                                 res[i].statusStyle = "gray";
                                 break;
                             case 5:
-                                res[i].statusName = "撤销审核中";
+                                res[i].statusName = "撤销审批中";
                                 res[i].statusStyle = "gray";
                                 break;
                         }

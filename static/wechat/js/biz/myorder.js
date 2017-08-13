@@ -74,7 +74,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                                 data[i].statusStyle = "gray";
                                 break;
                             case 3:
-                                data[i].statusName = "退款申请中";
+                                data[i].statusName = "退票审批中";
                                 data[i].statusStyle = "gray";
                                 break;
                             case 4:
@@ -130,7 +130,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                                 data[i].statusStyle = "gray";
                                 break;
                             case 3:
-                                data[i].statusName = "改期申请中";
+                                data[i].statusName = "改期审批中";
                                 data[i].statusStyle = "";
                                 break;
                             case 4:
@@ -138,7 +138,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                                 data[i].statusStyle = "gray";
                                 break;
                             case 5:
-                                data[i].statusName = "撤销审核中";
+                                data[i].statusName = "撤销审批中";
                                 data[i].statusStyle = "gray";
                                 break;
                         }
