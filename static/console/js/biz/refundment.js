@@ -53,6 +53,8 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
                             data[i].statusName = "退款失败";
                             break;
                     }
+                    data[i].fee = parseFloat(data[i].fee/100);
+                    data[i].refundFee = parseFloat(data[i].refundFee/100);
                 }
                 if(data.length == 0) {
                      $('.js-tbody').html('<td colspan="8" class="dataNull">还没有退款纪录</td>');
