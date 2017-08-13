@@ -64,7 +64,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                     });
 
                     if (!tcList || tcList.length == 0) {
-                        $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': '您没有飞行票，请购买后查看'}));
+                        showPopup(5);
                     } else {
                         $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': tcList}));
                     }
