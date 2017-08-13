@@ -96,7 +96,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
         }*/
 
         gId = $row.data('id');
-        gSerNo = $row.data('serNo');
+        gSerNo = $row.data('serno');
 
         $('.js-dialog').html(mustache.render($('#tpl-reschedule-dialog').html(), { }));
 
@@ -206,7 +206,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
         var $row = $(this).closest('tr');
 
         gId = $row.data('id');
-        gSerNo = $row.data('serNo');
+        gSerNo = $row.data('serno');
 
         $('.js-dialog').html(mustache.render($('#tpl-revoke-dialog').html(), { }));
     }
@@ -215,7 +215,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
         var $row = $(this).closest('tr');
         
         gId = $row.data('id');
-        gSerNo = $row.data('serNo');
+        gSerNo = $row.data('serno');
 
         $('.js-dialog').html(mustache.render($('#tpl-writeoff-dialog').html(), { }));
     }
@@ -288,6 +288,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
 
     function processData(data) {
         var statusDesc = '';
+        var canOperateList = [1, 3, 4, 8];
 
         _.each(data, function(item, i) {
             switch(Number(item.status)) {
@@ -315,6 +316,12 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator', '
                 case 8:
                     statusDesc = '拒绝撤销';
                     break;
+            }
+
+            if (canOperateList.indexOf(Number(item.status)) != -1) {
+                item.canOperate = true;
+            } else {
+                item.canOperate = false;
             }
 
             item.statusDesc = statusDesc;
