@@ -57,10 +57,14 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
 
                 if (!data || !data.canPurchase || data.canPurchase.length == 0) {
                     $('.js-video-can-purchase-list').html('<p class="dataNull">您还没有飞行礼品</p>');
+                    $('.fd-time').hide();
+                    $('.fd-dq-desc').hide();
                     $('.js-fd-payment').hide();
                 } else {
                     $('.js-video-can-purchase-list').html(mustache.render($('#videoTmpl').html(), { 'videoList': data.canPurchase, 'isPurchased': false }));
                     $('.js-fd-payment').show();
+                    $('.fd-time').show();
+                    $('.fd-dq-desc').show();
                 }
                 
                 if (!data || !data.hasPurchased || data.hasPurchased.length == 0) {
