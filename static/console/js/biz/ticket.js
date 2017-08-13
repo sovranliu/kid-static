@@ -84,7 +84,7 @@ define(['url', 'helper', 'mustache', 'dateTimePicker', 'message', 'paginator'], 
                     statusDesc = '已过期';
                     break;
                 case 3:
-                    statusDesc = '退款申请中';
+                    statusDesc = '退票申请中';
                     break;
                 case 4:
                     statusDesc = '已退票';
