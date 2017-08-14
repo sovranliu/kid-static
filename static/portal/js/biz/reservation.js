@@ -1,6 +1,6 @@
 define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, mustache, datePicker) {
 
-    var serialNumber, optType;
+    var serialNumber, type, expireParam, optType;
 
     function bindActions() {
         $('.js-time-list').on('click', '.js-select-time', selectTime);
@@ -16,7 +16,9 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
     //获取url参数
     function getUrlParams() {
         serialNumber = helper.getQueryStr('ticketId');
-        optType = helper.getQueryStr('type');
+        type = helper.getQueryStr('type');
+        expireParam = helper.getQueryStr('expire');
+        optType = helper.getQueryStr('optType');
     }
 
     //初始化年月日选择框
@@ -40,6 +42,8 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
                     
                     _.each(data, function(item, i) {
                         if (Number(item.status) == 0) {
+                            item.type = Number(item.ticketType) == 0 ? '团体票' : '单人票';
+                            item.expireParam = item.expire.replace('年','/').replace('月','/').replace('日','');
                             tcList.push(item);
                         }
                     });
@@ -54,13 +58,20 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
                 }
             })
         } else {
-            $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': [{'serialNumber': serialNumber}]})).attr('disabled', 'disabled');
+            $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': [{
+                'serialNumber': serialNumber,
+                'type': Number(type) == 0 ? '团体票' : '单人票',
+                'expireParam': expireParam
+            }]})).attr('disabled', 'disabled');
             getBookingTime();
         }
     }
 
     function changeTicket() {
-        serialNumber = $('.js-rsv-ticket option:selected').data('val');
+        var $selectedTicket = $('.js-rsv-ticket option:selected');
+
+        serialNumber = $selectedTicket.data('val');
+        expireParam = $selectedTicket.data('expire');
     }
 
     //获取可预约时间段
@@ -73,6 +84,17 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
         var year = $('.js-year option:selected').text();
         var month = $('.js-month option:selected').text();
         var day = $('.js-day option:selected').text();
+
+        //当预约时段超过门票有效期时，提示错误
+        var selectedDate = new Date(year + '/' + month + '/' + day);
+ 
+        if (selectedDate > new Date(expireParam)) {
+            showPopup(6);
+            $('.js-time-list').html('<p class="dataNull">请在有效期之内预约飞行</p>');
+            $('.rsv-tip').hide();
+            return;
+        }
+
 
         month = month.length < 2 ? "0" + month : month;
         day = day.length < 2 ? "0" + day : day;
@@ -151,6 +173,7 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
 
         helper.ajax(url.getBookableNum, params, function(res) {
             if (res.code >= 0) {
+                $('.rsv-tip').show();
                 $('.js-bookable-num').text(res.data.count);
             }
         });
@@ -224,6 +247,9 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
                 $('.js-confirm').on('click', function() {
                     window.location.href = 'BuyTickets.html';
                 });
+                break;
+            case 6:
+                $resText.html('请在有效期之内预约飞行');
                 break;
         }
     }

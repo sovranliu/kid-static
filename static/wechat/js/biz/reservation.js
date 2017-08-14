@@ -197,7 +197,8 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             var data = res.data;
 
             if (res.code >= 0) {
-                $('.js-bookable-num').show().text(data.count);
+                $('.rsv-tip').show();
+                $('.js-bookable-num').text(data.count);
             }
         });
     }

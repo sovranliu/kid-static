@@ -56,23 +56,6 @@
 		<!-- conntent -->
 		<div class="yh-content">
 			<div class="yh-conwrap mt0">
-				<div class="yh-i-t">
-					<img src="images/img9.jpg">
-					<div>
-						<h3>企业简介</h3>
-						<p>上海亚海航空俱乐部有限公司成立于2017年，是沪上首个动力三角翼空中游览项目的服务单位。</p>
-					</div>
-				</div>
-				<div class="yh-i-b">
-					<div class="yh-i-b-t">
-						<h3>动力三角洲</h3>
-						<p>动力三角翼也称动力悬挂滑翔机，是航空运动领域中最受欢迎的一种轻型动力的飞行器。</p>
-					</div>
-					<div class="yh-i-b-i">
-						<img class="img1" src="images/img10.jpg"></img>
-						<img class="img2" src="images/img11.jpg"></img>
-					</div>
-				</div>
 			</div>
 		</div>
 		<!-- fixedtool -->
@@ -115,6 +98,33 @@
 				</div>
 			</div>
 		</div>
-		<script data-main="js/boot.js"  src="js/libs/require.min.js"></script>
+
+		<script id="template" type="x-tmpl-mustache">
+	        {{#data}}
+	        	{{#odd}}
+		        	<div class="yh-i-t">
+						<img src="{{imgUrl}}" style="max-width:530px;">
+						<div>
+							<h3>{{title}}</h3>
+							<p>{{content}}</p>
+						</div>
+					</div>
+				{{/odd}}
+
+				{{^odd}}
+					<div class="yh-i-b">
+						<div class="yh-i-b-t">
+							<h3>{{title}}</h3>
+							<p>{{content}}</p>
+						</div>
+						<div class="yh-i-b-i">
+							<img class="img1" src="{{imgUrl}}" style="max-width:530px;"></img>
+						</div>
+					</div>
+				{{/odd}}
+	        {{/data}}
+	    </script>
+
+		<script data-main="js/boot.js" data-start="js/biz/introduce.js"  src="js/libs/require.min.js"></script>
 	</body>
 </html>

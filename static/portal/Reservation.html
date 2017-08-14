@@ -70,7 +70,7 @@
 		                        <select class="js-month" rel=""></select> 
 		                        <select class="js-day" rel=""></select> 
 		                    </div>
-		                    <div class="rsv-timeframe">
+		                    <div class="rsv-timeframe" style="margin-bottom: 20px;">
 		                        <ul class="js-time-list rsv-ul-list"></ul>
 		                    </div>
 		                    <p class="rsv-tip">当前时段还可预约<span class="js-bookable-num"></span>人</p>
@@ -158,9 +158,9 @@
 	    </script>
 
 	    <!-- 票务模板 -->
-	    <script type="x-tmpl-mustache" id="ticketTmpl" >
+	    <script type="x-tmpl-mustache" id="ticketTmpl">
 	    {{#data}}
-	        <option data-val="{{serialNumber}}">{{serialNumber}}</option>
+	        <option data-val="{{serialNumber}}" data-expire="{{expireParam}}">{{type}} - 有效期至{{expireParam}}</option>
 	    {{/data}}
 	    </script>
 
