@@ -1150,6 +1150,7 @@
     text-align: center!important;
     font-size: 18px!important;
 }
+<<<<<<< HEAD
 
 
 
@@ -1225,4 +1226,9 @@
 
 .pi-btn .edit {
     margin-right: 12px;
+}
+.red-dot{
+    color: yellow;
+    font-size: 12px;
+    font-family: sans-serif;
 }
