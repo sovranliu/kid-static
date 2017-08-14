@@ -36,7 +36,7 @@ define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,w
                     wx.onMenuShareAppMessage({ 
                         title: '我的飞行', // 分享标题  
                         link: 'http://solution.slfuture.cn/kid/static/wechat/VideoShare.html?vurl=' + vurl, 
-                        imgUrl: '', // 分享图标  
+                        imgUrl: 'http://solution.slfuture.cn/kid/static/portal/images/logo.png', // 分享图标  
                         success: function () {   
                             window.location.href = 'FlightDiary.html';
                         },  

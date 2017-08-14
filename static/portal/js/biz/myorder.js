@@ -43,6 +43,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                     $('.ticket-list').html(_html);
                 }else{
                     for (var i = 0; i < res.length; i++) {
+                        res[i].price = parseFloat((parseInt(res[i].price)/100).toFixed(2));
                         switch (res[i].type) {
                             case 0:
                                 res[i].ticketType = "团体购票（不接受退票）";
@@ -245,6 +246,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
     function _closePopup() {
         $(this).parent().parent('.popup').hide();
+        window.location.reload();
     }
     
     return {
