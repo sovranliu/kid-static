@@ -26,7 +26,11 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
         var params = {};
         helper.ajax(url.getMessageData,params,function (res) {
             if(res.code >= 0) {
-                result = res;
+                if(!result.data.content) {
+                    $('.red-dot').show();
+                }else{
+                    $('.red-dot').hide();
+                }
             }
         })
     }

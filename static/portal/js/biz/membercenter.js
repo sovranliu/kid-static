@@ -1,10 +1,10 @@
 define(['mustache','url','helper'], function (Mustache,url,helper) {
 
-    var userInfo;
+    var userInfo,result;
     function bindActions () {
         $('.js-userInfo').on('click',_openUserInfo);
         $('.js-submit').on('click',_postUserInfoData);
-        $('.js-message').on('click',_getMessageData)
+        $('.js-message').on('click',_showMessage)
         $('.js-confirm').on("click", function () {
             $(".popup").hide();
         });
@@ -66,21 +66,32 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         var params = {};
         $('.js-confirm-popup').show();
         helper.ajax(url.getMessageData,params,function (res) {
+            result = res;
             var data = res.data;
             if(res.code >= 0) {
-                if(!res.data.content) {
-                    $('.js-confirm-popup').find('p').html('暂无回复');
+                if(!result.data.content) {
+                    $('.red-dot').show();
                 }else{
-                    $('.js-confirm-popup').find('p').html("最新消息：" + res.data.content);
+                    $('.red-dot').hide();
                 }
             }
         })
+    }
+
+    function _showMessage() {
+        $('.js-confirm-popup').show();
+        if(!result.data.content) {
+            $('.js-confirm-popup').find('p').html('暂无回复');
+        }else{
+            $('.js-confirm-popup').find('p').html(result.data.content);
+        }
     }
 
     return {
         init: function () {
           bindActions();
           _getUserInfo();
+          _getMessageData();
         }
     }
 });
