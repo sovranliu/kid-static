@@ -1,6 +1,6 @@
 define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, helper, mustache, datePicker, handshake) {
 
-    var serialNumber, optType;
+    var serialNumber, type, expireParam, optType;
 
     function bindActions() {
         $('.js-time-list').on('click', '.js-select-time', selectTime);
@@ -15,7 +15,9 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
     //获取url参数
     function getUrlParams() {
         serialNumber = helper.getQueryStr('ticketId');
-        optType = helper.getQueryStr('type');
+        type = helper.getQueryStr('type');
+        expireParam = helper.getQueryStr('expire');
+        optType = helper.getQueryStr('optType');
     }
 
     //初始化年月日选择框
@@ -57,7 +59,8 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                     _.each(data, function(item, i) {
                         if (Number(item.status) == 0) {
                             //var serialNo = item.serialNumber;
-                            //item.type = item.ticketType == 0 ? '团体票' : '单人票';
+                            item.type = Number(item.ticketType) == 0 ? '团体票' : '单人票';
+                            item.expireParam = item.expire.replace('年','/').replace('月','/').replace('日','');
                             //item.sno = serialNo.replace(serialNo.substring(10, serialNo.length-5), '****');
                             tcList.push(item);
                         }
@@ -74,7 +77,11 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                 }
             })
         } else {
-            $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': [{'serialNumber': serialNumber}]})).hide();
+            $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': [{
+                'serialNumber': serialNumber,
+                'type': Number(type) == 0 ? '团体票' : '单人票',
+                'expireParam': expireParam
+            }]})).hide();
             $('.js-ticket-text').html($('.js-rsv-ticket option:selected').text()).addClass('hideAfter');
             getBookingTime();
         }

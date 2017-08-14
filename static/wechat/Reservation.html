@@ -82,7 +82,7 @@
     <!-- 票务模板 -->
     <script type="x-tmpl-mustache" id="ticketTmpl" >
     {{#data}}
-        <option data-val="{{serialNumber}}">{{serialNumber}}</option>
+        <option data-val="{{serialNumber}}">{{type}} - 有效期至{{expireParam}}</option>
     {{/data}}
     </script>
 
