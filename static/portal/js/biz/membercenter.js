@@ -6,9 +6,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         $('.js-userInfo').on('click',_openUserInfo);
         $('.js-submit').on('click',_postUserInfoData);
         $('.js-message').on('click',_showMessage)
-        $('.js-confirm').on("click", function () {
-            $(".popup").hide();
-        });
+        $('.js-confirm').on("click", hidePopup);
         $('.js-edit-popup').on('keyup','.js-telephone',_changeMobile);
         $('.js-edit-popup').on('click', '.js-send',_getVerificationCode);
     }
@@ -166,6 +164,11 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
             $.cookie('message',msg);
             $('.js-confirm-popup').find('p').html(content);
         }
+    }
+
+    //关闭弹框
+    function hidePopup(e) {
+        $(e.currentTarget).closest('.popup').hide();
     }
 
     return {
