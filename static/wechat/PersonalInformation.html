@@ -63,8 +63,15 @@
             <li class="pi-item">
                 <span class="pi-left">手机</span>
                 <div class="pi-right">
-                    <input type="number" class="js-telephone" placeholder="请填写手机号码" name="" value="{{telephone}}">
+                    <input type="text" class="js-telephone" placeholder="请填写手机号码" name="" value="{{telephone}}">
                 </div>
+            </li>
+            <li class="pi-item hide js-send-item">
+                <span class="pi-left"></span>
+                <div class="pi-right code-wrapper">
+                    <input type="text" class="js-code" placeholder="请输入验证码" name="">
+                </div>
+                <em class="count hide">(60)秒</em><button type="button" class="js-send code-btn">验证码</button>
             </li>
             <li class="pi-item">
                 <span class="pi-left">地址</span>

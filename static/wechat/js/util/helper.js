@@ -209,7 +209,7 @@ define(['jquery'], function($) {
             success: function(data) {
                 $('body').css('visibility','visible');
                 if(data.msg != null && data.msg != "") {
-                    alert(data.msg);
+                    $('.popup').show().find('p').html(data.msg);
                     return;
                 }
                 if(data.redirect != null && data.redirect != "") {

@@ -1,7 +1,8 @@
 define(['url','helper','handshake'], function (url,helper,handshake) {
 
+    var result;
     function bindActions () {
-        $('.js-message').on('click',_getMessageData);
+        $('.js-message').on('click',_showMessage);
         $('.js-confirm').on("click", function () {
             $(".popup").hide();
         });
@@ -23,17 +24,20 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
     //查看回复消息
     function _getMessageData() {
         var params = {};
-        $('.popup').show();
         helper.ajax(url.getMessageData,params,function (res) {
             if(res.code >= 0) {
-                if(!res.data.content) {
-                    $('.popup').find('p').html('暂无回复');
-                }else{
-                    $('.popup').find('p').html(res.data.content);
-                }
-                
+                result = res;
             }
         })
+    }
+
+    function _showMessage() {
+        $('.popup').show();
+        if(!result.data.content) {
+            $('.popup').find('p').html('暂无回复');
+        }else{
+            $('.popup').find('p').html(result.data.content);
+        }
     }
 
     return {
@@ -41,6 +45,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
             handshake.init();
             bindActions();
             _getUserInfoData();
+            _getMessageData();
         }
     }
 });

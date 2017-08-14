@@ -975,7 +975,7 @@ a,div,img {
 }
 
 .pi-input {
-    margin-top: 120px;
+    margin-top: 80px;
 }
 
 .pi-item {
@@ -1009,8 +1009,11 @@ a,div,img {
     height: 50px;
     line-height: 50px;
     font-size: 15px;
+    padding-left: 5px;
 }
-
+.code-wrapper{
+    width: 48%;
+}
 .pi-right div {
     display: inline-block;
     margin: auto;
@@ -1222,8 +1225,12 @@ a,div,img {
     width: 60%;
     float: left;
 }
-
-.rp-form p button {
+.code-btn{
+    width: 30%!important;
+    height: 50px!important;
+    display: block;
+}
+.rp-form p button,.code-btn {
     font-size: 12px;
     float: right;
     width: 35%;
@@ -1508,7 +1515,9 @@ a,div,img {
     margin: auto;
     bottom: 50px;
 }
-
+.red-dot{
+    
+}
 .table-content {
     color: #666;
     background-color: #fff;

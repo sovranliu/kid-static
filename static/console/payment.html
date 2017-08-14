@@ -203,7 +203,11 @@
             <td>{{goodsTypeTitle}}</td>
             <td>{{orderNo}}</td>
             <td>{{fee}}</td>
-            <td>{{serialNo}}</td>
+            <td>
+            {{#serialNo}}
+            {{.}}
+            {{/serialNo}}
+            </td>
             <td>{{time}}</td>
             <td>{{statusName}}</td>
         </tr>

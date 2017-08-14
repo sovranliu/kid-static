@@ -16,7 +16,7 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
 
    function buildSearchParams() {
         var params = {};
-        params['orderNo'] = $.trim($('.js-order').val());
+        params['serialNo'] = $.trim($('.js-order').val());
         params['mobileNo'] = $.trim($('.js-phone').val());
         params['beginTime'] = $.trim($('.js-filter-startTime').val());
         params['endTime'] = $.trim($('.js-filter-endTime').val());

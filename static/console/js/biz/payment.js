@@ -25,7 +25,7 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
 
     function buildSearchParams() {
         var params = {};
-        params['orderNo'] = $.trim($('.js-order').val());
+        params['serialNo'] = $.trim($('.js-order').val());
         params['mobileNo'] = $.trim($('.js-phone').val());
         params['beginTime'] = $.trim($('.js-filter-startTime').val());
         params['endTime'] = $.trim($('.js-filter-endTime').val());
@@ -63,6 +63,7 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
                             break;
                     }
                     data[i].fee = parseFloat(data[i].fee/100).toFixed(2);
+                    data[i].serialNo = data[i].serialNo.split(',');
                 }
                 if(data.length == 0) {
                      $('.js-tbody').html('<td colspan="7" class="dataNull">还没有收款纪录</td>');
