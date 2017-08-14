@@ -100,7 +100,7 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
             "title":$modal.find('.js-title').val(),
             "imgUrl":$modal.find('.js-img-item img').attr('src'),
             "link":$modal.find('.js-link').val(),
-            "type":1
+            "type":2
         }
 
         if(id != "") {
