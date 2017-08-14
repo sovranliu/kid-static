@@ -87,7 +87,7 @@ define(['url', 'helper'], function(url, helper) {
             "openId": helper.getQueryStr('openId')
         }
 
-        if (name != "" && code != "" && _checkMobileNumber(phone)) {
+        if (name != "" && code != "" && _checkMobileNumber(phone) && _checkName(name)) {
             helper.ajax(url.postRegister, params, function(res) {
                 if (res.code >= 0) {
                     window.location.href = "MemberCenter.html";
@@ -95,7 +95,7 @@ define(['url', 'helper'], function(url, helper) {
             })
         } else {
             $('.popup').show();
-            $('.popup').find('p').html('请完善输入内容');
+            $('.popup').find('p').html('请确认姓名或手机格式是否正确');
         }
     }
 
@@ -108,6 +108,12 @@ define(['url', 'helper'], function(url, helper) {
         }
     }
 
+    //验证姓名
+    function _checkName(name) {
+        var reg = /[a-zA-Z]{1,20}|[\u4e00-\u9fa5]{1,10}/; //验证规则
+        return reg.test(name); //true
+        
+    }
     //验证手机号
     function _checkMobileNumber(num) {
         var reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证规则
