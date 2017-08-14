@@ -1,6 +1,6 @@
 define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, helper, mustache, datePicker, handshake) {
 
-    var serialNumber, type, expireParam, optType;
+    var serialNumber, type, expire, optType;
 
     function bindActions() {
         $('.js-time-list').on('click', '.js-select-time', selectTime);
@@ -16,7 +16,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
     function getUrlParams() {
         serialNumber = helper.getQueryStr('ticketId');
         type = helper.getQueryStr('type');
-        expireParam = helper.getQueryStr('expire');
+        expire = helper.getQueryStr('expire');
         optType = helper.getQueryStr('optType');
     }
 
@@ -50,7 +50,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         var day = $('.js-day option:selected').text();
         var selectedDate = new Date(year + '/' + month + '/' + day);
  
-        if (selectedDate > new Date(expireParam)) {
+        if (selectedDate > new Date(expire)) {
             showPopup(6);
             $('.js-time-list').html('<p class="dataNull">请在有效期之内预约飞行</p>');
             $('.rsv-tip').hide();
@@ -73,7 +73,6 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                         if (Number(item.status) == 0) {
                             //var serialNo = item.serialNumber;
                             item.type = Number(item.ticketType) == 0 ? '团体票' : '单人票';
-                            item.expireParam = item.expire.replace('年','/').replace('月','/').replace('日','');
                             //item.sno = serialNo.replace(serialNo.substring(10, serialNo.length-5), '****');
                             tcList.push(item);
                         }
@@ -93,7 +92,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             $('.js-rsv-ticket').html(mustache.render($('#ticketTmpl').html(), {'data': [{
                 'serialNumber': serialNumber,
                 'type': Number(type) == 0 ? '团体票' : '单人票',
-                'expireParam': expireParam
+                'expire': expire
             }]})).hide();
             $('.js-ticket-text').html($('.js-rsv-ticket option:selected').text()).addClass('hideAfter');
             getBookingTime();
@@ -104,7 +103,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         var $selectedTicket = $('.js-rsv-ticket option:selected');
 
         serialNumber = $selectedTicket.data('val');
-        expireParam = $selectedTicket.data('expire');
+        expire = $selectedTicket.data('expire');
     }
 
     //获取可预约时间段

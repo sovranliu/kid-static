@@ -82,8 +82,6 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                                 res[i].statusStyle = "gray";
                                 break;
                         }
-
-                        res[i].expireParam = res[i].expire.replace('年','/').replace('月','/').replace('日','');
                     }
 
                     var ticketList = {

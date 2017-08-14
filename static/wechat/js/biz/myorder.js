@@ -142,8 +142,6 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                                 data[i].statusStyle = "gray";
                                 break;
                         }
-
-                        data[i].expireParam = data[i].expire.replace('年','/').replace('月','/').replace('日','');
                     }
 
                     var bookList = {
