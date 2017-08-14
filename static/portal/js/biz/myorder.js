@@ -229,6 +229,9 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
     function _confirmMessgeResult() {
         $('.send-message-result').hide();
+
+        //确认弹框后刷新页面
+        window.location.reload();
     }
 
     function _shareTicket() {
