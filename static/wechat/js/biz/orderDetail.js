@@ -187,6 +187,7 @@ define(['url', 'helper'], function (url, helper) {
                "paySign":data.signature//微信签名 
            },
            function(res){  
+                alert(res.err_msg);
                if (res.err_msg == "get_brand_wcpay_request:ok") {
                     window.location.href = "PayResult.html";
                } else {

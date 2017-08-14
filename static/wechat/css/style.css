@@ -546,6 +546,19 @@ a,div,img {
     display: inline-block;
     width: 49%;
     height: 49%;
+    position: relative;
+}
+.already-con .fd-video-item a{
+    position: absolute;
+    display: block;
+    top: 0;
+    background: #000;
+    width: 100%;
+    opacity: 0.5;
+    padding: 10px 0;
+    color: #fff;
+    text-align: center;
+    z-index: 9;
 }
 .fd-dq-pop, .fd-yg-pop{
     position: absolute;

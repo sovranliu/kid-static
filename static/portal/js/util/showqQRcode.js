@@ -23,10 +23,8 @@ define(['url','helper'], function(url,helper) {
             var islogin = helper.getQueryStr('login');
             if(islogin) {
                 _getLogin();
-            }else{
-                _init();
             }
-        } else if(path.indexOf("MembershipPrice") != -1 || path.indexOf("TicketNotes") != -1 || path.indexOf("QRCode") != -1) {
+        } else if(path.indexOf("HomePage") != -1 || path.indexOf("MembershipPrice") != -1 || path.indexOf("TicketNotes") != -1 || path.indexOf("QRCode") != -1 || path.indexOf("Introduction") != -1 || path.indexOf("MemberBenefitDetail") != -1) {
             if($.cookie('userName') && $.cookie('avatarUrl')) {
                 $('.sign-in').html('<img class="fl" src="' + $.cookie('avatarUrl') + '"></img><div class="fl"><a href="MemberCenter.html"><span>姓名：' + $.cookie('userName')+ '</span><span>会员级别：初级飞行员</span></a></div>')
             }else{

@@ -64,6 +64,9 @@
                 <source src="{{url}}" type="video/mp4" />
             </video>
             <!--<div class="{{#isPurchased}}fd-yg-pop{{/isPurchased}}{{^isPurchased}}fd-dq-pop{{/isPurchased}}"><i></i></div>-->
+            {{#isPurchased}}
+            <a class="share-btn" href="VideoShare.html?vurl={{url}}"><i>分享</i></a>
+            {{/isPurchased}}
             <div class="{{^isPurchased}}fd-dq-pop{{/isPurchased}}"><i></i></div>
         </div>
     {{/videoList}}
