@@ -57,22 +57,6 @@
 		<div class="yh-content">
 			<div class="yh-wid872">
 				<div class="yh-qr-list">
-					<div class="yh-qr-item">
-						<img src="images/img7.jpg">
-						<div>
-							<p class="yh-p1">亚海飞行俱乐部</p>
-							<p class="yh-p2">2017-06-03</p>
-							<p class="yh-p3">碧海金沙引入航空运动 </p>
-						</div>
-					</div>
-					<div class="yh-qr-item">
-						<img src="images/img8.jpg">
-						<div>
-							<p class="yh-p1">亚海飞行俱乐部</p>
-							<p class="yh-p2">2017-06-03</p>
-							<p class="yh-p3">沪上“海陆空”游玩模式升级，动力三角翼带你飞  </p>
-						</div>
-					</div>
 				</div>
 				<div class="yh-qr-box">
 					<img src="images/qr.jpg">
@@ -121,6 +105,23 @@
 				</div>
 			</div>
 		</div>
-		<script data-main="js/boot.js"  src="js/libs/require.min.js"></script>
+
+		<script id="template" type="x-tmpl-mustache">
+	        {{#data}}
+		        <div class="yh-qr-item">
+		        	<a href="{{link}}" target="_blank">
+						<img src="{{imgUrl}}" style="max-width:340px;">
+						<div>
+							<p class="yh-p1">{{title}}</p>
+							<p class="yh-p2">{{updateTime}}</p>
+							<p class="yh-p3">{{content}}</p>
+						</div>
+					</a>
+				</div>
+	        {{/data}}
+        </script>
+
+
+		<script data-main="js/boot.js" data-start="js/biz/QRCode.js" src="js/libs/require.min.js"></script>
 	</body>
 </html>
