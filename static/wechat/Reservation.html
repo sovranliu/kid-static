@@ -48,7 +48,7 @@
                             <select class="js-day" rel=""></select> 
                         </div>
                     </div>
-                    <div class="rsv-timeframe">
+                    <div class="rsv-timeframe" style="margin-bottom: 30px;">
                         <ul class="js-time-list rsv-ul-list"></ul>
                     </div>
                     <div class="rsv-tip">
@@ -82,7 +82,7 @@
     <!-- 票务模板 -->
     <script type="x-tmpl-mustache" id="ticketTmpl" >
     {{#data}}
-        <option data-val="{{serialNumber}}">{{type}} - 有效期至{{expireParam}}</option>
+        <option data-val="{{serialNumber}}" data-expire="{{expireParam}}">{{type}} - 有效期至{{expireParam}}</option>
     {{/data}}
     </script>
 

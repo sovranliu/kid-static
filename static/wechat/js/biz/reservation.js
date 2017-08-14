@@ -43,7 +43,20 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         selectedVal = selectedVal.toString().length < 2 ? "0" + selectedVal : selectedVal;
 
         $dateInput.text(selectedVal);
-        getBookingTime();
+
+        //当预约时段超过门票有效期时，提示错误
+        var year = $('.js-year option:selected').text();
+        var month = $('.js-month option:selected').text();
+        var day = $('.js-day option:selected').text();
+        var selectedDate = new Date(year + '/' + month + '/' + day);
+ 
+        if (selectedDate > new Date(expireParam)) {
+            showPopup(6);
+            $('.js-time-list').html('<p class="dataNull">请在有效期之内预约飞行</p>');
+            $('.rsv-tip').hide();
+        } else {
+            getBookingTime();
+        }
     }
 
     //获取所有票券
@@ -88,7 +101,10 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
     }
 
     function changeTicket() {
-        serialNumber = $('.js-rsv-ticket option:selected').data('val');
+        var $selectedTicket = $('.js-rsv-ticket option:selected');
+
+        serialNumber = $selectedTicket.data('val');
+        expireParam = $selectedTicket.data('expire');
     }
 
     //获取可预约时间段
@@ -181,7 +197,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
             var data = res.data;
 
             if (res.code >= 0) {
-                $('.js-bookable-num').text(data.count);
+                $('.js-bookable-num').show().text(data.count);
             }
         });
     }
@@ -262,6 +278,8 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                 $('.js-confirm').on('click', function() {
                     window.location.href = 'BuyTickets.html';
                 });
+            case 6:
+                $resText.html('请在有效期之内预约飞行');
                 break;
         }
     }
