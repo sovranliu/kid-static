@@ -1150,3 +1150,8 @@
     text-align: center!important;
     font-size: 18px!important;
 }
+.red-dot{
+    color: yellow;
+    font-size: 12px;
+    font-family: sans-serif;
+}

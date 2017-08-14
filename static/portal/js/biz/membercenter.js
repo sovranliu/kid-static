@@ -64,15 +64,22 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     //查看回复消息
     function _getMessageData() {
         var params = {};
-        $('.js-confirm-popup').show();
         helper.ajax(url.getMessageData,params,function (res) {
             result = res;
-            var data = res.data;
+            var content = res.data.content;
+            //取cookie中的msg，与返回的msg比较
+            var $cmsg = $.cookie('message');
+
             if(res.code >= 0) {
-                if(!result.data.content) {
-                    $('.red-dot').show();
-                }else{
+                if(!content) {
                     $('.red-dot').hide();
+                }else{
+                    var msg = content.length + content.substr(content.length-1,1) + content.substr(0,1);
+                    if(msg != $cmsg) {
+                        $('.red-dot').show();
+                    }else{
+                        $('.red-dot').hide();
+                    }
                 }
             }
         })
@@ -80,10 +87,14 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
 
     function _showMessage() {
         $('.js-confirm-popup').show();
-        if(!result.data.content) {
+        var content = result.data.content;
+        if(!content) {
             $('.js-confirm-popup').find('p').html('暂无回复');
         }else{
-            $('.js-confirm-popup').find('p').html(result.data.content);
+            var msg = content.length + content.substr(content.length-1,1) + content.substr(0,1);
+            debugger
+            $.cookie('message',msg);
+            $('.js-confirm-popup').find('p').html(content);
         }
     }
 

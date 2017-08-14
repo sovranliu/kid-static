@@ -1516,7 +1516,9 @@ a,div,img {
     bottom: 50px;
 }
 .red-dot{
-    
+    color: yellow;
+    font-size: 12px;
+    font-family: sans-serif;
 }
 .table-content {
     color: #666;

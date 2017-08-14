@@ -25,11 +25,20 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
     function _getMessageData() {
         var params = {};
         helper.ajax(url.getMessageData,params,function (res) {
+            result = res;
+            var $cmsg = $.cookie('message')
+            var content = res.data.content;
             if(res.code >= 0) {
-                if(!result.data.content) {
-                    $('.red-dot').show();
-                }else{
+                if(!content) {
                     $('.red-dot').hide();
+                }else{
+                    var msg = content.length + content.substr(content.length-1,1) + content.substr(0,1);
+                    if(msg != $cmsg) {
+                        $('.red-dot').show();
+                    }else{
+                        $('.red-dot').hide();
+                    }
+                    $('.red-dot').show();
                 }
             }
         })
@@ -37,10 +46,13 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
 
     function _showMessage() {
         $('.popup').show();
-        if(!result.data.content) {
+        var content = result.data.content;
+        if(!content) {
             $('.popup').find('p').html('暂无回复');
         }else{
-            $('.popup').find('p').html(result.data.content);
+            var msg = content.length + content.substr(content.length-1,1) + content.substr(0,1);
+            $.cookie('message',msg);
+            $('.popup').find('p').html(content);
         }
     }
 
