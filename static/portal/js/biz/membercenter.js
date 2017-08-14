@@ -1,6 +1,7 @@
 define(['mustache','url','helper'], function (Mustache,url,helper) {
 
-    var userInfo;
+    var userInfo,mobileNo,newMoileNo;
+
     function bindActions () {
         $('.js-userInfo').on('click',_openUserInfo);
         $('.js-submit').on('click',_postUserInfoData);
@@ -8,6 +9,8 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         $('.js-confirm').on("click", function () {
             $(".popup").hide();
         });
+        $('.js-edit-popup').on('keyup','.js-telephone',_changeMobile);
+        $('.js-edit-popup').on('click', '.js-send',_getVerificationCode);
     }
 
     //打开编辑弹框
@@ -31,6 +34,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         helper.ajax(url.getUserInfo,params,function (res) {
             if(res.code >= 0) {
                 userInfo = res.data;
+                mobileNo = userInfo.telephone;
                 if(userInfo.avatarUrl){
                     $('.user-img').attr('src',userInfo.avatarUrl);
                 }
@@ -41,6 +45,61 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         })
     }
 
+    //检测用户是否修改手机
+    function _changeMobile() {
+        newMoileNo = $('.js-telephone').val();
+        if(newMoileNo != mobileNo) {
+            $('.js-send-item').removeClass('hide');
+        }else{
+            $('.js-send-item').addClass('hide');
+        }
+    }
+
+    //发送验证码
+    function _getVerificationCode() {
+        var $btn = $('.code-btn');
+        var params = {
+            "mobileNo": newMoileNo
+        };
+        $('.count').html('(60)秒');
+        if (_checkMobileNumber(newMoileNo)) {
+            //$btn.html("短信发送中");
+            _loadingCodeTime($btn);
+            helper.ajax(url.getVerificationCode, params, function(res) {
+                if (res.code >= 0) {
+                    $btn.html("已发送");
+                } else {
+                    $btn.html("重新发送");
+                }
+            })
+        } else {
+            $('.popup').show().find('p').html('请输入正确的手机号码');
+        }
+
+    }
+
+    function _loadingCodeTime(dom) {
+        //60秒后重新发送
+        var $btnSend = $(".js-send");
+        var $msg = $('.count');
+
+        $btnSend.hide();
+        $msg.show();
+
+        var left_time = 60;
+        var timeCount = window.setInterval(function() {
+            left_time = left_time - 1;
+            if (left_time <= 0) {
+                window.clearInterval(timeCount);
+                $msg.hide();
+                $btnSend.show();
+            } else {
+                $msg.html('(' + left_time + ')秒');
+            }
+        }, 1000);
+    }
+
+
     //提交用户信息
     function _postUserInfoData() {
         var params = {};
@@ -50,7 +109,12 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         params.userName = $.trim($('.js-username').val());
         params.telephone = $.trim($('.js-telephone').val());
         params.address = $.trim($('.js-address').val());
+        params.code = $.trim($('.js-code').val());
         params.sex = sex;
+
+        if(!_checkMobileNumber(params.telephone)) {
+            $('.js-confirm-popup').show().find('p').html('手机号码格式不正确');
+        }
 
         helper.ajax(url.postUserInfo,params,function (res) {
             //todo 弹层提示成功
@@ -75,6 +139,12 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
                 }
             }
         })
+    }
+
+    //验证手机号
+    function _checkMobileNumber(num) {
+        var reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证规则
+        return reg.test(num); //true
     }
 
     return {

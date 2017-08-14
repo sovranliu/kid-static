@@ -16,6 +16,7 @@ define([], function() {
         //编辑用户信息
         getUserInfo: _basePath + 'getUserInfo',
         postUserInfo: _basePath + 'postUserInfo',
+        getVerificationCode: _basePath + 'getVerificationCode',
         //留言
         getMessageData: _basePath + 'getMessage',
         postMessageData: _basePath + 'postMessage',
