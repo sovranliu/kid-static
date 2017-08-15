@@ -280,6 +280,8 @@ a,div,img {
 }
 
 .pop-main p {
+    max-height: 300px;
+    overflow-y: scroll;
     padding: 20px 38px;
     font-size: 16px;
     color: #666;
@@ -561,7 +563,6 @@ a,div,img {
     z-index: 9;
 }
 .fd-dq-pop, .fd-yg-pop{
-    position: absolute;
     background: rgba(0,0,0,.5);
     border-radius: 3px;
     /* 若要改成动态设置高度，去除以下2个属性*/

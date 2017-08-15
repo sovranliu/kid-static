@@ -167,13 +167,13 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         var day = $('.js-day option:selected').text();
         var params = {};
 
-        if (activeTime.length < 2) {
-            showPopup(4);
-            return;
-        }
-
         if(!serialNumber) {
             showPopup(5);
+            return;
+        }
+        
+        if (activeTime.length < 2) {
+            showPopup(4);
             return;
         }
 

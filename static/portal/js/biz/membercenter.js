@@ -146,6 +146,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
                     if(msg != $cmsg) {
                         $('.red-dot').show();
                     }else{
+                        result = "";
                         $('.red-dot').hide();
                     }
                 }

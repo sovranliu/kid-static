@@ -36,6 +36,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
                     if(msg != $cmsg) {
                         $('.red-dot').show();
                     }else{
+                        result = "";
                         $('.red-dot').hide();
                     }
                     $('.red-dot').show();
@@ -47,7 +48,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
     function _showMessage() {
         $('.popup').show();
         var content = result.data.content;
-        if(!content) {
+        if(!content || content == "") {
             $('.popup').find('p').html('暂无回复');
         }else{
             var msg = content.length + content.substr(content.length-1,1) + content.substr(0,1);

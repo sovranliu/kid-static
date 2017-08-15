@@ -279,3 +279,7 @@ a.disabled {
     cursor: not-allowed;
     opacity: .65;
 }
+.table td{
+    word-break: break-all;
+    word-wrap:break-word;
+}

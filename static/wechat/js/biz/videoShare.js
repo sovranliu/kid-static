@@ -1,4 +1,4 @@
-define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,wx) {
+define(['url', 'helper','wechat'], function (url, helper,wx) {
 
     var vurl;
 
@@ -7,7 +7,7 @@ define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,w
     }
 
     function getVideoDetail() {
-        $('video').html('<source src="'+vurl+'" type="video/mp4" />');
+        $('#video').attr('src',vurl);
         handleShare();
     }
 
@@ -55,7 +55,6 @@ define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,w
 
     return {
         init: function () {
-            handshake.init();
             getUrlParams();
             getVideoDetail();
         }
