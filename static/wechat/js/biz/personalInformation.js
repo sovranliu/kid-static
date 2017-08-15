@@ -137,15 +137,12 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
 
     function filteremoji(name){
         if(name != ""){
-            // var ranges = [
-            //     '\ud83c[\udf00-\udfff]', 
-            //     '\ud83d[\udc00-\ude4f]', 
-            //     '\ud83d[\ude80-\udeff]'
-            // ];
-            var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;
-            if(name.match(regRule)) {
-                name = name.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "");
-            } 
+            var ranges = [
+                '\ud83c[\udf00-\udfff]', 
+                '\ud83d[\udc00-\ude4f]', 
+                '\ud83d[\ude80-\udeff]'
+            ];
+            name = name.replace(new RegExp(ranges.join('|'), 'g'), '');
         }
         return name
     }
