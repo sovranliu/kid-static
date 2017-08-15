@@ -38,9 +38,9 @@ define(['url', 'helper'], function(url, helper) {
         $('.count').html('(60)秒');
         if (_checkMobileNumber(phone)) {
             //$btn.html("短信发送中");
-            _loadingCodeTime($btn);
             helper.ajax(url.getVerificationCode, params, function(res) {
                 if (res.code >= 0) {
+                    _loadingCodeTime($btn);
                     $btn.html("已发送");
                 } else {
                     $btn.html("重新发送");
