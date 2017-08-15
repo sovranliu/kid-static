@@ -11,6 +11,7 @@ define(['url','helper'], function(url,helper) {
     function bindActions() {
     	$('.sign-in').on('click','.js-register',_getRegister);
     	$('.sign-in').on('click','.js-login',_getLogin);
+        $('.sign-in').on('click','.js-logout',_logout);
     	$('body').on('click','.js-confirm',function() {
     		$('.js-qrcode-popup').hide();
             clearInterval(checkLogin);
@@ -26,7 +27,7 @@ define(['url','helper'], function(url,helper) {
             }
         } else if(path.indexOf("HomePage") != -1 || path.indexOf("MembershipPrice") != -1 || path.indexOf("TicketNotes") != -1 || path.indexOf("QRCode") != -1 || path.indexOf("Introduction") != -1 || path.indexOf("MemberBenefitDetail") != -1) {
             if($.cookie('userName') && $.cookie('avatarUrl')) {
-                $('.sign-in').html('<img class="fl" src="' + $.cookie('avatarUrl') + '"></img><div class="fl"><a href="MemberCenter.html"><span>姓名：' + $.cookie('userName')+ '</span><span>会员级别：初级飞行员</span></a></div>')
+                $('.sign-in').html('<img class="fl" src="' + $.cookie('avatarUrl') + '"></img><div class="fl"><a href="MemberCenter.html"><span>姓名：' + $.cookie('userName')+ '</span><span>会员级别：初级飞行员</span></a></div><div class="js-logout">注销</div>')
             }else{
                 $('.sign-in').html('<button class="js-login">登录</button> <button class="js-register">注册</button>');
             }
@@ -44,7 +45,7 @@ define(['url','helper'], function(url,helper) {
                 if(!res.data.avatarUrl){
                     $.cookie('avatarUrl','images/user-default.png');
                 }
-                $('.sign-in').html('<img class="fl" src="' + res.data.avatarUrl + '"></img><div class="fl"><a href="MemberCenter.html"><span>姓名：' + res.data.userName + '</span><span>会员级别：初级飞行员</span></a></div>')
+                $('.sign-in').html('<img class="fl" src="' + res.data.avatarUrl + '"></img><div class="fl"><a href="MemberCenter.html"><span>姓名：' + res.data.userName + '</span><span>会员级别：初级飞行员</span></a></div><div class="js-logout">注销</div>')
             }else{
                 $('.sign-in').html('<button class="js-login">登录</button> <button class="js-register">注册</button>');
             }
@@ -66,6 +67,14 @@ define(['url','helper'], function(url,helper) {
                 },2000);
             }
     	})
+    }
+
+    function _logout() {
+        $.removeCookie('aid');
+        $.removeCookie('avatarUrl');
+        $.removeCookie('sid');
+        $.removeCookie('userName');
+        window.location.href = 'MemberCenter.html';
     }
 
     function _checkLogin(code) {

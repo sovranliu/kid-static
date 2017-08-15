@@ -160,7 +160,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
             $('.js-confirm-popup').find('p').html('暂无回复');
         }else{
             var msg = content.length + content.substr(content.length-1,1) + content.substr(0,1);
-            debugger
+         
             $.cookie('message',msg);
             $('.js-confirm-popup').find('p').html(content);
         }
