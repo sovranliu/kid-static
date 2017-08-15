@@ -130,19 +130,22 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
 
      //验证姓名
     function _checkName(name) {
-        var reg = /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/; //验证规则
+        var reg = /[a-zA-Z]{1,20}|[\u4e00-\u9fa5]{1,10}/; //验证规则
         return reg.test(name); //true
         
     }
 
     function filteremoji(name){
         if(name != ""){
-            var ranges = [
-                '\ud83c[\udf00-\udfff]', 
-                '\ud83d[\udc00-\ude4f]', 
-                '\ud83d[\ude80-\udeff]'
-            ];
-            name = name.replace(new RegExp(ranges.join('|'), 'g'), '');
+            // var ranges = [
+            //     '\ud83c[\udf00-\udfff]', 
+            //     '\ud83d[\udc00-\ude4f]', 
+            //     '\ud83d[\ude80-\udeff]'
+            // ];
+            var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;
+            if(name.match(regRule)) {
+                name = name.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "");
+            } 
         }
         return name
     }

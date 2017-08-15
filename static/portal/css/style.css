@@ -1241,7 +1241,7 @@
     position: absolute;
     top: 14px;
     right: 0;
-    color: #0068b7;
+    color: #0068b7!important;
 }
 .hide{
     display: none;
