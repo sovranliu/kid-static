@@ -70,10 +70,10 @@ define(['url','helper'], function(url,helper) {
     }
 
     function _logout() {
-        $.cookie('aid', '', '/');
-        $.cookie('avatarUrl', '', '/');
-        $.cookie('sid', '', '/');
-        $.cookie('userName', '', '/');
+        $.removeCookie('aid', {path:'/kid/static/portal'});
+        $.removeCookie('avatarUrl', {path:'/kid/static/portal'});
+        $.removeCookie('sid', {path:'/'});
+        $.removeCookie('userName', {path:'/kid/static/portal'});
         window.location.href = 'MemberCenter.html';
     }
 
