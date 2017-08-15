@@ -89,15 +89,22 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
         var $pop = $('.popup');
         var sex = $('.js-sex').prop('checked') ? 1 : 2;
 
-        params.userName = $.trim($('.js-username').val());
+        params.userName = filteremoji($.trim($('.js-username').val()));
         params.telephone = $.trim($('.js-telephone').val());
         params.address = $.trim($('.js-address').val());
         params.code = $.trim($('.js-code').val());
         params.sex = sex;
 
+        if(!_checkName(params.userName)) {
+            $pop.show().find('p').html('姓名格式不正确');
+            return;
+        }
+
         if(!_checkMobileNumber(params.telephone)) {
             $pop.show().find('p').html('手机号码格式不正确');
+            return;
         }
+
         helper.ajax(url.postUserInfo,params,function (res) {
             var data = res.data;
             if(res.code >= 0) {
@@ -121,6 +128,24 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
         return reg.test(num); //true
     }
 
+     //验证姓名
+    function _checkName(name) {
+        var reg = /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/; //验证规则
+        return reg.test(name); //true
+        
+    }
+
+    function filteremoji(name){
+        if(name != ""){
+            var ranges = [
+                '\ud83c[\udf00-\udfff]', 
+                '\ud83d[\udc00-\ude4f]', 
+                '\ud83d[\ude80-\udeff]'
+            ];
+            name = name.replace(new RegExp(ranges.join('|'), 'g'), '');
+        }
+        return name
+    }
     return {
         init: function () {
             handshake.init();

@@ -110,8 +110,13 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         params.code = $.trim($('.js-code').val());
         params.sex = sex;
 
+        if(!_checkName(params.userName)) {
+            $('.js-confirm-popup').show().find('p').html('姓名格式不正确');
+            return;
+        }
         if(!_checkMobileNumber(params.telephone)) {
             $('.js-confirm-popup').show().find('p').html('手机号码格式不正确');
+            return;
         }
 
         helper.ajax(url.postUserInfo,params,function (res) {
@@ -164,6 +169,13 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
             $.cookie('message',msg);
             $('.js-confirm-popup').find('p').html(content);
         }
+    }
+
+     //验证姓名
+    function _checkName(name) {
+        var reg = /[a-zA-Z]{1,20}|[\u4e00-\u9fa5]{1,10}/; //验证规则
+        return reg.test(name); //true
+        
     }
 
     //关闭弹框
