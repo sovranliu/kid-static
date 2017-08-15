@@ -87,13 +87,12 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
         //当预约时段超过门票有效期时，提示错误
         var selectedDate = new Date(year + '/' + month + '/' + day);
  
-        if (selectedDate > new Date(expireParam)) {
+        if (expire && (selectedDate > new Date(expire))) {
             showPopup(6);
             $('.js-time-list').html('<p class="dataNull">请在有效期之内预约飞行</p>');
             $('.rsv-tip').hide();
             return;
         }
-
 
         month = month.length < 2 ? "0" + month : month;
         day = day.length < 2 ? "0" + day : day;

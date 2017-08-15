@@ -50,7 +50,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         var day = $('.js-day option:selected').text();
         var selectedDate = new Date(year + '/' + month + '/' + day);
  
-        if (selectedDate > new Date(expire)) {
+        if (expire && (selectedDate > new Date(expire))) {
             showPopup(6);
             $('.js-time-list').html('<p class="dataNull">请在有效期之内预约飞行</p>');
             $('.rsv-tip').hide();
