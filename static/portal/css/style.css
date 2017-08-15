@@ -395,6 +395,8 @@
 	overflow:hidden;
 	font-size: 18px;
 	color: #373839;
+    margin-bottom: 10px;
+
 }
 .yh-i-t img{
 	float: left;
@@ -408,6 +410,7 @@
 	font-weight: 100;
 }
 .yh-i-b{
+    margin-bottom: 10px;
 }
 .yh-i-b .yh-i-b-t{
 	position: relative;

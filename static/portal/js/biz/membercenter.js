@@ -104,7 +104,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
 
         var sex = $('.js-sex').prop('checked') ? 1 : 2;
 
-        params.userName = filteremoji($.trim($('.js-username').val()));
+        params.userName = $.trim($('.js-username').val());
         params.telephone = $.trim($('.js-telephone').val());
         params.address = $.trim($('.js-address').val());
         params.code = $.trim($('.js-code').val());
@@ -178,17 +178,6 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
         
     }
 
-    function filteremoji(name){
-        if(name != ""){
-            var ranges = [
-                '\ud83c[\udf00-\udfff]', 
-                '\ud83d[\udc00-\ude4f]', 
-                '\ud83d[\ude80-\udeff]'
-            ];
-            name = name.replace(new RegExp(ranges.join('|'), 'g'), '');
-        }
-        return name
-    }
     //关闭弹框
     function hidePopup(e) {
         $(e.currentTarget).closest('.popup').hide();
