@@ -83,7 +83,7 @@ define(['url', 'helper'], function(url, helper) {
         var params = {
             "mobileNo": phone,
             "code": code,
-            "name": name,
+            "name": filteremoji(name),
             "openId": helper.getQueryStr('openId')
         }
 
@@ -118,6 +118,18 @@ define(['url', 'helper'], function(url, helper) {
     function _checkMobileNumber(num) {
         var reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证规则
         return reg.test(num); //true
+    }
+
+    function filteremoji(name){
+        if(name != ""){
+            var ranges = [
+                '\ud83c[\udf00-\udfff]', 
+                '\ud83d[\udc00-\ude4f]', 
+                '\ud83d[\ude80-\udeff]'
+            ];
+            name = name.replace(new RegExp(ranges.join('|'), 'g'), '');
+        }
+        return name
     }
 
     return {
