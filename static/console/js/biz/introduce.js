@@ -56,6 +56,7 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
             "type":"新增",
             "id":"",
             "title":"",
+            "content": "",
             "imgUrl":"",
             "link":"",
         }
@@ -70,6 +71,7 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
             "isEdit":true,
             "id":$row.attr('data-id'),
             "title":$row.find('.js-td-title').text(),
+            "content":$row.find('.js-td-content').text(),
             "imgUrl":$row.find('.js-td-img img').attr('data-src'),
             "link":$row.find('.js-td-link a').text(),
         }
@@ -98,6 +100,7 @@ define(['url', 'helper', 'mustache','message','paginator'], function (url, helpe
         var data = {
             "id":id || "",
             "title":$modal.find('.js-title').val(),
+            "content": $modal.find('.js-content').val(),
             "imgUrl":$modal.find('.js-img-item img').attr('src'),
             "link":$modal.find('.js-link').val(),
             "type":2

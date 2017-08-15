@@ -103,23 +103,27 @@
 	        {{#data}}
 	        	{{#odd}}
 		        	<div class="yh-i-t">
-						<img src="{{imgUrl}}" style="max-width:530px;">
-						<div>
-							<h3>{{title}}</h3>
-							<p>{{content}}</p>
-						</div>
+		        		<a href="{{link}}" target="_blank">
+							<img src="{{imgUrl}}" style="max-width:530px;">
+							<div>
+								<h3>{{title}}</h3>
+								<p>{{content}}</p>
+							</div>
+						</a>
 					</div>
 				{{/odd}}
 
 				{{^odd}}
 					<div class="yh-i-b">
-						<div class="yh-i-b-t">
-							<h3>{{title}}</h3>
-							<p>{{content}}</p>
-						</div>
-						<div class="yh-i-b-i">
-							<img class="img1" src="{{imgUrl}}" style="max-width:530px;"></img>
-						</div>
+						<a href="{{link}}" target="_blank">
+							<div class="yh-i-b-t">
+								<h3>{{title}}</h3>
+								<p>{{content}}</p>
+							</div>
+							<div class="yh-i-b-i">
+								<img class="img1" src="{{imgUrl}}" style="max-width:530px;"></img>
+							</div>
+						</a>
 					</div>
 				{{/odd}}
 	        {{/data}}
