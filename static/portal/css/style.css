@@ -1237,6 +1237,12 @@
     font-size: 12px;
     font-family: sans-serif;
 }
+.logout-btn{
+    position: absolute;
+    top: 14px;
+    right: 0;
+    color: #0068b7;
+}
 .hide{
     display: none;
 }
