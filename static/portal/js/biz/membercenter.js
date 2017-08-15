@@ -57,7 +57,8 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     function _getVerificationCode() {
         var $btn = $('.code-btn');
         var params = {
-            "mobileNo": newMoileNo
+            "mobileNo": newMoileNo,
+            "new":true
         };
         $('.count').html('(60)秒');
         if (_checkMobileNumber(newMoileNo)) {
