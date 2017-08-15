@@ -416,6 +416,7 @@
 }
 .yh-i-b-i{
 	position: relative;
+    float: right;
 }
 .yh-i-b-i .img2{
     position: absolute;
@@ -495,7 +496,8 @@
 	padding-left: 35px;
 }
 .yh-bt-tn a {
-    color: #000;
+    color: #4181b5;
+    text-decoration: underline;
 }
 .yh-bt-box{
 	width: 572px;
