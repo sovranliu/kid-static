@@ -41,8 +41,8 @@ define(['url', 'helper','wechat'], function (url, helper,wx) {
                     
                     wx.onMenuShareAppMessage({ 
                         title: '我的飞行', // 分享标题  
-                        link: 'http://solution.slfuture.cn/kid/static/wechat/VideoShare.html?vurl=' + vurl, 
-                        imgUrl: 'http://solution.slfuture.cn/kid/static/portal/images/logo.png', // 分享图标  
+                        link: 'http://yahaifeixing.cn/kid/static/wechat/VideoShare.html?vurl=' + vurl, 
+                        imgUrl: 'http://yahaifeixing.cn/kid/static/portal/images/logo.png', // 分享图标  
                         success: function () {   
                             window.location.href = 'FlightDiary.html';
                         },  
