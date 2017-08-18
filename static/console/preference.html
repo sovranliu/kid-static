@@ -162,14 +162,14 @@
     </main><!-- Page Content -->
     <div class="cd-overlay"></div>
 
-    <!-- 数据表格模板 -->
+    <!-- 数据表格模板tmpl -->
     <script id="tpl-tbody" type="x-tmpl-mustache">
         {{#data}}
         <tr data-id="{{id}}">
             <td class="js-td-title limit-width">{{title}}</td>
             <td class="js-td-img limit-width"><img class="preview-img" src="{{imgUrl}}" data-src="{{imgUrl}}"></td>
             <td class="js-td-link limit-width"><a href="{{link}}" target="_blank">{{link}}</a></td>
-            <td class="limit-width">{{updateTime}}</td>
+            <td class="limit-width">{{updatetime}}</td>
             <td>
                 <a href="#modal-dialog" data-toggle="modal">
                     <span class="js-edit btn btn-sm btn-success"  data-toggle="tooltip" data-placement="top" title="回复"><i class="fa fa-edit text-edit"></i> 编辑</span>
