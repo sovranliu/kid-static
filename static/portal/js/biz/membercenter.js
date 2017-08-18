@@ -163,14 +163,13 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     function _showMessage() {
         $('.js-confirm-popup').show();
         $('.red-dot').hide();
-        var content = result.data.content;
-        if(!content) {
+        var data = result.data;
+        if(!data || !data.content || data.content == "") {
             $('.js-confirm-popup').find('p').html('暂无回复');
         }else{
-            var msg = content.length + content.substr(content.length-1,1) + content.substr(0,1);
-         
+            var msg = data.content.length + data.content.substr(data.content.length-1,1) + data.content.substr(0,1);
             $.cookie('message',msg);
-            $('.js-confirm-popup').find('p').html(content);
+            $('.js-confirm-popup').find('p').html(data.content);
         }
     }
 

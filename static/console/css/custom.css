@@ -283,3 +283,6 @@ a.disabled {
     word-break: break-all;
     word-wrap:break-word;
 }
+.limit-width-td{
+    max-width:350px!important;
+}
