@@ -278,6 +278,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
                 $('.js-confirm').on('click', function() {
                     window.location.href = 'BuyTickets.html';
                 });
+                break;
             case 6:
                 $resText.html('请在有效期之内预约飞行');
                 break;

@@ -124,8 +124,7 @@ define(['url', 'helper'], function(url, helper) {
         if(name != ""){
             var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;
             if(name.match(regRule)) {
-                // $('.popup').find('p').html('姓名格式错误');
-                // return;
+                //$('.popup').find('p').html('姓名格式错误');
                 name = name.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "");
             } 
         }

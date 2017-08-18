@@ -162,6 +162,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     
     function _showMessage() {
         $('.js-confirm-popup').show();
+        $('.red-dot').hide();
         var content = result.data.content;
         if(!content) {
             $('.js-confirm-popup').find('p').html('暂无回复');

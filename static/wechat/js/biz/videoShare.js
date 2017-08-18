@@ -1,9 +1,15 @@
 define(['url', 'helper','wechat'], function (url, helper,wx) {
 
-    var vurl;
+    var vurl,fromPath;
 
     function getUrlParams() {
         vurl =  helper.getQueryStr('vurl');
+        fromPath = helper.getQueryStr('from');
+        if(fromPath) {
+            $('.share-wrapper').hide();
+        }else{
+            $('.share-wrapper').show();
+        }
     }
 
     function getVideoDetail() {

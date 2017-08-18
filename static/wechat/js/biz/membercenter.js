@@ -47,6 +47,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
 
     function _showMessage() {
         $('.popup').show();
+        $('.red-dot').hide();
         var content = result.data.content;
         if(!content || content == "") {
             $('.popup').find('p').html('暂无回复');
