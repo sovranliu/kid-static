@@ -7,6 +7,7 @@ define(['url', 'helper','wechat'], function (url, helper,wx) {
     }
 
     function getVideoDetail() {
+        alert(vurl);
         $('#video').attr('src',vurl);
         handleShare();
     }
