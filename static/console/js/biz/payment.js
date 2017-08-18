@@ -15,14 +15,6 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
         $('.js-phone').val(helper.getQueryStr('telephone') || '');
     }
 
-    function handleReset() {
-        $('.js-filter-input').val('');
-        $('.js-table').hide();
-
-        pageNum = 1;
-        getOrderData();
-    }
-
     function buildSearchParams() {
         var params = {};
         params['serialNo'] = $.trim($('.js-order').val());
@@ -41,7 +33,7 @@ define(['url', 'helper', 'mustache','dateTimePicker','paginator'], function (url
         $('.js-filter-select').find('option:first').prop('selected', 'selected');
 
         pageNum = 1;
-        getTicketList();
+        getOrderData();
     }
 
     function getOrderData() {
