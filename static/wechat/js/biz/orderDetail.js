@@ -134,6 +134,7 @@ define(['url', 'helper'], function (url, helper) {
     }
 
     function buyTicket() {
+        $(this).prop('disabled',true);
         var ticketNum = ticketType == '1' ? 1 : Number($('.js-current-num').val());
         var needRefundInsurance = $('.js-switch-refundInsurance').is(':checked');
         var insurance = 0;
@@ -192,6 +193,7 @@ define(['url', 'helper'], function (url, helper) {
                } else {
                     $('.popup').show().find('p').html("支付失败")
                }
+               $('.js-buy-ticket').prop('disabled',false);
            }
        ); 
     }

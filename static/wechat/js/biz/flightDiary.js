@@ -116,6 +116,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
     }
 
     function buyFlightDiary() {
+        $(this).prop('disabled',true);
         var params = {
             "serialNo": serialNumber,
             "goodsType":'30000',
@@ -167,6 +168,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                } else {
                     $('popup').show().find('p').html(res.msg)
                }
+               $('.js-buy-flightDiary').prop('disabled',false)
            }
        ); 
     }
