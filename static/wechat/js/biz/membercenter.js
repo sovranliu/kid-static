@@ -39,7 +39,6 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
                         result = "";
                         $('.red-dot').hide();
                     }
-                    $('.red-dot').show();
                 }
             }
         })
@@ -49,7 +48,7 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
         $('.popup').show();
         $('.red-dot').hide();
         var content = result.data.content;
-        if(!content || content == "") {
+        if(!result.data || !content || content == "") {
             $('.popup').find('p').html('暂无回复');
         }else{
             var msg = content.length + content.substr(content.length-1,1) + content.substr(0,1);
