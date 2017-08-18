@@ -143,8 +143,8 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
                 //$('.popup').show().find('p').html('姓名格式错误');
                 name = name.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "");
             } 
-            return name
         }
+        return name
     }
     return {
         init: function () {
