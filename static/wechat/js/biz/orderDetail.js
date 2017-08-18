@@ -35,7 +35,7 @@ define(['url', 'helper'], function (url, helper) {
     */
     function checkType() {
         if(!ticketType) {
-            alert('您好，页面入口不合法，请注册后登陆购买。谢谢。');
+            $('.popup').show().find('p').html('您好，页面入口不合法，请注册后登陆购买。谢谢。');
             window.location.href = "Registerpage.html";
         }
         checkPhone();
