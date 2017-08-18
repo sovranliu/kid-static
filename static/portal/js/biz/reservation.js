@@ -212,7 +212,6 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
         helper.ajax(url.submitBooking, params, function(res) {
             if (res.code >= 0) {
                 showPopup(1);
-                window.location.href = "MemberCenter.html";
             } else {
                 showPopup(2); //预约满
             }
@@ -253,8 +252,13 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
     }
 
     //关闭弹框
-    function hidePopup(e) {
-        $(e.currentTarget).closest('.popup').hide();
+    function hidePopup() {
+
+        $('.js-result-wrapper').hide();
+
+        if($(this).data('type') == 'success') {
+            window.location.href = "MyOrder.html";
+        }
     }
 
     function openDisclaimer() {
