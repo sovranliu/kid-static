@@ -163,7 +163,7 @@
     </main><!-- Page Content -->
     <div class="cd-overlay"></div>
 
-    <!-- 数据表格模板 -->
+    <!-- 数据表格模板tmpl -->
     <script id="tpl-tbody" type="x-tmpl-mustache">
         {{#data}}
         <tr data-id="{{id}}">
@@ -171,7 +171,7 @@
             <td class="js-td-content limit-width">{{content}}</td>
             <td class="js-td-img limit-width"><img class="preview-img" src="{{imgUrl}}" data-src="{{imgUrl}}"></td>
             <td class="js-td-link limit-width"><a href="{{link}}" target="_blank">{{link}}</a></td>
-            <td class="limit-width">{{updateTime}}</td>
+            <td class="limit-width">{{updatetime}}</td>
             <td>
                 <a href="#modal-dialog" data-toggle="modal">
                     <span class="js-edit btn btn-sm btn-success"  data-toggle="tooltip" data-placement="top" title="回复"><i class="fa fa-edit text-edit"></i> 编辑</span>
@@ -208,7 +208,7 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">简介<i class="form-required">*</i></label>
                                 <div class="col-md-6">
-                                    <textarea rows="3" cols="20" class="js-content form-control" type="text" value="{{content}}"></textarea>
+                                    <textarea rows="3" cols="20" class="js-content form-control">{{content}}</textarea>
                                 </div>
                             </div>
                             {{#isEdit}}
