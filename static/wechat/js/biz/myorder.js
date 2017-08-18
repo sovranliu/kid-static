@@ -280,7 +280,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                 });  
               
                 wx.ready(function () {  
-                    alert('http://solution.slfuture.cn/kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber);
+                    alert('http://yahaifeixing.cn/kid/static/wechat/ReceiveTicket.html?serialNumber=' + serialNumber);
                     
                     wx.checkJsApi({ 
                       jsApiList: [
@@ -296,7 +296,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     });
                     wx.onMenuShareTimeline({
                         title: '赠送飞行票', // 分享标题
-                        link: 'http://solution.slfuture.cn/kid/static/wechat/ReceiveTicket.html',
+                        link: 'http://yahaifeixing.cn/kid/static/wechat/ReceiveTicket.html',
                         imgUrl: '', // 分享图标
                         success: function () {
                             $('.send-message-result').show();
@@ -309,7 +309,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     });
                     wx.onMenuShareAppMessage({ 
                         title: '赠送飞行票', // 分享标题  
-                        link: 'http://solution.slfuture.cn/kid/static/wechat/ReceiveTicket.html', // 分享链接  
+                        link: 'http://yahaifeixing.cn/kid/static/wechat/ReceiveTicket.html', // 分享链接  
                         imgUrl: '', // 分享图标  
                         trigger: function (res) {
                           alert('用户点击发送给朋友');
