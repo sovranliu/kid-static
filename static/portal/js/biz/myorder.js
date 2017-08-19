@@ -12,7 +12,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         $('.js-send-message').on('click', _sendMessage);
         $('.js-confirm-message-result').on('click', _confirmMessgeResult);
         $('.popup').on('click','.js-confirm',_closePopup);
-        $('.error-popup').on('click','.js-confirm',_closePopup);
+        $('.error-popup').on('click','.js-confirm',_closePopupError);
         $('.revoke-popup').on('click','.js-confirm',function() {
             window.location.reload();
         })
@@ -92,8 +92,8 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                     Mustache.parse(template);
                     $('.ticket-list').html(Mustache.render(template, ticketList));
                 }
-            }else if(res.msg != null && res.msg != ""){
-                $('.error-popup').show().find('p').html(res.msg)
+            }else if(data.msg != null && data.msg != ""){
+                $('.error-popup').show().find('p').html(data.msg);
             }
             
         })
@@ -146,8 +146,8 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                     Mustache.parse(template);
                     $('.book-list').html(Mustache.render(template, bookList));
                 }
-            }else if(res.msg != null && res.msg != ""){
-                $('.error-popup').show().find('p').html(res.msg)
+            }else if(data.msg != null && data.msg != ""){
+                $('.error-popup').show().find('p').html(data.msg);
             }
         })
     }
@@ -263,7 +263,9 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         $(this).parent().parent('.popup').hide();
         window.location.reload();
     }
-    
+    function _closePopupError() {
+        $(this).parent().parent('.error-popup').hide();
+    }
     return {
         init: function() {
             bindActions();
