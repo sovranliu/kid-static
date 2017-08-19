@@ -395,7 +395,7 @@
 	overflow:hidden;
 	font-size: 18px;
 	color: #373839;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
 }
 .yh-i-t img{
@@ -409,13 +409,18 @@
 	text-decoration: underline;
 	font-weight: 100;
 }
+.yh-i-t a,.yh-i-b a{
+    color: #000
+}
 .yh-i-b{
     margin-bottom: 10px;
+    font-size: 18px;
 }
 .yh-i-b .yh-i-b-t{
 	position: relative;
 	width: 530px;
 	margin:20px 0 20px;
+    display: inline-block;
 }
 .yh-i-b-i{
 	position: relative;
@@ -620,8 +625,8 @@
 }
 .yh-cp-rsv video {
     object-fit: fill;
-    width: 24%;
-    height: 200px;
+    width: 49%;
+    height: 250px;
     float: left;
     padding: 2px 2px 50px 2px;
     text-align: center;
@@ -1246,3 +1251,4 @@
 .hide{
     display: none;
 }
+.clearfix{overflow:hidden;_zoom:1;}
