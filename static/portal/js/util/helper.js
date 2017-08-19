@@ -208,7 +208,8 @@ define(['jquery'], function($) {
             },
             success: function(data) {
                 if(data.msg != null && data.msg != "") {
-                    $('.popup').show().find('p').html(data.msg);
+                    $('.error-popup').show().find('p').html(data.msg);
+                    return
                 }
                 if(data.redirect != null && data.redirect != "") {
                     window.location.href = data.redirect;
