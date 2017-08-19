@@ -1,7 +1,7 @@
 define(['url','helper','handshake'], function (url,helper,handshake) {
 
     function bindActions () {
-        $('.js-submit').on('click',_postBenefitData);
+        //$('.js-submit').on('click',_postBenefitData);
         $('.js-confirm').on("click", _closePopup);
     }
 

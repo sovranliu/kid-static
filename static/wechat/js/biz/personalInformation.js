@@ -25,6 +25,8 @@ define(['mustache','url','helper','handshake'], function (Mustache,url,helper,ha
                 var template = $('#template').html();
                 Mustache.parse(template);
                 $('.pi-list').html(Mustache.render(template, data));
+            } else if(res.msg != null && res.msg != ""){
+                $('.popup').show().find('p').html(res.msg)
             }
         })
     }

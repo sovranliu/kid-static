@@ -72,7 +72,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
                 }
             })
         } else {
-            $('.popup').show().find('p').html('请输入正确的手机号码');
+            $('.error-popup').show().find('p').html('请输入正确的手机号码');
         }
 
     }
@@ -154,7 +154,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
                     }
                 }
             }else if(res.msg != null && res.msg != ""){
-                $('.popup').show().find('p').html(res.msg)
+                $('.error-popup').show().find('p').html(res.msg)
             }
         })
     }
@@ -188,6 +188,7 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
     //关闭弹框
     function hidePopup(e) {
         $(e.currentTarget).closest('.popup').hide();
+        $(e.currentTarget).closest('.error-popup').hide();
     }
 
     return {

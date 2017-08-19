@@ -55,6 +55,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
 
     function _closePopup() {
         $(this).parent().parent('.popup').hide();
+        $(this).parent().parent('.error-popup').hide();
     }
 
     return {

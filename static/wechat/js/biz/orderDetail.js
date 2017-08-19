@@ -9,9 +9,6 @@ define(['url', 'helper'], function (url, helper) {
         $('.js-buy-ticket').on('click', buyTicket);
         $('.js-insurance').on('click',showInsuranceNote);
         $('.popup').on('click', '.js-confirm',closePopup);
-        $('.error-popup').on('click','.js-confirm', function() {
-            $('.error-popup').hide();
-        });
     }
 
     function getUrlParams() {
@@ -53,8 +50,8 @@ define(['url', 'helper'], function (url, helper) {
                     var data = res.data;
                     $('.js-name').text(data.user.name);
                     $('.js-phone').text(data.user.mobileNo);
-                } else {
-                    res.msg && $('.error-popup').show().find('p').html(res.msg);
+                }else if(res.msg != null && res.msg != ""){
+                    $('.popup').show().find('p').html(res.msg)
                 }
             })
         }
@@ -82,8 +79,8 @@ define(['url', 'helper'], function (url, helper) {
                 ticketRefundInsurance = Number((Number(data.refundInsurance) / 100).toFixed(2));
 
                 setRefundInsurance();
-            } else {
-                res.msg && $('.error-popup').show().find('p').html(res.msg);
+            } else if(res.msg != null && res.msg != ""){
+                $('.popup').show().find('p').html(res.msg)
             }
         });
     }
@@ -177,8 +174,8 @@ define(['url', 'helper'], function (url, helper) {
                 } else {
                     onBridgeReady(res);
                 }
-            } else {
-                res.msg && $('.error-popup').show().find('p').html(res.msg);
+            } else if(res.msg != null && res.msg != ""){
+                $('.popup').show().find('p').html(res.msg)
             }
         });
     }
