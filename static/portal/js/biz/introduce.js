@@ -1,5 +1,11 @@
 define(['mustache','url', 'helper'], function(Mustache,url, helper) {
 
+    function bindActions() {
+        $('.error-popup').on('click','.js-confirm', function() {
+            $('.error-popup').hide();
+        });
+    }
+    
     function _getMaterielData() {
         var params = {
             "type": 2
@@ -15,12 +21,15 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                 });
 
                 $('.yh-conwrap').html(Mustache.render(template, res));
+            } else {
+                res.msg && $('.error-popup').show().find('p').html(res.msg);
             }
         })
     }
 
     return {
         init: function() {
+            bindActions();
             _getMaterielData();
         }
     }
