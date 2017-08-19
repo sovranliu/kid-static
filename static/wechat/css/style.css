@@ -226,7 +226,7 @@ a,div,img {
     border-radius: 52px;
 }
 
-.popup {
+.popup, .error-popup {
     position: fixed;
     z-index: 201;
     top: 0;

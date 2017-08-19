@@ -11,6 +11,9 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
         $('.js-submit').on('click', submitBooking);
         $('.js-confirm').on('click', hidePopup);
         $('.js-open-disclaimer').on('click', openDisclaimer);
+        $('.error-popup').on('click','.js-confirm', function() {
+            $('.error-popup').hide();
+        });
     }
 
     //获取url参数
@@ -54,6 +57,8 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
                         changeTicket();
                         getBookingTime();
                     }
+                } else {
+                    res.msg && $('.error-popup').show().find('p').html(res.msg);
                 }
             })
         } else {
@@ -131,6 +136,8 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
                     $('.js-time-list').html(mustache.render($('#timeTmpl').html(), { 'timeList': timeList }));
                     $('.js-select-time').eq(0).click();
                 }
+            } else {
+                res.msg && $('.error-popup').show().find('p').html(res.msg);
             }
         });
     }
@@ -173,6 +180,8 @@ define(['url', 'helper', 'mustache', 'datePicker'], function (url, helper, musta
             if (res.code >= 0) {
                 $('.rsv-tip').show();
                 $('.js-bookable-num').text(res.data.count);
+            } else {
+                res.msg && $('.error-popup').show().find('p').html(res.msg);
             }
         });
     }

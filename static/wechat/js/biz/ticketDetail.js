@@ -2,6 +2,12 @@ define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,w
 
     var serialNumber;
 
+    function bindActions() {
+        $('.error-popup').on('click','.js-confirm', function() {
+            $('.error-popup').hide();
+        });
+    }
+
     function getUrlParams() {
         serialNumber =  helper.getQueryStr('serialNumber');
     }
@@ -67,8 +73,8 @@ define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,w
                     wx.error(function(res){  
                     });  
                 });
-
-
+            } else {
+                res.msg && $('.error-popup').show().find('p').html(res.msg);
             }
         })
     }
@@ -76,6 +82,7 @@ define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,w
     return {
         init: function () {
             handshake.init();
+            bindActions();
             getUrlParams();
             getTicketDetail();
         }
