@@ -207,9 +207,9 @@ define(['jquery'], function($) {
                 // }
             },
             success: function(data) {
-                if(data.msg != null && data.msg != "") {
-                    $('.popup').show().find('p').html(data.msg);
-                }
+                // if(data.msg != null && data.msg != "") {
+                //     $('.popup').show().find('p').html(data.msg);
+                // }
                 if(data.redirect != null && data.redirect != "") {
                     window.location.href = data.redirect;
                 }
