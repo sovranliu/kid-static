@@ -49,7 +49,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
                     window.location.href = data.redirect;
                 }
                 $('body').css('visibility','visible');
-                if(res.code >=0) {
+                if(data.code >=0) {
                     $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
                     $('.js-close').hide();
                 }else{
