@@ -38,15 +38,26 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
             "serialNumber": ticketId
         }
 
-        helper.ajax(url.postRefund, params, function(res) {
-            if(res.code >=0) {
-                $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
-                $('.js-close').hide();
-            }else{
-                $popup.find('p').html(res.msg);
+        $.ajax({
+            url: url.postRefund,
+            type: 'POST',
+            data: params,
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function(data) {
+                if(data.redirect != null && data.redirect != "") {
+                    window.location.href = data.redirect;
+                }
+                $('body').css('visibility','visible');
+                if(res.code >=0) {
+                    $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
+                    $('.js-close').hide();
+                }else{
+                    $popup.find('p').html(data.msg);
+                }
+                $popup.find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
             }
-            $popup.find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
-        })
+        });
     }
 
     function _closePopup() {
