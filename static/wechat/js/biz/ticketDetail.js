@@ -23,6 +23,7 @@ define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,w
             if (res.code >= 0) {
                 $('.js-result-success').show();
                 $('.js-result-fail').hide();
+                $('.share-wrapper').show();
 
                 $('.js-ticket-number').html(data.serialNumber);
                 $('.js-ticket-type').html(Number(data.type) == 0 ? '团体票' : '单人票' );
@@ -33,6 +34,7 @@ define(['url', 'helper','handshake','wechat'], function (url, helper,handshake,w
             } else {
                 $('.js-result-success').hide();
                 $('.js-result-fail').show();
+                $('.share-wrapper').hide();
             }
         });
     }
