@@ -856,7 +856,7 @@
 .yh-mc-bottom .wt{
     background: url(../images/wt.png);
 }
-.popup {
+.popup,.error-popup {
     position: fixed;
     z-index: 201;
     top: 0;
@@ -970,7 +970,7 @@
     background: #1162a2;
     text-align: center;
 }
-.popup .pop-con .close:before, .popup .pop-con .close:after{
+.popup .pop-con .close:before, .popup .pop-con .close:after,.error-popup .pop-con .close:before, .error-popup .pop-con .close:after{
 	right: 5px;
 }
 
@@ -1002,14 +1002,14 @@
 .pop-main button:nth-child(2) {
     margin-top: 15px;
 }
-.popup .close{
+.popup .close,.error-popup .close{
     position: absolute;
     right: 0;
     top: 0;
     width: 40px;
     height: 40px;
 }
-.popup .close:before,.popup .close:after{
+.popup .close:before,.popup .close:after,.error-popup .close:before,.error-popup .close:after{
     position: absolute;
     top: 50%;
 	content: "";
@@ -1022,7 +1022,7 @@
 	-ms-transform: rotate(-45deg);
 	-o-transform: rotate(-45deg);
 }
-.popup .close:after{
+.popup .close:after,.error-popup .close:after{
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);

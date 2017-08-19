@@ -12,6 +12,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         $('.js-send-message').on('click', _sendMessage);
         $('.js-confirm-message-result').on('click', _confirmMessgeResult);
         $('.popup').on('click','.js-confirm',_closePopup);
+        $('.error-popup').on('click','.js-confirm',_closePopup);
         $('.revoke-popup').on('click','.js-confirm',function() {
             window.location.reload();
         })
@@ -219,8 +220,6 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         helper.ajax(url.postRefund, params, function(res) {
             if(res.code >= 0) {
                 $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
-            }else{
-                $popup.find('p').html(res.msg);
             }
             $popup.find('.confirm-btn').removeClass('js-submit-refund').addClass('js-confirm');
         })
@@ -251,7 +250,6 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     }
 
     function _closePopup() {
-        debugger
         $(this).parent().parent('.popup').hide();
         window.location.reload();
     }
