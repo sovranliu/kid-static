@@ -10,7 +10,9 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
         $('.js-ticket-share').on('click', _shareTicket);
         $('.js-send-message').on('click', _sendMessage);
         $('.js-close').on('click', _closePopup);
-        $('.error-popup').on('click','.js-confirm',_closePopup);
+        $('.error-popup').on('click','.js-confirm', function() {
+            $('.error-popup').hide();
+        });
         $('.js-confirm-message-result').on('click', _confirmMessgeResult);
         //$('.js-revoke').on('click', _handleRevoke);
         $('.revoke-popup').on('click','.js-confirm',function() {

@@ -8,7 +8,7 @@ define(['url', 'helper'], function (url, helper) {
         $('.js-notes-open').on('click', openNote);
         $('.js-notes-close').on('click', closeNote);
         $('.js-insurance').on('click',openInsuranceNote);
-        $('.js-confirm').on('click',closePay);
+        $('.popup').on('click','.js-confirm',closePay);
         $('.error-popup').on('click','.js-confirm', function() {
             $('.error-popup').hide();
         });

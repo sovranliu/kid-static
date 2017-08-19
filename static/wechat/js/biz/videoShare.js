@@ -58,15 +58,16 @@ define(['url', 'helper','wechat'], function (url, helper,wx) {
 
 
             }else if(res.msg != null && res.msg != ""){
-                    $('.error-popup').find('p').html(res.msg);
+                    $('.error-popup').show().find('p').html(res.msg);
                 }
         })
     }
     function closePopup() {
-        $(this).parent().parent('.popup').hide();
+        $(this).parent().parent('.error-popup').hide();
     }
     return {
         init: function () {
+            bindActions();
             getUrlParams();
             getVideoDetail();
         }

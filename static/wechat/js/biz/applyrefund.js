@@ -14,7 +14,9 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
             window.location.href = "MyOrder.html"
         });
         $('.js-close').on('click', _closePopup);
-        $('.error-popup').on('click','.js-confirm', _closePopup);
+         $('.error-popup').on('click','.js-confirm', function() {
+            $('.error-popup').hide();
+        });
     }
 
     //获取要退的票券信息
@@ -55,7 +57,6 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
 
     function _closePopup() {
         $(this).parent().parent('.popup').hide();
-        $(this).parent().parent('.error-popup').hide();
     }
 
     return {

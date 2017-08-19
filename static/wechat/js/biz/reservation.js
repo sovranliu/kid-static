@@ -9,7 +9,7 @@ define(['url', 'helper', 'mustache', 'datePicker', 'handshake'], function (url, 
         $('.js-day').on('change', changeDate);
         $('.js-rsv-ticket').on('change', changeTicket);
         $('.js-submit').on('click', submitBooking);
-        $('.js-confirm').on('click', hidePopup);
+        $('.popup').on('click','.js-confirm', hidePopup);
         $('.error-popup').on('click','.js-confirm', function() {
             $('.error-popup').hide();
         });

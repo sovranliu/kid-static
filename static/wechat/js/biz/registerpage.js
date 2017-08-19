@@ -4,8 +4,10 @@ define(['url', 'helper'], function(url, helper) {
     function bindActions() {
         $('.js-submit').on('click', _postRegisterData);
         $('.js-check').on('click', _checkMemberBenefit);
-        $('.js-confirm').on('click', function() {
+        $('.popup').on('click','.js-confirm', function() {
             $('.popup').hide();
+        });
+        $('.error-popup').on('click','.js-confirm', function() {
             $('.error-popup').hide();
         });
         $('.js-send').on('click', _getVerificationCode);
@@ -25,6 +27,8 @@ define(['url', 'helper'], function(url, helper) {
                 if (!res.data) {
                     window.location.href = "FollowUs.html"
                 }
+            }else{
+                res.msg && $('.error-popup').show().find('p').html(res.msg);
             }
         })
     }
@@ -97,8 +101,7 @@ define(['url', 'helper'], function(url, helper) {
                 }
             })
         } else {
-            $('.popup').show();
-            $('.popup').find('p').html('请确认姓名或手机格式是否正确');
+            $('.popup').show().find('p').html('请确认姓名或手机格式是否正确');
         }
     }
 
