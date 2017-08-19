@@ -6,6 +6,7 @@ define(['url', 'helper'], function(url, helper) {
         $('.js-check').on('click', _checkMemberBenefit);
         $('.js-confirm').on('click', function() {
             $('.popup').hide();
+            $('.error-popup').hide();
         });
         $('.js-send').on('click', _getVerificationCode);
     }
@@ -91,6 +92,8 @@ define(['url', 'helper'], function(url, helper) {
             helper.ajax(url.postRegister, params, function(res) {
                 if (res.code >= 0) {
                     window.location.href = "MemberCenter.html";
+                }else if(res.msg != null && res.msg != ""){
+                    $('.error-popup').find('p').html(res.msg);
                 }
             })
         } else {

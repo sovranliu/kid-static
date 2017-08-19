@@ -17,6 +17,8 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
                 if(res.data.avatarUrl) {
                     $('.user-img').attr('src',res.data.avatarUrl);
                 }
+            }else if(res.msg != null && res.msg != ""){
+                $('.popup').show().find('p').html(res.msg)
             }
         })
     }
@@ -40,6 +42,8 @@ define(['url','helper','handshake'], function (url,helper,handshake) {
                         $('.red-dot').hide();
                     }
                 }
+            }else if(res.msg != null && res.msg != ""){
+                $('.popup').show().find('p').html(res.msg)
             }
         })
     }

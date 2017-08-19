@@ -1,7 +1,9 @@
 define(['url', 'helper','wechat'], function (url, helper,wx) {
 
     var vurl,fromPath;
-
+    function bindActions() {
+        $('.js-confirm').on('click', closePopup);
+    }
     function getUrlParams() {
         vurl =  helper.getQueryStr('vurl');
         fromPath = helper.getQueryStr('from');
@@ -55,10 +57,14 @@ define(['url', 'helper','wechat'], function (url, helper,wx) {
                 });
 
 
-            }
+            }else if(res.msg != null && res.msg != ""){
+                    $('.error-popup').find('p').html(res.msg);
+                }
         })
     }
-
+    function closePopup() {
+        $(this).parent().parent('.popup').hide();
+    }
     return {
         init: function () {
             getUrlParams();

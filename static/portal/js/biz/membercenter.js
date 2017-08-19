@@ -125,6 +125,9 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
             if(res.code >= 0) {
                 $('.js-edit-popup').hide();
                 $('.js-confirm-popup').show().find('p').html('编辑成功。');
+            }else if(res.msg != null && res.msg != ""){
+                $('.js-edit-popup').hide();
+                $('.js-confirm-popup').show().find('p').html('编辑失败。');
             }
         })
     }
@@ -150,6 +153,8 @@ define(['mustache','url','helper'], function (Mustache,url,helper) {
                         $('.red-dot').hide();
                     }
                 }
+            }else if(res.msg != null && res.msg != ""){
+                $('.popup').show().find('p').html(res.msg)
             }
         })
     }

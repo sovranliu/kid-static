@@ -10,6 +10,7 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
         $('.js-ticket-share').on('click', _shareTicket);
         $('.js-send-message').on('click', _sendMessage);
         $('.js-close').on('click', _closePopup);
+        $('.error-msg').on('click','.js-confirm',_closePopup);
         $('.js-confirm-message-result').on('click', _confirmMessgeResult);
         //$('.js-revoke').on('click', _handleRevoke);
         $('.revoke-popup').on('click','.js-confirm',function() {
@@ -92,6 +93,8 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     Mustache.parse(template);
                     $('.ticket-list').html(Mustache.render(template, ticketList));
                 }
+            }else if(res.msg != null && res.msg != ""){
+                $('.error-popup').show().find('p').html(res.msg)
             }
         })
     }
@@ -151,6 +154,8 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
                     Mustache.parse(template);
                     $('.book-list').html(Mustache.render(template, bookList));
                 }
+            }else if(res.msg != null && res.msg != ""){
+                $('.error-popup').show().find('p').html(res.msg)
             }
         })
     }
@@ -172,8 +177,10 @@ define(['mustache','url', 'helper','handshake','wechat'], function(Mustache,url,
         helper.ajax(url.postRevoke, params, function(res) {
             if(res.code >= 0) {
                 $('.revoke-popup').find('p').html('您的撤销申请已提交，请等待管理员审核，谢谢。');
-                $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
+            }else if(res.msg != null && res.msg != ""){
+                $('.revoke-popup').show().find('p').html(res.msg)
             }
+            $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
         })
     }
 

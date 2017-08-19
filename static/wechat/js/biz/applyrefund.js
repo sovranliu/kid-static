@@ -14,6 +14,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
             window.location.href = "MyOrder.html"
         });
         $('.js-close').on('click', _closePopup);
+        $('.error-popup').on('click','.js-confirm', _closePopup);
     }
 
     //获取要退的票券信息
@@ -28,6 +29,8 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
                 var template = $('#template').html();
                 Mustache.parse(template);
                 $('.ar-content').html(Mustache.render(template, res.data));
+            }else if(res.msg != null && res.msg != ""){
+                $('.error-popup').find('p').html(res.msg);
             }
         })
     }
@@ -42,7 +45,7 @@ define(['mustache','url', 'helper','handshake'], function(Mustache,url, helper,h
             if(res.code >=0) {
                 $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
                 $('.js-close').hide();
-            }else{
+            }else if(res.msg != null && res.msg != ""){
                 $popup.find('p').html(res.msg);
             }
             $popup.find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');

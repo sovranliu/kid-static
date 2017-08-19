@@ -92,6 +92,8 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                     Mustache.parse(template);
                     $('.ticket-list').html(Mustache.render(template, ticketList));
                 }
+            }else if(res.msg != null && res.msg != ""){
+                $('.error-popup').show().find('p').html(res.msg)
             }
             
         })
@@ -144,6 +146,8 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
                     Mustache.parse(template);
                     $('.book-list').html(Mustache.render(template, bookList));
                 }
+            }else if(res.msg != null && res.msg != ""){
+                $('.error-popup').show().find('p').html(res.msg)
             }
         })
     }
@@ -165,8 +169,10 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         helper.ajax(url.postRevoke, params, function(res) {
             if(res.code >= 0) {
                 $('.revoke-popup').find('p').html('您的撤销申请已提交，请等待管理员审核，谢谢。');
-                $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
+            }else if(res.msg != null && res.msg != ""){
+                $('.revoke-popup').find('p').html(res.msg)
             }
+            $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
         })
     }
 
@@ -220,6 +226,8 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         helper.ajax(url.postRefund, params, function(res) {
             if(res.code >= 0) {
                 $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
+            }else if(res.msg != null && res.msg != ""){
+                $popup.find('p').html(res.msg);
             }
             $popup.find('.confirm-btn').removeClass('js-submit-refund').addClass('js-confirm');
         })
@@ -239,8 +247,10 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         helper.ajax(url.getTickets, params, function(res) {
             if(res.code >= 0) {
                 $('.revoke-popup').find('p').html('您的撤销申请已提交，请等待管理员审核，谢谢。');
-                $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
+            }else if(res.msg != null && res.msg != ""){
+                $('.revoke-popup').find('p').html(res.msg);
             }
+            $('.revoke-popup').find('.confirm-btn').removeClass('js-submit').addClass('js-confirm');
         })
     }
     //验证手机号
