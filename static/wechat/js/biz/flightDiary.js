@@ -9,6 +9,9 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
         });
         $('.js-buy-flightDiary').on('click', buyFlightDiary);
         $('.js-rsv-ticket').on('change', changeTicket);
+        $('.error-popup').on('click','.js-confirm', function() {
+            $('.error-popup').hide();
+        });
     }
 
     function getUrlParams() {
@@ -25,6 +28,8 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                     var data = res.data;
                     $('.js-name').text(data.user.userName);
                     $('.js-phone').text(data.user.mobileNo);
+                } else {
+                    res.msg && $('.error-popup').show().find('p').html(res.msg);
                 }
             })
         }
@@ -81,6 +86,7 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                     $('.fd-yg-pop').css('width', ygWidth+'px');
                 }
             } else {
+                res.msg && $('.error-popup').show().find('p').html(res.msg);
                 $('.fd-time').hide();
                 $('.fd-dq-desc').hide();
                 $('.js-fd-payment').hide();
@@ -136,6 +142,8 @@ define(['url', 'helper', 'mustache'], function (url, helper, mustache) {
                 } else {
                     onBridgeReady(res);
                 }
+            } else {
+               res.msg && $('.error-popup').show().find('p').html(res.msg); 
             }
         });
     }

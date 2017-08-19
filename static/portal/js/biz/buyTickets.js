@@ -7,8 +7,11 @@ define(['url', 'helper'], function (url, helper) {
         $('.js-buy-ticket').on('click', buyTicket);
         $('.js-notes-open').on('click', openNote);
         $('.js-notes-close').on('click', closeNote);
-        $('.js-insurance').on('click',openInsuranceNote)
-        $('.js-confirm').on('click',closePay)
+        $('.js-insurance').on('click',openInsuranceNote);
+        $('.js-confirm').on('click',closePay);
+        $('.error-popup').on('click','.js-confirm', function() {
+            $('.error-popup').hide();
+        });
     }
 
 
@@ -32,9 +35,12 @@ define(['url', 'helper'], function (url, helper) {
 
         helper.ajax(url.getTicketPrice, params, function(res) {
             var data = res.data;
+
             if(res.code >= 0) {
                 $('.js-single-price').text(Number(data.single / 100).toFixed(2));
                 $('.js-group-price').text(Number(data.group / 100).toFixed(2)); 
+            } else {
+                res.msg && $('.error-popup').show().find('p').html(res.msg);
             }
             
         });
@@ -55,7 +61,7 @@ define(['url', 'helper'], function (url, helper) {
                 $('.js-pay').show();
                 $('.js-pay-qrcode').attr('src', data.qrcode);
             } else {
-                //todo
+                res.msg && $('.error-popup').show().find('p').html(res.msg);
             }
         });
     }
