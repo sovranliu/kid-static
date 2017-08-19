@@ -8,8 +8,6 @@ define([], function() {
         getUserList: _basePath + 'getUserList',
         //票务信息列表
         getTicketList: _basePath + 'getTicketList',
-        //退票
-        refundTicket: _basePath + 'refundTicket',
         //飞行日志列表
         getFlightDiary: _basePath + 'getFlightDiary',
         deleteFlightDiary: _basePath + 'deleteFlightDiary',
