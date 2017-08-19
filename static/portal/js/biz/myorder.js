@@ -216,25 +216,15 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
             'serialNumber': serialNumber
         };
 
-        $.ajax({
-            url: url.postRefund,
-            type: 'POST',
-            data: params,
-            dataType: 'json',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            success: function(data) {
-                if(data.redirect != null && data.redirect != "") {
-                    window.location.href = data.redirect;
-                }
-                $('body').css('visibility','visible');
-                if(data.code >=0) {
-                    $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
-                }else{
-                    $popup.find('p').html(data.msg);
-                }
-                $popup.find('.confirm-btn').removeClass('js-submit-refund').addClass('js-confirm');
+        helper.ajax(url.postRefund, params, function(res) {
+            if(res.code >= 0) {
+                $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
+            }else{
+                $popup.find('p').html(data.msg);
             }
-        });
+            $popup.find('.confirm-btn').removeClass('js-submit-refund').addClass('js-confirm');
+        })
+        
         $(this).off('click',_postRufund)
     }
 
