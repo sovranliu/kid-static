@@ -1,4 +1,4 @@
-define(['url', 'helper'], function (url, helper) {
+define(['url', 'helper', 'message'], function (url, helper, msg) {
 
     var serialNumber;
 
@@ -18,6 +18,8 @@ define(['url', 'helper'], function (url, helper) {
                     $.cookie('userName', res.data.userName);
                 }
                 window.location.href = "config.html"
+            } else {
+                msg.error('帐号或密码错误，请重试！');
             }
         });
     }
