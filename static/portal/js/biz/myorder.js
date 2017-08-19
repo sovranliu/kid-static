@@ -220,7 +220,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
             if(res.code >= 0) {
                 $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
             }else{
-                $popup.find('p').html(data.msg);
+                $popup.find('p').html(res.msg);
             }
             $popup.find('.confirm-btn').removeClass('js-submit-refund').addClass('js-confirm');
         })
