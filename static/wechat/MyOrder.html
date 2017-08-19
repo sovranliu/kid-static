@@ -66,6 +66,15 @@
             <button class="js-confirm-message-result confirm-btn">确认</button>
         </div>
     </div>
+
+    <div class="error-popup">
+        <div class="pop-mask"></div>
+        <div class="pop-main">
+            <p></p>
+            <button class="js-confirm confirm-btn">确认</button>
+        </div>
+    </div>
+    
     <script id="ticketTemplate" type="x-tmpl-mustache">
     {{#data}}
         <li class="voucher-item {{statusStyle}}" data-id="{{serialNumber}}">
