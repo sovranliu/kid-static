@@ -11,7 +11,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
         $('.js-ticket-share').on('click', _shareTicket);
         $('.js-send-message').on('click', _sendMessage);
         $('.js-confirm-message-result').on('click', _confirmMessgeResult);
-        $('.js-confirm').on('click',_closePopup);
+        $('.popup').on('click','.js-confirm',_closePopup);
         $('.revoke-popup').on('click','.js-confirm',function() {
             window.location.reload();
         })
@@ -216,9 +216,22 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
             'serialNumber': serialNumber
         };
 
-        helper.ajax(url.postRefund, params, function(res) {
-            if(res.code >= 0) {
-                $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
+        $.ajax({
+            url: url.postRefund,
+            type: 'POST',
+            data: params,
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function(data) {
+                if(data.redirect != null && data.redirect != "") {
+                    window.location.href = data.redirect;
+                }
+                $('body').css('visibility','visible');
+                if(data.code >=0) {
+                    $popup.find('p').html('您的退款申请已提交，请等待管理员审核，谢谢。');
+                }else{
+                    $popup.find('p').html(data.msg);
+                }
                 $popup.find('.confirm-btn').removeClass('js-submit-refund').addClass('js-confirm');
             }
         });
@@ -248,6 +261,7 @@ define(['mustache','url', 'helper'], function(Mustache,url, helper) {
     }
 
     function _closePopup() {
+        debugger
         $(this).parent().parent('.popup').hide();
         window.location.reload();
     }
